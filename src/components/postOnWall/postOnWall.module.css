@@ -1,0 +1,41 @@
+.post_on_wall__wrapper {
+    display: grid;
+    grid-template-columns:  1fr;
+    grid-template-rows: 5fr 1fr;
+    grid-template-areas:
+            "content"
+            "likeBtn";
+    height: 150px;
+}
+
+.post_on_wall__card {
+    display: flex;
+    align-items: center;
+    margin: 40px 0 0;
+    width: 900px;
+}
+
+.post_on_wall__avatar {
+    height: 80px;
+    width: 80px;
+    margin: 0 30px;
+}
+
+.post_on_wall__text {
+    font-size: 20px;
+    font-style: italic;
+    text-align: left;
+}
+
+.post_on_wall__likeBtn {
+    align-self: center;
+    grid-area: likeBtn;
+    margin-left: 140px;
+}
+
+.post_on_wall__likeCount {
+    align-self: center;
+    grid-area: likeBtn;
+    margin-left: 160px;
+    text-align: left;
+}

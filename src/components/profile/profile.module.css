@@ -1,0 +1,54 @@
+.profile__wrapper {
+    background-color: white;
+    margin: 40px auto 0;
+    width: 1200px;
+}
+
+.profile__card {
+    display: grid;
+    position: relative;
+    bottom: 50px;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: repeat(5,1fr) ;
+    grid-template-areas:
+            "photo  data"
+            "photo  data-name"
+            "photo  data-birth"
+            "photo  data-city"
+            "photo  data-education"
+            "photo  data-site";
+    grid-column-gap: 30px;
+    padding-top: 30px;
+}
+
+.profile__image {
+    grid-area: photo;
+    justify-self: center;
+}
+
+.profile__data {
+    margin: 0;
+    text-align: left;
+}
+
+.profile__data_name {
+    font-size: 18px;
+    font-weight: bold;
+    grid-area: data-name;
+}
+
+.profile__data_birth {
+    grid-area: data-birth;
+}
+
+.profile__data_city {
+    grid-area: data-city;
+}
+
+.profile__data_education {
+    grid-area: data-education;
+}
+
+.profile__data_site {
+    grid-area: data-site;
+}
