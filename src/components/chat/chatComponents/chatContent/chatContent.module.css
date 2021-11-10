@@ -1,0 +1,53 @@
+.container {
+    background-color: white;
+    height: 655px;
+    width: 850px;
+}
+
+.header {
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    font-size: 15px;
+    line-height: 56px;
+    padding-left: 30px;
+    margin: 0;
+    height: 56px;
+}
+
+.chatName {
+    color: blue;
+}
+
+.chatting {
+    height: 521px;
+    width: 100%;
+}
+
+.sendMessage {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgba(128, 128, 128, 0.5);
+    height: 75px;
+    width: 100%;
+}
+
+.messageText{
+    box-sizing: border-box;
+    border: none;
+    font-size: 18px;
+    outline: none;
+    padding: 25px;
+    resize: none;
+    height: 75px;
+    width: 84%;
+}
+
+.sendBtn, .attachBtn {
+    margin: 0 15px;
+    background: none;
+    border: none;
+}
+
+.attachBtn {
+
+}

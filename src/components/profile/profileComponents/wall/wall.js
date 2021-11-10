@@ -1,6 +1,6 @@
 import React from "react";
 import style from './wall.module.css';
-import {PostOnWall} from "../postOnWall/postOnWall";
+import {PostOnWall} from "./wallComponents/postOnWall/postOnWall";
 
 export const Wall = (props) => {
     return (

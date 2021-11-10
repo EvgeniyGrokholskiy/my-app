@@ -1,0 +1,18 @@
+.chat__wrapper {
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    grid-column-gap: 40px;
+    grid-template-rows: 1fr;
+    grid-template-areas: "sideBar content";
+    margin: 40px auto 0;
+    width: 1200px;
+}
+
+.chat__sideBar {
+    grid-area: sideBar;
+}
+
+.chat__content {
+    grid-area: content;
+}
+

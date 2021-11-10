@@ -1,0 +1,19 @@
+.chatSideBar__wrapper {
+    background-color: white;
+    margin-right: 40px;
+    height: 560px;
+    width: 290px;
+}
+
+.chatSideBar__header {
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 56px;
+    padding-left: 30px;
+    text-align: left;
+    margin: 0;
+    height: 56px;
+    width: 100%;
+}
