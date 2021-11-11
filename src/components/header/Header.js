@@ -7,27 +7,27 @@ import {ReactComponent as Messages} from "./img/Message-square.svg";
 import {ReactComponent as News} from "./img/News.svg";
 import {ReactComponent as Music} from "./img/Music.svg";
 import {ReactComponent as Settings} from "./img/Settings.svg";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 
 export const Header = (props) => {
     return (
         <header className={style.header}>
             <>
-                <div className={style.header__logo_wrapper}>
+                <div className={style.wrapper}>
                     <Logo />
                 </div>
                 <nav>
-                    <ul className={style.header__nav}>
-                        <li><Link className={style.header__list_item} to = "/">Profile <User /></Link></li>
-                        <li><Link className={style.header__list_item} to = "/chat">Messages <Messages /></Link></li>
-                        <li><Link className={style.header__list_item} to = "/news">News <News /></Link></li>
-                        <li><Link className={style.header__list_item} to = "/music">Music <Music /></Link></li>
-                        <li><Link className={style.header__list_item} to = "/settings">Settings <Settings /></Link></li>
+                    <ul className={style.nav}>
+                        <li><NavLink className={(navData) => navData.isActive ? `${style.list_item} ${style.selected}`: `${style.list_item}`} activeClassName={style.selected} to = "/">Profile <User /></NavLink></li>
+                        <li><NavLink className={(navData) => navData.isActive ? `${style.list_item} ${style.selected}`: `${style.list_item}`} activeClassName={style.selected} to = "/chat">Messages <Messages /></NavLink></li>
+                        <li><NavLink className={(navData) => navData.isActive ? `${style.list_item} ${style.selected}`: `${style.list_item}`} activeClassName={style.selected} to = "/news">News <News /></NavLink></li>
+                        <li><NavLink className={(navData) => navData.isActive ? `${style.list_item} ${style.selected}`: `${style.list_item}`} activeClassName={style.selected} to = "/music">Music <Music /></NavLink></li>
+                        <li><NavLink className={(navData) => navData.isActive ? `${style.list_item} ${style.selected}`: `${style.list_item}`} activeClassName={style.selected} to = "/settings">Settings <Settings /></NavLink></li>
                     </ul>
                 </nav>
                 <>
-                    <input className={style.header__search} type="text" placeholder={"Search"}/>
+                    <input className={style.search} type="text" placeholder={"Search"}/>
                 </>
             </>
         </header>
