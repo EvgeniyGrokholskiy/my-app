@@ -1,0 +1,27 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "text";
+    justify-items: start;
+    margin: 0 0 20px 0;
+}
+
+.messageText {
+    display: inline;
+    grid-area: text;
+    background-color: #0275B1;
+    font-size: 14px;
+    color: white;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+}
+
+.data {
+    display: block;
+    align-self: end;
+    grid-area: text;
+    font-size: 10px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+}
