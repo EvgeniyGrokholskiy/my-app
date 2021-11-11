@@ -7,6 +7,7 @@ import {ReactComponent as Messages} from "./img/Message-square.svg";
 import {ReactComponent as News} from "./img/News.svg";
 import {ReactComponent as Music} from "./img/Music.svg";
 import {ReactComponent as Settings} from "./img/Settings.svg";
+import {Link} from "react-router-dom";
 
 
 export const Header = (props) => {
@@ -18,11 +19,11 @@ export const Header = (props) => {
                 </div>
                 <nav>
                     <ul className={style.header__nav}>
-                        <li className={style.header__list_item}>Profile <User /></li>
-                        <li className={style.header__list_item}>Messages <Messages /></li>
-                        <li className={style.header__list_item}>News <News /></li>
-                        <li className={style.header__list_item}>Music <Music /></li>
-                        <li className={style.header__list_item}>Settings <Settings /></li>
+                        <li><Link className={style.header__list_item} to = "/">Profile <User /></Link></li>
+                        <li><Link className={style.header__list_item} to = "/chat">Messages <Messages /></Link></li>
+                        <li><Link className={style.header__list_item} to = "/news">News <News /></Link></li>
+                        <li><Link className={style.header__list_item} to = "/music">Music <Music /></Link></li>
+                        <li><Link className={style.header__list_item} to = "/settings">Settings <Settings /></Link></li>
                     </ul>
                 </nav>
                 <>

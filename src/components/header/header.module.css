@@ -27,12 +27,19 @@
 }
 
 .header__list_item {
+    cursor: pointer;
     display: flex;
     font-size: 20px;
     flex-direction: column-reverse;
+    color: black;
     align-items: center;
     justify-content: center;
     padding: 0;
+    text-decoration: none;
+}
+
+.header__list_item:active {
+    transform: scale(0.98);
 }
 
 .header__search {
