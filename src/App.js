@@ -8,7 +8,6 @@ import {Settings} from "./components/settings/settings";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 
-
 function App(props) {
     return (
         <BrowserRouter>
@@ -16,11 +15,11 @@ function App(props) {
                 <Header/>
                 <main>
                     <Routes>
-                        <Route path="/" element = {<Profile />} />.
-                        <Route path="/chat/*" element = {<Chat />} />
-                        <Route path="/news/*" element = {<News />} />
-                        <Route path="/music/*" element = {<Music />} />
-                        <Route path="/settings/*" element = {<Settings />} />
+                        <Route path="/" element={<Profile/>}/>.
+                        <Route path="/chat/*" element={<Chat/>}/>
+                        <Route path="/news/*" element={<News/>}/>
+                        <Route path="/music/*" element={<Music/>}/>
+                        <Route path="/settings/*" element={<Settings/>}/>
                     </Routes>
                 </main>
             </div>
