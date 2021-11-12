@@ -7,15 +7,15 @@ import {SendMessage} from "./chatComponents/sendMessage/sendMessage";
 
 export const Chat = (props) => {
     return (
-      <div className={style.wrapper}>
-          <div className={style.sideBar}>
-              <ChatSideBar />
-              <StartNewChat />
-          </div>
-          <div className={style.content}>
-                  <ChatContent chatName = "Kyle Fisher" />
-                  <SendMessage />
-          </div>
-      </div>
+        <div className={style.wrapper}>
+            <div className={style.sideBar}>
+                <ChatSideBar/>
+                <StartNewChat/>
+            </div>
+            <div className={style.content}>
+                <ChatContent chatName="Kyle Fisher"/>
+                <SendMessage/>
+            </div>
+        </div>
     );
 }

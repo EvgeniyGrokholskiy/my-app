@@ -17,10 +17,10 @@ function App(props) {
                 <main>
                     <Routes>
                         <Route path="/" element = {<Profile />} />.
-                        <Route path="/chat" element = {<Chat />} />
-                        <Route path="/news" element = {<News />} />
-                        <Route path="/music" element = {<Music />} />
-                        <Route path="/settings" element = {<Settings />} />
+                        <Route path="/chat/*" element = {<Chat />} />
+                        <Route path="/news/*" element = {<News />} />
+                        <Route path="/music/*" element = {<Music />} />
+                        <Route path="/settings/*" element = {<Settings />} />
                     </Routes>
                 </main>
             </div>

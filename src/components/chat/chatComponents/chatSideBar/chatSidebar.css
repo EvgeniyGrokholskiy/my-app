@@ -4,6 +4,6 @@ a.chatLink.active {
     border-left: 5px solid blue;
 }
 
-a.chatLink.active div img {
+a.chatLink.active div > img {
     margin-left: 15px;
 }
