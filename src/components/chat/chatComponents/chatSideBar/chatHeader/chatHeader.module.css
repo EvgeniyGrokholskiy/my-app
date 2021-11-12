@@ -1,15 +1,12 @@
 .wrapper {
     box-sizing: border-box;
+    cursor: pointer;
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgba(128, 128, 128, 0.5);
     margin: 0;
     height: 84px;
     width: 100%;
-}
-
-.active {
-    border-left: 5px solid blue;
 }
 
 .photo {
@@ -33,6 +30,7 @@
 .lastMessage {
     display: flex;
     align-items: center;
+    color: black;
     font-size: 10px;
     margin: 0 0 10px 10px;
 }

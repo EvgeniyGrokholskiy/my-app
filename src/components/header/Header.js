@@ -19,11 +19,11 @@ export const Header = (props) => {
                 </div>
                 <nav>
                     <ul className={style.nav}>
-                        <li><NavLink className={(navData) => navData.isActive ? `${style.list_item} ${style.selected}`: `${style.list_item}`} activeClassName={style.selected} to = "/">Profile <User /></NavLink></li>
-                        <li><NavLink className={(navData) => navData.isActive ? `${style.list_item} ${style.selected}`: `${style.list_item}`} activeClassName={style.selected} to = "/chat">Messages <Messages /></NavLink></li>
-                        <li><NavLink className={(navData) => navData.isActive ? `${style.list_item} ${style.selected}`: `${style.list_item}`} activeClassName={style.selected} to = "/news">News <News /></NavLink></li>
-                        <li><NavLink className={(navData) => navData.isActive ? `${style.list_item} ${style.selected}`: `${style.list_item}`} activeClassName={style.selected} to = "/music">Music <Music /></NavLink></li>
-                        <li><NavLink className={(navData) => navData.isActive ? `${style.list_item} ${style.selected}`: `${style.list_item}`} activeClassName={style.selected} to = "/settings">Settings <Settings /></NavLink></li>
+                        <li><NavLink className={style.list_item} to = "/">Profile <User /></NavLink></li>
+                        <li><NavLink className={style.list_item} to = "/chat">Messages <Messages /></NavLink></li>
+                        <li><NavLink className={style.list_item} to = "/news">News <News /></NavLink></li>
+                        <li><NavLink className={style.list_item} to = "/music">Music <Music /></NavLink></li>
+                        <li><NavLink className={style.list_item} to = "/settings">Settings <Settings /></NavLink></li>
                     </ul>
                 </nav>
                 <>

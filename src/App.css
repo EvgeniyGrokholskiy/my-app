@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+a.active {
+  color: gray;
+}
+
+a.active svg {
+  stroke-width: 2;
+}

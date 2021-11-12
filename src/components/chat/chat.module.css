@@ -1,4 +1,4 @@
-.chat__wrapper {
+.wrapper {
     display: grid;
     grid-template-columns: 290px 1fr;
     grid-column-gap: 40px;
@@ -8,11 +8,11 @@
     width: 1200px;
 }
 
-.chat__sideBar {
+.sideBar {
     grid-area: sideBar;
 }
 
-.chat__content {
+.content {
     grid-area: content;
 }
 

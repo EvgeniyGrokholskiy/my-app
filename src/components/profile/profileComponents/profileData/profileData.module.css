@@ -1,10 +1,10 @@
-.profileData__wrapper {
+.wrapper {
     background-color: white;
     margin: 40px auto 0;
     width: 1200px;
 }
 
-.profileData__card {
+.card {
     display: grid;
     position: relative;
     bottom: 50px;
@@ -21,34 +21,34 @@
     padding-top: 30px;
 }
 
-.profileData__image {
+.image {
     grid-area: photo;
     justify-self: center;
 }
 
-.profileData__data {
+.data {
     margin: 0;
     text-align: left;
 }
 
-.profileData__data_name {
+.data_name {
     font-size: 18px;
     font-weight: bold;
     grid-area: data-name;
 }
 
-.profileData__data_birth {
+.data_birth {
     grid-area: data-birth;
 }
 
-.profileData__data_city {
+.data_city {
     grid-area: data-city;
 }
 
-.profileData__data_education {
+.data_education {
     grid-area: data-education;
 }
 
-.profileData__data_site {
+.data_site {
     grid-area: data-site;
 }
