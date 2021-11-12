@@ -1,0 +1,29 @@
+.sendMessage {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgba(128, 128, 128, 0.5);
+    height: 75px;
+    width: 100%;
+}
+
+.messageText{
+    box-sizing: border-box;
+    border: none;
+    font-size: 18px;
+    outline: none;
+    padding: 25px;
+    resize: none;
+    height: 75px;
+    width: 84%;
+}
+
+.sendBtn, .attachBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin: 0 15px;
+}
+
+.attachBtn {
+
+}

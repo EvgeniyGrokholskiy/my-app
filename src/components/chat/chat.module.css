@@ -14,5 +14,8 @@
 
 .content {
     grid-area: content;
+    background-color: white;
+    height: 655px;
+    width: 850px;
 }
 
