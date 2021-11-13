@@ -10,8 +10,8 @@
     background-color: white;
     box-sizing: border-box;
     padding: 0 30px;
-    margin: 40px auto 0;
-    width: 1200px;
+    margin-top: 40px;
+    width: 850px;
 }
 
 .header {
@@ -30,7 +30,7 @@
     resize: none;
     outline: none;
     height: 80px;
-    width: 1000px;
+    width: 650px;
 }
 
 .send_btn {
