@@ -9,14 +9,15 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 
 
 function App(props) {
+
     return (
         <BrowserRouter>
             <div className="App">
                 <Header/>
                 <main>
                     <Routes>
-                        <Route path="/" element={<Profile/>}/>.
-                        <Route path="/chat/*" element={<Chat/>}/>
+                        <Route path="/" element={<Profile wallMessageArray = {props.wallMessageArray}/>}/>.
+                        <Route path="/chat/*" element={<Chat chat = {props.chat} chatMessage = {props.chatMessage}/>}/>
                         <Route path="/news/*" element={<News/>}/>
                         <Route path="/music/*" element={<Music/>}/>
                         <Route path="/settings/*" element={<Settings/>}/>

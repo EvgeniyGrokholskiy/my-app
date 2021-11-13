@@ -2,9 +2,9 @@ import React from "react";
 import style from "./postOnWall.module.css";
 import avatar from "./img/photo.png";
 import {ReactComponent as LikeBtn} from "./img/thumbsUp.svg";
-// import {ReactComponent as LikeBtnClicked} from "./img/thumbsUpClicked.svg";
 
 export const PostOnWall = (props) => {
+
     return (
         <div className={style.wrapper}>
             <div className={style.card}>
