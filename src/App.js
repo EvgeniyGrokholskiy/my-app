@@ -18,9 +18,9 @@ function App(props) {
                     <Routes>
                         <Route path="/" element={<Profile wallMessageArray = {props.wallMessageArray}/>}/>.
                         <Route path="/chat/*" element={<Chat chat = {props.chat} chatMessage = {props.chatMessage}/>}/>
-                        <Route path="/news/*" element={<News/>}/>
-                        <Route path="/music/*" element={<Music/>}/>
-                        <Route path="/settings/*" element={<Settings/>}/>
+                        <Route path="/news/*" element={<News />}/>
+                        <Route path="/music/*" element={<Music />}/>
+                        <Route path="/settings/*" element={<Settings yarn/>}/>
                     </Routes>
                 </main>
             </div>

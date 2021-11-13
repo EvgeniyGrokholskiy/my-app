@@ -4,8 +4,6 @@ import './index.css';
 import App from './App';
 //import reportWebVitals from './reportWebVitals';
 
-//data - test
-
 let wallMessageArray = [
     {message: "How’s your day going, guys?", likeCount: "10", id: "1"},
     {message: "What did the Dursleys care if Harry lost his place on the House Quidditch team because he hadn’t practiced all summer?", likeCount: "20", id: "2"}
@@ -28,8 +26,6 @@ let chatMessageArray = [
     {message: "It’ll be great! I need this job, but...", type: "in", id: "5"},
     {message: "So, it’s up to you!", type: "in", id: "6"},
 ]
-
-//
 
 
 ReactDOM.render(
