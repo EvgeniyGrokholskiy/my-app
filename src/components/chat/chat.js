@@ -9,11 +9,11 @@ export const Chat = (props) => {
     return (
         <div className={style.wrapper}>
             <div className={style.sideBar}>
-                <ChatSideBar chat = {props.state.chatsList}/>
+                <ChatSideBar chat={props.state.chatsList}/>
                 <StartNewChat/>
             </div>
             <div className={style.content}>
-                <ChatContent chatMessage = {props.state.chatMessageArray} chatName="Kyle Fisher"/>
+                <ChatContent chatMessage={props.state.chatMessageArray} chatName="Kyle Fisher"/>
                 <SendMessage/>
             </div>
         </div>

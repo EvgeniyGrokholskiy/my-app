@@ -15,15 +15,15 @@ export const Header = (props) => {
         <header className={style.header}>
             <>
                 <div className={style.wrapper}>
-                    <Logo />
+                    <Logo/>
                 </div>
                 <nav>
                     <ul className={style.nav}>
-                        <li><NavLink className={style.list_item} to = "/">Profile <User /></NavLink></li>
-                        <li><NavLink className={style.list_item} to = "/chat">Messages <Messages /></NavLink></li>
-                        <li><NavLink className={style.list_item} to = "/news">News <News /></NavLink></li>
-                        <li><NavLink className={style.list_item} to = "/music">Music <Music /></NavLink></li>
-                        <li><NavLink className={style.list_item} to = "/settings">Settings <Settings /></NavLink></li>
+                        <li><NavLink className={style.list_item} to="/profile">Profile <User/></NavLink></li>
+                        <li><NavLink className={style.list_item} to="/chat">Messages <Messages/></NavLink></li>
+                        <li><NavLink className={style.list_item} to="/news">News <News/></NavLink></li>
+                        <li><NavLink className={style.list_item} to="/music">Music <Music/></NavLink></li>
+                        <li><NavLink className={style.list_item} to="/settings">Settings <Settings/></NavLink></li>
                     </ul>
                 </nav>
                 <>

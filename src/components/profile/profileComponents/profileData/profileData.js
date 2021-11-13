@@ -26,6 +26,6 @@ export const ProfileData = (props) => {
                     Web site: {"www"}
                 </p>
             </div>
-        </div>  
+        </div>
     );
 }
