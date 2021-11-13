@@ -6,10 +6,10 @@ import {NavLink} from "react-router-dom";
 
 export const ChatSideBar = (props) => {
 
-    let chatsToRender = props.chat.map( (chat) => {
+    let chatsToRender = props.chat.map((chat) => {
         return (
             <NavLink key={chat.id} className={`${style.link} chatLink`} to={`/chat/${chat.id}`}>
-                <ChatHeader name = {`${chat.name}`} lastMessage ={`${chat.lastMessage}`}/>
+                <ChatHeader name={`${chat.name}`} lastMessage={`${chat.lastMessage}`}/>
             </NavLink>
         );
     })

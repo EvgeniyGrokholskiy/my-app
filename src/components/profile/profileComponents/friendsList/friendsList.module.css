@@ -1,0 +1,30 @@
+.container {
+    background-color: white;
+    margin-top: 40px;
+    height: 625px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    margin: 0 auto;
+    height: 56px;
+    width: 230px;
+}
+
+.headerText, .headerLink {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.headerLink {
+    color: blue;
+    cursor: pointer;
+}
+
+.friendsList {
+    margin: 0 auto;
+    width: 230px;
+}

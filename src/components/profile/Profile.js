@@ -3,6 +3,7 @@ import style from "./profile.module.css"
 import {ProfileData} from "./profileComponents/profileData/profileData";
 import {NewPost} from "./profileComponents/new_post/new_post";
 import {Wall} from "./profileComponents/wall/wall";
+import {FriendsList} from "./profileComponents/friendsList/friendsList";
 
 export const Profile = (props) => {
     return (
@@ -10,10 +11,10 @@ export const Profile = (props) => {
             <div className={style.leftContainer}>
                 <ProfileData/>
                 <NewPost/>
-                <Wall wallMessageArray={props.state.wallMessageArray}/>
+                <Wall state={props.state.profile.wallMessageArray}/>
             </div>
             <div className={style.rightContainer}>
-
+                <FriendsList state={props.state.friendsList}/>
             </div>
         </div>
     );

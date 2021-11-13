@@ -16,7 +16,7 @@ function App(props) {
                 <Header/>
                 <main>
                     <Routes>
-                        <Route path="/" element = {<Profile state = {props.state.profile} />} />
+                        <Route path="/" element = {<Profile state = {props.state} />} />
                         <Route path="/chat/*" element = {<Chat state = {props.state.chatPage} />}/>
                         <Route path="/news/*" element = {<News />}/>
                         <Route path="/music/*" element = {<Music />}/>
