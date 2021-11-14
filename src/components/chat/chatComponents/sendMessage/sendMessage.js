@@ -9,7 +9,8 @@ export const SendMessage = (props) => {
     let textAreaComponent = createRef();
 
     const sendMessage = () => {
-        alert(textAreaComponent.current.value)
+        props.sendMessage(textAreaComponent.current.value);
+        textAreaComponent.current.value = "";
     }
 
     return (

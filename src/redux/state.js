@@ -1,3 +1,5 @@
+import {rerender} from "../render";
+
 let state = {
 
     chatPage: {
@@ -64,6 +66,33 @@ let state = {
             }
         ],
     },
+}
+
+export function addMessageOnWall(message) {
+
+    let id = state.profile.wallMessageArray.length + 1;
+    let messageObj = {
+        message: message,
+        likeCount: 0,
+        id: id,
+    };
+
+    state.profile.wallMessageArray.push(messageObj);
+    rerender(state);
+}
+
+
+export function sendMessage(message) {
+
+    let id = state.chatPage.chatMessageArray.length + 1;
+    let messageObj = {
+        message: message,
+        type: "out",
+        id: id,
+    };
+
+    state.chatPage.chatMessageArray.push(messageObj);
+    rerender(state);
 }
 
 export default state;

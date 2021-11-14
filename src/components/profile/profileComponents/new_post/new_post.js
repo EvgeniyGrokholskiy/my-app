@@ -1,13 +1,17 @@
 import React, {createRef} from "react";
 import style from "./new_post.module.css";
 import {ReactComponent as SendIcon} from "./img/send_icon.svg";
+//import {add} from "../../../../redux/state";
 
 export const NewPost = (props) => {
 
     let textAreaComponent = createRef();
 
+
     const addPost = () => {
-        alert(textAreaComponent.current.value);
+        let newMessage = textAreaComponent.current.value;
+        textAreaComponent.current.value = '';
+        props.callback(newMessage);
     }
 
     return (

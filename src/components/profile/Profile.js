@@ -10,7 +10,7 @@ export const Profile = (props) => {
         <div className={style.gridContainer}>
             <div className={style.leftContainer}>
                 <ProfileData/>
-                <NewPost/>
+                <NewPost callback = {props.addPost}/>
                 <Wall state={props.state.profile.wallMessageArray}/>
             </div>
             <div className={style.rightContainer}>

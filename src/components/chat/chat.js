@@ -4,6 +4,7 @@ import {ChatSideBar} from "./chatComponents/chatSideBar/chatSideBar";
 import {StartNewChat} from "./chatComponents/startNewChatBtn/startNewChat";
 import {ChatContent} from "./chatComponents/chatContent/chatContent";
 import {SendMessage} from "./chatComponents/sendMessage/sendMessage";
+import {sendMessage} from "../../redux/state";
 
 export const Chat = (props) => {
     return (
@@ -14,7 +15,7 @@ export const Chat = (props) => {
             </div>
             <div className={style.content}>
                 <ChatContent chatMessage={props.state.chatMessageArray} chatName="Kyle Fisher"/>
-                <SendMessage/>
+                <SendMessage sendMessage={props.sendMessage}/>
             </div>
         </div>
     );
