@@ -1,13 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import state, {
-    addMessageOnWall,
-    sendMessage,
-    setNewMessageInChat,
-    setNewMessageOnWall,
-    subscriber
-} from "./redux/state";
+import store from "./redux/store";
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
@@ -17,9 +11,10 @@ export function rerender() {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={state} addPost={addMessageOnWall} sendMessage={sendMessage}
-                                    setNewMessage={setNewMessageOnWall}
-                                    setNewMessageInChat={setNewMessageInChat}/>
+                <App state={store.getState()}
+                     setNewMessageOnWall={store.setNewMessageOnWall.bind(store)}
+                     addMessageOnWall={store.addMessageOnWall.bind(store)}
+                />
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
@@ -28,7 +23,7 @@ export function rerender() {
 
 rerender();
 
-subscriber(rerender);
+store.subscriber(rerender);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

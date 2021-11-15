@@ -9,17 +9,17 @@ export const SendMessage = (props) => {
     let textAreaComponent = createRef();
 
     const sendMessage = () => {
-        props.sendMessage(textAreaComponent.current.value);
+        props.state.sendMessage(textAreaComponent.current.value);
     }
 
     const setNewMessage = () => {
-        props.setNewMessageInChat(textAreaComponent.current.value);
+        props.state.setNewMessageInChat(textAreaComponent.current.value);
     }
 
     return (
         <div className={style.sendMessage}>
             <textarea onChange={setNewMessage} ref={textAreaComponent} className={style.messageText}
-                      placeholder={"Write your message"} value={props.state}/>
+                      placeholder={"Write your message"} value={props.state.chatPage.newMessage}/>
             <button className={style.attachBtn}><AttachBtn/></button>
             <button onClick={sendMessage} className={style.sendBtn}><SendBtn/></button>
         </div>

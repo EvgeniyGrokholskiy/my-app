@@ -16,8 +16,11 @@ function App(props) {
             <Header/>
             <main>
                 <Routes>
-                    <Route path="/profile/*" element={<Profile state={props.state} addPost={props.addPost} setNewMessage={props.setNewMessage}/>}/>
-                    <Route path="/chat/*" element={<Chat state={props.state.chatPage} sendMessage={props.sendMessage} setNewMessageInChat={props.setNewMessageInChat}/>}/>
+                    <Route path="/profile/*" element={<Profile state={props.state}
+                                                               setNewMessageOnWall={props.setNewMessageOnWall}
+                                                               addMessageOnWall={props.addMessageOnWall}
+                    />}/>
+                    <Route path="/chat/*" element={<Chat state={props.state}/>}/>
                     <Route path="/news/*" element={<News/>}/>
                     <Route path="/music/*" element={<Music/>}/>
                     <Route path="/settings/*" element={<Settings/>}/>
