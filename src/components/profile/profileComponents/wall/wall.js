@@ -3,9 +3,8 @@ import style from './wall.module.css';
 import {PostOnWall} from "./wallComponents/postOnWall/postOnWall";
 
 export const Wall = (props) => {
-
-    let postsToRender = props.state.map(post => {
-        return <PostOnWall key={post.id} message={post.message} likeCount={post.likeCount}/>
+    let postsToRender = props.state.wallMessageArray.map(post => {
+        return <PostOnWall key={post.id} message={post.message} likeCount={post.likeCount} newMessage={post.newMessage}/>
     });
 
     return (

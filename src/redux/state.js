@@ -1,8 +1,16 @@
-import {rerender} from "../render";
+let rerender = () => {
+
+}
+
+export const subscriber = (observer) => {
+    rerender = observer;
+}
+
 
 let state = {
 
     chatPage: {
+        newMessage: 'test',
         chatsList: [
             {name: 'Darlene Black', id: '1', lastMessage: 'Hey, how is your project?',},
             {name: 'Theresa Steward', id: '2', lastMessage: 'Hi, Dmitry! I have a work for you. We',},
@@ -27,6 +35,7 @@ let state = {
     },
 
     profile: {
+        newMessage: '',
         wallMessageArray: [
             {message: "How’s your day going, guys?", likeCount: "10", id: "1"},
             {
@@ -68,7 +77,21 @@ let state = {
     },
 }
 
+export const setNewMessageOnWall = (message) => {
+    state.profile.newMessage = message;
+    rerender();
+};
+
+export const setNewMessageInChat = (message) => {
+    state.chatPage.newMessage = message;
+    rerender();
+}
+
+const isEmptyMessage = (message) => (message === '' || message === undefined);
+
 export function addMessageOnWall(message) {
+
+    if (isEmptyMessage(message)) return
 
     let id = state.profile.wallMessageArray.length + 1;
     let messageObj = {
@@ -78,11 +101,14 @@ export function addMessageOnWall(message) {
     };
 
     state.profile.wallMessageArray.push(messageObj);
+    state.profile.newMessage = ''
     rerender(state);
 }
 
 
 export function sendMessage(message) {
+
+    if (isEmptyMessage(message)) return
 
     let id = state.chatPage.chatMessageArray.length + 1;
     let messageObj = {
@@ -92,6 +118,7 @@ export function sendMessage(message) {
     };
 
     state.chatPage.chatMessageArray.push(messageObj);
+    state.chatPage.newMessage = ''
     rerender(state);
 }
 

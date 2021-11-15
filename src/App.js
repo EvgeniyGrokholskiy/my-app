@@ -6,7 +6,7 @@ import {News} from "./components/news/news";
 import {Music} from "./components/music/music";
 import {Settings} from "./components/settings/settings";
 import {Route, Routes} from "react-router-dom";
-import {sendMessage} from "./redux/state";
+
 
 
 function App(props) {
@@ -16,8 +16,8 @@ function App(props) {
             <Header/>
             <main>
                 <Routes>
-                    <Route path="/profile/*" element={<Profile state={props.state} addPost={props.addPost}/>}/>
-                    <Route path="/chat/*" element={<Chat state={props.state.chatPage} sendMessage={props.sendMessage}/>}/>
+                    <Route path="/profile/*" element={<Profile state={props.state} addPost={props.addPost} setNewMessage={props.setNewMessage}/>}/>
+                    <Route path="/chat/*" element={<Chat state={props.state.chatPage} sendMessage={props.sendMessage} setNewMessageInChat={props.setNewMessageInChat}/>}/>
                     <Route path="/news/*" element={<News/>}/>
                     <Route path="/music/*" element={<Music/>}/>
                     <Route path="/settings/*" element={<Settings/>}/>
