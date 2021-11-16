@@ -159,7 +159,7 @@ let store = {
 
         this.state.profile.wallMessageArray.push(messageObj);
         this.state.profile.newMessage = ''
-        this.rerender(this.state);
+        this.rerender();
     },
 
 

@@ -9,11 +9,11 @@ export const SendMessage = (props) => {
     let textAreaComponent = createRef();
 
     const sendMessage = () => {
-        props.state.sendMessage(textAreaComponent.current.value);
+        props.sendMessage(textAreaComponent.current.value);
     }
 
     const setNewMessage = () => {
-        props.state.setNewMessageInChat(textAreaComponent.current.value);
+        props.setNewMessageInChat(textAreaComponent.current.value);
     }
 
     return (

@@ -7,19 +7,17 @@ export const NewPost = (props) => {
     let textAreaComponent = createRef();
 
     const addPost = () => {
-        let newMessage = textAreaComponent.current.value;
-        props.addMessageOnWall(newMessage);
+        props.addMessageOnWall(textAreaComponent.current.value);
     }
 
     const setNewMessage = () => {
-        debugger
         props.setNewMessageOnWall(textAreaComponent.current.value);
     }
 
     return (
         <div className={style.wrapper}>
             <p className={style.header}>NEW POST</p>
-            <textarea onChange={setNewMessage} ref={textAreaComponent} className={style.textArea} placeholder={"What’s on your mind?"} value={props.newMessage}/>
+            <textarea onChange={setNewMessage} ref={textAreaComponent} className={style.textArea} placeholder={"What’s on your mind?"} value={props.state.profile.newMessage}/>
             <button onClick={addPost} className={style.button}><SendIcon className={style.svg}/></button>
         </div>
     )

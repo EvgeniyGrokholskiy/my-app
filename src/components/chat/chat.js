@@ -9,12 +9,17 @@ export const Chat = (props) => {
     return (
         <div className={style.wrapper}>
             <div className={style.sideBar}>
-                <ChatSideBar state={props.state}/>
+                <ChatSideBar state={props.state}
+                             setActiveChatName={props.setActiveChatName}
+                />
                 <StartNewChat/>
             </div>
             <div className={style.content}>
                 <ChatContent chatMessage={props.state.chatPage.chatMessageArray} chatName={props.state.chatPage.activeChatName}/>
-                <SendMessage state={props.state} />
+                <SendMessage state={props.state}
+                             setNewMessageInChat={props.setNewMessageInChat}
+                             sendMessage={props.sendMessage}
+                />
             </div>
         </div>
     );

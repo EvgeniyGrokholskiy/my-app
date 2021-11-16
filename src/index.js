@@ -14,6 +14,9 @@ export function rerender() {
                 <App state={store.getState()}
                      setNewMessageOnWall={store.setNewMessageOnWall.bind(store)}
                      addMessageOnWall={store.addMessageOnWall.bind(store)}
+                     setActiveChatName={store.setActiveChatName.bind(store)}
+                     setNewMessageInChat={store.setNewMessageInChat.bind(store)}
+                     sendMessage={store.sendMessage.bind(store)}
                 />
             </BrowserRouter>
         </React.StrictMode>,

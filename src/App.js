@@ -20,7 +20,11 @@ function App(props) {
                                                                setNewMessageOnWall={props.setNewMessageOnWall}
                                                                addMessageOnWall={props.addMessageOnWall}
                     />}/>
-                    <Route path="/chat/*" element={<Chat state={props.state}/>}/>
+                    <Route path="/chat/*" element={<Chat state={props.state}
+                                                         setActiveChatName={props.setActiveChatName}
+                                                         setNewMessageInChat={props.setNewMessageInChat}
+                                                         sendMessage={props.sendMessage}
+                    />}/>
                     <Route path="/news/*" element={<News/>}/>
                     <Route path="/music/*" element={<Music/>}/>
                     <Route path="/settings/*" element={<Settings/>}/>

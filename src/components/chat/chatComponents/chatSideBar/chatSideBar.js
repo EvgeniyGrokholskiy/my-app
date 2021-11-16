@@ -7,7 +7,7 @@ import {NavLink} from "react-router-dom";
 export const ChatSideBar = (props) => {
 
     const setActiveChat = (event) => {
-        props.state.setActiveChatName(event.currentTarget.dataset.number);
+        props.setActiveChatName(event.currentTarget.dataset.number);
     }
 
     let chatsToRender = props.state.chatPage.chatsList.map((chat) => {
