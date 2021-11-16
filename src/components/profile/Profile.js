@@ -10,10 +10,7 @@ export const Profile = (props) => {
         <div className={style.gridContainer}>
             <div className={style.leftContainer}>
                 <ProfileData/>
-                <NewPost state={props.state}
-                         setNewMessageOnWall={props.setNewMessageOnWall}
-                         addMessageOnWall={props.addMessageOnWall}
-                />
+                <NewPost state={props.state} dispatch={props.dispatch} />
                 <Wall state={props.state.profile} />
             </div>
             <div className={style.rightContainer}>

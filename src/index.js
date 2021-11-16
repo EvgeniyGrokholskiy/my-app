@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import store from "./redux/store";
+import store, {dispatch} from "./redux/store";
 import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
@@ -11,7 +11,7 @@ export function rerender() {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={store.getState()}
+                <App state={store.getState()} dispatch={dispatch}
                      setNewMessageOnWall={store.setNewMessageOnWall.bind(store)}
                      addMessageOnWall={store.addMessageOnWall.bind(store)}
                      setActiveChatName={store.setActiveChatName.bind(store)}

@@ -118,17 +118,18 @@ let store = {
         },
     },
 
-    rerender () {},
+    rerender() {
+    },
 
-    subscriber (observer) {
+    subscriber(observer) {
         this.rerender = observer;
     },
 
-    getState () {
+    getState() {
         return this.state;
     },
 
-    setState (path,value) {
+    setState(path, value) {
         return this[path] = value
     },
 
@@ -146,7 +147,7 @@ let store = {
 
     isEmptyMessage (message){ return (message === '' || message === undefined)},
 
-    addMessageOnWall (message) {
+    addMessageOnWall(message) {
 
         if (this.isEmptyMessage(message)) return
 
@@ -163,7 +164,7 @@ let store = {
     },
 
 
-    sendMessage (message) {
+    sendMessage(message) {
 
         if (this.isEmptyMessage(message)) return
 
@@ -179,15 +180,73 @@ let store = {
         this.rerender(this.state);
     },
 
-    setActiveChatName (activeChatName) {
+    setActiveChatName(activeChatId) {
 
-        this.state.chatPage.chatsList.forEach((chat)=>{
-            if (chat.id === activeChatName){
+        this.state.chatPage.chatsList.forEach((chat) => {
+            if (chat.id === activeChatId) {
                 this.state.chatPage.activeChatName = chat.name;
             }
         })
 
         this.rerender(this.state)
+    }
+}
+
+export const dispatch = function (action) {
+
+    const isEmptyMessage = (message) => {
+        return (message === '' || message === undefined)
+    };
+
+    if (action.type === "CHANGE_NEW_MESSAGE_ON_WALL") {
+
+        store.state.profile.newMessage = action.message;
+        store.rerender(store.getState());
+
+    } else if (action.type === "CHANGE_NEW_MESSAGE_IN_CHAT") {
+
+        store.state.chatPage.newMessage = action.message;
+        store.rerender(store.getState());
+
+    } else if (action.type === "ADD_MESSAGE_ON_WALL") {
+
+        if (isEmptyMessage(action.message)) return
+
+        let id = store.state.profile.wallMessageArray.length + 1;
+        let messageObj = {
+            message: action.message,
+            likeCount: 0,
+            id: id,
+        };
+
+        store.state.profile.wallMessageArray.push(messageObj);
+        store.state.profile.newMessage = ''
+        store.rerender(store.getState());
+
+    } else if (action.type === "SEND_MESSAGE_IN_CHAT") {
+
+        if (isEmptyMessage(action.message)) return
+
+        let id = store.state.chatPage.chatMessageArray.length + 1;
+        let messageObj = {
+            message: action.message,
+            type: "out",
+            id: id,
+        };
+
+        store.state.chatPage.chatMessageArray.push(messageObj);
+        store.state.chatPage.newMessage = ''
+        store.rerender(store.getState());
+
+    } else  if (action.type === "SET_ACTIVE_CHAT_NAME") {
+
+        store.state.chatPage.chatsList.forEach((chat) => {
+            if (chat.id === action.activeChatId) {
+                store.state.chatPage.activeChatName = chat.name;
+            }
+        });
+
+        store.rerender(store.getState());
     }
 }
 

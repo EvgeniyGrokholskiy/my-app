@@ -7,11 +7,19 @@ export const NewPost = (props) => {
     let textAreaComponent = createRef();
 
     const addPost = () => {
-        props.addMessageOnWall(textAreaComponent.current.value);
+        props.dispatch(
+            {
+            type:"ADD_MESSAGE_ON_WALL",
+            message: textAreaComponent.current.value
+            });
     }
 
     const setNewMessage = () => {
-        props.setNewMessageOnWall(textAreaComponent.current.value);
+        props.dispatch(
+            {
+            type: "CHANGE_NEW_MESSAGE_ON_WALL",
+            message:textAreaComponent.current.value
+            });
     }
 
     return (
