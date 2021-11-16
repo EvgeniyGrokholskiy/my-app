@@ -9,10 +9,13 @@ export const SendMessage = (props) => {
     let textAreaComponent = createRef();
 
     const sendMessage = () => {
+
+        const newMessage = textAreaComponent.current.value;
+
         props.dispatch(
             {
                 type: "SEND_MESSAGE_IN_CHAT",
-                message: textAreaComponent.current.value
+                message: newMessage,
             });
     }
 
