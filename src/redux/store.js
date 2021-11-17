@@ -1,3 +1,9 @@
+const addMessageOnWall = "ADD_MESSAGE_ON_WALL"
+const changeNewMessageOnWall = "CHANGE_NEW_MESSAGE_ON_WALL"
+
+const newMessageInChat = "SEND_MESSAGE_IN_CHAT";
+const updateMessage = "UPDATE_MESSAGE_IN_TEXTAREA";
+
 let store = {
 
     state: {
@@ -133,62 +139,33 @@ let store = {
         return this[path] = value
     },
 
+}
 
-    setNewMessageOnWall (message) {
-        this.state.profile.newMessage = message;
-        this.rerender(this.state);
-    },
+export const addMessageOnWallActionCreator = (message) => {
+    return {
+        type: addMessageOnWall,
+        message: message,
+    };
+}
 
+export const changeNewMessageOnWallActionCreator = (message) => {
+    return {
+        type: changeNewMessageOnWall,
+        message: message,
+    }
+}
 
-    setNewMessageInChat (message) {
-        this.state.chatPage.newMessage = message;
-        this.rerender(this.state);
-    },
+export const sendMessageActionCreator = (newMessage) => {
+    return {
+        type: newMessageInChat,
+        message: newMessage,
+    }
+}
 
-    isEmptyMessage (message){ return (message === '' || message === undefined)},
-
-    addMessageOnWall(message) {
-
-        if (this.isEmptyMessage(message)) return
-
-        let id = this.state.profile.wallMessageArray.length + 1;
-        let messageObj = {
-            message: message,
-            likeCount: 0,
-            id: id,
-        };
-
-        this.state.profile.wallMessageArray.push(messageObj);
-        this.state.profile.newMessage = ''
-        this.rerender();
-    },
-
-
-    sendMessage(message) {
-
-        if (this.isEmptyMessage(message)) return
-
-        let id = this.state.chatPage.chatMessageArray.length + 1;
-        let messageObj = {
-            message: message,
-            type: "out",
-            id: id,
-        };
-
-        this.state.chatPage.chatMessageArray.push(messageObj);
-        this.state.chatPage.newMessage = ''
-        this.rerender(this.state);
-    },
-
-    setActiveChatName(activeChatId) {
-
-        this.state.chatPage.chatsList.forEach((chat) => {
-            if (chat.id === activeChatId) {
-                this.state.chatPage.activeChatName = chat.name;
-            }
-        })
-
-        this.rerender(this.state)
+export const updateMessageInTextareaActionCreator = (newMessage) => {
+    return {
+        type: updateMessage,
+        message: newMessage,
     }
 }
 
@@ -203,7 +180,7 @@ export const dispatch = function (action) {
         store.state.profile.newMessage = action.message;
         store.rerender(store.getState());
 
-    } else if (action.type === "CHANGE_NEW_MESSAGE_IN_CHAT") {
+    } else if (action.type === "UPDATE_MESSAGE_IN_TEXTAREA") {
 
         store.state.chatPage.newMessage = action.message;
         store.rerender(store.getState());
@@ -238,7 +215,7 @@ export const dispatch = function (action) {
         store.state.chatPage.newMessage = ''
         store.rerender(store.getState());
 
-    } else  if (action.type === "SET_ACTIVE_CHAT_NAME") {
+    } else if (action.type === "SET_ACTIVE_CHAT_NAME") {
 
         store.state.chatPage.chatsList.forEach((chat) => {
             if (chat.id === action.activeChatId) {

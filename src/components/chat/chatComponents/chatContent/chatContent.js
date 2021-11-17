@@ -5,8 +5,8 @@ import {OutgoingMessage} from "../outgoingMessage/outgoingMessage";
 
 export const ChatContent = (props) => {
 
-    const chatMessage = props.state.chatPage.chatMessageArray;
-    const chatName = props.state.chatPage.activeChatName;
+    const chatMessage = props.state.chatMessageArray;
+    const chatName = props.state.activeChatName;
 
     let chatToRender = chatMessage.map((message) => (message.type === "in") ?
         <IncomingMessage key={message.id} message={message.message}/> :

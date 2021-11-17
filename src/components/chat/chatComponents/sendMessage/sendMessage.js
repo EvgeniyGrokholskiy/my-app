@@ -2,6 +2,7 @@ import React, {createRef} from "react";
 import style from "./sendMessage.module.css";
 import {ReactComponent as AttachBtn} from "../chatContent/img/paperclip.svg";
 import {ReactComponent as SendBtn} from "../chatContent/img/send_icon.svg";
+import {sendMessageActionCreator, updateMessageInTextareaActionCreator} from "../../../../redux/store";
 
 
 export const SendMessage = (props) => {
@@ -12,25 +13,20 @@ export const SendMessage = (props) => {
 
         const newMessage = textAreaComponent.current.value;
 
-        props.dispatch(
-            {
-                type: "SEND_MESSAGE_IN_CHAT",
-                message: newMessage,
-            });
+        props.dispatch(sendMessageActionCreator(newMessage));
     }
 
-    const setNewMessage = (event) => {
-        props.dispatch(
-            {
-                type:"CHANGE_NEW_MESSAGE_IN_CHAT",
-                message:event.currentTarget.value
-            });
+    const updateMessageInTextarea = (event) => {
+
+        const newMessage = event.currentTarget.value;
+
+        props.dispatch(updateMessageInTextareaActionCreator(newMessage));
     }
 
     return (
         <div className={style.sendMessage}>
-            <textarea onChange={setNewMessage} ref={textAreaComponent} className={style.messageText}
-                      placeholder={"Write your message"} value={props.state.chatPage.newMessage}/>
+            <textarea onChange={updateMessageInTextarea} ref={textAreaComponent} className={style.messageText}
+                      placeholder={"Write your message"} value={props.state.newMessage}/>
             <button className={style.attachBtn}><AttachBtn /></button>
             <button onClick={sendMessage} className={style.sendBtn}><SendBtn /></button>
         </div>

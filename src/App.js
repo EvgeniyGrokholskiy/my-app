@@ -17,11 +17,7 @@ function App(props) {
             <main>
                 <Routes>
                     <Route path="/profile/*" element={<Profile state={props.state} dispatch={props.dispatch} />}/>
-                    <Route path="/chat/*" element={<Chat state={props.state} dispatch={props.dispatch}
-                                                         setActiveChatName={props.setActiveChatName}
-                                                         setNewMessageInChat={props.setNewMessageInChat}
-                                                         sendMessage={props.sendMessage}
-                    />}/>
+                    <Route path="/chat/*" element={<Chat state={props.state} dispatch={props.dispatch} />}/>
                     <Route path="/news/*" element={<News/>}/>
                     <Route path="/music/*" element={<Music/>}/>
                     <Route path="/settings/*" element={<Settings/>}/>
