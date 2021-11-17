@@ -1,7 +1,7 @@
 import React, {createRef} from "react";
 import style from "./new_post.module.css";
 import {ReactComponent as SendIcon} from "./img/send_icon.svg";
-import {addMessageOnWallActionCreator, changeNewMessageOnWallActionCreator} from "../../../../redux/store";
+import {addMessageOnWallActionCreator, changeNewMessageOnWallActionCreator} from "../../../../redux/profileReducer";
 
 export const NewPost = (props) => {
 

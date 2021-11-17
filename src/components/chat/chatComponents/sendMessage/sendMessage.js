@@ -2,7 +2,7 @@ import React, {createRef} from "react";
 import style from "./sendMessage.module.css";
 import {ReactComponent as AttachBtn} from "../chatContent/img/paperclip.svg";
 import {ReactComponent as SendBtn} from "../chatContent/img/send_icon.svg";
-import {sendMessageActionCreator, updateMessageInTextareaActionCreator} from "../../../../redux/store";
+import {sendMessageActionCreator, updateMessageInTextareaActionCreator} from "../../../../redux/chatReducer";
 
 
 export const SendMessage = (props) => {
@@ -14,14 +14,14 @@ export const SendMessage = (props) => {
         const newMessage = textAreaComponent.current.value;
 
         props.dispatch(sendMessageActionCreator(newMessage));
-    }
+    };
 
     const updateMessageInTextarea = (event) => {
 
         const newMessage = event.currentTarget.value;
 
         props.dispatch(updateMessageInTextareaActionCreator(newMessage));
-    }
+    };
 
     return (
         <div className={style.sendMessage}>
@@ -30,5 +30,5 @@ export const SendMessage = (props) => {
             <button className={style.attachBtn}><AttachBtn /></button>
             <button onClick={sendMessage} className={style.sendBtn}><SendBtn /></button>
         </div>
-    )
-}
+    );
+};

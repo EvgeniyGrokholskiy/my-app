@@ -1,8 +1,7 @@
-const addMessageOnWall = "ADD_MESSAGE_ON_WALL"
-const changeNewMessageOnWall = "CHANGE_NEW_MESSAGE_ON_WALL"
-
-const newMessageInChat = "SEND_MESSAGE_IN_CHAT";
-const updateMessage = "UPDATE_MESSAGE_IN_TEXTAREA";
+import {profileReducer} from "./profileReducer";
+import {chatReducer} from "./chatReducer";
+import {newsReducer} from "./newsReducer";
+import {musicReducer} from "./musicReducer";
 
 let store = {
 
@@ -122,13 +121,20 @@ let store = {
                 }
             ],
         },
+
+        musicPage: {},
+
+        newsPage: {},
+
+        settings: {},
     },
 
-    rerender() {
+    _rerender() {
+
     },
 
     subscriber(observer) {
-        this.rerender = observer;
+        this._rerender = observer;
     },
 
     getState() {
@@ -139,92 +145,17 @@ let store = {
         return this[path] = value
     },
 
-}
+    dispatch(action) {
 
-export const addMessageOnWallActionCreator = (message) => {
-    return {
-        type: addMessageOnWall,
-        message: message,
-    };
-}
+        this.state.profile = profileReducer(action, this.state.profile);
+        this.state.chatPage = chatReducer(action, this.state.chatPage);
+        this.state.newsPage = newsReducer(action, this.state.newsPage);
+        this.state.musicPage = musicReducer(action, this.state.musicPage);
+        this.state.settings = musicReducer(action ,this.state.settings);
+        this._rerender(this.state);
 
-export const changeNewMessageOnWallActionCreator = (message) => {
-    return {
-        type: changeNewMessageOnWall,
-        message: message,
     }
-}
 
-export const sendMessageActionCreator = (newMessage) => {
-    return {
-        type: newMessageInChat,
-        message: newMessage,
-    }
-}
-
-export const updateMessageInTextareaActionCreator = (newMessage) => {
-    return {
-        type: updateMessage,
-        message: newMessage,
-    }
-}
-
-export const dispatch = function (action) {
-
-    const isEmptyMessage = (message) => {
-        return (message === '' || message === undefined)
-    };
-
-    if (action.type === "CHANGE_NEW_MESSAGE_ON_WALL") {
-
-        store.state.profile.newMessage = action.message;
-        store.rerender(store.getState());
-
-    } else if (action.type === "UPDATE_MESSAGE_IN_TEXTAREA") {
-
-        store.state.chatPage.newMessage = action.message;
-        store.rerender(store.getState());
-
-    } else if (action.type === "ADD_MESSAGE_ON_WALL") {
-
-        if (isEmptyMessage(action.message)) return
-
-        let id = store.state.profile.wallMessageArray.length + 1;
-        let messageObj = {
-            message: action.message,
-            likeCount: 0,
-            id: id,
-        };
-
-        store.state.profile.wallMessageArray.push(messageObj);
-        store.state.profile.newMessage = ''
-        store.rerender(store.getState());
-
-    } else if (action.type === "SEND_MESSAGE_IN_CHAT") {
-
-        if (isEmptyMessage(action.message)) return
-
-        let id = store.state.chatPage.chatMessageArray.length + 1;
-        let messageObj = {
-            message: action.message,
-            type: "out",
-            id: id,
-        };
-
-        store.state.chatPage.chatMessageArray.push(messageObj);
-        store.state.chatPage.newMessage = ''
-        store.rerender(store.getState());
-
-    } else if (action.type === "SET_ACTIVE_CHAT_NAME") {
-
-        store.state.chatPage.chatsList.forEach((chat) => {
-            if (chat.id === action.activeChatId) {
-                store.state.chatPage.activeChatName = chat.name;
-            }
-        });
-
-        store.rerender(store.getState());
-    }
 }
 
 export default store;

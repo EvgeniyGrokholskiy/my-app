@@ -3,16 +3,14 @@ import style from "./chatSideBar.module.css";
 import "./chatSidebar.css";
 import {ChatHeader} from "./chatHeader/chatHeader";
 import {NavLink} from "react-router-dom";
+import {setActiveChatNameActionCreator} from "../../../../redux/chatReducer";
+
 
 export const ChatSideBar = (props) => {
 
     const setActiveChat = (event) => {
 
-        props.dispatch(
-            {
-                type: "SET_ACTIVE_CHAT_NAME",
-                activeChatId:event.currentTarget.dataset.number
-            });
+        props.dispatch(setActiveChatNameActionCreator(event.currentTarget.dataset.number));
     }
 
     let chatsToRender = props.state.chatsList.map((chat) => {
@@ -22,7 +20,7 @@ export const ChatSideBar = (props) => {
                 <ChatHeader  name={`${chat.name}`} lastMessage={`${chat.lastMessage}`}/>
             </NavLink>
         );
-    })
+    });
 
     return (
         <div className={style.wrapper}>
@@ -31,5 +29,5 @@ export const ChatSideBar = (props) => {
             {chatsToRender}
 
         </div>
-    )
-}
+    );
+};

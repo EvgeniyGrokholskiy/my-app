@@ -18,4 +18,4 @@ export const Chat = (props) => {
             </div>
         </div>
     );
-}
+};
