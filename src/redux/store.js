@@ -5,7 +5,7 @@ import {musicReducer} from "./musicReducer";
 
 let store = {
 
-    state: {
+    _state: {
         chatPage: {
             newMessage: '',
             activeChatName: '',
@@ -138,7 +138,7 @@ let store = {
     },
 
     getState() {
-        return this.state;
+        return this._state;
     },
 
     setState(path, value) {
@@ -147,12 +147,12 @@ let store = {
 
     dispatch(action) {
 
-        this.state.profile = profileReducer(action, this.state.profile);
-        this.state.chatPage = chatReducer(action, this.state.chatPage);
-        this.state.newsPage = newsReducer(action, this.state.newsPage);
-        this.state.musicPage = musicReducer(action, this.state.musicPage);
-        this.state.settings = musicReducer(action ,this.state.settings);
-        this._rerender(this.state);
+        this._state.profile = profileReducer(action, this._state.profile);
+        this._state.chatPage = chatReducer(action, this._state.chatPage);
+        this._state.newsPage = newsReducer(action, this._state.newsPage);
+        this._state.musicPage = musicReducer(action, this._state.musicPage);
+        this._state.settings = musicReducer(action ,this._state.settings);
+        this._rerender(this._state);
 
     }
 
