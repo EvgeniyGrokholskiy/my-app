@@ -12,7 +12,7 @@ export function rerender(state) {
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state={state} dispatch={store.dispatch.bind(store)} />
+                <App state={state} dispatch={store.dispatch.bind(store)}/>
             </BrowserRouter>
         </React.StrictMode>,
         document.getElementById('root')
@@ -21,9 +21,9 @@ export function rerender(state) {
 
 rerender(store.getState());
 
-store.subscribe(()=>{
-    const state = store.getState();
-    rerender(state) });
+store.subscribe(() => {
+    rerender(store.getState());
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

@@ -154,7 +154,7 @@ let store = {
         this._state.friendsList = friendsListReducer(action, this._state.friendsList);
         this._state.newsPage = newsReducer(action, this._state.newsPage);
         this._state.musicPage = musicReducer(action, this._state.musicPage);
-        this._state.settings = settingsReducer(action ,this._state.settings);
+        this._state.settings = settingsReducer(action, this._state.settings);
         this._rerender(this._state);
 
     }
