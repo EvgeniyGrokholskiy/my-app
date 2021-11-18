@@ -1,3 +1,5 @@
-export const settingsReducer = (action, state) => {
+const initialState = {} ;
+
+export const settingsReducer = (state = initialState, action) => {
     return state;
 }

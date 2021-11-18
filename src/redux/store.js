@@ -2,6 +2,8 @@ import {profileReducer} from "./profileReducer";
 import {chatReducer} from "./chatReducer";
 import {newsReducer} from "./newsReducer";
 import {musicReducer} from "./musicReducer";
+import {settingsReducer} from "./settingsReducer";
+import {friendsListReducer} from "./friendsListReducer";
 
 let store = {
 
@@ -149,9 +151,10 @@ let store = {
 
         this._state.profile = profileReducer(action, this._state.profile);
         this._state.chatPage = chatReducer(action, this._state.chatPage);
+        this._state.friendsList = friendsListReducer(action, this._state.friendsList);
         this._state.newsPage = newsReducer(action, this._state.newsPage);
         this._state.musicPage = musicReducer(action, this._state.musicPage);
-        this._state.settings = musicReducer(action ,this._state.settings);
+        this._state.settings = settingsReducer(action ,this._state.settings);
         this._rerender(this._state);
 
     }
