@@ -6,10 +6,10 @@ const NewPost = (props) => {
 
     let textAreaComponent = createRef();
 
-    const addPost = () => {
+    const addPost = (events) => {
         const newMessage = textAreaComponent.current.value;
-
-        props.addPost(newMessage);
+        //const value = events.currentTarget.previousSibling.value;
+        if (newMessage) props.addPost(newMessage);
     }
 
     const setNewMessage = (event) => {

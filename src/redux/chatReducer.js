@@ -86,41 +86,43 @@ export const chatReducer = (state = initialState, action) => {
 
         case updateMessage: {
 
-            let stateCopy = {...state};
+            return {
+                ...state,
+                newMessage: action.message
+            };
 
-            stateCopy.newMessage = action.message;
-            return stateCopy;
         }
 
         case newMessageInChat: {
 
-            let stateCopy = {...state};
-            stateCopy.chatMessageArray = [...state.chatMessageArray];
+            if (isEmptyMessage(state.newMessage)) return state;
+            const date = new Date();
+            const id = state.chatMessageArray.length + 1;
+            const day = String(date.getDate()).padStart(2, "0");
+            const month = String(date.getMonth() + 1).padStart(2, "0");
+            const year = date.getUTCFullYear();
+            const hour = String(date.getHours()).padStart(2, "0");
+            const minute = String(date.getMinutes()).padStart(2, "0");
 
-            if (isEmptyMessage(action.message)) return state;
-
-            let id = state.chatMessageArray.length + 1;
-            const day = new Date().getDate();
-            const month = new Date().getMonth();
-            const year = new Date().getUTCFullYear();
-            const hour = new Date().getHours();
-            const minute = new Date().getMinutes();
             let messageObj = {
                 data: `${day}.${month}.${year} ${hour}:${minute}`,
-                message: `${action.message}`,
+                message: `${state.newMessage}`,
                 type: "out",
                 id: id,
             };
 
-            stateCopy.chatMessageArray.push(messageObj);
-            stateCopy.newMessage = '';
-
-            return stateCopy;
+            return {
+                ...state,
+                chatMessageArray: [...state.chatMessageArray, messageObj],
+                newMessage: ''
+            };
         }
         case setActiveChatName: {
 
-            let stateCopy = {...state};
-            stateCopy.chatsList = [...state.chatsList];
+            let stateCopy = {
+                ...state,
+                chatsList: [...state.chatsList],
+            };
 
             stateCopy.chatsList.forEach((chat) => {
                 if (chat.id === action.activeChatId) {
@@ -137,10 +139,9 @@ export const chatReducer = (state = initialState, action) => {
     }
 };
 
-export const sendMessageActionCreator = (newMessage) => {
+export const sendMessageActionCreator = () => {
     return {
         type: newMessageInChat,
-        message: newMessage,
     }
 }
 

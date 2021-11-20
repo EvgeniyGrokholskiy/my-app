@@ -36,30 +36,29 @@ export const profileReducer = (state = initialState, action) => {
 
         case changeNewMessageOnWall: {
 
-            let stateCopy = {...state};
-            stateCopy.newMessage = [...state.newMessage];
+            return {
+                ...state,
+                newMessage: action.message
+            };
 
-            stateCopy.newMessage = action.message;
-            return stateCopy;
         }
 
         case addMessageOnWall: {
 
-            let stateCopy = {...state};
-            stateCopy.wallMessageArray = [...state.wallMessageArray]
+            if (isEmptyMessage(state.newMessage)) return state;
 
-            if (isEmptyMessage(action.message)) return state;
-
-            let id = stateCopy.wallMessageArray.length + 1;
+            let id = state.wallMessageArray.length + 1;
             let messageObj = {
-                message: action.message,
+                message: state.newMessage,
                 likeCount: 0,
                 id: id,
             };
 
-            stateCopy.wallMessageArray.push(messageObj);
-            stateCopy.newMessage = '';
-            return stateCopy;
+            return {
+                ...state,
+                wallMessageArray: [...state.wallMessageArray, messageObj],
+                newMessage: ''
+            };
         }
 
         default:
@@ -68,10 +67,9 @@ export const profileReducer = (state = initialState, action) => {
     }
 };
 
-export const addMessageOnWallActionCreator = (message) => {
+export const addMessageOnWallActionCreator = () => {
     return {
         type: addMessageOnWall,
-        message: message,
     };
 }
 
