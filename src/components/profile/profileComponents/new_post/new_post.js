@@ -3,7 +3,7 @@ import style from "./new_post.module.css";
 import {ReactComponent as SendIcon} from "./img/send_icon.svg";
 
 const NewPost = (props) => {
-
+debugger
     let textAreaComponent = createRef();
 
     const addPost = () => {

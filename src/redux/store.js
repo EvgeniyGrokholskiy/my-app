@@ -85,7 +85,7 @@ let store = {
         },
 
         profile: {
-            newMessage: '',
+            newMessage: "",
             wallMessageArray: [
                 {
                     message: "How’s your day going, guys?",

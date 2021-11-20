@@ -2,7 +2,7 @@ const addMessageOnWall = "ADD_MESSAGE_ON_WALL";
 const changeNewMessageOnWall = "CHANGE_NEW_MESSAGE_ON_WALL";
 
 const initialState = {
-    newMessage: '',
+    newMessage: "",
     wallMessageArray: [
         {
             message: "How’s your day going, guys?",

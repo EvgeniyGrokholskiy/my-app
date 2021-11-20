@@ -3,7 +3,7 @@ import style from "./profile.module.css"
 import NewPostContainer from "./profileComponents/new_post/new_postContainer";
 import FriendsListContainer from "./profileComponents/friendsList/friendsListContainer";
 import ProfileDataContainer from "./profileComponents/profileData/profileDataContainer";
-import {WallContainer} from "./profileComponents/wall/wallContainer";
+import WallContainer from "./profileComponents/wall/wallContainer";
 
 const Profile = (props) => {
 

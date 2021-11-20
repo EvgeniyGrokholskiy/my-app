@@ -1,28 +1,51 @@
 import React from "react";
 import PostOnWall from "./wallComponents/postOnWall/postOnWall";
-import StoreContext from "../../../../StoreContext";
 import Wall from "./wall";
+import {connect} from "react-redux";
 
-export const WallContainer = (props) => {
+// const WallContainer = (props) => {
+//
+//     return (
+//         <StoreContext.Consumer>
+//             {
+//                 value => {
+//
+//                     let postsToRender = value.getState().profile.wallMessageArray.map(post => {
+//
+//                         return <PostOnWall key={post.id} message={post.message} likeCount={post.likeCount} newMessage={post.newMessage}/>
+//                     });
+//
+//                     return(
+//
+//                       <Wall children={postsToRender}/>
+//
+//                     )
+//                 }
+//             }
+//         </StoreContext.Consumer>
+//
+//     );
+// }
 
-    return (
-        <StoreContext.Consumer>
-            {
-                value => {
 
-                    let postsToRender = value.getState().profile.wallMessageArray.map(post => {
 
-                        return <PostOnWall key={post.id} message={post.message} likeCount={post.likeCount} newMessage={post.newMessage}/>
-                    });
 
-                    return(
+const mapStateToProps = (state) => {
 
-                      <Wall children={postsToRender}/>
+    let postsToRender = state.profile.wallMessageArray.map(post => {
 
-                    )
-                }
-            }
-        </StoreContext.Consumer>
+        return <PostOnWall key={post.id} message={post.message} likeCount={post.likeCount} newMessage={post.newMessage}/>
+    });
 
-    );
+    return {
+        children: postsToRender
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {}
 }
+
+const WallContainer = connect(mapStateToProps, mapDispatchToProps)(Wall);
+
+export default WallContainer;
