@@ -3,7 +3,7 @@ import style from "./postOnWall.module.css";
 import avatar from "./img/photo.png";
 import {ReactComponent as LikeBtn} from "./img/thumbsUp.svg";
 
-export const PostOnWall = (props) => {
+const PostOnWall = (props) => {
 
     return (
         <div className={style.wrapper}>
@@ -15,4 +15,6 @@ export const PostOnWall = (props) => {
             <span className={style.likeCount}>{props.likeCount}</span>
         </div>
     );
-}
+};
+
+export default PostOnWall;

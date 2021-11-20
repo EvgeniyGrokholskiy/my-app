@@ -7,7 +7,7 @@ import App from './App';
 import {BrowserRouter} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
-export function rerender(state) {
+function rerender(state) {
 
     ReactDOM.render(
         <React.StrictMode>

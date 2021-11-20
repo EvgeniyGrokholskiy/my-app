@@ -2,7 +2,7 @@ import React from "react";
 import style from "./chatHeader.module.css";
 import photo from "./img/photo.png";
 
-export const ChatHeader = (props) => {
+const ChatHeader = (props) => {
     return (
         <div className={style.wrapper}>
             <img className={style.photo} src={photo} alt="" height={52} width={52}/>
@@ -17,4 +17,6 @@ export const ChatHeader = (props) => {
             </div>
         </div>
     );
-}
+};
+
+export default ChatHeader;

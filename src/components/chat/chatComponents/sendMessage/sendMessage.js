@@ -5,7 +5,7 @@ import {ReactComponent as SendBtn} from "../chatContent/img/send_icon.svg";
 import {sendMessageActionCreator, updateMessageInTextareaActionCreator} from "../../../../redux/chatReducer";
 
 
-export const SendMessage = (props) => {
+const SendMessage = (props) => {
 
     let textAreaComponent = createRef();
 
@@ -32,3 +32,5 @@ export const SendMessage = (props) => {
         </div>
     );
 };
+
+export default SendMessage;

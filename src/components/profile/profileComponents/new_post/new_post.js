@@ -1,22 +1,21 @@
 import React, {createRef} from "react";
 import style from "./new_post.module.css";
 import {ReactComponent as SendIcon} from "./img/send_icon.svg";
-import {addMessageOnWallActionCreator, changeNewMessageOnWallActionCreator} from "../../../../redux/profileReducer";
 
-export const NewPost = (props) => {
+const NewPost = (props) => {
 
     let textAreaComponent = createRef();
 
     const addPost = () => {
         const newMessage = textAreaComponent.current.value;
 
-        props.dispatch(addMessageOnWallActionCreator(newMessage));
+        props.addPost(newMessage);
     }
 
     const setNewMessage = (event) => {
         const newMessage = event.currentTarget.value;
 
-        props.dispatch(changeNewMessageOnWallActionCreator(newMessage));
+        props.setNewMessage(newMessage);
     }
 
     return (
@@ -27,4 +26,6 @@ export const NewPost = (props) => {
             <button onClick={addPost} className={style.button}><SendIcon className={style.svg}/></button>
         </div>
     )
-}
+};
+
+export default NewPost;

@@ -3,7 +3,7 @@ import style from "./friendCard.module.css";
 import photo from "./img/photo.png";
 
 
-export const FriendCard = (props) => {
+const FriendCard = (props) => {
 
     return (
         <div className={style.wrapper}>
@@ -18,4 +18,6 @@ export const FriendCard = (props) => {
             </div>
         </div>
     );
-}
+};
+
+export default FriendCard;

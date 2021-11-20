@@ -1,8 +1,8 @@
 import React from "react";
 import style from './wall.module.css';
-import PostOnWall from "./wallComponents/postOnWall/postOnWall";
+import {PostOnWall} from "./wallComponents/postOnWall/postOnWall";
 
-const Wall = (props) => {
+export const WallContainer = (props) => {
 
     let postsToRender = props.state.wallMessageArray.map(post => {
 
@@ -16,6 +16,4 @@ const Wall = (props) => {
 
         </div>
     );
-};
-
-export default Wall;
+}

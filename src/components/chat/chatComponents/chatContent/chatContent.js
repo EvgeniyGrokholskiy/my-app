@@ -1,9 +1,9 @@
 import React, {Fragment} from "react";
 import style from "./chatContent.module.css";
-import {IncomingMessage} from "../incomingMessage/incomingMessage";
-import {OutgoingMessage} from "../outgoingMessage/outgoingMessage";
+import IncomingMessage from "../incomingMessage/incomingMessage";
+import OutgoingMessage from "../outgoingMessage/outgoingMessage";
 
-export const ChatContent = (props) => {
+const ChatContent = (props) => {
 
     const chatMessage = props.state.chatMessageArray;
     const chatName = props.state.activeChatName;
@@ -24,3 +24,5 @@ export const ChatContent = (props) => {
         </>
     )
 }
+
+export default ChatContent;

@@ -10,7 +10,7 @@ import {ReactComponent as Settings} from "./img/Settings.svg";
 import {NavLink} from "react-router-dom";
 
 
-export const Header = (props) => {
+const Header = (props) => {
     return (
         <header className={style.header}>
             <>
@@ -33,3 +33,5 @@ export const Header = (props) => {
         </header>
     )
 }
+
+export default Header;

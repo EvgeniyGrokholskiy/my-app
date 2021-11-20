@@ -1,9 +1,9 @@
 import React from "react";
 import style from "./friendsList.module.css";
-import {FriendCard} from "./friendCard/friendCard";
+import FriendCard from "./friendCard/friendCard";
 
 
-export const FriendsList = (props) => {
+const FriendsList = (props) => {
 
     const friendsListToRender = props.state.friends.map((friend) => {
         return <FriendCard key={friend.id} state={friend}/>;
@@ -21,3 +21,5 @@ export const FriendsList = (props) => {
         </div>
     );
 }
+
+export default FriendsList;

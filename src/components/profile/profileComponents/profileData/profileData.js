@@ -4,7 +4,7 @@ import photo from "./img/photo.png";
 import profileData_top_image from "./img/profile_top_images.jpg";
 
 
-export const ProfileData = (props) => {
+const ProfileData = (props) => {
     return (
         <div className={style.wrapper}>
             <img src={profileData_top_image} alt="" height={180} width={850}/>
@@ -28,4 +28,6 @@ export const ProfileData = (props) => {
             </div>
         </div>
     );
-}
+};
+
+export default ProfileData;
