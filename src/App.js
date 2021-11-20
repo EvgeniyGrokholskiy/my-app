@@ -15,8 +15,8 @@ function App(props) {
             <Header/>
             <main>
                 <Routes>
-                    <Route path="/profile/*" element={<Profile state={props.state} dispatch={props.dispatch}/>}/>
-                    <Route path="/chat/*" element={<Chat state={props.state} dispatch={props.dispatch}/>}/>
+                    <Route path="/profile/*" element={<Profile/>}/>
+                    <Route path="/chat/*" element={<Chat/>}/>
                     <Route path="/news/*" element={<News/>}/>
                     <Route path="/music/*" element={<Music/>}/>
                     <Route path="/settings/*" element={<Settings/>}/>

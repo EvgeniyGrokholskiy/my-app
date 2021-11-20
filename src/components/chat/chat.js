@@ -1,20 +1,20 @@
 import React from "react";
 import style from "./chat.module.css";
 import StartNewChat from "./chatComponents/startNewChatBtn/startNewChat";
-import ChatContent from "./chatComponents/chatContent/chatContent";
 import ChatSideBarContainer from "./chatComponents/chatSideBar/chatSideBarContainer";
 import SendMessageContainer from "./chatComponents/sendMessage/sendMessageContainer";
+import ChatContentContainer from "./chatComponents/chatContent/chatContentContainer";
 
 const Chat = (props) => {
     return (
         <div className={style.wrapper}>
             <div className={style.sideBar}>
-                <ChatSideBarContainer state={props.state} dispatch={props.dispatch} />
+                <ChatSideBarContainer/>
                 <StartNewChat />
             </div>
             <div className={style.content}>
-                <ChatContent state={props.state.chatPage} />
-                <SendMessageContainer state={props.state} dispatch={props.dispatch} />
+                <ChatContentContainer />
+                <SendMessageContainer />
             </div>
         </div>
     );

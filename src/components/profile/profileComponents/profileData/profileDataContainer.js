@@ -1,12 +1,21 @@
 import React from "react";
 import ProfileData from "./profileData";
+import StoreContext from "../../../../StoreContext";
 
 
 
 const ProfileDataContainer = (props) => {
-
     return (
-        <ProfileData state={props.state.profile.profileData} />
+        <StoreContext.Consumer>
+            {
+                value => {
+                    return(
+                        <ProfileData state={value.getState().profile.profileData} />
+                    )
+                }
+            }
+
+        </StoreContext.Consumer>
     );
 };
 
