@@ -9,7 +9,7 @@ const ChatSideBar = (props) => {
 
     const setActiveChat = (event) => {
 
-        props.setActiveChat(event.currentTarget.dataset.number);
+        props.setActiveChat(Number(event.currentTarget.dataset.number));
     }
 
     let chatsToRender = props.state.chatsList.map((chat) => {

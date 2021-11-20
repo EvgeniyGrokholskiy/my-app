@@ -9,8 +9,8 @@ let store = {
 
     _state: {
         chatPage: {
-            newMessage: '',
-            activeChatName: '',
+            newMessage: "",
+            activeChatName: "",
             chatsList: [
                 {
                     name: 'Darlene Black',
@@ -48,37 +48,37 @@ let store = {
                 {
                     message: "Oh, sh#t! This junior designers!!!!!!!!!!!!!!!!",
                     type: "in",
-                    id: "1",
+                    id: 1,
                     data: "01.01.01",
                 },
                 {
                     message: "Hi, Kyle. How are you doing? Did you get that job yesterday?",
                     type: "out",
-                    id: "2",
+                    id: 2,
                     data: "02.02.02"
                 },
                 {
                     message: "Nope, they kicked me out of the office!",
                     type: "in",
-                    id: "3",
+                    id: 3,
                     data: "03.03.03"
                 },
                 {
                     message: "Wow! I can invite you in my new project. We need a product designer right now!",
                     type: "out",
-                    id: "4",
+                    id: 4,
                     data: "04.04.04"
                 },
                 {
                     message: "It’ll be great! I need this job, but...",
                     type: "in",
-                    id: "5",
+                    id: 5,
                     data: "05.05.05"
                 },
                 {
                     message: "So, it’s up to you!",
                     type: "in",
-                    id: "6",
+                    id: 6,
                     data: "06.06.06"
                 },
             ],
@@ -89,13 +89,13 @@ let store = {
             wallMessageArray: [
                 {
                     message: "How’s your day going, guys?",
-                    likeCount: "10",
-                    id: "1"
+                    likeCount: 10,
+                    id: 1
                 },
                 {
                     message: "What did the Dursleys care if Harry lost his place on the House Quidditch team because he hadn’t practiced all summer?",
-                    likeCount: "20",
-                    id: "2"
+                    likeCount: 20,
+                    id: 2
                 }
             ],
             profileData: [

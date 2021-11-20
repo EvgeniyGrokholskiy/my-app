@@ -1,4 +1,3 @@
-import React from "react";
 import ProfileData from "./profileData";
 import {connect} from "react-redux";
 

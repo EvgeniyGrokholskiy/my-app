@@ -6,13 +6,13 @@ const initialState = {
     wallMessageArray: [
         {
             message: "How’s your day going, guys?",
-            likeCount: "10",
-            id: "1"
+            likeCount: 10,
+            id: 1
         },
         {
             message: "What did the Dursleys care if Harry lost his place on the House Quidditch team because he hadn’t practiced all summer?",
-            likeCount: "20",
-            id: "2"
+            likeCount: 20,
+            id: 2
         }
 
     ],
@@ -34,27 +34,37 @@ export const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case changeNewMessageOnWall:
-            state.newMessage = action.message;
-            return state;
+        case changeNewMessageOnWall: {
 
-        case addMessageOnWall:
+            let stateCopy = {...state};
+            stateCopy.newMessage = [...state.newMessage];
+
+            stateCopy.newMessage = action.message;
+            return stateCopy;
+        }
+
+        case addMessageOnWall: {
+
+            let stateCopy = {...state};
+            stateCopy.wallMessageArray = [...state.wallMessageArray]
 
             if (isEmptyMessage(action.message)) return state;
 
-            let id = state.wallMessageArray.length + 1;
+            let id = stateCopy.wallMessageArray.length + 1;
             let messageObj = {
                 message: action.message,
                 likeCount: 0,
                 id: id,
             };
 
-            state.wallMessageArray.push(messageObj);
-            state.newMessage = '';
-            return state;
+            stateCopy.wallMessageArray.push(messageObj);
+            stateCopy.newMessage = '';
+            return stateCopy;
+        }
 
         default:
             return state;
+
     }
 };
 

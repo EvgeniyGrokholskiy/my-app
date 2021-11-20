@@ -7,10 +7,6 @@ import {BrowserRouter} from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 
-function rerender() {
-    debugger
-    let test = store.getState();
-
     ReactDOM.render(
         <React.StrictMode>
             <BrowserRouter>
@@ -21,13 +17,6 @@ function rerender() {
         </React.StrictMode>,
         document.getElementById('root')
     );
-}
-
-rerender();
-
-store.subscribe(() => {
-    rerender();
-});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
