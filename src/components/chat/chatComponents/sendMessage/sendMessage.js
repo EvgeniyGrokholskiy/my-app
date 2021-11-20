@@ -2,7 +2,6 @@ import React, {createRef} from "react";
 import style from "./sendMessage.module.css";
 import {ReactComponent as AttachBtn} from "../chatContent/img/paperclip.svg";
 import {ReactComponent as SendBtn} from "../chatContent/img/send_icon.svg";
-import {sendMessageActionCreator, updateMessageInTextareaActionCreator} from "../../../../redux/chatReducer";
 
 
 const SendMessage = (props) => {
@@ -13,14 +12,14 @@ const SendMessage = (props) => {
 
         const newMessage = textAreaComponent.current.value;
 
-        props.dispatch(sendMessageActionCreator(newMessage));
+        props.sendMessage(newMessage);
     };
 
     const updateMessageInTextarea = (event) => {
 
         const newMessage = event.currentTarget.value;
 
-        props.dispatch(updateMessageInTextareaActionCreator(newMessage));
+        props.updateMessageInTextarea(newMessage);
     };
 
     return (

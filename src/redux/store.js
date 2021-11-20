@@ -92,6 +92,16 @@ let store = {
                     id: "2"
                 }
             ],
+            profileData: [
+                {
+                    firstName: "Evgeniy",
+                    secondName: "Grokholskiy",
+                    birthDate: "21.05.1979",
+                    city: "Chelyabinsk",
+                    education: "College",
+                    webSite: "www",
+                }
+            ]
         },
 
         friendsList: {

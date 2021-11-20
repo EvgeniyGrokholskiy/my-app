@@ -3,14 +3,13 @@ import style from "./chatSideBar.module.css";
 import "./chatSidebar.css";
 import ChatHeader from "./chatHeader/chatHeader";
 import {NavLink} from "react-router-dom";
-import {setActiveChatNameActionCreator} from "../../../../redux/chatReducer";
 
 
 const ChatSideBar = (props) => {
 
     const setActiveChat = (event) => {
 
-        props.dispatch(setActiveChatNameActionCreator(event.currentTarget.dataset.number));
+        props.setActiveChat(event.currentTarget.dataset.number);
     }
 
     let chatsToRender = props.state.chatsList.map((chat) => {

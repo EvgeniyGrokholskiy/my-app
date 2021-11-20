@@ -4,7 +4,7 @@ import PostOnWall from "./wallComponents/postOnWall/postOnWall";
 
 const Wall = (props) => {
 
-    let postsToRender = props.state.wallMessageArray.map(post => {
+    const postsToRender = props.state.wallMessageArray.map(post => {
 
         return <PostOnWall key={post.id} message={post.message} likeCount={post.likeCount} newMessage={post.newMessage}/>
     });
