@@ -5,8 +5,10 @@ import {newsReducer} from "./newsReducer";
 import {musicReducer} from "./musicReducer";
 import {settingsReducer} from "./settingsReducer";
 import {friendsListReducer} from "./friendsListReducer";
+import {findUsersReducer} from "./findUsersReducer";
 
 let reducers = combineReducers({
+    findUsersPage: findUsersReducer,
     chatPage: chatReducer,
     friendsList: friendsListReducer,
     profile: profileReducer,

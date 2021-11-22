@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./header.module.css";
 
+import {ReactComponent as FindUsers} from "./img/findUsers.svg";
 import {ReactComponent as User} from "./img/User.svg";
 import {ReactComponent as Logo} from "./img/Logo.svg";
 import {ReactComponent as Messages} from "./img/Message-square.svg";
@@ -19,6 +20,7 @@ const Header = (props) => {
                 </div>
                 <nav>
                     <ul className={style.nav}>
+                        <li><NavLink className={style.list_item} to="/users">Find Users <FindUsers/></NavLink></li>
                         <li><NavLink className={style.list_item} to="/profile">Profile <User/></NavLink></li>
                         <li><NavLink className={style.list_item} to="/chat">Messages <Messages/></NavLink></li>
                         <li><NavLink className={style.list_item} to="/news">News <News/></NavLink></li>
