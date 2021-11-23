@@ -3,27 +3,6 @@ import ChatSideBar from "./chatSideBar";
 import {connect} from "react-redux";
 
 
-// const ChatSideBarContainer = (props) => {
-//
-//     return (
-//         <StoreContext.Consumer>
-//             {
-//                 value => {
-//
-//                     const setActiveChat = (chatId) => {
-//
-//                         value.dispatch(setActiveChatNameActionCreator(chatId));
-//                     }
-//
-//                     return (
-//                         <ChatSideBar setActiveChat={setActiveChat} state={value.getState().chatPage} />
-//                     )
-//                 }
-//             }
-//         </StoreContext.Consumer>
-//     );
-// };
-
 const mapStateToProps = (state) => {
     return {
         state: state.chatPage

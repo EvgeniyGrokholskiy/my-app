@@ -8,13 +8,13 @@ const UserCard = (props) => {
         props.toUnfollow(props.user.id)
     };
 
-    const toFollow = (event) => {
+    const toFollow = () => {
         props.toFollow(props.user.id)
     };
 
     return (
 
-        <div key={props.user.id} className={style.wrapper}>
+        <div className={style.wrapper}>
             <div className={style.avatar_container}>
                 <img className={style.photo} src={props.user.photoURL} alt=""/>
                 {(props.user.followed)? <button onClick={toUnfollow} className={style.button}>Unfollow</button>: <button onClick={toFollow} className={style.button}>Follow</button>}
