@@ -17,12 +17,12 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return (
         {
-            toFollow: (id) => {
-                dispatch(toFollowActionCreator(id));
+            toFollow: (userID) => {
+                dispatch(toFollowActionCreator(userID));
             },
 
-            toUnfollow: (id) => {
-                dispatch(toUnfollowActionCreator(id));
+            toUnfollow: (userID) => {
+                dispatch(toUnfollowActionCreator(userID));
             }
         }
     )
@@ -31,4 +31,4 @@ const mapDispatchToProps = (dispatch) => {
 
 const FindUsersContainer = connect(mapStateToProps, mapDispatchToProps)(ListOfUsers)
 
-export default FindUsersContainer
+export default FindUsersContainer;

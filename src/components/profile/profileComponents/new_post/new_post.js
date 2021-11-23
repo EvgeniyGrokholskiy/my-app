@@ -22,7 +22,7 @@ const NewPost = (props) => {
         <div className={style.wrapper}>
             <p className={style.header}>NEW POST</p>
             <textarea onChange={setNewMessage} ref={textAreaComponent} className={style.textArea}
-                      placeholder={"What’s on your mind?"} value={props.state.newMessage}/>
+                      placeholder={"What’s on your mind?"} value={props.profile.newMessage}/>
             <button onClick={addPost} className={style.button}><SendIcon className={style.svg}/></button>
         </div>
     )

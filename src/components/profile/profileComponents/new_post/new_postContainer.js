@@ -2,36 +2,10 @@ import {addMessageOnWallActionCreator, changeNewMessageOnWallActionCreator} from
 import NewPost from "./new_post";
 import {connect} from "react-redux";
 
-// const NewPostContainer = (props) => {
-//
-//     return (
-//         <StoreContext.Consumer>
-//             {
-//                 value => {
-//
-//                     const addPost = (message) => {
-//
-//                         value.dispatch(addMessageOnWallActionCreator(message));
-//                     }
-//
-//                     const setNewMessage = (message) => {
-//
-//                         value.dispatch(changeNewMessageOnWallActionCreator(message));
-//                     }
-//
-//                     return(
-//                         <NewPost addPost={addPost} setNewMessage={setNewMessage} state={value.getState()}  />
-//                     )
-//                 }
-//             }
-//         </StoreContext.Consumer>
-//
-//     )
-// };
 
 const mapStateToProps = (state) => {
     return {
-        state: state.profile
+        profile: state.profile
     }
 }
 
