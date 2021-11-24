@@ -1,0 +1,36 @@
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.userCard {
+    width: 100%;
+}
+
+.button {
+    background: rgb(0,119,181);
+    background: linear-gradient(180deg, rgba(0,119,181,1) 0%, rgba(14,103,149,1) 100%);
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 4px 0 #00000040;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 36px;
+    margin-bottom: 40px;
+    text-align: center;
+    height: 36px;
+    width: 230px;
+    transition: all ease-in 0.1s;
+}
+.button:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 6px 0 #00000040;
+}
+
+.button:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 2px 0 #00000040;
+}

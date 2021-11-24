@@ -5,7 +5,7 @@ const setUsers = "SET_USERS";
 const initialState = {
 
     findUsers: [
-        {
+        /*{
             id: 1,
             photoURL: "",
             followed: false,
@@ -44,7 +44,7 @@ const initialState = {
             fullName: "Dmitry5",
             status: "Hi5",
             location: {city: "Minsk5", country: "Belarus"}
-        },
+        },*/
     ]
 };
 
