@@ -9,9 +9,12 @@ export class ListOfUsers extends React.Component{
 
     getUsers = () => {
 
-        if (this.props.findUsers.length === 0) {
-
-        }
+        axios.get("https://social-network.samuraijs.com/api/1.0/users/?count-5")
+            .then((response) => {
+                    console.log(response.data.items);
+                    this.props.setUsers(response.data.items);
+                }
+            )
     }
 
     toUnfollow = () => {
@@ -63,7 +66,7 @@ export class ListOfUsers extends React.Component{
                         return (
                             /*<UserCard className={style.userCard} key={user.id} user={user} toFollow={this.props.toFollow}
                                       toUnfollow={this.props.toUnfollow} getUsers={this.getUsers}/>*/
-                            <div className={style.wrapper}>
+                            <div key={user.id} className={style.wrapper}>
                                 <div className={style.avatar_container}>
                                     <img className={style.photo} src={user.photos.small !== null? user.photos.small: photo} alt=""/>
                                     {(user.followed)? <button onClick={this.toUnfollow} className={style.button}>Unfollow</button>: <button onClick={this.toFollow} className={style.button}>Follow</button>}
@@ -82,7 +85,7 @@ export class ListOfUsers extends React.Component{
                         )
                     })
                 }
-                <button onClick={this.getUsers} className={style.button}>Show more</button>
+                <button onClick={this.getUsers} className={style.buttonSM}>Show more</button>
             </div>
         )
     }
