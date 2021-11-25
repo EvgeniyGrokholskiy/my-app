@@ -79,7 +79,7 @@ export const findUsersReducer = (state = initialState, action) => {
         case setUsers: {
             return  {
                 ...state,
-                findUsers: [...state.findUsers, ...action.users]
+                findUsers: [...state.findUsers, ...action.users],
             }
         }
 

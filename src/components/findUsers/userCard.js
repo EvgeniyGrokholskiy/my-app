@@ -1,9 +1,10 @@
 import React from "react";
 import style from "./userCard.module.css";
+import photo from "./img/userUnknown.png";
 
 
 const UserCard = (props) => {
-
+debugger
     const toUnfollow = () => {
         props.toUnfollow(props.user.id)
     };
@@ -16,8 +17,8 @@ const UserCard = (props) => {
 
         <div className={style.wrapper}>
             <div className={style.avatar_container}>
-                <img className={style.photo} src={props.user.photos.small} alt=""/>
-                {("props.user.followed")? <button onClick={toUnfollow} className={style.button}>Unfollow</button>: <button onClick={toFollow} className={style.button}>Follow</button>}
+                <img className={style.photo} src={props.user.photos.small !== null? props.user.photos.small: photo} alt=""/>
+                {(props.user.followed)? <button onClick={toUnfollow} className={style.button}>Unfollow</button>: <button onClick={toFollow} className={style.button}>Follow</button>}
             </div>
             <div className={style.user_description}>
                 <div className={style.left_description}>
