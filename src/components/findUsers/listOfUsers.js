@@ -1,5 +1,5 @@
 import React from "react";
-import UserCard from "./userCard";
+//import UserCard from "./userCard";
 import style from "./listOfUsers.module.css"
 import axios from "axios";
 import photo from "./img/userUnknown.png";
