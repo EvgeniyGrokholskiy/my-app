@@ -4,7 +4,7 @@ import photo from "./img/userUnknown.png";
 
 
 const UserCard = (props) => {
-debugger
+
     const toUnfollow = () => {
         props.toUnfollow(props.user.id)
     };

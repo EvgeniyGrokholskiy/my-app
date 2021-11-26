@@ -141,6 +141,9 @@ let store = {
         },
 
         findUsersPage: {
+            currentPage: 1,
+            totalUsers: 0,
+            usersOnPage: 5,
             findUsers: [
                 {id:1, photoURL: "", followed: false, fullName: "Dmitry", status: "Hi", location: {city: "Minsk", country: "Belarus"} },
                 {id:2, photoURL: "", followed: false, fullName: "Dmitry2", status: "Hi2", location: {city: "Minsk2", country: "Belarus"} },

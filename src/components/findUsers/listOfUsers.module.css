@@ -9,7 +9,7 @@
     width: 100%;
 }
 
-.buttonSM {
+.buttonSM, .button, .pageButton {
     background: rgb(0,119,181);
     background: linear-gradient(180deg, rgba(0,119,181,1) 0%, rgba(14,103,149,1) 100%);
     border: none;
@@ -25,12 +25,12 @@
     width: 230px;
     transition: all ease-in 0.1s;
 }
-.buttonSM:hover {
+.buttonSM:hover, .button:hover, .pageButton:hover {
     transform: scale(1.02);
     box-shadow: 0 6px 6px 0 #00000040;
 }
 
-.buttonSM:active {
+.buttonSM:active, .button:active, .pageButton:active {
     transform: scale(0.98);
     box-shadow: 0 2px 2px 0 #00000040;
 }
@@ -64,30 +64,38 @@
 }
 
 .button {
-    background: rgb(0, 119, 181);
-    background: linear-gradient(180deg, rgba(0, 119, 181, 1) 0%, rgba(14, 103, 149, 1) 100%);
-    border: none;
-    border-radius: 4px;
-    box-shadow: 0 4px 4px 0 #00000040;
-    color: white;
-    cursor: pointer;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 26px;
-    text-align: center;
     height: 26px;
     width: 70px;
-    transition: all ease-in 0.1s;
 }
 
-.button:hover {
-    transform: scale(1.02);
-    box-shadow: 0 6px 6px 0 #00000040;
+.pageButton {
+    display: inline-block;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 5px;
+    height: 30px;
+    width: 30px;
 }
 
-.button:active {
-    transform: scale(0.98);
-    box-shadow: 0 2px 2px 0 #00000040;
+.current {
+    background: none;
+    border: 2px solid blue;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
 }
+
+/*.button:hover {*/
+/*    transform: scale(1.02);*/
+/*    box-shadow: 0 6px 6px 0 #00000040;*/
+/*}*/
+
+/*.button:active {*/
+/*    transform: scale(0.98);*/
+/*    box-shadow: 0 2px 2px 0 #00000040;*/
+/*}*/
 
 .user_description {
     display: flex;
