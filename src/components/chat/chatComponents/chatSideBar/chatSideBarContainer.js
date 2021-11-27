@@ -1,4 +1,4 @@
-import {setActiveChatNameActionCreator} from "../../../../redux/chatReducer";
+import {setActiveChatName} from "../../../../redux/chatReducer";
 import ChatSideBar from "./chatSideBar";
 import {connect} from "react-redux";
 
@@ -9,14 +9,14 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
+/*const mapDispatchToProps = (dispatch) => {
     return {
         setActiveChat: (chatId) => {
-            dispatch(setActiveChatNameActionCreator(chatId));
+            dispatch(setActiveChatName(chatId));
         }
     }
-}
+}*/
 
-const ChatSideBarContainer = connect(mapStateToProps,mapDispatchToProps)(ChatSideBar)
+const ChatSideBarContainer = connect(mapStateToProps,{setActiveChatName})(ChatSideBar)
 
 export default ChatSideBarContainer;

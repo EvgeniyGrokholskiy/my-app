@@ -1,11 +1,11 @@
 import {connect} from "react-redux";
 import {
-    setLoaderActionCreator,
-    setTotalUsersCountActionCreator,
-    setUsersActionCreator,
-    showPageActionCreator,
-    toFollowActionCreator,
-    toUnfollowActionCreator
+    setLoader,
+    setTotalUsersCount,
+    setUsers,
+    showPage,
+    toFollow,
+    toUnfollow
 } from "../../redux/findUsersReducer";
 import React from "react";
 import axios from "axios";
@@ -74,7 +74,7 @@ const mapStateToProps = (state) => {
 
 }
 
-const mapDispatchToProps = (dispatch) => {
+/*const mapDispatchToProps = (dispatch) => {
     return (
         {
             toFollow: (userID) => {
@@ -101,9 +101,16 @@ const mapDispatchToProps = (dispatch) => {
             },
         }
     )
-}
+}*/
 
 
-const FindUsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+const FindUsersContainer = connect(mapStateToProps, {
+    toFollow,
+    toUnfollow,
+    setUsers,
+    showPage,
+    setTotalUsersCount,
+    setLoader,
+})(UsersContainer)
 
 export default FindUsersContainer;

@@ -1,9 +1,9 @@
-const toFollow = "TO_FOLLOW";
-const toUnfollow = "TO_UNFOLLOW";
-const setUsers = "SET_USERS";
-const showPage = "SHOW_PAGE";
-const setTotalUsersCount = "SET_TOTAL_USER_COUNT";
-const setLoader = "SET_LOADER";
+const ToFollow = "TO_FOLLOW";
+const ToUnfollow = "TO_UNFOLLOW";
+const SetUsers = "SET_USERS";
+const ShowPage = "SHOW_PAGE";
+const SetTotalUsersCount = "SET_TOTAL_USER_COUNT";
+const SetLoader = "SET_LOADER";
 
 const initialState = {
 
@@ -59,7 +59,7 @@ export const findUsersReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case toFollow: {
+        case ToFollow: {
             return {
                 ...state,
                 findUsers: state.findUsers.map((user) => {
@@ -71,7 +71,7 @@ export const findUsersReducer = (state = initialState, action) => {
             }
         }
 
-        case toUnfollow: {
+        case ToUnfollow: {
             return {
                 ...state,
                 findUsers: state.findUsers.map((user) => {
@@ -83,7 +83,7 @@ export const findUsersReducer = (state = initialState, action) => {
             }
         }
 
-        case setUsers: {
+        case SetUsers: {
             return  {
                 ...state,
                 findUsers: [ ...action.users],
@@ -91,21 +91,21 @@ export const findUsersReducer = (state = initialState, action) => {
             }
         }
 
-        case showPage: {
+        case ShowPage: {
             return  {
                 ...state,
                 currentPage: action.selectedPage
             }
         }
 
-        case setTotalUsersCount: {
+        case SetTotalUsersCount: {
             return {
                 ...state,
                 totalUsers: action.totalUsers
             }
         }
 
-        case setLoader: {
+        case SetLoader: {
             return {
                 ...state,
                 isFetching: action.isFetching
@@ -118,45 +118,45 @@ export const findUsersReducer = (state = initialState, action) => {
     }
 };
 
-export const toFollowActionCreator = (userID) => {
+export const toFollow = (userID) => {
     return {
-        type: toFollow,
+        type: ToFollow,
         id: userID
     };
 }
 
-export const toUnfollowActionCreator = (userID) => {
+export const toUnfollow = (userID) => {
     return {
-        type: toUnfollow,
+        type: ToUnfollow,
         id: userID
     };
 }
 
-export const setUsersActionCreator = (users,page= 1) => {
+export const setUsers = (users,page= 1) => {
     return {
-        type: setUsers,
+        type: SetUsers,
         users: users,
         page: page
     };
 }
 
-export const showPageActionCreator = (selectedPage) => {
+export const showPage = (selectedPage) => {
     return {
-        type: showPage,
+        type: ShowPage,
         selectedPage: selectedPage
     };
 }
 
-export const setTotalUsersCountActionCreator = (totalUsers) => {
+export const setTotalUsersCount = (totalUsers) => {
     return {
-        type: setTotalUsersCount,
+        type: SetTotalUsersCount,
         totalUsers: totalUsers
     };
 }
 
-export const setLoaderActionCreator = (isFetching) => {
+export const setLoader = (isFetching) => {
     return {
-        type: setLoader,
+        type: SetLoader,
         isFetching: isFetching
     };
 }

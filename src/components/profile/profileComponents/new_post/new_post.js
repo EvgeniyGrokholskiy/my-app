@@ -15,7 +15,7 @@ const NewPost = (props) => {
     const setNewMessage = (event) => {
         const newMessage = event.currentTarget.value;
 
-        props.setNewMessage(newMessage);
+        props.changeNewMessageOnWall(newMessage);
     }
 
     return (

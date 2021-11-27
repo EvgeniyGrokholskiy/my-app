@@ -7,15 +7,17 @@ import {NavLink} from "react-router-dom";
 
 const ChatSideBar = (props) => {
 
-    const setActiveChat = (event) => {
 
-        props.setActiveChat(Number(event.currentTarget.dataset.number));
-    }
 
     let chatsToRender = props.state.chatsList.map((chat) => {
 
+        const setActiveChat = (event) => {
+
+            props.setActiveChatName(chat.id);
+        }
+
         return (
-            <NavLink onClick={setActiveChat} key={chat.id} data-number={chat.id} className={`${style.link} chatLink`} to={`/chat/${chat.id}`}>
+            <NavLink onClick={setActiveChat} key={chat.id} className={`${style.link} chatLink`} to={`/chat/${chat.id}`}>
                 <ChatHeader  name={`${chat.name}`} lastMessage={`${chat.lastMessage}`}/>
             </NavLink>
         );

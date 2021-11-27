@@ -9,7 +9,7 @@ const SendMessage = (props) => {
     let textAreaComponent = createRef();
 
     const sendMessage = (event) => {
-debugger
+
         const newMessage = textAreaComponent.current.value;
         //const newMessage = event.currentTarget.parentElement.firstChild.value;
 

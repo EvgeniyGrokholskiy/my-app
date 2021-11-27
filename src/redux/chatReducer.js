@@ -1,6 +1,6 @@
-const newMessageInChat = "SEND_MESSAGE_IN_CHAT";
-const updateMessage = "UPDATE_MESSAGE_IN_TEXTAREA";
-const setActiveChatName = "SET_ACTIVE_CHAT_NAME"
+const NewMessageInChat = "SEND_MESSAGE_IN_CHAT";
+const UpdateMessage = "UPDATE_MESSAGE_IN_TEXTAREA";
+const SetActiveChatName = "SET_ACTIVE_CHAT_NAME"
 
 const initialState = {
     newMessage: "",
@@ -84,7 +84,7 @@ export const chatReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case updateMessage: {
+        case UpdateMessage: {
 
             return {
                 ...state,
@@ -93,7 +93,7 @@ export const chatReducer = (state = initialState, action) => {
 
         }
 
-        case newMessageInChat: {
+        case NewMessageInChat: {
 
             if (isEmptyMessage(state.newMessage)) return state;
             const date = new Date();
@@ -117,7 +117,7 @@ export const chatReducer = (state = initialState, action) => {
                 newMessage: ''
             };
         }
-        case setActiveChatName: {
+        case SetActiveChatName: {
 
             let stateCopy = {
                 ...state,
@@ -139,22 +139,22 @@ export const chatReducer = (state = initialState, action) => {
     }
 };
 
-export const sendMessageActionCreator = () => {
+export const sendMessage = () => {
     return {
-        type: newMessageInChat,
+        type: NewMessageInChat,
     }
 }
 
-export const updateMessageInTextareaActionCreator = (newMessage) => {
+export const updateMessageInTextarea = (newMessage) => {
     return {
-        type: updateMessage,
+        type: UpdateMessage,
         message: newMessage,
     }
 }
 
-export const setActiveChatNameActionCreator = (chatId) => {
+export const setActiveChatName = (chatId) => {
     return {
-        type: setActiveChatName,
+        type: SetActiveChatName,
         activeChatId: chatId,
     }
 }

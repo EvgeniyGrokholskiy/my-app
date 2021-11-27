@@ -1,5 +1,5 @@
-const addMessageOnWall = "ADD_MESSAGE_ON_WALL";
-const changeNewMessageOnWall = "CHANGE_NEW_MESSAGE_ON_WALL";
+const AddMessageOnWall = "ADD_MESSAGE_ON_WALL";
+const ChangeNewMessageOnWall = "CHANGE_NEW_MESSAGE_ON_WALL";
 
 const initialState = {
     newMessage: "",
@@ -34,7 +34,7 @@ export const profileReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case changeNewMessageOnWall: {
+        case ChangeNewMessageOnWall: {
 
             return {
                 ...state,
@@ -43,7 +43,7 @@ export const profileReducer = (state = initialState, action) => {
 
         }
 
-        case addMessageOnWall: {
+        case AddMessageOnWall: {
 
             if (isEmptyMessage(state.newMessage)) return state;
 
@@ -67,15 +67,15 @@ export const profileReducer = (state = initialState, action) => {
     }
 };
 
-export const addMessageOnWallActionCreator = () => {
+export const addPost = () => {
     return {
-        type: addMessageOnWall,
+        type: AddMessageOnWall,
     };
 }
 
-export const changeNewMessageOnWallActionCreator = (message) => {
+export const changeNewMessageOnWall = (message) => {
     return {
-        type: changeNewMessageOnWall,
+        type: ChangeNewMessageOnWall,
         message: message,
     }
 }

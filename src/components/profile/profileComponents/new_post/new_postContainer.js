@@ -1,4 +1,4 @@
-import {addMessageOnWallActionCreator, changeNewMessageOnWallActionCreator} from "../../../../redux/profileReducer";
+import {addPost, changeNewMessageOnWall} from "../../../../redux/profileReducer";
 import NewPost from "./new_post";
 import {connect} from "react-redux";
 
@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+/*const mapDispatchToProps = (dispatch) => {
     return {
         addPost: (message) => {
             dispatch(addMessageOnWallActionCreator(message));
@@ -19,8 +19,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(changeNewMessageOnWallActionCreator(message));
         }
     }
-}
+}*/
 
-const NewPostContainer = connect(mapStateToProps, mapDispatchToProps)(NewPost);
+const NewPostContainer = connect(mapStateToProps, {addPost, changeNewMessageOnWall})(NewPost);
 
 export default NewPostContainer;
