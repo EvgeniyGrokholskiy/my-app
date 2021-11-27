@@ -1,5 +1,6 @@
 import {connect} from "react-redux";
 import {
+    setLoaderActionCreator,
     setTotalUsersCountActionCreator,
     setUsersActionCreator,
     showPageActionCreator,
@@ -9,28 +10,33 @@ import {
 import React from "react";
 import axios from "axios";
 import UserCard from "./userCard";
+import Loading from "./loading";
 
 
 class UsersContainer extends React.Component {
 
     onPageChanged = (page) => {
+        this.props.setLoader(true);
         this.props.showPage(page);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=5&page=${page}`)
             .then((response) => {
                     console.log(response.data);
                     this.props.setUsers(response.data.items, this.props.currentPage);
+                    this.props.setLoader(false);
                 }
             )
     }
 
 
     componentDidMount() {
+        this.props.setLoader(true);
         console.log(this.props);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=5&page=${this.props.currentPage}`)
             .then((response) => {
                     console.log(response.data.items);
                     this.props.setUsers(response.data.items, this.props.currentPage);
                     this.props.setTotalUsersCount(response.data.totalCount)
+                    this.props.setLoader(false)
                 }
             )
     }
@@ -38,15 +44,18 @@ class UsersContainer extends React.Component {
     render() {
 
         return (
-            <UserCard totalUsers={this.props.totalUsers}
-                      usersOnPage={this.props.usersOnPage}
-                      currentPage={this.props.currentPage}
-                      findUsers={this.props.findUsers}
-                      onPageChanged={this.onPageChanged}
-                      toUnfollow={this.props.toUnfollow}
-                      toFollow={this.props.toFollow}
+            <>
+            {this.props.isFetching ? <Loading />: <></>}
+                <UserCard totalUsers={this.props.totalUsers}
+                          usersOnPage={this.props.usersOnPage}
+                          currentPage={this.props.currentPage}
+                          findUsers={this.props.findUsers}
+                          onPageChanged={this.onPageChanged}
+                          toUnfollow={this.props.toUnfollow}
+                          toFollow={this.props.toFollow}
 
-            />
+                />
+            </>
         )
     }
 }
@@ -59,6 +68,7 @@ const mapStateToProps = (state) => {
             currentPage: state.findUsersPage.currentPage,
             totalUsers: state.findUsersPage.totalUsers,
             usersOnPage: state.findUsersPage.usersOnPage,
+            isFetching: state.findUsersPage.isFetching,
         }
     )
 
@@ -85,7 +95,10 @@ const mapDispatchToProps = (dispatch) => {
 
             setTotalUsersCount: (totalUsers) => {
                 dispatch(setTotalUsersCountActionCreator(totalUsers))
-            }
+            },
+            setLoader: (isFetching) => {
+                dispatch(setLoaderActionCreator(isFetching))
+            },
         }
     )
 }

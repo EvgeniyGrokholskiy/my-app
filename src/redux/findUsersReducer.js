@@ -3,12 +3,10 @@ const toUnfollow = "TO_UNFOLLOW";
 const setUsers = "SET_USERS";
 const showPage = "SHOW_PAGE";
 const setTotalUsersCount = "SET_TOTAL_USER_COUNT";
+const setLoader = "SET_LOADER";
 
 const initialState = {
 
-    currentPage: 1,
-    totalUsers: 100,
-    usersOnPage: 5,
     findUsers: [
         /*{
             id: 1,
@@ -50,7 +48,11 @@ const initialState = {
             status: "Hi5",
             location: {city: "Minsk5", country: "Belarus"}
         },*/
-    ]
+    ],
+    currentPage: 1,
+    totalUsers: 100,
+    usersOnPage: 5,
+    isFetching: true,
 };
 
 export const findUsersReducer = (state = initialState, action) => {
@@ -103,6 +105,13 @@ export const findUsersReducer = (state = initialState, action) => {
             }
         }
 
+        case setLoader: {
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
+        }
+
         default:
             return state;
 
@@ -142,5 +151,12 @@ export const setTotalUsersCountActionCreator = (totalUsers) => {
     return {
         type: setTotalUsersCount,
         totalUsers: totalUsers
+    };
+}
+
+export const setLoaderActionCreator = (isFetching) => {
+    return {
+        type: setLoader,
+        isFetching: isFetching
     };
 }
