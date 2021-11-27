@@ -1,6 +1,6 @@
 import "./App.css";
 import Header from "./components/header/Header";
-import FindUsers from "./components/findUsers/FindUsers";
+import FindUsers from "./components/findUsers/findUsers";
 import Profile from "./components/profile/Profile";
 import Chat from "./components/chat/chat";
 import News from "./components/news/news";

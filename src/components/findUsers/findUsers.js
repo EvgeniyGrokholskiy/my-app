@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./findUsers.module.css";
 import FriendsListContainer from "../profile/profileComponents/friendsList/friendsListContainer";
-import FindUsersContainer from "./FindUsersContainer";
+import FindUsersContainer from "./findUsersContainer";
 
 const FindUsers = (props)=> {
     return (
