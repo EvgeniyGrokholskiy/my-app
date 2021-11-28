@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./userCard.module.css";
 import photo from "./img/userUnknown.png";
+import {NavLink} from "react-router-dom";
 
 
 const UserCard = (props) => {
@@ -22,10 +23,11 @@ const UserCard = (props) => {
                     pagesArray.map((page) => {
 
                         return (
-                            <button onClick={() => {
+                            <button key={page} onClick={() => {
                                 props.onPageChanged(page)
                             }}
-                                    className={page === props.currentPage ? `${style.pageButton} ${style.current}` : style.pageButton}>{page}</button>
+                                    className={page === props.currentPage ? `${style.pageButton} ${style.current}` : style.pageButton}>{page}
+                            </button>
                         )
                     })
                 }
@@ -52,6 +54,7 @@ const UserCard = (props) => {
                                 {(user.followed) ?
                                     <button onClick={toUnfollow} className={style.button}>Unfollow</button> :
                                     <button onClick={toFollow} className={style.button}>Follow</button>}
+                                <NavLink to={`/profile/${user.id}`} className={style.linkToProfile}>Open Profile</NavLink>
                             </div>
 
                             <div className={style.user_description}>

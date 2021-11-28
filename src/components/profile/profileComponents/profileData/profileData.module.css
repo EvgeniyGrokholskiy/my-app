@@ -14,7 +14,7 @@
     grid-template-areas:
             "photo  data"
             "photo  data-name"
-            "photo  data-birth"
+            "photo  aboutMe"
             "photo  data-city"
             "photo  data-education"
             "photo  data-site";
@@ -23,11 +23,17 @@
 }
 
 .image {
+    background-color: white;
+    border: 10px solid white;
+    border-radius: 50%;
     grid-area: photo;
     justify-self: center;
+    height: 200px;
+    width: 200px;
 }
 
 .data {
+    display: block;
     margin: 0;
     text-align: left;
 }
@@ -38,8 +44,8 @@
     grid-area: data-name;
 }
 
-.data_birth {
-    grid-area: data-birth;
+.aboutMe {
+    grid-area: aboutMe;
 }
 
 .data_city {

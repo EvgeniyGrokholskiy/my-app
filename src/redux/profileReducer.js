@@ -1,5 +1,6 @@
 const AddMessageOnWall = "ADD_MESSAGE_ON_WALL";
 const ChangeNewMessageOnWall = "CHANGE_NEW_MESSAGE_ON_WALL";
+const SetUserProfile = "SET_USERS_PROFILE"
 
 const initialState = {
     newMessage: "",
@@ -16,16 +17,26 @@ const initialState = {
         }
 
     ],
-    profileData: [
-        {
-            firstName: "Evgeniy",
-            secondName: "Grokholskiy",
-            birthDate: "21.05.1979",
-            city: "Chelyabinsk",
-            education: "College",
-            webSite: "www",
-        }
-    ],
+
+    profile: {
+        aboutMe: null,
+        contacts: {
+            facebook: "facebook.com",
+            github: "github.com",
+            instagram: "instagra.com/sds",
+            mainLink: null,
+            twitter: "https://twitter.com/@sdf",
+            vk: "vk.com/dimych",
+            website: null,
+            youtube: null,
+        },
+        fullName: "samurai dimych",
+        lookingForAJob: true,
+        lookingForAJobDescription: "не ищу, а дурачусь",
+        photos: {small: 'https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0', large: 'https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0'},
+        userId: 2
+
+    },
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -61,6 +72,14 @@ export const profileReducer = (state = initialState, action) => {
             };
         }
 
+        case SetUserProfile: {
+            return {
+                ...state,
+                profile: action.profile
+            }
+        }
+
+
         default:
             return state;
 
@@ -77,5 +96,12 @@ export const changeNewMessageOnWall = (message) => {
     return {
         type: ChangeNewMessageOnWall,
         message: message,
+    }
+}
+
+export const setUserProfile = (profile) => {
+    return {
+        type: SetUserProfile,
+        profile: profile
     }
 }

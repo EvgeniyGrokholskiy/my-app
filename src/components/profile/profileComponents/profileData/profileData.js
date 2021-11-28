@@ -1,30 +1,40 @@
 import React from "react";
 import style from "./profileData.module.css";
-import photo from "./img/photo.png";
+import photo from "./img/userUnknown.png";
 import profileData_top_image from "./img/profile_top_images.jpg";
 
 
 const ProfileData = (props) => {
 
+    if (!props.state.profile) {
+        return
+    }
+
     return (
         <div className={style.wrapper}>
             <img src={profileData_top_image} alt="" height={180} width={850}/>
             <div className={style.card}>
-                <img className={style.image} src={photo} alt=""/>
+                <img className={style.image} src={props.state.profile.photos.large ? props.state.profile.photos.large : photo } alt=""/>
                 <p className={`${style.data} ${style.data_name}`}>
-                    {`${props.state[0].firstName} ${props.state[0].secondName}`}
+                    {props.state.profile.fullName}
                 </p>
-                <p className={`${style.data} ${style.data_birth}`}>
-                    Date of birth: {props.state[0].birthDate}
+                <p className={`${style.data} ${style.aboutMe}`}>
+                    About me: {props.state.profile.aboutMe}
                 </p>
                 <p className={`${style.data} ${style.data_city}`}>
-                    City: {props.state[0].city}
+                    LookingForAJob: {props.state.profile.lookingForAJob ?"Yes" : "Have a job."}
                 </p>
                 <p className={`${style.data} ${style.data_education}`}>
-                    Education: {props.state[0].education}
+                    Job description: {props.state.profile.lookingForAJobDescription}
                 </p>
                 <p className={`${style.data} ${style.data_site}`}>
-                    Web site: {props.state[0].webSite}
+                    <span className={style.data}> Facebook: {props.state.profile.contacts.facebook}; </span>
+                    <span className={style.data}> GitHub: {props.state.profile.contacts.github}; </span>
+                    <span className={style.data}> Instagram: {props.state.profile.contacts.instagram}; </span>
+                    <span className={style.data}> MainLink: {props.state.profile.contacts.mainLink}; </span>
+                    <span className={style.data}> Twitter: {props.state.profile.contacts.twitter}; </span>
+                    <span className={style.data}> Vk: {props.state.profile.contacts.vk}; </span>
+                    <span className={style.data}> Website: {props.state.profile.contacts.facebook}; </span>
                 </p>
             </div>
         </div>
