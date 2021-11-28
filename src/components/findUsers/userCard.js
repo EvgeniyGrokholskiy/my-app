@@ -38,31 +38,34 @@ const UserCard = (props) => {
                 props.findUsers.map((user) => {
 
                     const toUnfollow = () => {
-
+                        props.followingInProgress(true);
                         followUnfollowAPI.unFollow(user.id).then((data) => {
 
                             if (data.resultCode === 0) {
-                                props.toUnfollow(user.id)
+                                props.toUnfollow(user.id);
                             }
-
+                            props.followingInProgress(true);
                         })
                             .catch((error) => {
-                                console.log(error)
+                                console.log(error);
                             })
                     };
 
                     const toFollow = () => {
-
+                        props.followingInProgress(true);
                         followUnfollowAPI.follow(user.id).then((data) => {
 
                             if (data.resultCode === 0) {
-                                props.toFollow(user.id)
+                                props.toFollow(user.id);
                             }
+                            props.followingInProgress(true);
+
                         })
                             .catch((error) => {
-                                console.log(error)
+                                console.log(error);
                             })
                     };
+
 
                     return (
 
@@ -72,8 +75,8 @@ const UserCard = (props) => {
                                 <img className={style.photo}
                                      src={user.photos.small !== null ? user.photos.small : photo} alt=""/>
                                 {(user.followed) ?
-                                    <button onClick={toUnfollow} className={style.button}>Unfollow</button> :
-                                    <button onClick={toFollow} className={style.button}>Follow</button>}
+                                    <button disabled={props.isFollowingInProgress} onClick={toUnfollow} className={style.button} >Unfollow</button> :
+                                    <button disabled={props.isFollowingInProgress} onClick={toFollow} className={style.button}>Follow</button>}
                                 <NavLink to={`/profile/${user.id}`} className={style.linkToProfile}>Open
                                     Profile</NavLink>
                             </div>

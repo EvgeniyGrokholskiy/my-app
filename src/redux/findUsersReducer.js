@@ -4,6 +4,7 @@ const SetUsers = "SET_USERS";
 const ShowPage = "SHOW_PAGE";
 const SetTotalUsersCount = "SET_TOTAL_USER_COUNT";
 const SetLoader = "SET_LOADER";
+const FollowingInProgress = "FOLLOWING_IN_PROGRESS";
 
 const initialState = {
 
@@ -53,6 +54,7 @@ const initialState = {
     totalUsers: 100,
     usersOnPage: 5,
     isFetching: true,
+    isFollowingInProgress: false
 };
 
 export const findUsersReducer = (state = initialState, action) => {
@@ -84,15 +86,15 @@ export const findUsersReducer = (state = initialState, action) => {
         }
 
         case SetUsers: {
-            return  {
+            return {
                 ...state,
-                findUsers: [ ...action.users],
+                findUsers: [...action.users],
                 currentPage: action.page
             }
         }
 
         case ShowPage: {
-            return  {
+            return {
                 ...state,
                 currentPage: action.selectedPage
             }
@@ -109,6 +111,13 @@ export const findUsersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: action.isFetching
+            }
+        }
+
+        case FollowingInProgress: {
+            return {
+                ...state,
+                followingInProgress: action.isInProgress
             }
         }
 
@@ -132,7 +141,7 @@ export const toUnfollow = (userID) => {
     };
 }
 
-export const setUsers = (users,page= 1) => {
+export const setUsers = (users, page = 1) => {
     return {
         type: SetUsers,
         users: users,
@@ -159,4 +168,11 @@ export const setLoader = (isFetching) => {
         type: SetLoader,
         isFetching: isFetching
     };
+}
+
+export const followingInProgress = (isInProgress) => {
+    return {
+        type: FollowingInProgress,
+        isInProgress
+    }
 }

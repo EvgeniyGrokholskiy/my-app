@@ -153,11 +153,8 @@ let store = {
         },
 
         findUsersPage: {
-            currentPage: 1,
-            totalUsers: 0,
-            usersOnPage: 5,
             findUsers: [
-                {
+                /*{
                     id: 1,
                     photoURL: "",
                     followed: false,
@@ -196,8 +193,13 @@ let store = {
                     fullName: "Dmitry5",
                     status: "Hi5",
                     location: {city: "Minsk5", country: "Belarus"}
-                },
-            ]
+                },*/
+            ],
+            currentPage: 1,
+            totalUsers: 100,
+            usersOnPage: 5,
+            isFetching: true,
+            isFollowingInProgress: false,
         },
 
         auth: {

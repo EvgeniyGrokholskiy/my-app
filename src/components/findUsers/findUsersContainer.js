@@ -1,5 +1,13 @@
 import {connect} from "react-redux";
-import {setLoader, setTotalUsersCount, setUsers, showPage, toFollow, toUnfollow} from "../../redux/findUsersReducer";
+import {
+    followingInProgress,
+    setLoader,
+    setTotalUsersCount,
+    setUsers,
+    showPage,
+    toFollow,
+    toUnfollow
+} from "../../redux/findUsersReducer";
 import React from "react";
 import UserCard from "./userCard";
 import Loading from "./loading";
@@ -23,6 +31,7 @@ class UsersContainer extends React.Component {
 
 
     componentDidMount() {
+
         this.props.setLoader(true);
 
         usersAPI.getUsers(this.props.currentPage, this.props.usersOnPage)
@@ -47,6 +56,9 @@ class UsersContainer extends React.Component {
                           onPageChanged={this.onPageChanged}
                           toUnfollow={this.props.toUnfollow}
                           toFollow={this.props.toFollow}
+                          followingInProgress={this.props.followingInProgress}
+                          isFollowingInProgress={this.props.isFollowingInProgress}
+
 
                 />
             </>
@@ -63,6 +75,7 @@ const mapStateToProps = (state) => {
             totalUsers: state.findUsersPage.totalUsers,
             usersOnPage: state.findUsersPage.usersOnPage,
             isFetching: state.findUsersPage.isFetching,
+            isFollowingInProgress: state.findUsersPage.isFollowingInProgress,
         }
     )
 
@@ -105,6 +118,7 @@ const FindUsersContainer = connect(mapStateToProps, {
     showPage,
     setTotalUsersCount,
     setLoader,
+    followingInProgress,
 })(UsersContainer)
 
 export default FindUsersContainer;
