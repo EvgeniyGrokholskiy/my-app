@@ -114,7 +114,10 @@ let store = {
                 fullName: "samurai dimych",
                 lookingForAJob: true,
                 lookingForAJobDescription: "не ищу, а дурачусь",
-                photos: {small: 'https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0', large: 'https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0'},
+                photos: {
+                    small: 'https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0',
+                    large: 'https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0'
+                },
                 userId: 2
             },
         },
@@ -154,12 +157,55 @@ let store = {
             totalUsers: 0,
             usersOnPage: 5,
             findUsers: [
-                {id:1, photoURL: "", followed: false, fullName: "Dmitry", status: "Hi", location: {city: "Minsk", country: "Belarus"} },
-                {id:2, photoURL: "", followed: false, fullName: "Dmitry2", status: "Hi2", location: {city: "Minsk2", country: "Belarus"} },
-                {id:3, photoURL: "", followed: false, fullName: "Dmitry3", status: "Hi3", location: {city: "Minsk3", country: "Belarus"} },
-                {id:4, photoURL: "", followed: false, fullName: "Dmitry4", status: "Hi4", location: {city: "Minsk4", country: "Belarus"} },
-                {id:5, photoURL: "", followed: false, fullName: "Dmitry5", status: "Hi5", location: {city: "Minsk5", country: "Belarus"} },
+                {
+                    id: 1,
+                    photoURL: "",
+                    followed: false,
+                    fullName: "Dmitry",
+                    status: "Hi",
+                    location: {city: "Minsk", country: "Belarus"}
+                },
+                {
+                    id: 2,
+                    photoURL: "",
+                    followed: false,
+                    fullName: "Dmitry2",
+                    status: "Hi2",
+                    location: {city: "Minsk2", country: "Belarus"}
+                },
+                {
+                    id: 3,
+                    photoURL: "",
+                    followed: false,
+                    fullName: "Dmitry3",
+                    status: "Hi3",
+                    location: {city: "Minsk3", country: "Belarus"}
+                },
+                {
+                    id: 4,
+                    photoURL: "",
+                    followed: false,
+                    fullName: "Dmitry4",
+                    status: "Hi4",
+                    location: {city: "Minsk4", country: "Belarus"}
+                },
+                {
+                    id: 5,
+                    photoURL: "",
+                    followed: false,
+                    fullName: "Dmitry5",
+                    status: "Hi5",
+                    location: {city: "Minsk5", country: "Belarus"}
+                },
             ]
+        },
+
+        auth: {
+            id: null,
+            login: null,
+            email: null,
+            isAuth: false,
+            isFetching: false
         },
 
         musicPage: {},

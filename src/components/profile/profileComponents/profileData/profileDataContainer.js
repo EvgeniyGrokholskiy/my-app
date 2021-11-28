@@ -9,8 +9,8 @@ import {useMatch} from "react-router";
 class GetProfileData extends React.Component {
 
     componentDidMount() {
-
-        let userID = this.props.match ? this.props.match.params.userId : 2;
+        debugger
+        let userID = this.props.match ? this.props.match.params.userId : this.props.auth.id;
 
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`)
             .then((response) =>{
@@ -36,7 +36,8 @@ const GetMatchUrl = (props) => {
 const mapStateToProps = (state)=>{
 
     return {
-        state: state.profile
+        state: state.profile,
+        auth: state.auth
     };
 };
 

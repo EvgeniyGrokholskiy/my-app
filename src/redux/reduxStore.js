@@ -6,6 +6,7 @@ import {musicReducer} from "./musicReducer";
 import {settingsReducer} from "./settingsReducer";
 import {friendsListReducer} from "./friendsListReducer";
 import {findUsersReducer} from "./findUsersReducer";
+import {authReducer} from "./authReducer";
 
 let reducers = combineReducers({
     findUsersPage: findUsersReducer,
@@ -14,7 +15,8 @@ let reducers = combineReducers({
     profile: profileReducer,
     newsPage: newsReducer,
     musicPage: musicReducer,
-    settings: settingsReducer
+    settings: settingsReducer,
+    auth: authReducer
 });
 
 let store = createStore(reducers);

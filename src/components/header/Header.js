@@ -12,10 +12,11 @@ import {NavLink} from "react-router-dom";
 
 
 const Header = (props) => {
+
     return (
         <header className={style.header}>
             <>
-                <div className={style.wrapper}>
+                <div className={style.logo}>
                     <Logo/>
                 </div>
                 <nav>
@@ -28,9 +29,18 @@ const Header = (props) => {
                         <li><NavLink className={style.list_item} to="/settings">Settings <Settings/></NavLink></li>
                     </ul>
                 </nav>
-                <>
-                    <input className={style.search} type="text" placeholder={"Search"}/>
-                </>
+                <div className={style.loginBlock}>
+                    {
+                        props.state.isAuth ? <span className={style.loginName}>{props.state.login}</span> : <></>
+                    }
+                    {
+                        props.state.isAuth ? <button className={style.loginButton}>LogOut</button> :
+                            <button className={style.loginButton}>LogIn</button>
+                    }
+
+                    {/*<button className={style.loginButton}>LogIn</button>
+                    <button className={style.loginButton}>LogOut</button>*/}
+                </div>
             </>
         </header>
     )
