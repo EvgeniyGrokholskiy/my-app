@@ -2,7 +2,7 @@ import React from "react";
 import style from "./userCard.module.css";
 import photo from "./img/userUnknown.png";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {followUnfollowAPI} from "../../api/api";
 
 
 const UserCard = (props) => {
@@ -39,43 +39,29 @@ const UserCard = (props) => {
 
                     const toUnfollow = () => {
 
-                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
-                            withCredentials: true,
-                            headers: {
-                                "API-KEY": "fce403c2-caf0-42dc-b949-c6e98a50bfc1"
-                            }
-                        })
-                            .then((response) => {
-                                if (response.data.resultCode === 0) {
-                                    props.toUnfollow(user.id)
-                                }
+                        followUnfollowAPI.unFollow(user.id).then((data) => {
 
-                            })
+                            if (data.resultCode === 0) {
+                                props.toUnfollow(user.id)
+                            }
+
+                        })
                             .catch((error) => {
                                 console.log(error)
                             })
-
-
                     };
 
                     const toFollow = () => {
 
-                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
-                            withCredentials: true,
-                            headers: {
-                                "API-KEY": "fce403c2-caf0-42dc-b949-c6e98a50bfc1"
+                        followUnfollowAPI.follow(user.id).then((data) => {
+
+                            if (data.resultCode === 0) {
+                                props.toFollow(user.id)
                             }
                         })
-                            .then((response) => {
-                                if (response.data.resultCode === 0) {
-                                    props.toFollow(user.id)
-                                }
-                            })
                             .catch((error) => {
                                 console.log(error)
                             })
-
-
                     };
 
                     return (
