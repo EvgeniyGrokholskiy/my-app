@@ -19,7 +19,6 @@ function App(props) {
                 <Routes>
                     <Route path="/users" element={<FindUsers/>}/>
                     <Route path="/profile/*" element={<Profile/>}/>
-                    <Route path="/profile" element={<Profile/>}/>
                     <Route path="/chat/*" element={<Chat/>}/>
                     <Route path="/news/*" element={<News/>}/>
                     <Route path="/music/*" element={<Music/>}/>

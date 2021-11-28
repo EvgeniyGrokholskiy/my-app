@@ -10,7 +10,7 @@ class GetProfileData extends React.Component {
 
     componentDidMount() {
         debugger
-        let userID = this.props.match ? this.props.match.params.userId : this.props.auth.id;
+        let userID = this.props.match ? this.props.match.params.userId : this.props.auth.id || 2 ;
 
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`)
             .then((response) =>{

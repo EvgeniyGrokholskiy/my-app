@@ -18,7 +18,9 @@ class UsersContainer extends React.Component {
     onPageChanged = (page) => {
         this.props.setLoader(true);
         this.props.showPage(page);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=5&page=${page}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=5&page=${page}`,{
+            withCredentials:true
+        })
             .then((response) => {
                     console.log(response.data);
                     this.props.setUsers(response.data.items, this.props.currentPage);
@@ -31,7 +33,9 @@ class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.setLoader(true);
         console.log(this.props);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=5&page=${this.props.currentPage}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users/?count=5&page=${this.props.currentPage}`,{
+            withCredentials:true
+        })
             .then((response) => {
                     console.log(response.data.items);
                     this.props.setUsers(response.data.items, this.props.currentPage);

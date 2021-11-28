@@ -2,6 +2,7 @@ import React from "react";
 import style from "./userCard.module.css";
 import photo from "./img/userUnknown.png";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
 
 
 const UserCard = (props) => {
@@ -37,11 +38,44 @@ const UserCard = (props) => {
                 props.findUsers.map((user) => {
 
                     const toUnfollow = () => {
-                        props.toUnfollow(user.id)
+
+                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {
+                            withCredentials: true,
+                            headers: {
+                                "API-KEY": "fce403c2-caf0-42dc-b949-c6e98a50bfc1"
+                            }
+                        })
+                            .then((response) => {
+                                if (response.data.resultCode === 0) {
+                                    props.toUnfollow(user.id)
+                                }
+
+                            })
+                            .catch((error) => {
+                                console.log(error)
+                            })
+
+
                     };
 
                     const toFollow = () => {
-                        props.toFollow(user.id)
+
+                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {
+                            withCredentials: true,
+                            headers: {
+                                "API-KEY": "fce403c2-caf0-42dc-b949-c6e98a50bfc1"
+                            }
+                        })
+                            .then((response) => {
+                                if (response.data.resultCode === 0) {
+                                    props.toFollow(user.id)
+                                }
+                            })
+                            .catch((error) => {
+                                console.log(error)
+                            })
+
+
                     };
 
                     return (
@@ -54,7 +88,8 @@ const UserCard = (props) => {
                                 {(user.followed) ?
                                     <button onClick={toUnfollow} className={style.button}>Unfollow</button> :
                                     <button onClick={toFollow} className={style.button}>Follow</button>}
-                                <NavLink to={`/profile/${user.id}`} className={style.linkToProfile}>Open Profile</NavLink>
+                                <NavLink to={`/profile/${user.id}`} className={style.linkToProfile}>Open
+                                    Profile</NavLink>
                             </div>
 
                             <div className={style.user_description}>
