@@ -18,25 +18,7 @@ const initialState = {
 
     ],
 
-    profile: {
-        aboutMe: null,
-        contacts: {
-            facebook: "facebook.com",
-            github: "github.com",
-            instagram: "instagra.com/sds",
-            mainLink: null,
-            twitter: "https://twitter.com/@sdf",
-            vk: "vk.com/dimych",
-            website: null,
-            youtube: null,
-        },
-        fullName: "samurai dimych",
-        lookingForAJob: true,
-        lookingForAJobDescription: "не ищу, а дурачусь",
-        photos: {small: 'https://social-network.samuraijs.com/activecontent/images/users/2/user-small.jpg?v=0', large: 'https://social-network.samuraijs.com/activecontent/images/users/2/user.jpg?v=0'},
-        userId: 2
-
-    },
+    profile: null,
 };
 
 export const profileReducer = (state = initialState, action) => {

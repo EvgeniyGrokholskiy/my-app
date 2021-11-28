@@ -3,11 +3,16 @@ import ProfileData from "./profileData";
 import {connect} from "react-redux";
 import axios from "axios";
 import {setUserProfile} from "../../../../redux/profileReducer";
+import {useMatch} from "react-router";
+
 
 class GetProfileData extends React.Component {
 
     componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
+
+        let userID = this.props.match ? this.props.match.params.userId : 2;
+
+        axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${userID}`)
             .then((response) =>{
                 console.log(response.data.fullName);
                 this.props.setUserProfile(response.data)
@@ -21,6 +26,13 @@ class GetProfileData extends React.Component {
     }
 }
 
+const GetMatchUrl = (props) => {
+    let match = useMatch("/profile/:userId");
+    return (
+        <GetProfileData {...props} match={match} />
+    )
+}
+
 const mapStateToProps = (state)=>{
 
     return {
@@ -32,6 +44,6 @@ const mapStateToProps = (state)=>{
     return ;
 };*/
 
-const ProfileDataContainer = connect(mapStateToProps, {setUserProfile})(GetProfileData);
+const ProfileDataContainer = connect(mapStateToProps, {setUserProfile})(GetMatchUrl);
 
 export default ProfileDataContainer;

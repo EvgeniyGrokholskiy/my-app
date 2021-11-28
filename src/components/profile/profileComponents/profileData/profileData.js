@@ -2,12 +2,21 @@ import React from "react";
 import style from "./profileData.module.css";
 import photo from "./img/userUnknown.png";
 import profileData_top_image from "./img/profile_top_images.jpg";
+import Loading from "../../../findUsers/loading";
 
 
 const ProfileData = (props) => {
 
     if (!props.state.profile) {
-        return
+
+        return (
+            <div className={style.wrapper}>
+                <img src={profileData_top_image} alt="" height={180} width={850}/>
+                <div className={style.card}>
+                    <Loading />
+                </div>
+            </div>
+        )
     }
 
     return (
