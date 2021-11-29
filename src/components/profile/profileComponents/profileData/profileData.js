@@ -2,7 +2,7 @@ import React from "react";
 import style from "./profileData.module.css";
 import photo from "./img/userUnknown.png";
 import profileData_top_image from "./img/profile_top_images.jpg";
-import Loading from "../../../findUsers/loading";
+import Loading from "../../../loading/loading";
 
 
 const ProfileData = (props) => {

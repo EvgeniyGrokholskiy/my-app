@@ -10,7 +10,7 @@ import {
 } from "../../redux/findUsersReducer";
 import React from "react";
 import UserCard from "./userCard";
-import Loading from "./loading";
+import Loading from "../loading/loading";
 import {usersAPI} from "../../api/api";
 
 
@@ -27,6 +27,9 @@ class UsersContainer extends React.Component {
                     this.props.setLoader(false);
                 }
             )
+            .catch((error)=> {
+                console.log(error);
+            })
     }
 
 
@@ -42,6 +45,9 @@ class UsersContainer extends React.Component {
                     this.props.setLoader(false)
                 }
             )
+            .catch((error)=> {
+                console.log(error);
+            })
     }
 
     render() {
@@ -58,8 +64,6 @@ class UsersContainer extends React.Component {
                           toFollow={this.props.toFollow}
                           followingInProgress={this.props.followingInProgress}
                           isFollowingInProgress={this.props.isFollowingInProgress}
-
-
                 />
             </>
         )
@@ -80,36 +84,6 @@ const mapStateToProps = (state) => {
     )
 
 }
-
-/*const mapDispatchToProps = (dispatch) => {
-    return (
-        {
-            toFollow: (userID) => {
-                dispatch(toFollowActionCreator(userID));
-            },
-
-            toUnfollow: (userID) => {
-                dispatch(toUnfollowActionCreator(userID));
-            },
-
-            setUsers: (users, page) => {
-                dispatch(setUsersActionCreator(users, page));
-            },
-
-            showPage: (page) => {
-                dispatch(showPageActionCreator(+page));
-            },
-
-            setTotalUsersCount: (totalUsers) => {
-                dispatch(setTotalUsersCountActionCreator(totalUsers))
-            },
-            setLoader: (isFetching) => {
-                dispatch(setLoaderActionCreator(isFetching))
-            },
-        }
-    )
-}*/
-
 
 const FindUsersContainer = connect(mapStateToProps, {
     toFollow,

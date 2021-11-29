@@ -54,7 +54,7 @@ const initialState = {
     totalUsers: 100,
     usersOnPage: 5,
     isFetching: true,
-    isFollowingInProgress: false
+    isFollowingInProgress: []
 };
 
 export const findUsersReducer = (state = initialState, action) => {
@@ -117,7 +117,9 @@ export const findUsersReducer = (state = initialState, action) => {
         case FollowingInProgress: {
             return {
                 ...state,
-                followingInProgress: action.isInProgress
+                isFollowingInProgress: action.isInProgress
+                    ? [...state.isFollowingInProgress, action.userId]
+                    : state.isFollowingInProgress.filter(id => id !== action.userId)
             }
         }
 
@@ -170,9 +172,10 @@ export const setLoader = (isFetching) => {
     };
 }
 
-export const followingInProgress = (isInProgress) => {
+export const followingInProgress = (isInProgress, userId) => {
     return {
         type: FollowingInProgress,
-        isInProgress
+        isInProgress,
+        userId
     }
 }

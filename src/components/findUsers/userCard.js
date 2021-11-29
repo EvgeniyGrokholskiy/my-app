@@ -3,48 +3,33 @@ import style from "./userCard.module.css";
 import photo from "./img/userUnknown.png";
 import {NavLink} from "react-router-dom";
 import {followUnfollowAPI} from "../../api/api";
+import Pagination from "./pagination/pagination";
 
 
 const UserCard = (props) => {
-
-    let pagesCount = Math.ceil(props.totalUsers / props.usersOnPage);
-    let pagesArray = [];
-
-    for (let i = 1; i <= (pagesCount >= 20 ? 20 : pagesCount); i++) {
-        pagesArray.push(i);
-    }
 
     return (
 
         <div className={style.cardContainer}>
 
-            <div className={style.pageButtonsContainer}>
-                {
 
-                    pagesArray.map((page) => {
-
-                        return (
-                            <button key={page} onClick={() => {
-                                props.onPageChanged(page)
-                            }}
-                                    className={page === props.currentPage ? `${style.pageButton} ${style.current}` : style.pageButton}>{page}
-                            </button>
-                        )
-                    })
-                }
-            </div>
+            <Pagination onPageChanged={props.onPageChanged}
+                        totalUsers={props.totalUsers}
+                        usersOnPage={props.usersOnPage}
+                        currentPage={props.currentPage}
+            />
 
             {
                 props.findUsers.map((user) => {
 
                     const toUnfollow = () => {
-                        props.followingInProgress(true);
+                        props.followingInProgress(true, user.id);
                         followUnfollowAPI.unFollow(user.id).then((data) => {
 
                             if (data.resultCode === 0) {
                                 props.toUnfollow(user.id);
                             }
-                            props.followingInProgress(true);
+                            props.followingInProgress(false, user.id);
                         })
                             .catch((error) => {
                                 console.log(error);
@@ -52,13 +37,13 @@ const UserCard = (props) => {
                     };
 
                     const toFollow = () => {
-                        props.followingInProgress(true);
+                        props.followingInProgress(true, user.id);
                         followUnfollowAPI.follow(user.id).then((data) => {
 
                             if (data.resultCode === 0) {
                                 props.toFollow(user.id);
                             }
-                            props.followingInProgress(true);
+                            props.followingInProgress(false, user.id);
 
                         })
                             .catch((error) => {
@@ -75,8 +60,8 @@ const UserCard = (props) => {
                                 <img className={style.photo}
                                      src={user.photos.small !== null ? user.photos.small : photo} alt=""/>
                                 {(user.followed) ?
-                                    <button disabled={props.isFollowingInProgress} onClick={toUnfollow} className={style.button} >Unfollow</button> :
-                                    <button disabled={props.isFollowingInProgress} onClick={toFollow} className={style.button}>Follow</button>}
+                                    <button disabled={props.isFollowingInProgress.some(id => id === user.id)} onClick={toUnfollow} className={style.button} >Unfollow</button> :
+                                    <button disabled={props.isFollowingInProgress.some(id => id === user.id)} onClick={toFollow} className={style.button}>Follow</button>}
                                 <NavLink to={`/profile/${user.id}`} className={style.linkToProfile}>Open
                                     Profile</NavLink>
                             </div>
