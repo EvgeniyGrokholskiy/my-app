@@ -1,3 +1,5 @@
+import {followUnfollowAPI, usersAPI} from "../api/api";
+
 const ToFollow = "TO_FOLLOW";
 const ToUnfollow = "TO_UNFOLLOW";
 const SetUsers = "SET_USERS";
@@ -125,9 +127,58 @@ export const findUsersReducer = (state = initialState, action) => {
 
         default:
             return state;
-
     }
 };
+
+
+export const getUsers = (currentPage, usersOnPage) => {
+    return (dispatch) => {
+        dispatch(setLoader(true));
+        usersAPI.getUsers(currentPage, usersOnPage)
+            .then((data) => {
+                    dispatch(setUsers(data.items, currentPage));
+                    dispatch(setTotalUsersCount(data.totalCount))
+                    dispatch(setLoader(false))
+                }
+            )
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+}
+
+export const setUnfollow = (userId) => {
+    return (dispatch) => {
+        dispatch(followingInProgress(true, userId));
+        followUnfollowAPI.unFollow(userId).then((data) => {
+
+            if (data.resultCode === 0) {
+                dispatch(toUnfollow(userId))
+            }
+            dispatch(followingInProgress(false, userId))
+        })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+}
+
+export const setFollow = (userId) => {
+    return (dispatch) => {
+        dispatch(followingInProgress(true, userId));
+        followUnfollowAPI.follow(userId).then((data) => {
+
+            if (data.resultCode === 0) {
+                dispatch(toFollow(userId));
+            }
+            dispatch(followingInProgress(false, userId));
+
+        })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+}
 
 export const toFollow = (userID) => {
     return {

@@ -2,7 +2,6 @@ import React from "react";
 import style from "./userCard.module.css";
 import photo from "./img/userUnknown.png";
 import {NavLink} from "react-router-dom";
-import {followUnfollowAPI} from "../../api/api";
 import Pagination from "./pagination/pagination";
 
 
@@ -23,32 +22,11 @@ const UserCard = (props) => {
                 props.findUsers.map((user) => {
 
                     const toUnfollow = () => {
-                        props.followingInProgress(true, user.id);
-                        followUnfollowAPI.unFollow(user.id).then((data) => {
-
-                            if (data.resultCode === 0) {
-                                props.toUnfollow(user.id);
-                            }
-                            props.followingInProgress(false, user.id);
-                        })
-                            .catch((error) => {
-                                console.log(error);
-                            })
+                        props.toUnfollowThunkCreator(user.id);
                     };
 
                     const toFollow = () => {
-                        props.followingInProgress(true, user.id);
-                        followUnfollowAPI.follow(user.id).then((data) => {
-
-                            if (data.resultCode === 0) {
-                                props.toFollow(user.id);
-                            }
-                            props.followingInProgress(false, user.id);
-
-                        })
-                            .catch((error) => {
-                                console.log(error);
-                            })
+                        props.toFollowThunkCreator(user.id)
                     };
 
 
@@ -83,7 +61,7 @@ const UserCard = (props) => {
                     )
                 })
             }
-            <button className={style.buttonSM}>Show more</button>
+            {/*<button className={style.buttonSM}>Show more</button>*/}
         </div>
     )
 }

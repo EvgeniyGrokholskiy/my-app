@@ -1,54 +1,26 @@
 import {connect} from "react-redux";
 import {
-    followingInProgress,
-    setLoader,
-    setTotalUsersCount,
-    setUsers,
-    showPage,
-    toFollow,
-    toUnfollow
+    getUsers,
+    setFollow,
+    setUnfollow
 } from "../../redux/findUsersReducer";
 import React from "react";
 import UserCard from "./userCard";
 import Loading from "../loading/loading";
-import {usersAPI} from "../../api/api";
 
 
 class UsersContainer extends React.Component {
 
     onPageChanged = (page) => {
-        this.props.setLoader(true);
-        this.props.showPage(page);
-
-        usersAPI.getUsers(page, this.props.usersOnPage)
-            .then((data) => {
-
-                    this.props.setUsers(data.items, this.props.currentPage);
-                    this.props.setLoader(false);
-                }
-            )
-            .catch((error)=> {
-                console.log(error);
-            })
+        this.props.getUsersThunkCreator(page, this.props.usersOnPage);
     }
 
 
     componentDidMount() {
-
-        this.props.setLoader(true);
-
-        usersAPI.getUsers(this.props.currentPage, this.props.usersOnPage)
-            .then((data) => {
-
-                    this.props.setUsers(data.items, this.props.currentPage);
-                    this.props.setTotalUsersCount(data.totalCount)
-                    this.props.setLoader(false)
-                }
-            )
-            .catch((error)=> {
-                console.log(error);
-            })
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.usersOnPage);
     }
+
+
 
     render() {
 
@@ -60,10 +32,9 @@ class UsersContainer extends React.Component {
                           currentPage={this.props.currentPage}
                           findUsers={this.props.findUsers}
                           onPageChanged={this.onPageChanged}
-                          toUnfollow={this.props.toUnfollow}
-                          toFollow={this.props.toFollow}
-                          followingInProgress={this.props.followingInProgress}
                           isFollowingInProgress={this.props.isFollowingInProgress}
+                          toUnfollowThunkCreator={this.props.toUnfollowThunkCreator}
+                          toFollowThunkCreator={this.props.toFollowThunkCreator}
                 />
             </>
         )
@@ -86,13 +57,9 @@ const mapStateToProps = (state) => {
 }
 
 const FindUsersContainer = connect(mapStateToProps, {
-    toFollow,
-    toUnfollow,
-    setUsers,
-    showPage,
-    setTotalUsersCount,
-    setLoader,
-    followingInProgress,
+    getUsersThunkCreator: getUsers,
+    toUnfollowThunkCreator: setUnfollow,
+    toFollowThunkCreator: setFollow,
 })(UsersContainer)
 
 export default FindUsersContainer;
