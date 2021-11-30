@@ -7,6 +7,8 @@ import Music from "./components/music/music";
 import Settings from "./components/settings/settings";
 import {Route, Routes} from "react-router-dom";
 import HeaderContainer from "./components/header/HeaderContainer";
+import Login from "./components/login/login";
+import ProfileContainer from "./components/profile/profileContainer/ProfileContainer";
 
 
 
@@ -17,8 +19,9 @@ function App(props) {
             <HeaderContainer />
             <main>
                 <Routes>
+                    <Route path="/login" element={<Login/>}/>
                     <Route path="/users" element={<FindUsers/>}/>
-                    <Route path="/profile/*" element={<Profile/>}/>
+                    <Route path="/profile/*" element={<ProfileContainer/>}/>
                     <Route path="/chat/*" element={<Chat/>}/>
                     <Route path="/news/*" element={<News/>}/>
                     <Route path="/music/*" element={<Music/>}/>
