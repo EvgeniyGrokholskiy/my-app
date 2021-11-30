@@ -4,14 +4,11 @@ import NewPostContainer from "./profileContainer/new_post/new_postContainer";
 import FriendsListContainer from "./profileContainer/friendsList/friendsListContainer";
 import ProfileDataContainer from "./profileContainer/profileData/profileDataContainer";
 import WallContainer from "./profileContainer/wall/wallContainer";
-import {Navigate} from "react-router";
+import {connect} from "react-redux";
+import {withAuthRedirect} from "../hoc/authRedirect";
 
 
 const Profile = (props) => {
-
-    if(!props.isAuth) {
-        return <Navigate to={"/login/"} />
-    }
 
     return (
         <div className={style.gridContainer}>
@@ -27,4 +24,18 @@ const Profile = (props) => {
     );
 };
 
-export default Profile;
+
+
+const mapStateToProps = (state)  => {
+    return {
+    }
+}
+const mapDispatchToProps = (dispatch) => {
+    return {
+    }
+}
+
+
+const ProfileContainer = connect(mapStateToProps,mapDispatchToProps)(Profile);
+
+export default ProfileContainer;

@@ -1,30 +1,57 @@
 import React from "react";
 import style from "./chat.module.css";
 import StartNewChat from "./chatComponents/startNewChatBtn/startNewChat";
-import ChatSideBarContainer from "./chatComponents/chatSideBar/chatSideBarContainer";
-import SendMessageContainer from "./chatComponents/sendMessage/sendMessageContainer";
-import ChatContentContainer from "./chatComponents/chatContent/chatContentContainer";
-import {Navigate} from "react-router";
+import {connect} from "react-redux";
+import {sendMessage, setActiveChatName, updateMessageInTextarea} from "../../redux/chatReducer";
+import ChatSideBar from "./chatComponents/chatSideBar/chatSideBar";
+import ChatContent from "./chatComponents/chatContent/chatContent";
+import SendMessage from "./chatComponents/sendMessage/sendMessage";
+import {withAuthRedirect} from "../hoc/authRedirect";
 
 
 const Chat = (props) => {
 
-    if(!props.isAuth) {
-        return <Navigate to={"/login/"} />
-    }
-
     return (
         <div className={style.wrapper}>
             <div className={style.sideBar}>
-                <ChatSideBarContainer/>
-                <StartNewChat />
+                <ChatSideBar
+                    state={props.state}
+                    setActiveChatName={props.setActiveChatName}
+                />
+                <StartNewChat/>
             </div>
             <div className={style.content}>
-                <ChatContentContainer />
-                <SendMessageContainer />
+                <ChatContent
+                    chatMessage={props.chatMessage}
+                    chatName={props.chatName}
+                />
+                <SendMessage
+                    stateSM={props.stateSM}
+                    sendMessage={props.sendMessage}
+                    updateMessageInTextarea={props.updateMessageInTextarea}
+                />
             </div>
         </div>
     );
 };
 
-export default Chat;
+let AuthRedirectComponent = withAuthRedirect(Chat)
+
+
+const mapStateToProps = (state) => {
+    return {
+        state: state.chatPage,
+        chatMessage: state.chatPage.chatMessageArray,
+        chatName: state.chatPage.activeChatName,
+        stateSM: state.chatPage
+    }
+}
+
+const ChatContainer = connect(mapStateToProps,
+    {
+        setActiveChatName,
+        sendMessage,
+        updateMessageInTextarea,
+    })(AuthRedirectComponent);
+
+export default ChatContainer;

@@ -1,4 +1,4 @@
-import React, {createRef} from "react";
+import React from "react";
 import style from "./sendMessage.module.css";
 import {ReactComponent as AttachBtn} from "../chatContent/img/paperclip.svg";
 import {ReactComponent as SendBtn} from "../chatContent/img/send_icon.svg";
@@ -6,12 +6,9 @@ import {ReactComponent as SendBtn} from "../chatContent/img/send_icon.svg";
 
 const SendMessage = (props) => {
 
-    let textAreaComponent = createRef();
-
     const sendMessage = (event) => {
 
-        const newMessage = textAreaComponent.current.value;
-        //const newMessage = event.currentTarget.parentElement.firstChild.value;
+        const newMessage = event.currentTarget.parentElement.firstChild.value;
 
         if (newMessage) props.sendMessage(newMessage);
     };
@@ -25,8 +22,8 @@ const SendMessage = (props) => {
 
     return (
         <div className={style.sendMessage}>
-            <textarea onChange={updateMessageInTextarea} ref={textAreaComponent} className={style.messageText}
-                      placeholder={"Write your message"} value={props.state.newMessage}/>
+            <textarea onChange={updateMessageInTextarea} className={style.messageText}
+                      placeholder={"Write your message"} value={props.stateSM.newMessage}/>
             <button className={style.attachBtn}><AttachBtn /></button>
             <button onClick={sendMessage} className={style.sendBtn}><SendBtn /></button>
         </div>

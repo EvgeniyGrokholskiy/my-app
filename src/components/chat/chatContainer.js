@@ -1,3 +1,4 @@
+/*
 import {connect} from "react-redux";
 import Chat from "./chat";
 
@@ -15,4 +16,4 @@ const mapDispatchToProps = (dispatch) => {
 
 const ChatContainer = connect(mapStateToProps ,mapDispatchToProps)(Chat);
 
-export default ChatContainer;
+export default ChatContainer;*/

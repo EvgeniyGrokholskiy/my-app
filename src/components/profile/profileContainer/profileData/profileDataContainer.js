@@ -3,6 +3,8 @@ import ProfileData from "./profileData";
 import {connect} from "react-redux";
 import {getUserProfile, setUserProfile} from "../../../../redux/profileReducer";
 import {useMatch} from "react-router";
+import {withAuthRedirect} from "../../../hoc/authRedirect";
+
 
 
 class GetProfileData extends React.Component {
@@ -27,6 +29,8 @@ const GetMatchUrl = (props) => {
     )
 }
 
+let AuthRedirectComponent = withAuthRedirect(GetMatchUrl);
+
 const mapStateToProps = (state) => {
 
     return {
@@ -43,6 +47,6 @@ const ProfileDataContainer = connect(mapStateToProps,
     {
         setUserProfile,
         getUserProfile
-    })(GetMatchUrl);
+    })(AuthRedirectComponent);
 
 export default ProfileDataContainer;

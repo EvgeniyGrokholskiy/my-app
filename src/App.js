@@ -6,8 +6,9 @@ import Settings from "./components/settings/settings";
 import {Route, Routes} from "react-router-dom";
 import HeaderContainer from "./components/header/HeaderContainer";
 import Login from "./components/login/login";
-import ProfileContainer from "./components/profile/ProfileContainer";
-import ChatContainer from "./components/chat/chatContainer";
+import ProfileContainer from "./components/profile/Profile";
+import ChatContainer from "./components/chat/chat";
+
 
 
 
