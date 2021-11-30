@@ -61,7 +61,7 @@ const UserCard = (props) => {
                     )
                 })
             }
-            <button className={style.buttonSM}>Show more</button>
+            {/*<button className={style.buttonSM}>Show more</button>*/}
         </div>
     )
 }

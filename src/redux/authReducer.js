@@ -1,3 +1,5 @@
+import {authMeAPI} from "../api/api";
+
 const SET_USER_DATA = "SET_USER_DATA";
 
 
@@ -16,7 +18,6 @@ export const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
             }
         }
 
@@ -26,13 +27,29 @@ export const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setUserData = (id, login, email) => {
+
+export const authThunkCreator = () => {
+    return (dispatch) => {
+        authMeAPI.authMe().then((data) => {
+            let isAuth = false
+            let {id, email, login} = data;
+
+            if (id !== undefined) {
+                isAuth = true;
+            }
+            dispatch(setUserData(id, login, email, isAuth));
+        })
+    }
+}
+
+export const setUserData = (id, login, email, isAuth) => {
     return {
         type: SET_USER_DATA,
         data: {
             id,
             login,
-            email
+            email,
+            isAuth
         }
     }
 }

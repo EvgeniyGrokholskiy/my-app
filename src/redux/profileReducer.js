@@ -1,3 +1,5 @@
+import {profileAPI} from "../api/api";
+
 const AddMessageOnWall = "ADD_MESSAGE_ON_WALL";
 const ChangeNewMessageOnWall = "CHANGE_NEW_MESSAGE_ON_WALL";
 const SetUserProfile = "SET_USERS_PROFILE"
@@ -67,6 +69,16 @@ export const profileReducer = (state = initialState, action) => {
 
     }
 };
+
+export const getUserProfile = (userId) => {
+    return (dispatch)=> {
+        profileAPI.getUserProfile(userId)
+            .then((data) => {
+            dispatch(setUserProfile(data));
+        })
+    }
+}
+
 
 export const addPost = () => {
     return {

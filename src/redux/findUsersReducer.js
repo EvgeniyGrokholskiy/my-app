@@ -131,7 +131,7 @@ export const findUsersReducer = (state = initialState, action) => {
 };
 
 
-export const getUsersThunkCreator = (currentPage, usersOnPage) => {
+export const getUsers = (currentPage, usersOnPage) => {
     return (dispatch) => {
         dispatch(setLoader(true));
         usersAPI.getUsers(currentPage, usersOnPage)
@@ -147,7 +147,7 @@ export const getUsersThunkCreator = (currentPage, usersOnPage) => {
     }
 }
 
-export const toUnfollowThunkCreator = (userId) => {
+export const setUnfollow = (userId) => {
     return (dispatch) => {
         dispatch(followingInProgress(true, userId));
         followUnfollowAPI.unFollow(userId).then((data) => {
@@ -163,7 +163,7 @@ export const toUnfollowThunkCreator = (userId) => {
     }
 }
 
-export const toFollowThunkCreator = (userId) => {
+export const setFollow = (userId) => {
     return (dispatch) => {
         dispatch(followingInProgress(true, userId));
         followUnfollowAPI.follow(userId).then((data) => {

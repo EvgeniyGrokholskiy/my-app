@@ -22,7 +22,7 @@ const Header = (props) => {
                 <nav>
                     <ul className={style.nav}>
                         <li><NavLink className={style.list_item} to="/users">Find Users <FindUsers/></NavLink></li>
-                        <li><NavLink className={style.list_item} to="/profile">Profile <User/></NavLink></li>
+                        <li><NavLink className={style.list_item} to="/profile/">Profile <User/></NavLink></li>
                         <li><NavLink className={style.list_item} to="/chat">Messages <Messages/></NavLink></li>
                         <li><NavLink className={style.list_item} to="/news">News <News/></NavLink></li>
                         <li><NavLink className={style.list_item} to="/music">Music <Music/></NavLink></li>

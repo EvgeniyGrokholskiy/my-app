@@ -1,8 +1,8 @@
 import {connect} from "react-redux";
 import {
-    getUsersThunkCreator,
-    toFollowThunkCreator,
-    toUnfollowThunkCreator
+    getUsers,
+    setFollow,
+    setUnfollow
 } from "../../redux/findUsersReducer";
 import React from "react";
 import UserCard from "./userCard";
@@ -57,9 +57,9 @@ const mapStateToProps = (state) => {
 }
 
 const FindUsersContainer = connect(mapStateToProps, {
-    getUsersThunkCreator,
-    toUnfollowThunkCreator,
-    toFollowThunkCreator,
+    getUsersThunkCreator: getUsers,
+    toUnfollowThunkCreator: setUnfollow,
+    toFollowThunkCreator: setFollow,
 })(UsersContainer)
 
 export default FindUsersContainer;
