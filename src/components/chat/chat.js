@@ -7,6 +7,7 @@ import ChatSideBar from "./chatComponents/chatSideBar/chatSideBar";
 import ChatContent from "./chatComponents/chatContent/chatContent";
 import SendMessage from "./chatComponents/sendMessage/sendMessage";
 import {withAuthRedirect} from "../hoc/authRedirect";
+import {compose} from "redux";
 
 
 const Chat = (props) => {
@@ -35,9 +36,6 @@ const Chat = (props) => {
     );
 };
 
-let AuthRedirectComponent = withAuthRedirect(Chat)
-
-
 const mapStateToProps = (state) => {
     return {
         state: state.chatPage,
@@ -47,11 +45,9 @@ const mapStateToProps = (state) => {
     }
 }
 
-const ChatContainer = connect(mapStateToProps,
-    {
-        setActiveChatName,
-        sendMessage,
-        updateMessageInTextarea,
-    })(AuthRedirectComponent);
+const ChatContainer = compose(
+    connect(mapStateToProps,{setActiveChatName, sendMessage,updateMessageInTextarea}),
+    withAuthRedirect
+)(Chat)
 
 export default ChatContainer;

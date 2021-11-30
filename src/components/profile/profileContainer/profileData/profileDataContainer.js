@@ -4,7 +4,9 @@ import {connect} from "react-redux";
 import {getUserProfile, setUserProfile} from "../../../../redux/profileReducer";
 import {useMatch} from "react-router";
 import {withAuthRedirect} from "../../../hoc/authRedirect";
-
+import {compose} from "redux";
+import NewPostContainer from "../new_post/new_postContainer";
+import WallContainer from "../wall/wallContainer";
 
 
 class GetProfileData extends React.Component {
@@ -17,7 +19,11 @@ class GetProfileData extends React.Component {
 
     render() {
         return (
-            <ProfileData {...this.props} />
+            <>
+                <ProfileData {...this.props} />
+                <NewPostContainer/>
+                <WallContainer/>
+            </>
         )
     }
 }
@@ -29,8 +35,6 @@ const GetMatchUrl = (props) => {
     )
 }
 
-let AuthRedirectComponent = withAuthRedirect(GetMatchUrl);
-
 const mapStateToProps = (state) => {
 
     return {
@@ -39,14 +43,9 @@ const mapStateToProps = (state) => {
     };
 };
 
-/*const mapDispatchToProps = (dispatch) => {
-    return ;
-};*/
-
-const ProfileDataContainer = connect(mapStateToProps,
-    {
-        setUserProfile,
-        getUserProfile
-    })(AuthRedirectComponent);
+const ProfileDataContainer = compose(
+    connect(mapStateToProps, {setUserProfile, getUserProfile}),
+    withAuthRedirect)
+(GetMatchUrl)
 
 export default ProfileDataContainer;

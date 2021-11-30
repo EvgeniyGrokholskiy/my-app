@@ -5,7 +5,6 @@ import FriendsListContainer from "./profileContainer/friendsList/friendsListCont
 import ProfileDataContainer from "./profileContainer/profileData/profileDataContainer";
 import WallContainer from "./profileContainer/wall/wallContainer";
 import {connect} from "react-redux";
-import {withAuthRedirect} from "../hoc/authRedirect";
 
 
 const Profile = (props) => {
@@ -14,8 +13,6 @@ const Profile = (props) => {
         <div className={style.gridContainer}>
             <div className={style.leftContainer}>
                 <ProfileDataContainer/>
-                <NewPostContainer />
-                <WallContainer />
             </div>
             <div className={style.rightContainer}>
                 <FriendsListContainer/>
