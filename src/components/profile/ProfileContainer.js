@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import Profile from "../Profile";
+import Profile from "./Profile";
 
 const mapStateToProps = (state)  => {
     return {
@@ -8,7 +8,6 @@ const mapStateToProps = (state)  => {
 }
 const mapDispatchToProps = (dispatch) => {
     return {
-
     }
 }
 

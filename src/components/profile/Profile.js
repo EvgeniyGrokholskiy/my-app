@@ -4,12 +4,13 @@ import NewPostContainer from "./profileContainer/new_post/new_postContainer";
 import FriendsListContainer from "./profileContainer/friendsList/friendsListContainer";
 import ProfileDataContainer from "./profileContainer/profileData/profileDataContainer";
 import WallContainer from "./profileContainer/wall/wallContainer";
-import {Redirect} from "react-router";
+import {Navigate} from "react-router";
+
 
 const Profile = (props) => {
 
-    if(props.isAuth === false) {
-        return <Redirect to={"login"} />
+    if(!props.isAuth) {
+        return <Navigate to={"/login/"} />
     }
 
     return (
