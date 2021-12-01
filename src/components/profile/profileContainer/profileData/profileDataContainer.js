@@ -1,26 +1,44 @@
 import React from "react";
 import ProfileData from "./profileData";
 import {connect} from "react-redux";
-import {editProfileStatus, getUserProfile, setProfileStatus, setUserProfile} from "../../../../redux/profileReducer";
+import {
+    editProfileStatus,
+    getUserProfile,
+    getUserStatusThunkCreator,
+    setProfileStatus,
+    setUserProfile, setUserStatusThunkCreator
+} from "../../../../redux/profileReducer";
 import {useMatch} from "react-router";
 import {withAuthRedirect} from "../../../hoc/authRedirect";
 import {compose} from "redux";
 import NewPostContainer from "../new_post/new_postContainer";
 import WallContainer from "../wall/wallContainer";
+import StatusBar from "../status/statusBar";
 
 
 class GetProfileData extends React.Component {
+
 
     componentDidMount() {
         let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id || 2;
 
         this.props.getUserProfile(userId)
+
+        this.props.getUserStatusThunkCreator(userId)
     }
 
     render() {
         return (
             <>
                 <ProfileData {...this.props} />
+                <StatusBar setProfileStatus={this.props.setProfileStatus}
+                           editProfileStatus={this.props.editProfileStatus}
+                           state={this.props.state}
+                           auth={this.props.auth}
+                           profileStatus={this.props.profileStatus}
+                           getUserStatusThunkCreator={this.props.getUserStatusThunkCreator}
+                           setUserStatusThunkCreator={this.props.setUserStatusThunkCreator}
+                />
                 <NewPostContainer/>
                 <WallContainer/>
             </>
@@ -39,12 +57,13 @@ const mapStateToProps = (state) => {
 
     return {
         state: state.profile,
-        auth: state.auth
+        auth: state.auth,
+        profileStatus: state.profile.profileStatus
     };
 };
 
 const ProfileDataContainer = compose(
-    connect(mapStateToProps, {setUserProfile, getUserProfile,setProfileStatus,editProfileStatus}),
+    connect(mapStateToProps, {setUserProfile, getUserProfile,setProfileStatus,editProfileStatus, getUserStatusThunkCreator,setUserStatusThunkCreator}),
     withAuthRedirect)
 (GetMatchUrl)
 

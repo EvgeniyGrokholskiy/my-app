@@ -23,7 +23,8 @@ const initialState = {
     ],
 
     profile: null,
-    profileStatus: "test",
+    profileStatus: "",
+    putRequestStatus: null
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -67,9 +68,9 @@ export const profileReducer = (state = initialState, action) => {
         }
 
         case SetProfileStatus: {
-            return  {
+            return {
                 ...state,
-                profileStatus: action.message
+                profileStatus: action.status
             }
         }
 
@@ -88,11 +89,41 @@ export const profileReducer = (state = initialState, action) => {
 };
 
 export const getUserProfile = (userId) => {
-    return (dispatch)=> {
+    return (dispatch) => {
         profileAPI.getUserProfile(userId)
             .then((data) => {
-            dispatch(setUserProfile(data));
-        })
+                dispatch(setUserProfile(data));
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+}
+
+export const getUserStatusThunkCreator = (userId) => {
+    return (dispatch) => {
+        profileAPI.getUserStatus(userId)
+            .then((data) => {
+                dispatch(setProfileStatus(data));
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+    }
+}
+
+export const setUserStatusThunkCreator = (status) => {
+    return (dispatch) => {
+        profileAPI.setUserStatus(status)
+            .then((response) => {
+                    if (response.resultCode === 0) {
+                        dispatch(setProfileStatus(status));
+                    }
+                }
+            )
+            .catch((error) => {
+                console.error(error)
+            })
     }
 }
 
@@ -116,10 +147,10 @@ export const setUserProfile = (profile) => {
     }
 }
 
-export const setProfileStatus = (message) => {
+export const setProfileStatus = (status) => {
     return {
         type: SetProfileStatus,
-        message
+        status
     }
 }
 

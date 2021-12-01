@@ -121,7 +121,7 @@ let store = {
                 userId: 2
             },
 
-            profileStatus: "test",
+            profileStatus: "",
         },
 
         friendsList: {

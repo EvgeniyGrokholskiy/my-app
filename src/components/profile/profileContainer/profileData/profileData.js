@@ -10,28 +10,6 @@ class ProfileData extends React.Component {
         super(props);
     }
 
-    state = {
-        editFlag: false,
-        status: "test"
-    }
-
-    editStatus = () => {
-        this.setState({
-            editFlag: true
-        })
-    }
-
-    setStatus = (event) => {
-        this.props.setProfileStatus(event.currentTarget.value);
-        this.setState({
-            editFlag: false
-        })
-    }
-
-    changeStatus= (event) => {
-        this.props.editProfileStatus(event.currentTarget.value)
-    }
-
     render() {
 
         if (!this.props.state.profile) {
@@ -51,15 +29,6 @@ class ProfileData extends React.Component {
                 <img src={profileData_top_image} alt="" height={180} width={850}/>
                 <div className={style.card}>
                     <img className={style.image} src={this.props.state.profile.photos.large ? this.props.state.profile.photos.large : photo } alt=""/>
-                    {
-                        !this.state.editFlag &&
-                            <span className={style.status} onDoubleClick={this.editStatus}>{this.props.state.profileStatus}</span>
-                    }
-                    {
-                        this.state.editFlag &&
-                            <input className={style.status} autoFocus={true} onBlur={this.setStatus} onChange={this.changeStatus} value={this.props.state.profileStatus} />
-                    }
-
                     <p className={`${style.data} ${style.data_name}`}>
                         {this.props.state.profile.fullName}
                     </p>
