@@ -120,6 +120,8 @@ let store = {
                 },
                 userId: 2
             },
+
+            profileStatus: "test",
         },
 
         friendsList: {

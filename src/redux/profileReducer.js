@@ -2,7 +2,9 @@ import {profileAPI} from "../api/api";
 
 const AddMessageOnWall = "ADD_MESSAGE_ON_WALL";
 const ChangeNewMessageOnWall = "CHANGE_NEW_MESSAGE_ON_WALL";
-const SetUserProfile = "SET_USERS_PROFILE"
+const SetUserProfile = "SET_USERS_PROFILE";
+const SetProfileStatus = "SET_PROFILE_STATUS";
+const EditProfileStatus = "EDIT_PROFILE_STATUS";
 
 const initialState = {
     newMessage: "",
@@ -21,6 +23,7 @@ const initialState = {
     ],
 
     profile: null,
+    profileStatus: "test",
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -63,6 +66,20 @@ export const profileReducer = (state = initialState, action) => {
             }
         }
 
+        case SetProfileStatus: {
+            return  {
+                ...state,
+                profileStatus: action.message
+            }
+        }
+
+        case EditProfileStatus: {
+            return {
+                ...state,
+                profileStatus: action.message
+            }
+        }
+
 
         default:
             return state;
@@ -78,7 +95,6 @@ export const getUserProfile = (userId) => {
         })
     }
 }
-
 
 export const addPost = () => {
     return {
@@ -97,5 +113,19 @@ export const setUserProfile = (profile) => {
     return {
         type: SetUserProfile,
         profile: profile
+    }
+}
+
+export const setProfileStatus = (message) => {
+    return {
+        type: SetProfileStatus,
+        message
+    }
+}
+
+export const editProfileStatus = (message) => {
+    return {
+        type: EditProfileStatus,
+        message
     }
 }

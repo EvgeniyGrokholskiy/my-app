@@ -1,7 +1,7 @@
 import React from "react";
 import ProfileData from "./profileData";
 import {connect} from "react-redux";
-import {getUserProfile, setUserProfile} from "../../../../redux/profileReducer";
+import {editProfileStatus, getUserProfile, setProfileStatus, setUserProfile} from "../../../../redux/profileReducer";
 import {useMatch} from "react-router";
 import {withAuthRedirect} from "../../../hoc/authRedirect";
 import {compose} from "redux";
@@ -44,7 +44,7 @@ const mapStateToProps = (state) => {
 };
 
 const ProfileDataContainer = compose(
-    connect(mapStateToProps, {setUserProfile, getUserProfile}),
+    connect(mapStateToProps, {setUserProfile, getUserProfile,setProfileStatus,editProfileStatus}),
     withAuthRedirect)
 (GetMatchUrl)
 
