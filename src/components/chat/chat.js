@@ -47,7 +47,7 @@ const mapStateToProps = (state) => {
 
 const ChatContainer = compose(
     connect(mapStateToProps,{setActiveChatName, sendMessage,updateMessageInTextarea}),
-    withAuthRedirect
+    /*withAuthRedirect*/
 )(Chat)
 
 export default ChatContainer;

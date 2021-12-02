@@ -36,7 +36,7 @@ const Header = (props) => {
                     }
                     {
                         props.state.isAuth ? <button onClick={props.logoutThunkCreator} className={style.loginButton}>LogOut</button> :
-                            <button className={style.loginButton}>LogIn</button>
+                            <NavLink to={"/login/"} className={style.loginButton}>LogIn</NavLink>
                     }
 
                     {/*<button className={style.loginButton}>LogIn</button>

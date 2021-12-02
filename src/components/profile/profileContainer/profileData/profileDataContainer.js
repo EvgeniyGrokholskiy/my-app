@@ -76,7 +76,7 @@ const mapStateToProps = (state) => {
 
 const ProfileDataContainer = compose(
     connect(mapStateToProps, {setUserProfile, getUserProfile,setProfileStatus,editProfileStatus, getUserStatusThunkCreator,setUserStatusThunkCreator,authThunkCreator}),
-    withAuthRedirect)
+    /*withAuthRedirect*/)
 (GetMatchUrl)
 
 export default ProfileDataContainer;

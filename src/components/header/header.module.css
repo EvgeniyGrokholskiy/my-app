@@ -71,6 +71,7 @@
     margin-bottom: 5px;
     padding: 0;
     text-align: center;
+    text-decoration: none;
     height: 36px;
     width: 100px;
     transition: all ease-in 0.1s;
