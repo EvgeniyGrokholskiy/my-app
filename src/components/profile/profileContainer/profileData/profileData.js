@@ -6,9 +6,6 @@ import Loading from "../../../loading/loading";
 
 
 class ProfileData extends React.Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
 

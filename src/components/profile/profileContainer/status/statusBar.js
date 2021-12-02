@@ -1,7 +1,6 @@
 import React from "react";
 import style from "./statusBar.module.css";
 import {ReactComponent as SendIcon} from "../new_post/img/send_icon.svg";
-import {profileAPI} from "../../../../api/api";
 
 
 class StatusBar extends React.Component {
@@ -9,17 +8,6 @@ class StatusBar extends React.Component {
     state = {
         editFlag: false,
         status: this.props.profileStatus
-    }
-
-
-   static getDerivedStateFromProps(props, state) {
-        debugger
-        if (props.profileStatus !== state.status) {
-            return {
-                status: props.profileStatus
-            };
-        }
-        return null
     }
 
     editStatus = () => {
@@ -39,11 +27,20 @@ class StatusBar extends React.Component {
         this.setState({
             status: event.currentTarget.value
         })
-        //this.props.editProfileStatus(event.currentTarget.value)
     }
 
     componentDidMount() {
 
+    }
+
+    componentDidUpdate(prevProps, perevState) {
+
+        if (prevProps.profileStatus !== this.props.profileStatus) {
+            return {
+                status: this.props.profileStatus
+            };
+        }
+        return null
     }
 
 
