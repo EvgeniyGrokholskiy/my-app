@@ -9,6 +9,7 @@ import {ReactComponent as News} from "./img/News.svg";
 import {ReactComponent as Music} from "./img/Music.svg";
 import {ReactComponent as Settings} from "./img/Settings.svg";
 import {NavLink} from "react-router-dom";
+import {logoutThunkCreator} from "../../redux/authReducer";
 
 
 const Header = (props) => {
@@ -34,7 +35,7 @@ const Header = (props) => {
                         props.state.isAuth ? <span className={style.loginName}>{props.state.login}</span> : <></>
                     }
                     {
-                        props.state.isAuth ? <button className={style.loginButton}>LogOut</button> :
+                        props.state.isAuth ? <button onClick={props.logoutThunkCreator} className={style.loginButton}>LogOut</button> :
                             <button className={style.loginButton}>LogIn</button>
                     }
 

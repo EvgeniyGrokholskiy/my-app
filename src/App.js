@@ -5,9 +5,9 @@ import Music from "./components/music/music";
 import Settings from "./components/settings/settings";
 import {Route, Routes} from "react-router-dom";
 import HeaderContainer from "./components/header/HeaderContainer";
-import Login from "./components/login/login";
 import ProfileContainer from "./components/profile/Profile";
 import ChatContainer from "./components/chat/chat";
+import LoginContainer from "./components/login/loginContainer";
 
 
 
@@ -19,7 +19,7 @@ function App(props) {
             <HeaderContainer />
             <main>
                 <Routes>
-                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/login" element={<LoginContainer/>}/>
                     <Route path="/users" element={<FindUsers/>}/>
                     <Route path="/profile/*" element={<ProfileContainer/>}/>
                     <Route path="/chat/*" element={<ChatContainer/>}/>

@@ -5,14 +5,16 @@ import {connect} from "react-redux";
 const mapStateToProps = (state) => {
     return {
         isAuth: state.auth.isAuth,
+        props: state.auth
     }
 }
 
-export const withAuthRedirect = (Component) => {
+export const withLoginRedirect = (Component) => {
 
     class RedirectComponent extends React.Component {
         render() {
-            if(!this.props.isAuth) return <Navigate to={"/login/"} />
+
+            if(this.props.isAuth) return <Navigate to={`/profile`} />
 
             return <Component {...this.props} />
         }
@@ -20,6 +22,5 @@ export const withAuthRedirect = (Component) => {
 
     let ConnectedAuthRedirectComponent = connect (mapStateToProps)(RedirectComponent);
 
-return ConnectedAuthRedirectComponent;
+    return ConnectedAuthRedirectComponent;
 }
-

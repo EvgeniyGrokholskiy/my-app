@@ -31,7 +31,22 @@ export const authMeAPI = {
     authMe() {
         return instance.get(`auth/me/`)
             .then((response) => response.data.data)
+    },
+    login(data) {
+        return instance.post(`/auth/login`, data)
+            .then((response) => {
+                console.log(response.data.data)
+                return response.data.data
+
+            })
+    },
+    logout() {
+        return instance.delete(`/auth/login`)
+            .then((response) => {
+                console.log(response)
+            })
     }
+
 }
 
 export const profileAPI = {
@@ -43,7 +58,8 @@ export const profileAPI = {
     getUserStatus(userId) {
         return instance.get(`/profile/status/${userId}`)
             .then((response) => {
-                return response.data})
+                return response.data
+            })
     },
 
     setUserStatus(status) {
@@ -52,6 +68,4 @@ export const profileAPI = {
                 return response.data
             })
     }
-
-
 }

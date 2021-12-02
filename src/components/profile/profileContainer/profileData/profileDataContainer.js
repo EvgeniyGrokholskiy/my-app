@@ -14,17 +14,29 @@ import {compose} from "redux";
 import NewPostContainer from "../new_post/new_postContainer";
 import WallContainer from "../wall/wallContainer";
 import StatusBar from "../status/statusBar";
+import {authThunkCreator} from "../../../../redux/authReducer";
 
 
 class GetProfileData extends React.Component {
 
+    state ={
+        userId: this.props.auth.id
+    }
+
 
     componentDidMount() {
-        let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id || 2;
 
+        this.props.authThunkCreator();
+        let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id || 2;
         this.props.getUserProfile(userId)
 
         this.props.getUserStatusThunkCreator(userId)
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if(prevProps.auth.id !== this.props.auth.id) {
+            this.state.userId = this.props.auth.id
+        }
     }
 
     render() {
@@ -63,7 +75,7 @@ const mapStateToProps = (state) => {
 };
 
 const ProfileDataContainer = compose(
-    connect(mapStateToProps, {setUserProfile, getUserProfile,setProfileStatus,editProfileStatus, getUserStatusThunkCreator,setUserStatusThunkCreator}),
+    connect(mapStateToProps, {setUserProfile, getUserProfile,setProfileStatus,editProfileStatus, getUserStatusThunkCreator,setUserStatusThunkCreator,authThunkCreator}),
     withAuthRedirect)
 (GetMatchUrl)
 
