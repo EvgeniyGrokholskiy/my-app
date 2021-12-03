@@ -35,7 +35,9 @@ class GetProfileData extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if(prevProps.auth.id !== this.props.auth.id) {
-            this.state.userId = this.props.auth.id
+            this.setState({
+                userId: this.props.auth.id
+            })
         }
     }
 

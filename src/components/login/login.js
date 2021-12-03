@@ -22,9 +22,6 @@ const MyForm = (props) => {
             validate={(data) => {
                 console.log(data)
             }}
-            onChange={(data) => {
-                console.log(data);
-            }}
             render={({handleSubmit}) => (
                 <form className={style.form} onSubmit={handleSubmit}>
                     <div className={style.form__field}>

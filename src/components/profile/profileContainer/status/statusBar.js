@@ -57,7 +57,7 @@ class StatusBar extends React.Component {
                 {
                     this.state.editFlag &&
                     <input className={style.textArea} autoFocus={true} onBlur={this.setStatus}
-                           onChange={this.changeStatus} value={this.state.status ? this.state.status: this.props.profileStatus}/>
+                           onChange={this.changeStatus} value={this.state.status}/>
                 }
                 <button className={style.button}><SendIcon className={style.svg}/></button>
             </div>

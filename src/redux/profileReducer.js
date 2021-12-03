@@ -7,7 +7,7 @@ const SetProfileStatus = "SET_PROFILE_STATUS";
 const EditProfileStatus = "EDIT_PROFILE_STATUS";
 
 const initialState = {
-    newMessage: "",
+    //newMessage: "",
     wallMessageArray: [
         {
             message: "How’s your day going, guys?",
@@ -43,12 +43,12 @@ export const profileReducer = (state = initialState, action) => {
         }
 
         case AddMessageOnWall: {
-
-            if (isEmptyMessage(state.newMessage)) return state;
+debugger
+            if (isEmptyMessage(action.message)) return state;
 
             let id = state.wallMessageArray.length + 1;
             let messageObj = {
-                message: state.newMessage,
+                message: action.message,
                 likeCount: 0,
                 id: id,
             };
@@ -56,7 +56,7 @@ export const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 wallMessageArray: [...state.wallMessageArray, messageObj],
-                newMessage: ''
+                // newMessage: ''
             };
         }
 
@@ -80,7 +80,6 @@ export const profileReducer = (state = initialState, action) => {
                 profileStatus: action.message
             }
         }
-
 
         default:
             return state;
@@ -127,16 +126,17 @@ export const setUserStatusThunkCreator = (status) => {
     }
 }
 
-export const addPost = () => {
+export const addPost = (message) => {
     return {
         type: AddMessageOnWall,
+        message
     };
 }
 
 export const changeNewMessageOnWall = (message) => {
     return {
         type: ChangeNewMessageOnWall,
-        message: message,
+        message,
     }
 }
 
