@@ -35,7 +35,7 @@ const MyForm = (props) => {
                     </div>
                     <div className={style.form__field}>
                         <label className={style.label}>Password</label>
-                        <Field name="password" component={Input} placeholder={"Please input password"} type={'input'} validate={validator}/>
+                        <Field name="password" component={Input} placeholder={"Please input password"} type={"password"} validate={validator}/>
                     </div>
                     <div className={style.form__field}>
                         <label className={style.label}>Remember me</label>

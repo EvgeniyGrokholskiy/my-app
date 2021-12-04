@@ -27,7 +27,7 @@ export const followUnfollowAPI = {
     }
 }
 
-export const authMeAPI = {
+export const authAPI = {
     authMe() {
         return instance.get(`auth/me/`)
             .then((response) => response.data.data)
@@ -35,15 +35,14 @@ export const authMeAPI = {
     login(data) {
         return instance.post(`/auth/login`, data)
             .then((response) => {
-                console.log(response.data.data)
-                return response.data.data
+                return response
 
             })
     },
     logout() {
         return instance.delete(`/auth/login`)
             .then((response) => {
-                console.log(response)
+                return response
             })
     }
 }
