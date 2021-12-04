@@ -29,7 +29,6 @@ class GetProfileData extends React.Component {
         this.props.authThunkCreator();
         let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id || 2;
         this.props.getUserProfile(userId)
-
         this.props.getUserStatusThunkCreator(userId)
     }
 

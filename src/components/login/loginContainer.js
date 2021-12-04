@@ -10,13 +10,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-
-    }
-}
-
-
 const LoginContainer = compose(connect(mapStateToProps,
     {
         loginThunkCreator

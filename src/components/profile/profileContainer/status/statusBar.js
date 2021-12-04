@@ -17,7 +17,7 @@ class StatusBar extends React.Component {
     }
 
     setStatus = (event) => {
-        this.props.setUserStatusThunkCreator(event.currentTarget.value)
+        this.props.setUserStatusThunkCreator(this.props.profileStatus)
         this.setState({
             editFlag: false
         })

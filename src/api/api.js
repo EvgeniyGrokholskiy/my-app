@@ -46,7 +46,6 @@ export const authMeAPI = {
                 console.log(response)
             })
     }
-
 }
 
 export const profileAPI = {

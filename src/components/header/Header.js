@@ -9,7 +9,6 @@ import {ReactComponent as News} from "./img/News.svg";
 import {ReactComponent as Music} from "./img/Music.svg";
 import {ReactComponent as Settings} from "./img/Settings.svg";
 import {NavLink} from "react-router-dom";
-import {logoutThunkCreator} from "../../redux/authReducer";
 
 
 const Header = (props) => {

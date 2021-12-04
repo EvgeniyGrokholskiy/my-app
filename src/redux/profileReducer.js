@@ -7,7 +7,6 @@ const SetProfileStatus = "SET_PROFILE_STATUS";
 const EditProfileStatus = "EDIT_PROFILE_STATUS";
 
 const initialState = {
-    //newMessage: "",
     wallMessageArray: [
         {
             message: "How’s your day going, guys?",
@@ -19,7 +18,6 @@ const initialState = {
             likeCount: 20,
             id: 2
         }
-
     ],
 
     profile: null,
@@ -43,7 +41,6 @@ export const profileReducer = (state = initialState, action) => {
         }
 
         case AddMessageOnWall: {
-debugger
             if (isEmptyMessage(action.message)) return state;
 
             let id = state.wallMessageArray.length + 1;
@@ -56,7 +53,6 @@ debugger
             return {
                 ...state,
                 wallMessageArray: [...state.wallMessageArray, messageObj],
-                // newMessage: ''
             };
         }
 
@@ -131,13 +127,6 @@ export const addPost = (message) => {
         type: AddMessageOnWall,
         message
     };
-}
-
-export const changeNewMessageOnWall = (message) => {
-    return {
-        type: ChangeNewMessageOnWall,
-        message,
-    }
 }
 
 export const setUserProfile = (profile) => {

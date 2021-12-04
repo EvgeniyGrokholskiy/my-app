@@ -1,4 +1,4 @@
-import React, {createRef} from "react";
+import React from "react";
 import style from "./new_post.module.css";
 import {ReactComponent as SendIcon} from "./img/send_icon.svg";
 import {Field, Form} from "react-final-form";
@@ -10,18 +10,8 @@ const NewPost = (props) => {
         if(newMessage.message) props.addPost(newMessage.newMessage);
     }
 
-    const setNewMessage = (event) => {
-        const newMessage = event.currentTarget.value;
-
-        props.changeNewMessageOnWall(newMessage);
-    }
-
     return (
         <div>
-
-            {/*<textarea onChange={setNewMessage} ref={textAreaComponent} className={style.textArea}
-                      placeholder={"What’s on your mind?"} value={props.profile.newMessage}/>
-            <button onClick={addPost} className={style.button}><SendIcon className={style.svg}/></button>*/}
             <NewMessageForm addPost={addPost} />
         </div>
     )
