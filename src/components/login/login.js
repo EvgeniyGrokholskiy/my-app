@@ -1,6 +1,8 @@
 import React from "react";
 import {Field, Form} from 'react-final-form';
 import style from "./login.module.css";
+import {validators} from "../utils/validators";
+import {Input} from "../commons/formControls/component";
 
 
 const Login = (props) => {
@@ -14,60 +16,33 @@ const Login = (props) => {
 
 const MyForm = (props) => {
 
+    const maxLength30 = validators.maxLengthValidatorCreator(30)
+    const validator = validators.composeValidators(validators.required, maxLength30)
+
     return (
         <Form
             onSubmit={(data) => {
                 props.loginThunkCreator(data)
             }}
-            validate={(data) => {
-                console.log(data)
+            validate={(values) => {
+
             }}
             render={({handleSubmit}) => (
                 <form className={style.form} onSubmit={handleSubmit}>
                     <div className={style.form__field}>
-                        <label>Login</label>
-                        <hr className={style.hr}/>
-                        <Field name="email" component="input" placeholder="Please input login"/>
+                        <label className={style.label}>Login</label>
+                        <Field name="email" component={Input} placeholder={"Please input login"} validate={validator}/>
                     </div>
                     <div className={style.form__field}>
-                        <label>Password</label>
-                        <hr className={style.hr}/>
-                        <Field name="password" component="input" placeholder="Please input password"/>
+                        <label className={style.label}>Password</label>
+                        <Field name="password" component={Input} placeholder={"Please input password"} type={'input'} validate={validator}/>
                     </div>
                     <div className={style.form__field}>
-                        <label>Remember me</label>
+                        <label className={style.label}>Remember me</label>
                         <Field name="rememberMe" component="input" type={"checkbox"}/>
-                        <hr className={style.hr}/>
                     </div>
-                    {/*<h2>An Arbitrary Reusable Input Component</h2>
-                    <div>
-                        <label>Interests</label>
-                        <Field name="interests" component={"input"}/>
-                    </div>
-
-                    <h2>Render Function</h2>
-                    <Field
-                        name="bio"
-                        render={({input, meta}) => (
-                            <div>
-                                <label>Bio</label>
-                                <textarea {...input} />
-                                {meta.touched && meta.error && <span>{meta.error}</span>}
-                            </div>
-                        )}
-                    />
-
-                    <h2>Render Function as Children</h2>
-                    <Field name="phone">
-                        {({input, meta}) => (
-                            <div>
-                                <label>Phone</label>
-                                <input type="text" {...input} placeholder="Phone"/>
-                                {meta.touched && meta.error && <span>{meta.error}</span>}
-                            </div>
-                        )}
-                    </Field>*/}
-                    <button type="submit">Login</button>
+                    <br className={''}/>
+                    <button className={style.button} type="submit">Login</button>
                 </form>
             )}
         />

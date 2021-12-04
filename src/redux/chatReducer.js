@@ -1,9 +1,7 @@
 const NewMessageInChat = "SEND_MESSAGE_IN_CHAT";
-const UpdateMessage = "UPDATE_MESSAGE_IN_TEXTAREA";
 const SetActiveChatName = "SET_ACTIVE_CHAT_NAME"
 
 const initialState = {
-    newMessage: "",
     activeChatName: "",
     chatsList: [
         {
@@ -84,18 +82,9 @@ export const chatReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case UpdateMessage: {
-
-            return {
-                ...state,
-                newMessage: action.message
-            };
-
-        }
-
         case NewMessageInChat: {
 
-            if (isEmptyMessage(state.newMessage)) return state;
+            if (isEmptyMessage(action.message)) return state;
             const date = new Date();
             const id = state.chatMessageArray.length + 1;
             const day = String(date.getDate()).padStart(2, "0");
@@ -106,7 +95,7 @@ export const chatReducer = (state = initialState, action) => {
 
             let messageObj = {
                 data: `${day}.${month}.${year} ${hour}:${minute}`,
-                message: `${state.newMessage}`,
+                message: `${action.message}`,
                 type: "out",
                 id: id,
             };
@@ -114,7 +103,6 @@ export const chatReducer = (state = initialState, action) => {
             return {
                 ...state,
                 chatMessageArray: [...state.chatMessageArray, messageObj],
-                newMessage: ''
             };
         }
         case SetActiveChatName: {
@@ -139,16 +127,10 @@ export const chatReducer = (state = initialState, action) => {
     }
 };
 
-export const sendMessage = () => {
+export const sendMessage = (message) => {
     return {
         type: NewMessageInChat,
-    }
-}
-
-export const updateMessageInTextarea = (newMessage) => {
-    return {
-        type: UpdateMessage,
-        message: newMessage,
+        message
     }
 }
 

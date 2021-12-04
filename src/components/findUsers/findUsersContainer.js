@@ -6,7 +6,7 @@ import {
 } from "../../redux/findUsersReducer";
 import React from "react";
 import UserCard from "./userCard";
-import Loading from "../loading/loading";
+import Loading from "../commons/loading/loading";
 
 
 class UsersContainer extends React.Component {

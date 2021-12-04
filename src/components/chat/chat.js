@@ -2,7 +2,7 @@ import React from "react";
 import style from "./chat.module.css";
 import StartNewChat from "./chatComponents/startNewChatBtn/startNewChat";
 import {connect} from "react-redux";
-import {sendMessage, setActiveChatName, updateMessageInTextarea} from "../../redux/chatReducer";
+import {sendMessage, setActiveChatName} from "../../redux/chatReducer";
 import ChatSideBar from "./chatComponents/chatSideBar/chatSideBar";
 import ChatContent from "./chatComponents/chatContent/chatContent";
 import SendMessage from "./chatComponents/sendMessage/sendMessage";
@@ -46,7 +46,7 @@ const mapStateToProps = (state) => {
 }
 
 const ChatContainer = compose(
-    connect(mapStateToProps,{setActiveChatName, sendMessage,updateMessageInTextarea}),
+    connect(mapStateToProps,{setActiveChatName, sendMessage}),
     /*withAuthRedirect*/
 )(Chat)
 

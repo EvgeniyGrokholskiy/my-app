@@ -2,7 +2,7 @@ import React from "react";
 import style from "./profileData.module.css";
 import photo from "./img/userUnknown.png";
 import profileData_top_image from "./img/profile_top_images.jpg";
-import Loading from "../../../loading/loading";
+import Loading from "../../../commons/loading/loading";
 
 
 class ProfileData extends React.Component {
