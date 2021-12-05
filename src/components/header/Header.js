@@ -11,8 +11,8 @@ import {ReactComponent as Settings} from "./img/Settings.svg";
 import {NavLink} from "react-router-dom";
 
 
-const Header = (props) => {
 
+const Header = (props) => {
     return (
         <header className={style.header}>
             <>
@@ -35,11 +35,8 @@ const Header = (props) => {
                     }
                     {
                         props.state.isAuth ? <button onClick={props.logoutThunkCreator} className={style.loginButton}>LogOut</button> :
-                            <NavLink to={"/login/"} className={style.loginButton}>LogIn</NavLink>
+                            <button className={style.loginButton}>LogIn</button>
                     }
-
-                    {/*<button className={style.loginButton}>LogIn</button>
-                    <button className={style.loginButton}>LogOut</button>*/}
                 </div>
             </>
         </header>

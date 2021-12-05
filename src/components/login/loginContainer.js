@@ -6,13 +6,13 @@ import {withLoginRedirect} from "../hoc/loginRedirect";
 
 const mapStateToProps = (state) => {
     return {
-
+        auth: state.auth
     }
 }
 
 const LoginContainer = compose(connect(mapStateToProps,
     {
-        loginThunkCreator
+        loginThunkCreator,
     }),withLoginRedirect)(Login)
 
 export default LoginContainer

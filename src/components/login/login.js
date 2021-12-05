@@ -16,8 +16,10 @@ const Login = (props) => {
 
 const MyForm = (props) => {
 
-    const maxLength30 = validators.maxLengthValidatorCreator(30)
-    const validator = validators.composeValidators(validators.required, maxLength30)
+    const error = props.auth.isError;
+    const errorMessage = props.auth.errorMessage
+    const maxLength30 = validators.maxLengthValidatorCreator(30);
+    const validator = validators.composeValidators(validators.required, maxLength30);
 
     return (
         <Form
@@ -41,6 +43,9 @@ const MyForm = (props) => {
                         <label className={style.label}>Remember me</label>
                         <Field name="rememberMe" component="input" type={"checkbox"}/>
                     </div>
+                    {
+                        error ? <span className={style.errorSpan}>{errorMessage}</span> : <></>
+                    }
                     <br className={''}/>
                     <button className={style.button} type="submit">Login</button>
                 </form>

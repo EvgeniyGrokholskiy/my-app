@@ -58,3 +58,9 @@
     transform: scale(0.98);
     box-shadow: 0 2px 2px 0 #00000040;
 }
+
+.errorSpan {
+    color: red;
+    font-size: 18px;
+    margin-top: 15px;
+}

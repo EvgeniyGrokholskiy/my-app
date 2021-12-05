@@ -209,7 +209,8 @@ let store = {
             login: null,
             email: null,
             isAuth: false,
-            isFetching: false
+            isFetching: false,
+            isError: false
         },
 
         musicPage: {},
