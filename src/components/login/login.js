@@ -5,13 +5,17 @@ import {validators} from "../utils/validators";
 import {Input} from "../commons/formControls/component";
 
 
-const Login = (props) => {
-    return (
-        <div className={style.wrapper}>
-            <h1>Login</h1>
-            <MyForm {...props}/>
-        </div>
-    )
+class Login extends React.Component {
+
+    render() {
+        return (
+            <div className={style.wrapper}>
+                <h1>Login</h1>
+                <MyForm {...this.props}/>
+            </div>
+        )
+    }
+
 }
 
 const MyForm = (props) => {

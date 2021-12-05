@@ -8,28 +8,51 @@ import HeaderContainer from "./components/header/HeaderContainer";
 import ProfileContainer from "./components/profile/Profile";
 import ChatContainer from "./components/chat/chat";
 import LoginContainer from "./components/login/loginContainer";
+import React from "react";
+import {connect} from "react-redux";
+import {authThunkCreator} from "./redux/authReducer";
+import Loading from "./components/commons/loading/loading";
+import {initializeApp} from "./redux/appReducer";
 
 
+class App extends React.Component {
 
+    componentDidMount() {
+        this.props.initializeApp()
+    }
 
-function App(props) {
+    render() {
 
-    return (
-        <div className="App">
-            <HeaderContainer />
-            <main>
-                <Routes>
-                    <Route path="/login" element={<LoginContainer/>}/>
-                    <Route path="/users" element={<FindUsers/>}/>
-                    <Route path="/profile/*" element={<ProfileContainer/>}/>
-                    <Route path="/chat/*" element={<ChatContainer/>}/>
-                    <Route path="/news/*" element={<News/>}/>
-                    <Route path="/music/*" element={<Music/>}/>
-                    <Route path="/settings/*" element={<Settings/>}/>
-                </Routes>
-            </main>
-        </div>
-    );
+        if(!this.props.app.initialized) {
+            return <Loading/>
+        }
+
+        return (
+            <div className="App">
+                <HeaderContainer/>
+                <main>
+                    <Routes>
+                        <Route path="/login" element={<LoginContainer/>}/>
+                        <Route path="/users" element={<FindUsers/>}/>
+                        <Route path="/profile/*" element={<ProfileContainer/>}/>
+                        <Route path="/chat/*" element={<ChatContainer/>}/>
+                        <Route path="/news/*" element={<News/>}/>
+                        <Route path="/music/*" element={<Music/>}/>
+                        <Route path="/settings/*" element={<Settings/>}/>
+                    </Routes>
+                </main>
+            </div>
+        );
+    }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        app: state.app
+    }
+}
+
+export default connect(mapStateToProps,{authThunkCreator,initializeApp})(App)
+
+
+

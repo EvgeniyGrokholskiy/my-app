@@ -8,6 +8,7 @@ import {settingsReducer} from "./settingsReducer";
 import {friendsListReducer} from "./friendsListReducer";
 import {findUsersReducer} from "./findUsersReducer";
 import {authReducer} from "./authReducer";
+import {appReducer} from "./appReducer";
 
 let reducers = combineReducers({
     findUsersPage: findUsersReducer,
@@ -17,7 +18,8 @@ let reducers = combineReducers({
     newsPage: newsReducer,
     musicPage: musicReducer,
     settings: settingsReducer,
-    auth: authReducer
+    auth: authReducer,
+    app: appReducer
 });
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));

@@ -14,7 +14,7 @@ export const withLoginRedirect = (Component) => {
     class RedirectComponent extends React.Component {
         render() {
 
-            if(this.props.isAuth) return <Navigate to={`/profile`} />
+            if(this.props.isAuth) return <Navigate to={`/profile/`} />
 
             return <Component {...this.props} />
         }

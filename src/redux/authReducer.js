@@ -56,7 +56,7 @@ export const authReducer = (state = initialState, action) => {
 
 export const authThunkCreator = () => {
     return (dispatch) => {
-        authAPI.authMe().then((data) => {
+       return authAPI.authMe().then((data) => {
             let isAuth = false
             let {id, email, login} = data;
 

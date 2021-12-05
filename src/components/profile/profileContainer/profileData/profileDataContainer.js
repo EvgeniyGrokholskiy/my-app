@@ -6,34 +6,37 @@ import {
     getUserProfile,
     getUserStatusThunkCreator,
     setProfileStatus,
-    setUserProfile, setUserStatusThunkCreator
+    setUserProfile,
+    setUserStatusThunkCreator
 } from "../../../../redux/profileReducer";
 import {useMatch} from "react-router";
-import {withAuthRedirect} from "../../../hoc/authRedirect";
 import {compose} from "redux";
 import NewPostContainer from "../new_post/new_postContainer";
 import WallContainer from "../wall/wallContainer";
 import StatusBar from "../status/statusBar";
 import {authThunkCreator} from "../../../../redux/authReducer";
+import {withAuthRedirect} from "../../../hoc/authRedirect";
 
 
 class GetProfileData extends React.Component {
 
-    state ={
+    state = {
         userId: this.props.auth.id
     }
 
 
     componentDidMount() {
 
-        this.props.authThunkCreator();
-        let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id || 2;
-        this.props.getUserProfile(userId)
-        this.props.getUserStatusThunkCreator(userId)
+        this.props.authThunkCreator().then((data) => {
+            console.log(data);
+            let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id
+            this.props.getUserProfile(userId)
+            this.props.getUserStatusThunkCreator(userId)
+        });
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.auth.id !== this.props.auth.id) {
+        if (prevProps.auth.id !== this.props.auth.id) {
             this.setState({
                 userId: this.props.auth.id
             })
@@ -76,8 +79,16 @@ const mapStateToProps = (state) => {
 };
 
 const ProfileDataContainer = compose(
-    connect(mapStateToProps, {setUserProfile, getUserProfile,setProfileStatus,editProfileStatus, getUserStatusThunkCreator,setUserStatusThunkCreator,authThunkCreator}),
-    withAuthRedirect)
+    connect(mapStateToProps, {
+        setUserProfile,
+        getUserProfile,
+        setProfileStatus,
+        editProfileStatus,
+        getUserStatusThunkCreator,
+        setUserStatusThunkCreator,
+        authThunkCreator
+    }),
+    /*withAuthRedirect*/)
 (GetMatchUrl)
 
 export default ProfileDataContainer;
