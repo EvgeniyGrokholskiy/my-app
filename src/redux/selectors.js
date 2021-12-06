@@ -1,3 +1,5 @@
+import {createSelector} from "reselect";
+
 export const getProfileState = (state) => {
     return state.profile
 }
@@ -33,6 +35,14 @@ export const getActiveChanNameState = (state) => {
 export const getFindUsersState = (state) => {
     return state.findUsersPage.findUsers
 }
+
+/*export const getFindUsersStateSelector = (state) => {
+    return state.findUsersPage.findUsers.filter(user => true)
+}*/
+
+export const getFindUsersStateRESELECT = createSelector(getFindUsersState,((user)=>{
+    return user.filter(user => true)
+}))
 
 export const getCurrentPageState = (state) => {
     return state.findUsersPage.currentPage

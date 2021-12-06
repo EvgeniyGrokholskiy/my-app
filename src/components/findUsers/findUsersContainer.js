@@ -5,7 +5,7 @@ import UserCard from "./userCard";
 import Loading from "../commons/loading/loading";
 import {
     getCurrentPageState,
-    getFindUsersState,
+    getFindUsersStateRESELECT,
     getIsFetchingState, getIsFollowingInProgressState,
     getTotalUsersState,
     getUsersOnPageState
@@ -49,7 +49,7 @@ class UsersContainer extends React.Component {
 const mapStateToProps = (state) => {
     return (
         {
-            findUsers: getFindUsersState(state),
+            findUsers: getFindUsersStateRESELECT(state),
             currentPage: getCurrentPageState(state),
             totalUsers: getTotalUsersState(state),
             usersOnPage: getUsersOnPageState(state),
