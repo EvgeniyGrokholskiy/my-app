@@ -36,13 +36,21 @@ export const getFindUsersState = (state) => {
     return state.findUsersPage.findUsers
 }
 
-/*export const getFindUsersStateSelector = (state) => {
-    return state.findUsersPage.findUsers.filter(user => true)
-}*/
+/*
+export const getFindUsersState = (state) => {  простая логика в селекторе
+    return state.findUsersPage.findUsers
 
-export const getFindUsersStateRESELECT = createSelector(getFindUsersState,((user)=>{
-    return user.filter(user => true)
+export const getFindUsersStateSelector = (state) => {  сложный селектор с обработкой стэйта
+    return state.findUsersPage.findUsers.filter(user => true)
+}
+
+export const getFindUsersStateRESELECT = createSelector(getFindUsersState,((user)=>{ RESELECT библиотека предоставляет функцию
+    return user.filter(user => true)                                                 createSelector которая позволяет оптимизировать рендеринг.
+                                                                                     Функция принимает примитивный селектор который достает из стэйта
+                                                                                     и отдает нужные данные в сложный селектор, который вызывается в mapStateToProps
+                                                                                     производит сложную магию и отдает результат ретурном в переменную(в пропсы).
 }))
+*/
 
 export const getCurrentPageState = (state) => {
     return state.findUsersPage.currentPage

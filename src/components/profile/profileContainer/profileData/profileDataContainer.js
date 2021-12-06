@@ -17,6 +17,7 @@ import StatusBar from "../status/statusBar";
 import {authThunkCreator} from "../../../../redux/authReducer";
 import {withAuthRedirect} from "../../../hoc/authRedirect";
 import {getAuthState, getProfileState, getProfileStatusState} from "../../../../redux/selectors";
+import StatusBarWithHooks from "../status/statusBarWithHooks";
 
 
 class GetProfileData extends React.Component {
@@ -27,7 +28,6 @@ class GetProfileData extends React.Component {
 
 
     componentDidMount() {
-
         this.props.authThunkCreator().then((data) => {
             console.log(data);
             let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id
@@ -48,7 +48,7 @@ class GetProfileData extends React.Component {
         return (
             <>
                 <ProfileData {...this.props} />
-                <StatusBar setProfileStatus={this.props.setProfileStatus}
+                <StatusBarWithHooks setProfileStatus={this.props.setProfileStatus}
                            editProfileStatus={this.props.editProfileStatus}
                            state={this.props.state}
                            auth={this.props.auth}

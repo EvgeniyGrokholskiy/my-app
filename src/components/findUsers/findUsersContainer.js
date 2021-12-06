@@ -4,8 +4,7 @@ import React from "react";
 import UserCard from "./userCard";
 import Loading from "../commons/loading/loading";
 import {
-    getCurrentPageState,
-    getFindUsersStateRESELECT,
+    getCurrentPageState, getFindUsersState,
     getIsFetchingState, getIsFollowingInProgressState,
     getTotalUsersState,
     getUsersOnPageState
@@ -49,7 +48,8 @@ class UsersContainer extends React.Component {
 const mapStateToProps = (state) => {
     return (
         {
-            findUsers: getFindUsersStateRESELECT(state),
+            //findUsers: getFindUsersStateRESELECT(state), используется при использовании сложной логики в селекторе, что бы оптимизировать рендеринг
+            findUsers: getFindUsersState(state),
             currentPage: getCurrentPageState(state),
             totalUsers: getTotalUsersState(state),
             usersOnPage: getUsersOnPageState(state),
