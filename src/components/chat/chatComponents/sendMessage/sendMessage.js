@@ -23,9 +23,7 @@ const SendMessageForm = (props) => {
             onSubmit={(data) => {
                 props.sendMessage(data)
             }}
-            validate={(data) => {
-                console.log(data)
-            }}
+            validate={(data) => {}}
             render={({handleSubmit}) => (
                 <form onSubmit={handleSubmit}>
                     <Field name="newMessage">

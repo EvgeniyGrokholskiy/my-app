@@ -5,8 +5,8 @@ import Music from "./components/music/music";
 import Settings from "./components/settings/settings";
 import {Route, Routes} from "react-router-dom";
 import HeaderContainer from "./components/header/HeaderContainer";
-import ProfileContainer from "./components/profile/Profile";
-import ChatContainer from "./components/chat/chat";
+import Profile from "./components/profile/Profile";
+import ChatContainer from "./components/chat/chatContainer";
 import LoginContainer from "./components/login/loginContainer";
 import React from "react";
 import {connect} from "react-redux";
@@ -34,7 +34,7 @@ class App extends React.Component {
                     <Routes>
                         <Route path="/login" element={<LoginContainer/>}/>
                         <Route path="/users" element={<FindUsers/>}/>
-                        <Route path="/profile/*" element={<ProfileContainer/>}/>
+                        <Route path="/profile/*" element={<Profile/>}/>
                         <Route path="/chat/*" element={<ChatContainer/>}/>
                         <Route path="/news/*" element={<News/>}/>
                         <Route path="/music/*" element={<Music/>}/>

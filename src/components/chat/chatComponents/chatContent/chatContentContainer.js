@@ -1,12 +1,13 @@
 import ChatContent from "./chatContent";
 import {connect} from "react-redux";
+import {getActiveChanNameState, getChatMessageArrayState} from "../../../../redux/selectors";
 
 
 const mapStateToProps = (state) => {
 
     return {
-        chatMessage: state.chatPage.chatMessageArray,
-        chatName: state.chatPage.activeChatName
+        chatMessage: getChatMessageArrayState(state),
+        chatName: getActiveChanNameState(state)
     };
 };
 

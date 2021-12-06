@@ -16,6 +16,7 @@ import WallContainer from "../wall/wallContainer";
 import StatusBar from "../status/statusBar";
 import {authThunkCreator} from "../../../../redux/authReducer";
 import {withAuthRedirect} from "../../../hoc/authRedirect";
+import {getAuthState, getProfileState, getProfileStatusState} from "../../../../redux/selectors";
 
 
 class GetProfileData extends React.Component {
@@ -72,9 +73,9 @@ const GetMatchUrl = (props) => {
 const mapStateToProps = (state) => {
 
     return {
-        state: state.profile,
-        auth: state.auth,
-        profileStatus: state.profile.profileStatus
+        state: getProfileState(state),
+        auth: getAuthState(state),
+        profileStatus: getProfileStatusState(state)
     };
 };
 

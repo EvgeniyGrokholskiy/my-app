@@ -1,40 +1,44 @@
 import {connect} from "react-redux";
-import {
-    getUsers,
-    setFollow,
-    setUnfollow
-} from "../../redux/findUsersReducer";
+import {getUsers, setFollow, setUnfollow} from "../../redux/findUsersReducer";
 import React from "react";
 import UserCard from "./userCard";
 import Loading from "../commons/loading/loading";
+import {
+    getCurrentPageState,
+    getFindUsersState,
+    getIsFetchingState, getIsFollowingInProgressState,
+    getTotalUsersState,
+    getUsersOnPageState
+} from "../../redux/selectors";
 
 
 class UsersContainer extends React.Component {
 
     onPageChanged = (page) => {
-        this.props.getUsersThunkCreator(page, this.props.usersOnPage);
+        this.props.getUsers(page, this.props.usersOnPage);
     }
 
 
     componentDidMount() {
-        this.props.getUsersThunkCreator(this.props.currentPage, this.props.usersOnPage);
+        this.props.getUsers(this.props.currentPage, this.props.usersOnPage);
     }
 
 
-
     render() {
-
+        const {
+            totalUsers, usersOnPage, currentPage, findUsers, isFollowingInProgress,
+            toUnfollowThunkCreator, toFollowThunkCreator} = this.props
         return (
             <>
                 {this.props.isFetching ? <Loading/> : <></>}
-                <UserCard totalUsers={this.props.totalUsers}
-                          usersOnPage={this.props.usersOnPage}
-                          currentPage={this.props.currentPage}
-                          findUsers={this.props.findUsers}
+                <UserCard totalUsers={totalUsers}
+                          usersOnPage={usersOnPage}
+                          currentPage={currentPage}
+                          findUsers={findUsers}
                           onPageChanged={this.onPageChanged}
-                          isFollowingInProgress={this.props.isFollowingInProgress}
-                          toUnfollowThunkCreator={this.props.toUnfollowThunkCreator}
-                          toFollowThunkCreator={this.props.toFollowThunkCreator}
+                          isFollowingInProgress={isFollowingInProgress}
+                          toUnfollowThunkCreator={toUnfollowThunkCreator}
+                          toFollowThunkCreator={toFollowThunkCreator}
                 />
             </>
         )
@@ -45,21 +49,21 @@ class UsersContainer extends React.Component {
 const mapStateToProps = (state) => {
     return (
         {
-            findUsers: state.findUsersPage.findUsers,
-            currentPage: state.findUsersPage.currentPage,
-            totalUsers: state.findUsersPage.totalUsers,
-            usersOnPage: state.findUsersPage.usersOnPage,
-            isFetching: state.findUsersPage.isFetching,
-            isFollowingInProgress: state.findUsersPage.isFollowingInProgress,
+            findUsers: getFindUsersState(state),
+            currentPage: getCurrentPageState(state),
+            totalUsers: getTotalUsersState(state),
+            usersOnPage: getUsersOnPageState(state),
+            isFetching: getIsFetchingState(state),
+            isFollowingInProgress: getIsFollowingInProgressState(state),
         }
     )
 
 }
 
 const FindUsersContainer = connect(mapStateToProps, {
-    getUsersThunkCreator: getUsers,
-    toUnfollowThunkCreator: setUnfollow,
-    toFollowThunkCreator: setFollow,
+    getUsers: getUsers,
+    toUnfollow: setUnfollow,
+    toFollow: setFollow,
 })(UsersContainer)
 
 export default FindUsersContainer;

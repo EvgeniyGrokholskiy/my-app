@@ -2,7 +2,6 @@ import React from "react";
 import style from "./profile.module.css"
 import FriendsListContainer from "./profileContainer/friendsList/friendsListContainer";
 import ProfileDataContainer from "./profileContainer/profileData/profileDataContainer";
-import {connect} from "react-redux";
 
 
 const Profile = (props) => {
@@ -19,18 +18,4 @@ const Profile = (props) => {
     );
 };
 
-
-
-const mapStateToProps = (state)  => {
-    return {
-    }
-}
-const mapDispatchToProps = (dispatch) => {
-    return {
-    }
-}
-
-
-const ProfileContainer = connect(mapStateToProps,mapDispatchToProps)(Profile);
-
-export default ProfileContainer;
+export default Profile;

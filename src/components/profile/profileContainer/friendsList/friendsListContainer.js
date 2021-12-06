@@ -1,19 +1,14 @@
 import FriendsList from "./friendsList";
 import {connect} from "react-redux";
+import {getFriendListState} from "../../../../redux/selectors";
 
 
 const mapStateToProps = (state) => {
     return {
-        state: state.friendsList
+        state: getFriendListState(state)
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-
-    }
-}
-
-const FriendsListContainer = connect(mapStateToProps, mapDispatchToProps)(FriendsList);
+const FriendsListContainer = connect(mapStateToProps, null)(FriendsList);
 
 export default FriendsListContainer;

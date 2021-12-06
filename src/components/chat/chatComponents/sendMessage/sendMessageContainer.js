@@ -1,4 +1,4 @@
-import {sendMessage, updateMessageInTextarea} from "../../../../redux/chatReducer";
+import {sendMessage} from "../../../../redux/chatReducer";
 import SendMessage from "./sendMessage";
 import {connect} from "react-redux";
 
@@ -9,18 +9,6 @@ const mapStateToProps = (state) => {
     };
 };
 
-/*const mapDispatchToProps = (dispatch) => {
-    return {
-        sendMessage: (newMessage) => {
-            dispatch(sendMessage(newMessage));
-        },
-        updateMessageInTextarea: (newMessage) => {
-            dispatch(updateMessageInTextarea(newMessage));
-        }
-
-    }
-}*/
-
-const SendMessageContainer = connect(mapStateToProps, {sendMessage, updateMessageInTextarea})(SendMessage)
+const SendMessageContainer = connect(mapStateToProps, {sendMessage})(SendMessage)
 
 export default SendMessageContainer;

@@ -1,12 +1,12 @@
 import React from "react";
 import {Navigate} from "react-router";
 import {connect} from "react-redux";
-import Loading from "../commons/loading/loading";
+import {getInitializedState, getIsAuthState} from "../../redux/selectors";
 
 const mapStateToProps = (state) => {
     return {
-        isAuth: state.auth.isAuth,
-        initialized: state.app.initialized
+        isAuth: getIsAuthState(state),
+        initialized: getInitializedState(state)
     }
 }
 
