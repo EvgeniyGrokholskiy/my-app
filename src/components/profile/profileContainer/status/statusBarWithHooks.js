@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import style from "./statusBar.module.css";
 import {ReactComponent as SendIcon} from "../new_post/img/send_icon.svg";
 
@@ -17,6 +17,8 @@ const StatusBarWithHooks = (props) =>  {
         props.setUserStatusThunkCreator(status);
     }
 
+    useEffect(()=>{setStatus(props.profileStatus)},[props.profileStatus])
+
     const setProfileStatus = (event) => {
         setStatus(event.currentTarget.value);
     }
@@ -31,10 +33,10 @@ const StatusBarWithHooks = (props) =>  {
                 }
                 {
                     editFlag &&
-                    <input className={style.textArea} autoFocus={true} onBlur={editModeOff}
+                    <input className={style.textArea} autoFocus={true} /*onBlur={editModeOff}*/
                            onChange={setProfileStatus} value={status}/>
                 }
-                <button className={style.button}><SendIcon className={style.svg}/></button>
+                <button className={style.button} onClick={editModeOff}><SendIcon className={style.svg}/></button>
             </div>
         )
 }
