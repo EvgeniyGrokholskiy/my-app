@@ -97,9 +97,10 @@ export const getUserProfile = (userId) => {
 
 export const getUserStatusThunkCreator = (userId) => {
     return (dispatch) => {
-        profileAPI.getUserStatus(userId)
+        return profileAPI.getUserStatus(userId)
             .then((data) => {
                 dispatch(setProfileStatus(data));
+                return data
             })
             .catch((error) => {
                 console.error(error)

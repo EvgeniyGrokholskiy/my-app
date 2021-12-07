@@ -1,18 +1,12 @@
-import React from "react";
-import PostOnWall from "./wallComponents/postOnWall/postOnWall";
 import Wall from "./wall";
 import {connect} from "react-redux";
+import {getWallMessageArrayState} from "../../../../redux/selectors";
 
 
 const mapStateToProps = (state) => {
 
-    let postsToRender = state.profile.wallMessageArray.map(post => {
-
-        return <PostOnWall key={post.id} message={post.message} likeCount={post.likeCount} newMessage={post.newMessage}/>
-    });
-
     return {
-        children: postsToRender
+        wallMessageArray: getWallMessageArrayState(state)
     }
 };
 

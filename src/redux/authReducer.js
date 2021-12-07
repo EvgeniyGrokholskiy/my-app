@@ -1,4 +1,5 @@
 import {authAPI} from "../api/api";
+import {getUserProfile, getUserStatusThunkCreator, setProfileStatus} from "./profileReducer";
 
 const SET_USER_DATA = "SET_USER_DATA";
 const LOGIN = "LOGIN";
@@ -64,7 +65,11 @@ export const authThunkCreator = () => {
                 isAuth = true;
             }
             dispatch(setUserData(id, login, email, isAuth));
-        })
+            return id
+        }).then((id)=>{
+            dispatch(getUserProfile(id));
+            dispatch(getUserStatusThunkCreator(id))
+       })
     }
 }
 
@@ -85,7 +90,8 @@ export const loginThunkCreator = (data) => {
 export const logoutThunkCreator = () => {
     return (dispatch) => {
         authAPI.logout().then((response) => {
-            dispatch(setUserData(null, null, null, false))
+            dispatch(setUserData(null, null, null, false));
+            dispatch(setProfileStatus(""))
         })
     }
 }

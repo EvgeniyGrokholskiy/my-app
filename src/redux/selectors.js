@@ -1,4 +1,4 @@
-import {createSelector} from "reselect";
+//import {createSelector} from "reselect";
 
 export const getProfileState = (state) => {
     return state.profile
@@ -74,4 +74,8 @@ export const getIsFollowingInProgressState = (state) => {
 
 export const getFriendListState = (state) => {
     return state.friendsList
+}
+
+export const getWallMessageArrayState = (state) => {
+    return state.profile.wallMessageArray
 }

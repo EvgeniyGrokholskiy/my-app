@@ -4,24 +4,28 @@ import {ReactComponent as SendIcon} from "./img/send_icon.svg";
 import {Field, Form} from "react-final-form";
 import {validators} from "../../../utils/validators";
 
-const NewPost = (props) => {
+class NewPost extends React.Component {
 
-
-    const addPost = (data) => {
-        if (data.newMessage) props.addPost(data.newMessage);
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return !nextProps === this.props
     }
 
-    return (
-        <div>
-            <NewMessageForm addPost={addPost}/>
-        </div>
-    )
-};
+    render() {
+
+        const addPost = (data) => {
+            if (data.newMessage) this.props.addPost(data.newMessage);
+        }
+
+        return (
+            <div>
+                <NewMessageForm addPost={addPost}/>
+            </div>
+        )
+    }
+}
 
 const NewMessageForm = (props) => {
-
     const maxLength300 = validators.maxLengthValidatorCreator(300);
-
     return (
         <Form
             onSubmit={(data) => {
@@ -44,12 +48,9 @@ const NewMessageForm = (props) => {
                                     </button>
                                     {meta.touched && meta.error && <span className={style.errorMessage}>{meta.error}</span>}
                                 </div>
-
                             </>
                         )}
                     </Field>
-
-
                 </form>
             )}
         />
