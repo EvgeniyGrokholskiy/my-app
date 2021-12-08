@@ -20,7 +20,6 @@ class GetProfileData extends React.Component {
 
 
     componentDidMount() {
-
         let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id
         if (!userId) return
         this.props.getUserProfile(userId)

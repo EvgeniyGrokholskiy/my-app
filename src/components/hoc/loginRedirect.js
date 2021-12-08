@@ -2,11 +2,13 @@ import React from "react";
 import {Navigate} from "react-router";
 import {connect} from "react-redux";
 import {getAuthState, getIsAuthState, getProfileStatusState} from "../../redux/selectors";
+import {initializeApp} from "../../redux/appReducer";
 
 const mapStateToProps = (state) => {
     return {
         isAuth: getProfileStatusState(state),
-        props: getAuthState(state)
+        props: getAuthState(state),
+        auth: getAuthState(state)
     }
 }
 
@@ -21,7 +23,7 @@ export const withLoginRedirect = (Component) => {
         }
     }
 
-    let ConnectedAuthRedirectComponent = connect (mapStateToProps)(RedirectComponent);
+    let ConnectedAuthRedirectComponent = connect (mapStateToProps,{initializeApp})(RedirectComponent);
 
     return ConnectedAuthRedirectComponent;
 }

@@ -17,7 +17,7 @@ import {initializeApp} from "./redux/appReducer";
 
 class App extends React.Component {
 
-    componentDidMount() {
+   componentDidMount() {
         this.props.initializeApp()
     }
 
