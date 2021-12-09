@@ -1,10 +1,10 @@
 import {authAPI} from "../api/api";
 import {getUserProfile, getUserStatusThunkCreator, setProfileStatus} from "./profileReducer";
 
-const SET_USER_DATA = "SET_USER_DATA";
-const LOGIN = "LOGIN";
-const LOGOUT = "LOGOUT";
-const SET_ERROR_MESSAGE = "SET_ERROR_MESSAGE"
+const SET_USER_DATA = "MY_APP_/AUTH/SET_USER_DATA";
+const LOGIN = "MY_APP_/AUTH/LOGIN";
+const LOGOUT = "MY_APP_/AUTH/LOGOUT";
+const SET_ERROR_MESSAGE = "MY_APP_/AUTH/SET_ERROR_MESSAGE"
 
 
 const initialState = {
@@ -44,7 +44,8 @@ export const authReducer = (state = initialState, action) => {
         case SET_ERROR_MESSAGE: {
             return {
                 ...state,
-                errorMessage: action.errorMessage
+                errorMessage: action.errorMessage,
+                isError: action.isError
             }
         }
 
@@ -55,56 +56,40 @@ export const authReducer = (state = initialState, action) => {
 }
 
 
-export const authThunkCreator = () => {
-    return (dispatch) => {
-       return authAPI.authMe().then((data) => {
-            let isAuth = false
-            let {id, email, login} = data;
-
-            if (id !== undefined) {
-                isAuth = true;
-            }
-            dispatch(setUserData(id, login, email, isAuth));
-            return id
-        }).then((id)=>{
-            dispatch(getUserProfile(id));
-            dispatch(getUserStatusThunkCreator(id))
-       })
+export const authThunkCreator = () => async (dispatch) => {
+    let {id, email, login} = await authAPI.authMe()
+    if (id !== undefined) {
+        dispatch(setUserData(id, login, email, true));
+        dispatch(getUserProfile(id));
+        dispatch(getUserStatusThunkCreator(id));
     }
 }
 
-export const loginThunkCreator = (data) => {
-    return (dispatch) => {
-        authAPI.login(data).then((response) => {
-            if (response.data.resultCode === 0) {
-                dispatch(authThunkCreator())
-            } else {
-                dispatch(setUserData(null, null, null, false, true));
-                dispatch(setErrorMessage(response.data.messages[0]))
-            }
+export const loginThunkCreator = (loginData) => async (dispatch) => {
+    let responseData = await authAPI.login(loginData)
 
-        })
+    if (responseData.resultCode === 0) {
+        dispatch(authThunkCreator())
+    } else {
+        dispatch(setUserData(null, null, null, false));
+        dispatch(setErrorMessage(responseData.messages[0]))
     }
 }
 
-export const logoutThunkCreator = () => {
-    return (dispatch) => {
-        authAPI.logout().then((response) => {
-            dispatch(setUserData(null, null, null, false));
-            dispatch(setProfileStatus(""))
-        })
-    }
+export const logoutThunkCreator = () => async (dispatch) => {
+    await authAPI.logout()
+    dispatch(setUserData(null, null, null, false));
+    dispatch(setProfileStatus(""))
 }
 
-export const setUserData = (id, login, email, isAuth, isError = false) => {
+export const setUserData = (id, login, email, isAuth) => {
     return {
         type: SET_USER_DATA,
         data: {
             id,
             login,
             email,
-            isAuth,
-            isError
+            isAuth
         }
     }
 }
@@ -127,6 +112,7 @@ export const logout = (userId) => {
 export const setErrorMessage = (errorMessage) => {
     return {
         type: SET_ERROR_MESSAGE,
-        errorMessage
+        errorMessage,
+        isError: true
     }
 }

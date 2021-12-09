@@ -1,6 +1,6 @@
 import {authThunkCreator} from "./authReducer";
 
-const INIT_APP = "INIT_APP"
+const INIT_APP = "MY_APP/APP/INIT_APP"
 
 
 const initialState = {

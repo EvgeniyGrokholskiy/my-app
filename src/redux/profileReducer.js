@@ -83,43 +83,20 @@ export const profileReducer = (state = initialState, action) => {
     }
 };
 
-export const getUserProfile = (userId) => {
-    return (dispatch) => {
-        profileAPI.getUserProfile(userId)
-            .then((data) => {
-                dispatch(setUserProfile(data));
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-    }
+export const getUserProfile = (userId) => async (dispatch) => {
+    let data = await profileAPI.getUserProfile(userId)
+    dispatch(setUserProfile(data));
 }
 
-export const getUserStatusThunkCreator = (userId) => {
-    return (dispatch) => {
-        return profileAPI.getUserStatus(userId)
-            .then((data) => {
-                dispatch(setProfileStatus(data));
-                return data
-            })
-            .catch((error) => {
-                console.error(error)
-            })
-    }
+export const getUserStatusThunkCreator = (userId) => async (dispatch) => {
+    let data = await profileAPI.getUserStatus(userId)
+    dispatch(setProfileStatus(data));
 }
 
-export const setUserStatusThunkCreator = (status) => {
-    return (dispatch) => {
-        profileAPI.setUserStatus(status)
-            .then((response) => {
-                    if (response.resultCode === 0) {
-                        dispatch(setProfileStatus(status));
-                    }
-                }
-            )
-            .catch((error) => {
-                console.error(error)
-            })
+export const setUserStatusThunkCreator = (status) => async (dispatch) => {
+    let response = await profileAPI.setUserStatus(status)
+    if (response.resultCode === 0) {
+        dispatch(setProfileStatus(status));
     }
 }
 

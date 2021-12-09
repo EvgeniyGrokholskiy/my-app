@@ -4,8 +4,10 @@ import React from "react";
 import UserCard from "./userCard";
 import Loading from "../commons/loading/loading";
 import {
-    getCurrentPageState, getFindUsersState,
-    getIsFetchingState, getIsFollowingInProgressState,
+    getCurrentPageState,
+    getFindUsersState,
+    getIsFetchingState,
+    getIsFollowingInProgressState,
     getTotalUsersState,
     getUsersOnPageState
 } from "../../redux/selectors";
@@ -26,7 +28,8 @@ class UsersContainer extends React.Component {
     render() {
         const {
             totalUsers, usersOnPage, currentPage, findUsers, isFollowingInProgress,
-            toUnfollowThunkCreator, toFollowThunkCreator} = this.props
+            setUnfollow, setFollow
+        } = this.props
         return (
             <>
                 {this.props.isFetching ? <Loading/> : <></>}
@@ -36,8 +39,8 @@ class UsersContainer extends React.Component {
                           findUsers={findUsers}
                           onPageChanged={this.onPageChanged}
                           isFollowingInProgress={isFollowingInProgress}
-                          toUnfollowThunkCreator={toUnfollowThunkCreator}
-                          toFollowThunkCreator={toFollowThunkCreator}
+                          setUnfollow={setUnfollow}
+                          setFollow={setFollow}
                 />
             </>
         )
@@ -61,9 +64,9 @@ const mapStateToProps = (state) => {
 }
 
 const FindUsersContainer = connect(mapStateToProps, {
-    getUsers: getUsers,
-    toUnfollow: setUnfollow,
-    toFollow: setFollow,
+    getUsers,
+    setUnfollow,
+    setFollow,
 })(UsersContainer)
 
 export default FindUsersContainer;

@@ -23,6 +23,7 @@ class App extends React.Component {
 
     render() {
 
+
         if(!this.props.app.initialized) {
             return <Loading/>
         }

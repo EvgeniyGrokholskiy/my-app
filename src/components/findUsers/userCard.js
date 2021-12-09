@@ -22,11 +22,11 @@ const UserCard = (props) => {
                 props.findUsers.map((user) => {
 
                     const toUnfollow = () => {
-                        props.toUnfollowThunkCreator(user.id);
+                        props.setUnfollow(user.id);
                     };
 
                     const toFollow = () => {
-                        props.toFollowThunkCreator(user.id)
+                        props.setFollow(user.id)
                     };
 
 
