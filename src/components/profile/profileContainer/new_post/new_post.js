@@ -12,6 +12,7 @@ class NewPost extends React.Component {
 
     render() {
 
+
         const addPost = (data) => {
             if (data.newMessage) this.props.addPost(data.newMessage);
         }
