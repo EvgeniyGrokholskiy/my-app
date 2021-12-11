@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/EvgeniyGrokholskiy/my-app/static/css/main.4ccc3d0f.chunk.css",
+    "main.js": "/EvgeniyGrokholskiy/my-app/static/js/main.8db37e5e.chunk.js",
+    "main.js.map": "/EvgeniyGrokholskiy/my-app/static/js/main.8db37e5e.chunk.js.map",
+    "runtime-main.js": "/EvgeniyGrokholskiy/my-app/static/js/runtime-main.99c1ef81.js",
+    "runtime-main.js.map": "/EvgeniyGrokholskiy/my-app/static/js/runtime-main.99c1ef81.js.map",
+    "static/js/2.8dcf4adc.chunk.js": "/EvgeniyGrokholskiy/my-app/static/js/2.8dcf4adc.chunk.js",
+    "static/js/2.8dcf4adc.chunk.js.map": "/EvgeniyGrokholskiy/my-app/static/js/2.8dcf4adc.chunk.js.map",
+    "static/js/3.8f7a10bf.chunk.js": "/EvgeniyGrokholskiy/my-app/static/js/3.8f7a10bf.chunk.js",
+    "static/js/3.8f7a10bf.chunk.js.map": "/EvgeniyGrokholskiy/my-app/static/js/3.8f7a10bf.chunk.js.map",
+    "index.html": "/EvgeniyGrokholskiy/my-app/index.html",
+    "static/css/main.4ccc3d0f.chunk.css.map": "/EvgeniyGrokholskiy/my-app/static/css/main.4ccc3d0f.chunk.css.map",
+    "static/js/2.8dcf4adc.chunk.js.LICENSE.txt": "/EvgeniyGrokholskiy/my-app/static/js/2.8dcf4adc.chunk.js.LICENSE.txt",
+    "static/media/Logo.8c79ce98.svg": "/EvgeniyGrokholskiy/my-app/static/media/Logo.8c79ce98.svg",
+    "static/media/Message-square.9ac220cf.svg": "/EvgeniyGrokholskiy/my-app/static/media/Message-square.9ac220cf.svg",
+    "static/media/Music.c34bc56a.svg": "/EvgeniyGrokholskiy/my-app/static/media/Music.c34bc56a.svg",
+    "static/media/News.746fa435.svg": "/EvgeniyGrokholskiy/my-app/static/media/News.746fa435.svg",
+    "static/media/Settings.00505d7d.svg": "/EvgeniyGrokholskiy/my-app/static/media/Settings.00505d7d.svg",
+    "static/media/User.64fae8cb.svg": "/EvgeniyGrokholskiy/my-app/static/media/User.64fae8cb.svg",
+    "static/media/findUsers.a789c29a.svg": "/EvgeniyGrokholskiy/my-app/static/media/findUsers.a789c29a.svg",
+    "static/media/loading.227a97a8.gif": "/EvgeniyGrokholskiy/my-app/static/media/loading.227a97a8.gif",
+    "static/media/paperclip.b143863a.svg": "/EvgeniyGrokholskiy/my-app/static/media/paperclip.b143863a.svg",
+    "static/media/photo.24be48d4.png": "/EvgeniyGrokholskiy/my-app/static/media/photo.24be48d4.png",
+    "static/media/profile_top_images.1178c812.jpg": "/EvgeniyGrokholskiy/my-app/static/media/profile_top_images.1178c812.jpg",
+    "static/media/send_icon.43069b37.svg": "/EvgeniyGrokholskiy/my-app/static/media/send_icon.43069b37.svg",
+    "static/media/thumbsUp.2f4fd649.svg": "/EvgeniyGrokholskiy/my-app/static/media/thumbsUp.2f4fd649.svg",
+    "static/media/userUnknown.16df309a.png": "/EvgeniyGrokholskiy/my-app/static/media/userUnknown.16df309a.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.99c1ef81.js",
+    "static/js/2.8dcf4adc.chunk.js",
+    "static/css/main.4ccc3d0f.chunk.css",
+    "static/js/main.8db37e5e.chunk.js"
+  ]
+}
