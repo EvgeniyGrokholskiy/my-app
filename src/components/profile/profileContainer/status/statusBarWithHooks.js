@@ -36,7 +36,7 @@ const StatusBarWithHooks = (props) => {
             {
                 editFlag &&
                 <input className={style.textArea} autoFocus={true}
-                       onChange={setProfileStatus} value={status}/>
+                       onChange={setProfileStatus} onBlur={setProfileStatus} value={status}/>
             }
             <button className={style.button} onClick={editModeOff}><SendIcon className={style.svg}/></button>
         </div>

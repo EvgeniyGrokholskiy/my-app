@@ -22,12 +22,12 @@ const UserCard = (props) => {
                 props.findUsers.map((user) => {
 
                     const toUnfollow = () => {
-                        props.setUnfollow(user.id);
-                    };
+                        props.setUnfollow(user.id, false);
+                    }
 
                     const toFollow = () => {
-                        props.setFollow(user.id)
-                    };
+                        props.setFollow(user.id, true);
+                    }
 
 
                     return (

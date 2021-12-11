@@ -1,10 +1,9 @@
 import {profileAPI} from "../api/api";
 
-const AddMessageOnWall = "ADD_MESSAGE_ON_WALL";
-const ChangeNewMessageOnWall = "CHANGE_NEW_MESSAGE_ON_WALL";
-const SetUserProfile = "SET_USERS_PROFILE";
-const SetProfileStatus = "SET_PROFILE_STATUS";
-const EditProfileStatus = "EDIT_PROFILE_STATUS";
+const AddMessageOnWall = "MY-APP/PROFILE/ADD_MESSAGE_ON_WALL";
+const ChangeNewMessageOnWall = "MY-APP/PROFILE/CHANGE_NEW_MESSAGE_ON_WALL";
+const SetUserProfile = "MY-APP/PROFILE/SET_USERS_PROFILE";
+const SetProfileStatus = "MY-APP/PROFILE/SET_PROFILE_STATUS";
 
 const initialState = {
     wallMessageArray: [
@@ -70,13 +69,6 @@ export const profileReducer = (state = initialState, action) => {
             }
         }
 
-        case EditProfileStatus: {
-            return {
-                ...state,
-                profileStatus: action.message
-            }
-        }
-
         default:
             return state;
 
@@ -118,12 +110,5 @@ export const setProfileStatus = (status) => {
     return {
         type: SetProfileStatus,
         status
-    }
-}
-
-export const editProfileStatus = (message) => {
-    return {
-        type: EditProfileStatus,
-        message
     }
 }

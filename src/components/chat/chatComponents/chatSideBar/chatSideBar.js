@@ -11,7 +11,7 @@ const ChatSideBar = (props) => {
 
     let chatsToRender = props.state.chatsList.map((chat) => {
 
-        const setActiveChat = (event) => {
+        const setActiveChat = () => {
 
             props.setActiveChatName(chat.id);
         }

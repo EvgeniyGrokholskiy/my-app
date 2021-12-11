@@ -1,57 +1,15 @@
 import {followUnfollowAPI, usersAPI} from "../api/api";
 
-const ToFollow = "TO_FOLLOW";
-const ToUnfollow = "TO_UNFOLLOW";
-const SetUsers = "SET_USERS";
-const ShowPage = "SHOW_PAGE";
-const SetTotalUsersCount = "SET_TOTAL_USER_COUNT";
-const SetLoader = "SET_LOADER";
-const FollowingInProgress = "FOLLOWING_IN_PROGRESS";
+const ToFollowUnFollowFlow = "MY-APP/FIND-USER/TO-FOLLOW-TO-UNFOLLOW-FLOW"
+const SetUsers = "MY-APP/FIND-USER/SET_USERS";
+const ShowPage = "MY-APP/FIND-USER/SHOW_PAGE";
+const SetTotalUsersCount = "MY-APP/FIND-USER/SET_TOTAL_USER_COUNT";
+const SetLoader = "MY-APP/FIND-USER/SET_LOADER";
+const FollowingInProgress = "MY-APP/FIND-USER/FOLLOWING_IN_PROGRESS";
 
 const initialState = {
 
-    findUsers: [
-        /*{
-            id: 1,
-            photoURL: "",
-            followed: false,
-            fullName: "Dmitry",
-            status: "Hi",
-            location: {city: "Minsk", country: "Belarus"}
-        },
-        {
-            id: 2,
-            photoURL: "",
-            followed: true,
-            fullName: "Dmitry2",
-            status: "Hi2",
-            location: {city: "Minsk2", country: "Belarus"}
-        },
-        {
-            id: 3,
-            photoURL: "",
-            followed: false,
-            fullName: "Dmitry3",
-            status: "Hi3",
-            location: {city: "Minsk3", country: "Belarus"}
-        },
-        {
-            id: 4,
-            photoURL: "",
-            followed: true,
-            fullName: "Dmitry4",
-            status: "Hi4",
-            location: {city: "Minsk4", country: "Belarus"}
-        },
-        {
-            id: 5,
-            photoURL: "",
-            followed: false,
-            fullName: "Dmitry5",
-            status: "Hi5",
-            location: {city: "Minsk5", country: "Belarus"}
-        },*/
-    ],
+    findUsers: [],
     currentPage: 1,
     totalUsers: 100,
     usersOnPage: 5,
@@ -63,24 +21,12 @@ export const findUsersReducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case ToFollow: {
+        case ToFollowUnFollowFlow: {
             return {
                 ...state,
                 findUsers: state.findUsers.map((user) => {
                     if (user.id === action.id) {
-                        return {...user, followed: true}
-                    }
-                    return user;
-                })
-            }
-        }
-
-        case ToUnfollow: {
-            return {
-                ...state,
-                findUsers: state.findUsers.map((user) => {
-                    if (user.id === action.id) {
-                        return {...user, followed: false}
+                        return {...user, followed: action.followUnfollowFlow};
                     }
                     return user;
                 })
@@ -133,49 +79,36 @@ export const findUsersReducer = (state = initialState, action) => {
 
 export const getUsers = (currentPage, usersOnPage) => async (dispatch) => {
     dispatch(setLoader(true));
-    let data = await usersAPI.getUsers(currentPage, usersOnPage)
+    const data = await usersAPI.getUsers(currentPage, usersOnPage)
     dispatch(setUsers(data.items, currentPage));
     dispatch(setTotalUsersCount(data.totalCount));
     dispatch(setLoader(false));
 }
 
-const followUnfollow = (userId, flow) => async (dispatch) => {
+const followUnfollowFlow = async (dispatch, userId, apiMethod , actionCreator, flow) => {
     dispatch(followingInProgress(true, userId));
-
-    dispatch(followingInProgress(false, userId));
-}
-
-
-export const setUnfollow = (userId) => async (dispatch) => {
-    dispatch(followingInProgress(true, userId));
-    let data = await followUnfollowAPI.unFollow(userId)
+    let data = await apiMethod(userId)
     if (data.resultCode === 0) {
-        dispatch(toUnfollow(userId));
+        dispatch(actionCreator(userId,flow));
     }
     dispatch(followingInProgress(false, userId));
 }
 
-export const setFollow = (userId) => async (dispatch) => {
-    dispatch(followingInProgress(true, userId));
-    let data = await followUnfollowAPI.follow(userId)
-    if (data.resultCode === 0) {
-        dispatch(toFollow(userId));
+
+export const setUnfollow = (userId,flow) => (dispatch) => {
+    followUnfollowFlow(dispatch,userId,followUnfollowAPI.unFollow,toFollowUnFollowFlow,flow);
+}
+
+export const setFollow = (userId,flow) => async (dispatch) => {
+    followUnfollowFlow(dispatch,userId,followUnfollowAPI.follow,toFollowUnFollowFlow,flow);
+}
+
+export const toFollowUnFollowFlow = (userId,flow) => {
+    return {
+        type: ToFollowUnFollowFlow,
+        id: userId,
+        followUnfollowFlow: flow
     }
-    dispatch(followingInProgress(false, userId));
-}
-
-export const toFollow = (userID) => {
-    return {
-        type: ToFollow,
-        id: userID
-    };
-}
-
-export const toUnfollow = (userID) => {
-    return {
-        type: ToUnfollow,
-        id: userID
-    };
 }
 
 export const setUsers = (users, page = 1) => {

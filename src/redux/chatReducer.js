@@ -1,5 +1,7 @@
-const NewMessageInChat = "SEND_MESSAGE_IN_CHAT";
-const SetActiveChatName = "SET_ACTIVE_CHAT_NAME"
+import {getDate} from "../components/utils/getDate";
+
+const NewMessageInChat = "MY-APP/CHAT/SEND_MESSAGE_IN_CHAT";
+const SetActiveChatName = "MY-APP/CHAT/SET_ACTIVE_CHAT_NAME"
 
 const initialState = {
     activeChatName: "",
@@ -85,13 +87,9 @@ export const chatReducer = (state = initialState, action) => {
         case NewMessageInChat: {
 
             if (isEmptyMessage(action.message)) return state;
-            const date = new Date();
+
             const id = state.chatMessageArray.length + 1;
-            const day = String(date.getDate()).padStart(2, "0");
-            const month = String(date.getMonth() + 1).padStart(2, "0");
-            const year = date.getUTCFullYear();
-            const hour = String(date.getHours()).padStart(2, "0");
-            const minute = String(date.getMinutes()).padStart(2, "0");
+            const [day, month, year, hour, minute] = getDate();
 
             let messageObj = {
                 data: `${day}.${month}.${year} ${hour}:${minute}`,
