@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/EvgeniyGrokholskiy/my-app/static/css/main.c58eee7b.chunk.css",
-    "main.js": "/EvgeniyGrokholskiy/my-app/static/js/main.719f77d6.chunk.js",
-    "main.js.map": "/EvgeniyGrokholskiy/my-app/static/js/main.719f77d6.chunk.js.map",
-    "runtime-main.js": "/EvgeniyGrokholskiy/my-app/static/js/runtime-main.43d0b5d9.js",
-    "runtime-main.js.map": "/EvgeniyGrokholskiy/my-app/static/js/runtime-main.43d0b5d9.js.map",
-    "static/js/2.f7a3fd88.chunk.js": "/EvgeniyGrokholskiy/my-app/static/js/2.f7a3fd88.chunk.js",
-    "static/js/2.f7a3fd88.chunk.js.map": "/EvgeniyGrokholskiy/my-app/static/js/2.f7a3fd88.chunk.js.map",
+    "main.js": "/EvgeniyGrokholskiy/my-app/static/js/main.e3ca66ae.chunk.js",
+    "main.js.map": "/EvgeniyGrokholskiy/my-app/static/js/main.e3ca66ae.chunk.js.map",
+    "runtime-main.js": "/EvgeniyGrokholskiy/my-app/static/js/runtime-main.e8a1af2b.js",
+    "runtime-main.js.map": "/EvgeniyGrokholskiy/my-app/static/js/runtime-main.e8a1af2b.js.map",
+    "static/js/2.77d001d6.chunk.js": "/EvgeniyGrokholskiy/my-app/static/js/2.77d001d6.chunk.js",
+    "static/js/2.77d001d6.chunk.js.map": "/EvgeniyGrokholskiy/my-app/static/js/2.77d001d6.chunk.js.map",
     "static/css/3.6dd52a1b.chunk.css": "/EvgeniyGrokholskiy/my-app/static/css/3.6dd52a1b.chunk.css",
-    "static/js/3.ef406378.chunk.js": "/EvgeniyGrokholskiy/my-app/static/js/3.ef406378.chunk.js",
-    "static/js/3.ef406378.chunk.js.map": "/EvgeniyGrokholskiy/my-app/static/js/3.ef406378.chunk.js.map",
+    "static/js/3.493ede8f.chunk.js": "/EvgeniyGrokholskiy/my-app/static/js/3.493ede8f.chunk.js",
+    "static/js/3.493ede8f.chunk.js.map": "/EvgeniyGrokholskiy/my-app/static/js/3.493ede8f.chunk.js.map",
     "static/js/4.aa6492ab.chunk.js": "/EvgeniyGrokholskiy/my-app/static/js/4.aa6492ab.chunk.js",
     "static/js/4.aa6492ab.chunk.js.map": "/EvgeniyGrokholskiy/my-app/static/js/4.aa6492ab.chunk.js.map",
     "index.html": "/EvgeniyGrokholskiy/my-app/index.html",
     "static/css/3.6dd52a1b.chunk.css.map": "/EvgeniyGrokholskiy/my-app/static/css/3.6dd52a1b.chunk.css.map",
     "static/css/main.c58eee7b.chunk.css.map": "/EvgeniyGrokholskiy/my-app/static/css/main.c58eee7b.chunk.css.map",
-    "static/js/2.f7a3fd88.chunk.js.LICENSE.txt": "/EvgeniyGrokholskiy/my-app/static/js/2.f7a3fd88.chunk.js.LICENSE.txt",
+    "static/js/2.77d001d6.chunk.js.LICENSE.txt": "/EvgeniyGrokholskiy/my-app/static/js/2.77d001d6.chunk.js.LICENSE.txt",
     "static/media/Logo.8c79ce98.svg": "/EvgeniyGrokholskiy/my-app/static/media/Logo.8c79ce98.svg",
     "static/media/Message-square.9ac220cf.svg": "/EvgeniyGrokholskiy/my-app/static/media/Message-square.9ac220cf.svg",
     "static/media/Music.c34bc56a.svg": "/EvgeniyGrokholskiy/my-app/static/media/Music.c34bc56a.svg",
@@ -32,9 +32,9 @@
     "static/media/userUnknown.16df309a.png": "/EvgeniyGrokholskiy/my-app/static/media/userUnknown.16df309a.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.43d0b5d9.js",
-    "static/js/2.f7a3fd88.chunk.js",
+    "static/js/runtime-main.e8a1af2b.js",
+    "static/js/2.77d001d6.chunk.js",
     "static/css/main.c58eee7b.chunk.css",
-    "static/js/main.719f77d6.chunk.js"
+    "static/js/main.e3ca66ae.chunk.js"
   ]
 }
