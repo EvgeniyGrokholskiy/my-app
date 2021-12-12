@@ -16,6 +16,7 @@ const UserCard = (props) => {
                         totalUsers={props.totalUsers}
                         usersOnPage={props.usersOnPage}
                         currentPage={props.currentPage}
+                        pageSize={10}
             />
 
             {
