@@ -10,7 +10,7 @@
     display: grid;
     position: relative;
     bottom: 50px;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 220px 1fr;
     grid-template-rows: repeat(5, 1fr);
     grid-template-areas:
             "photo  status"
