@@ -6,7 +6,7 @@ import Loading from "../../../commons/loading/loading";
 
 
 const ProfileData = (props) => {
-    console.log("render ProfileData")
+
     if (!props.state.profile) {
 
         return (

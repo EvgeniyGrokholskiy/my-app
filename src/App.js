@@ -8,7 +8,7 @@ import HeaderContainer from "./components/header/HeaderContainer";
 import Profile from "./components/profile/Profile";
 import ChatContainer from "./components/chat/chatContainer";
 import LoginContainer from "./components/login/loginContainer";
-import React, {lazy} from "react";
+import React from "react";
 import {connect} from "react-redux";
 import {authThunkCreator} from "./redux/authReducer";
 import Loading from "./components/commons/loading/loading";
