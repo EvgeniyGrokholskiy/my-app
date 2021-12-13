@@ -19,15 +19,16 @@ let reducers = combineReducers({
     musicPage: musicReducer,
     settings: settingsReducer,
     auth: authReducer,
-    app: appReducer
+    app: appReducer,
+    footer: findUsersReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, /* preloadedState, */ composeEnhancers(applyMiddleware(thunkMiddleware)
-));
+const store = createStore(reducers, /* preloadedState, */ composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 /*
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));*/
+let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+*/
 
 window.__store__ = store
 

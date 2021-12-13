@@ -13,6 +13,7 @@ import {connect} from "react-redux";
 import {authThunkCreator} from "./redux/authReducer";
 import Loading from "./components/commons/loading/loading";
 import {initializeApp} from "./redux/appReducer";
+import FooterContainer from "./components/commons/footer/footerContainer";
 const FindUsers = React.lazy(() => import('./components/findUsers/findUsers'));
 
 
@@ -44,6 +45,9 @@ class App extends React.Component {
                         <Route path="/settings/*" element={<Settings/>}/>
                     </Routes>
                 </main>
+                <footer>
+                    <FooterContainer/>
+                </footer>
             </div>
         );
     }

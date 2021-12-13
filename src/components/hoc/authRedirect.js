@@ -14,7 +14,7 @@ export const withAuthRedirect = (Component) => {
 
     class RedirectComponent extends React.Component {
         render() {
-            debugger
+
             if (!window.sessionStorage.getItem("isAuth")/*this.props.isAuth*/) {
                 return <Navigate to={"/"}/>
             }

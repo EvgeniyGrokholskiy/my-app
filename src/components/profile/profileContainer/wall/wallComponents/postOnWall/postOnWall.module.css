@@ -5,7 +5,9 @@
     grid-template-areas:
             "content"
             "likeBtn";
-    height: 150px;
+    height: 160px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .card {

@@ -1,0 +1,113 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(180deg, rgba(241, 244, 248, 0.8) 0%, rgb(247, 249, 251) 100%);
+    border-top: 1px solid #EBEBEC;
+    padding: 35px 130px;
+    height: auto;
+    width: 1440px;
+    margin: 30px auto 0 auto;
+}
+
+.logoBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.logo, .logoText {
+    display: block;
+}
+
+.logo {
+    margin-bottom: 10px;
+}
+
+
+.navigation {
+    width: 135px;
+}
+
+.header {
+    font-size: 16px;
+    margin: 0 0 30px;
+}
+
+.navList {
+    margin: 0;
+    padding: 0;
+    justify-content: space-around;
+    list-style: none;
+    width: 100%;
+}
+
+.list_item {
+    color: black;
+    cursor: pointer;
+    display: flex;
+    font-size: 14px;
+    line-height: 25px;
+    padding: 0;
+    text-decoration: none;
+}
+
+.list_item:active {
+    transform: scale(0.98);
+}
+
+.selected {
+    color: gray;
+}
+
+.solution, .utils {
+    margin-top: 50px;
+}
+
+.buttons {
+
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0275B1;
+    border-radius: 4px;
+    color: white;
+    padding: 0 17px 0 16px;
+    margin-top: 23px;
+    height: 32px;
+    width: 170px;
+}
+
+.button:hover {
+    transform: scale(1.02);
+    box-shadow: 2px 2px 2px gray;
+}
+
+.button:active {
+    transform: scale(1.0);
+    box-shadow: none;
+}
+
+.whiteButton {
+    border: 1px solid #0275B1;
+    background-color: white;
+    color: #0275B1;
+    margin-top: 10px;
+}
+
+
+.languages {
+
+}
+
+.select {
+    border: 1px solid #F0F0F0;
+    border-radius: 4px;
+    line-height: 32px;
+    padding: 0 15px;
+    height: 32px;
+    width: 270px;
+}
