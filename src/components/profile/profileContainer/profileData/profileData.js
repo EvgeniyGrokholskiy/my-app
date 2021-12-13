@@ -7,6 +7,13 @@ import Loading from "../../../commons/loading/loading";
 
 const ProfileData = (props) => {
 
+    const onMainPhotoSelected = (event) => {
+        if (event.target.files.length){
+            props.savePhoto(event.target.files[0])
+        }
+
+    }
+
     if (!props.state.profile) {
 
         return (
@@ -23,8 +30,13 @@ const ProfileData = (props) => {
         <div className={style.wrapper}>
             <img src={profileData_top_image} alt="" height={180} width={850}/>
             <div className={style.card}>
+                <div className={style.imageWrapper}>
                 <img className={style.image}
                      src={props.state.profile.photos.large ? props.state.profile.photos.large : photo} alt=""/>
+                {
+                    props.auth.id && !props.match ? <input onChange={onMainPhotoSelected} type={"file"} className={style.setPhoto}/> : <></>
+                }
+                </div>
                 <p className={`${style.data} ${style.data_name}`}>
                     {props.state.profile.fullName}
                 </p>

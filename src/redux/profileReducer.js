@@ -4,6 +4,7 @@ const AddMessageOnWall = "MY-APP/PROFILE/ADD_MESSAGE_ON_WALL";
 const ChangeNewMessageOnWall = "MY-APP/PROFILE/CHANGE_NEW_MESSAGE_ON_WALL";
 const SetUserProfile = "MY-APP/PROFILE/SET_USERS_PROFILE";
 const SetProfileStatus = "MY-APP/PROFILE/SET_PROFILE_STATUS";
+const SetPhoto = "MY-APP/PROFILE/SAVE_PHOTO";
 
 const initialState = {
     wallMessageArray: [
@@ -69,6 +70,13 @@ export const profileReducer = (state = initialState, action) => {
             }
         }
 
+        case SetPhoto: {
+            return {
+                ...state,
+                profile: {...state.profile, photos: action.photo}
+            }
+        }
+
         default:
             return state;
 
@@ -92,6 +100,13 @@ export const setUserStatusThunkCreator = (status) => async (dispatch) => {
     }
 }
 
+export const savePhoto = (file) => async (dispatch) => {
+    let response = await profileAPI.savePhoto(file)
+    if (response.resultCode === 0) {
+        dispatch(setPhoto(response.data.photos));
+    }
+}
+
 export const addPost = (message) => {
     return {
         type: AddMessageOnWall,
@@ -110,5 +125,12 @@ export const setProfileStatus = (status) => {
     return {
         type: SetProfileStatus,
         status
+    }
+}
+
+export const setPhoto = (photo) => {
+    return {
+        type: SetPhoto,
+        photo
     }
 }

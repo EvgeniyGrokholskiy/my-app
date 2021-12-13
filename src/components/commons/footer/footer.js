@@ -37,19 +37,19 @@ const Footer = (props) => {
             <div className={style.solution}>
                 <nav>
                     <ul className={style.navList}>
-                        <li><NavLink className={style.list_item} to="">Talent Solutions</NavLink></li>
-                        <li><NavLink className={style.list_item} to="">Marketing Solutions</NavLink></li>
-                        <li><NavLink className={style.list_item} to="">Sales Solutions</NavLink></li>
-                        <li><NavLink className={style.list_item} to="">Safety Center</NavLink></li>
+                        <li><NavLink className={style.list_item} to="//">Talent Solutions</NavLink></li>
+                        <li><NavLink className={style.list_item} to="//">Marketing Solutions</NavLink></li>
+                        <li><NavLink className={style.list_item} to="//">Sales Solutions</NavLink></li>
+                        <li><NavLink className={style.list_item} to="//">Safety Center</NavLink></li>
                     </ul>
                 </nav>
             </div>
             <div className={style.utils}>
                 <nav>
                     <ul className={style.navList}>
-                        <li><NavLink className={style.list_item} to="">Community Guidelines</NavLink></li>
-                        <li><NavLink className={style.list_item} to="">Privacy & Terms</NavLink></li>
-                        <li><NavLink className={style.list_item} to="">Mobile App</NavLink></li>
+                        <li><NavLink className={style.list_item} to="//">Community Guidelines</NavLink></li>
+                        <li><NavLink className={style.list_item} to="//">Privacy & Terms</NavLink></li>
+                        <li><NavLink className={style.list_item} to="//">Mobile App</NavLink></li>
                     </ul>
                 </nav>
             </div>
@@ -58,8 +58,8 @@ const Footer = (props) => {
                 <nav>
                     <ul className={style.navList}>
                         <li><NavLink className={`${style.list_item} , ${style.button}`}
-                                     to="">QUESTIONS?<Question/></NavLink></li>
-                        <li><NavLink className={`${style.list_item} , ${style.button} ${style.whiteButton}`} to="">SETTINGS<Settings/></NavLink>
+                                     to="//">QUESTIONS?<Question/></NavLink></li>
+                        <li><NavLink className={`${style.list_item} , ${style.button} ${style.whiteButton}`} to="//">SETTINGS<Settings/></NavLink>
                         </li>
                     </ul>
                 </nav>

@@ -23,6 +23,14 @@
     padding-top: 30px;
 }
 
+.imageWrapper {
+    display: flex;
+    grid-area: photo;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 30px;
+}
+
 .image {
     background-color: white;
     border: 10px solid white;
@@ -31,6 +39,11 @@
     justify-self: center;
     height: 200px;
     width: 200px;
+}
+
+.setPhoto {
+    display: inline-block;
+    grid-area: photo;
 }
 
 .data, .status {

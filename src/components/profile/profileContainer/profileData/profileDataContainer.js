@@ -1,7 +1,12 @@
 import React from "react";
 import ProfileData from "./profileData";
 import {connect} from "react-redux";
-import {getUserProfile, getUserStatusThunkCreator, setUserStatusThunkCreator} from "../../../../redux/profileReducer";
+import {
+    getUserProfile,
+    getUserStatusThunkCreator,
+    savePhoto,
+    setUserStatusThunkCreator
+} from "../../../../redux/profileReducer";
 import {useMatch} from "react-router";
 import {compose} from "redux";
 import NewPostContainer from "../new_post/new_postContainer";
@@ -13,11 +18,12 @@ import {withAuthRedirect} from "../../../hoc/authRedirect";
 
 
 class GetProfileData extends React.Component {
-
-    state = {
-        userId: null
+    constructor(props) {
+        super(props);
+        this.state = {
+            userId: null
+        }
     }
-
 
     componentDidMount() {
         let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id
@@ -31,11 +37,11 @@ class GetProfileData extends React.Component {
 
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-/*        if (prevProps.auth.id !== this.props.auth.id) {
-            this.setState({
-                userId: this.props.auth.id
-            })
-        }*/
+        /*        if (prevProps.auth.id !== this.props.auth.id) {
+                    this.setState({
+                        userId: this.props.auth.id
+                    })
+                }*/
         let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id
         if (userId !== prevState.userId) {
             this.props.getUserProfile(userId)
@@ -50,7 +56,7 @@ class GetProfileData extends React.Component {
     render() {
         return (
             <>
-                <ProfileData {...this.props} />
+                <ProfileData {...this.props} userId={this.userId} />
                 <StatusBarWithHooks
                     //id={this.props.auth.id}
                     //getUserProfile={this.props.getUserProfile}
@@ -86,7 +92,8 @@ const ProfileDataContainer = compose(
         getUserProfile,
         getUserStatusThunkCreator,
         setUserStatusThunkCreator,
-        authThunkCreator
+        authThunkCreator,
+        savePhoto
     }),
     withAuthRedirect)
 (GetMatchUrl)
