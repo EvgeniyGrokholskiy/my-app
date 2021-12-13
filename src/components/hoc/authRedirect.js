@@ -16,7 +16,7 @@ export const withAuthRedirect = (Component) => {
         render() {
             debugger
             if (!window.sessionStorage.getItem("isAuth")/*this.props.isAuth*/) {
-                return <Navigate to={"/login"}/>
+                return <Navigate to={"/"}/>
             }
 
             return <Component {...this.props} />

@@ -4,7 +4,7 @@ import News from "./components/news/news";
 import Music from "./components/music/music";
 import Settings from "./components/settings/settings";
 import {Route, Routes} from "react-router-dom";
-import HeaderContainer from "./components/header/HeaderContainer";
+import HeaderContainer from "./components/commons/header/HeaderContainer";
 import Profile from "./components/profile/Profile";
 import ChatContainer from "./components/chat/chatContainer";
 import LoginContainer from "./components/login/loginContainer";
@@ -24,7 +24,6 @@ class App extends React.Component {
 
     render() {
 
-
         if(!this.props.app.initialized) {
             return <Loading/>
         }
@@ -34,12 +33,10 @@ class App extends React.Component {
                 <HeaderContainer/>
                 <main>
                     <Routes>
-                        <Route path="/login" element={<LoginContainer/>}/>
-
+                        <Route path="/" element={<LoginContainer/>}/>
                         <Route path="/users" element={
                             <React.Suspense fallback={<Loading />}><FindUsers/></React.Suspense>
                         }/>
-
                         <Route path="/profile/*" element={<Profile/>}/>
                         <Route path="/chat/*" element={<ChatContainer/>}/>
                         <Route path="/news/*" element={<News/>}/>
