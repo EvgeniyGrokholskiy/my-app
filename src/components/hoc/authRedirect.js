@@ -14,16 +14,17 @@ export const withAuthRedirect = (Component) => {
 
     class RedirectComponent extends React.Component {
         render() {
-           if (!this.props.isAuth){
-                return <Navigate to={"/login"} />
+            debugger
+            if (!window.sessionStorage.getItem("isAuth")/*this.props.isAuth*/) {
+                return <Navigate to={"/login"}/>
             }
 
             return <Component {...this.props} />
         }
     }
 
-    let ConnectedAuthRedirectComponent = connect (mapStateToProps)(RedirectComponent);
+    let ConnectedAuthRedirectComponent = connect(mapStateToProps)(RedirectComponent);
 
-return ConnectedAuthRedirectComponent;
+    return ConnectedAuthRedirectComponent;
 }
 

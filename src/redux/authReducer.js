@@ -59,6 +59,7 @@ export const authReducer = (state = initialState, action) => {
 export const authThunkCreator = () => async (dispatch) => {
     let {id, email, login} = await authAPI.authMe()
     if (id !== undefined) {
+        sessionStorage.setItem('isAuth', "true");
         dispatch(setUserData(id, login, email, true));
         dispatch(getUserProfile(id));
         dispatch(getUserStatusThunkCreator(id));
@@ -67,7 +68,6 @@ export const authThunkCreator = () => async (dispatch) => {
 
 export const loginThunkCreator = (loginData) => async (dispatch) => {
     let responseData = await authAPI.login(loginData)
-
     if (responseData.resultCode === 0) {
         dispatch(authThunkCreator())
     } else {
@@ -77,9 +77,10 @@ export const loginThunkCreator = (loginData) => async (dispatch) => {
 }
 
 export const logoutThunkCreator = () => async (dispatch) => {
-    await authAPI.logout()
+    await authAPI.logout();
+    sessionStorage.setItem('isAuth', "");
     dispatch(setUserData(null, null, null, false));
-    dispatch(setProfileStatus(""))
+    dispatch(setProfileStatus(""));
 }
 
 export const setUserData = (id, login, email, isAuth) => {

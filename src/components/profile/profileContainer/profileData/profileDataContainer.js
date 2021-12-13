@@ -15,7 +15,7 @@ import {withAuthRedirect} from "../../../hoc/authRedirect";
 class GetProfileData extends React.Component {
 
     state = {
-        userId: this.props.auth.id
+        userId: null
     }
 
 
@@ -24,15 +24,27 @@ class GetProfileData extends React.Component {
         if (!userId) return
         this.props.getUserProfile(userId)
         this.props.getUserStatusThunkCreator(userId)
+        this.setState({
+            userId: userId
+        })
     };
 
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.auth.id !== this.props.auth.id) {
+/*        if (prevProps.auth.id !== this.props.auth.id) {
             this.setState({
                 userId: this.props.auth.id
             })
+        }*/
+        let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id
+        if (userId !== prevState.userId) {
+            this.props.getUserProfile(userId)
+            this.props.getUserStatusThunkCreator(userId)
+            this.setState({
+                userId: userId
+            })
         }
+
     }
 
     render() {
