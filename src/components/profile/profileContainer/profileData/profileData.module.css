@@ -2,30 +2,18 @@
     border-radius: 4px;
     background-color: white;
     margin-top: 40px;
-    height: 481px;
     width: 850px;
 }
 
 .card {
-    display: grid;
+    display: flex;
     position: relative;
     bottom: 50px;
-    grid-template-columns: 220px 1fr;
-    grid-template-rows: repeat(5, 1fr);
-    grid-template-areas:
-            "photo  status"
-            "photo  data-name"
-            "photo  aboutMe"
-            "photo  data-city"
-            "photo  data-education"
-            "photo  data-site";
-    grid-column-gap: 30px;
     padding-top: 30px;
 }
 
 .imageWrapper {
     display: flex;
-    grid-area: photo;
     flex-direction: column;
     justify-content: space-between;
     padding-bottom: 30px;
@@ -35,45 +23,37 @@
     background-color: white;
     border: 10px solid white;
     border-radius: 50%;
-    grid-area: photo;
     justify-self: center;
     height: 200px;
     width: 200px;
 }
 
+.label {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
 .setPhoto {
     display: inline-block;
-    grid-area: photo;
+}
+
+.profileDataWrapper {
+    display: flex;
+    flex-direction: column;
+    padding-top: 35px;
 }
 
 .data, .status {
     display: block;
-    margin: 0;
+    margin: 10px 0;
     text-align: left;
 }
 
+.contacts {
+    margin: 10px 0 10px 20px;
+}
+
 .status {
-    grid-area: status;
-}
 
-.data_name {
-    font-size: 18px;
-    font-weight: bold;
-    grid-area: data-name;
-}
-
-.aboutMe {
-    grid-area: aboutMe;
-}
-
-.data_city {
-    grid-area: data-city;
-}
-
-.data_education {
-    grid-area: data-education;
-}
-
-.data_site {
-    grid-area: data-site;
 }

@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {
     getUserProfile,
     getUserStatusThunkCreator,
-    savePhoto,
+    savePhoto, setUserProfileData,
     setUserStatusThunkCreator
 } from "../../../../redux/profileReducer";
 import {useMatch} from "react-router";
@@ -93,7 +93,8 @@ const ProfileDataContainer = compose(
         getUserStatusThunkCreator,
         setUserStatusThunkCreator,
         authThunkCreator,
-        savePhoto
+        savePhoto,
+        setUserProfileData
     }),
     withAuthRedirect)
 (GetMatchUrl)

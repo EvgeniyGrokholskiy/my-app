@@ -1,10 +1,12 @@
 import {profileAPI} from "../api/api";
+import store from "./reduxStore";
 
 const AddMessageOnWall = "MY-APP/PROFILE/ADD_MESSAGE_ON_WALL";
 const ChangeNewMessageOnWall = "MY-APP/PROFILE/CHANGE_NEW_MESSAGE_ON_WALL";
 const SetUserProfile = "MY-APP/PROFILE/SET_USERS_PROFILE";
 const SetProfileStatus = "MY-APP/PROFILE/SET_PROFILE_STATUS";
 const SetPhoto = "MY-APP/PROFILE/SAVE_PHOTO";
+const UpdateProfileData = "MY-APP/PROFILE/UPDATE_PROFILE_DATA";
 
 const initialState = {
     wallMessageArray: [
@@ -107,6 +109,13 @@ export const savePhoto = (file) => async (dispatch) => {
     }
 }
 
+export const setUserProfileData = (data) => async (dispatch) => {
+    let response = await profileAPI.setProfileData(data)
+    if (response.resultCode === 0) {
+        dispatch(getUserProfile(store.getState().auth.id));
+    }
+}
+
 export const addPost = (message) => {
     return {
         type: AddMessageOnWall,
@@ -132,5 +141,12 @@ export const setPhoto = (photo) => {
     return {
         type: SetPhoto,
         photo
+    }
+}
+
+export const setUserProfileDataAC = (data) => {
+    return {
+        type: UpdateProfileData,
+        data
     }
 }
