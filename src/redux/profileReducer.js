@@ -1,12 +1,14 @@
 import {profileAPI} from "../api/api";
 import store from "./reduxStore";
+import {setErrorMessage} from "./authReducer";
 
 const AddMessageOnWall = "MY-APP/PROFILE/ADD_MESSAGE_ON_WALL";
 const ChangeNewMessageOnWall = "MY-APP/PROFILE/CHANGE_NEW_MESSAGE_ON_WALL";
 const SetUserProfile = "MY-APP/PROFILE/SET_USERS_PROFILE";
 const SetProfileStatus = "MY-APP/PROFILE/SET_PROFILE_STATUS";
 const SetPhoto = "MY-APP/PROFILE/SAVE_PHOTO";
-const UpdateProfileData = "MY-APP/PROFILE/UPDATE_PROFILE_DATA";
+const SetProfileDataError = "MY-APP/PROFILE/UPDATE_PROFILE_DATA_ERROR";
+const ResetSendError = "MY-APP/PROFILE/RESET_SEND_ERROR";
 
 const initialState = {
     wallMessageArray: [
@@ -24,7 +26,9 @@ const initialState = {
 
     profile: null,
     profileStatus: "",
-    putRequestStatus: null
+    putRequestStatus: null,
+    error: false,
+    sendErrorMessage: ""
 };
 
 export const profileReducer = (state = initialState, action) => {
@@ -79,9 +83,24 @@ export const profileReducer = (state = initialState, action) => {
             }
         }
 
+        case SetProfileDataError: {
+            return {
+                ...state,
+                sendErrorMessage: action.errorMessage,
+                error: action.error
+            }
+        }
+
+        case ResetSendError: {
+            return  {
+                ...state,
+                sendErrorMessage: action.errorMessage,
+                error: action.error
+            }
+        }
+
         default:
             return state;
-
     }
 };
 
@@ -96,23 +115,28 @@ export const getUserStatusThunkCreator = (userId) => async (dispatch) => {
 }
 
 export const setUserStatusThunkCreator = (status) => async (dispatch) => {
-    let response = await profileAPI.setUserStatus(status)
+    let response = await profileAPI.setUserStatus(status);
     if (response.resultCode === 0) {
         dispatch(setProfileStatus(status));
     }
 }
 
 export const savePhoto = (file) => async (dispatch) => {
-    let response = await profileAPI.savePhoto(file)
+    let response = await profileAPI.savePhoto(file);
     if (response.resultCode === 0) {
         dispatch(setPhoto(response.data.photos));
     }
 }
 
 export const setUserProfileData = (data) => async (dispatch) => {
-    let response = await profileAPI.setProfileData(data)
+    let response = await profileAPI.setProfileData(data);
     if (response.resultCode === 0) {
+        dispatch(setUserProfileDataError("",false));
         dispatch(getUserProfile(store.getState().auth.id));
+        return response
+    } else {
+        dispatch(setUserProfileDataError(response.messages,true));
+        return response
     }
 }
 
@@ -144,9 +168,19 @@ export const setPhoto = (photo) => {
     }
 }
 
-export const setUserProfileDataAC = (data) => {
+export const setUserProfileDataError = (errorMessage,error) => {
     return {
-        type: UpdateProfileData,
-        data
+        type: SetProfileDataError,
+        errorMessage,
+        error
+    }
+}
+
+export const resetSendError = () => {
+    return {
+        type: ResetSendError,
+        error: false,
+        sendErrorMessage: ""
+
     }
 }

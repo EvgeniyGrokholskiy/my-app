@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import Login from "./login";
-import {authThunkCreator, loginThunkCreator} from "../../redux/authReducer";
+import {authThunkCreator, setCaptchaUrl, loginThunkCreator, getNewCaptcha} from "../../redux/authReducer";
 import {compose} from "redux";
 import {withLoginRedirect} from "../hoc/loginRedirect";
 import {getAuthState} from "../../redux/selectors";
@@ -14,7 +14,8 @@ const mapStateToProps = (state) => {
 const LoginContainer = compose(connect(mapStateToProps,
     {
         loginThunkCreator,
-        authThunkCreator
+        authThunkCreator,
+        getNewCaptcha
     }),withLoginRedirect)(Login)
 
 export default LoginContainer

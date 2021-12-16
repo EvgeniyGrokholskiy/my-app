@@ -4,7 +4,9 @@ import {getUserProfile, getUserStatusThunkCreator, setProfileStatus} from "./pro
 const SET_USER_DATA = "MY_APP_/AUTH/SET_USER_DATA";
 const LOGIN = "MY_APP_/AUTH/LOGIN";
 const LOGOUT = "MY_APP_/AUTH/LOGOUT";
-const SET_ERROR_MESSAGE = "MY_APP_/AUTH/SET_ERROR_MESSAGE"
+const SET_ERROR_MESSAGE = "MY_APP_/AUTH/SET_ERROR_MESSAGE";
+const GET_CAPTCHA_SUCCESS = "MY_APP_/AUTH/GET_CAPTCHA_SUCCESS";
+const ENTERED_RIGHT_CAPTCHA = "MY-APP/AUTH/ENTERED_RIGHT_CAPTCHA"
 
 
 const initialState = {
@@ -14,7 +16,8 @@ const initialState = {
     isAuth: false,
     isFetching: false,
     isError: false,
-    errorMessage: ""
+    errorMessage: "",
+    captcha: null,
 }
 
 export const authReducer = (state = initialState, action) => {
@@ -49,6 +52,22 @@ export const authReducer = (state = initialState, action) => {
             }
         }
 
+        case GET_CAPTCHA_SUCCESS: {
+            return {
+                ...state,
+                captcha: action.captcha,
+                errorMessage: action.errorMessage,
+            }
+        }
+
+        case ENTERED_RIGHT_CAPTCHA: {
+            return {
+                ...state,
+                captcha: action.captcha,
+                isError: action.isError
+            }
+        }
+
         default: {
             return state;
         }
@@ -69,11 +88,22 @@ export const authThunkCreator = () => async (dispatch) => {
 export const loginThunkCreator = (loginData) => async (dispatch) => {
     let responseData = await authAPI.login(loginData)
     if (responseData.resultCode === 0) {
-        dispatch(authThunkCreator())
+        dispatch(authThunkCreator());
+        dispatch(enteredRightCaptcha());
     } else {
+        if (responseData.resultCode === 10) {
+            let captchaURL = await authAPI.getCaptcha();
+            dispatch(setCaptchaUrl(captchaURL))
+
+        }
         dispatch(setUserData(null, null, null, false));
         dispatch(setErrorMessage(responseData.messages[0]))
     }
+}
+
+export const getNewCaptcha = () => async (dispatch) => {
+    let newCaptchaURL = await authAPI.getCaptcha();
+    dispatch(setCaptchaUrl(newCaptchaURL))
 }
 
 export const logoutThunkCreator = () => async (dispatch) => {
@@ -103,7 +133,7 @@ export const login = (userId) => {
     }
 }
 
-export const logout = (userId) => {
+export const logout = () => {
     return {
         type: LOGOUT,
         isAuth: false
@@ -115,5 +145,21 @@ export const setErrorMessage = (errorMessage) => {
         type: SET_ERROR_MESSAGE,
         errorMessage,
         isError: true
+    }
+}
+
+export const setCaptchaUrl = (captcha) => {
+    return {
+        type: GET_CAPTCHA_SUCCESS,
+        captcha,
+        isError:true
+    }
+}
+
+export const enteredRightCaptcha = () => {
+    return {
+        type: ENTERED_RIGHT_CAPTCHA,
+        captcha: "",
+        isError: false
     }
 }
