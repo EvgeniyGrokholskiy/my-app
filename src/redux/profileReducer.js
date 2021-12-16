@@ -1,7 +1,5 @@
 import {profileAPI} from "../api/api";
 import store from "./reduxStore";
-import {setErrorMessage} from "./authReducer";
-
 const AddMessageOnWall = "MY-APP/PROFILE/ADD_MESSAGE_ON_WALL";
 const ChangeNewMessageOnWall = "MY-APP/PROFILE/CHANGE_NEW_MESSAGE_ON_WALL";
 const SetUserProfile = "MY-APP/PROFILE/SET_USERS_PROFILE";

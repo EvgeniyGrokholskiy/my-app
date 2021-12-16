@@ -3,7 +3,6 @@ import {Field, Form} from 'react-final-form';
 import style from "./login.module.css";
 import {validators} from "../utils/validators";
 import {Input} from "../commons/formControls/component";
-import {getNewCaptcha, setCaptchaUrl} from "../../redux/authReducer";
 
 
 class Login extends React.Component {

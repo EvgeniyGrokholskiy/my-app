@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 import Login from "./login";
-import {authThunkCreator, setCaptchaUrl, loginThunkCreator, getNewCaptcha} from "../../redux/authReducer";
+import {authThunkCreator, loginThunkCreator, getNewCaptcha} from "../../redux/authReducer";
 import {compose} from "redux";
 import {withLoginRedirect} from "../hoc/loginRedirect";
 import {getAuthState} from "../../redux/selectors";
