@@ -5,7 +5,7 @@ import {validators} from "../utils/validators";
 import {Input} from "../commons/formControls/component";
 
 
-class Login extends React.Component {
+class Login extends React.PureComponent {
 
     render() {
         return (
@@ -15,7 +15,6 @@ class Login extends React.Component {
             </div>
         )
     }
-
 }
 
 const MyForm = (props) => {
@@ -65,7 +64,6 @@ const MyForm = (props) => {
 const Captcha = (props) =>{
     return (
         <div className={style.form__field}>
-            {/*<label className={style.label}>Captcha</label>*/}
             <img className={style.captcha} src={props.captcha} alt={"captcha"}/><button onClick={props.getNewCaptcha}>Get new Captcha</button>
             <Field name="captcha" component={Input} placeholder={"Please enter characters from the image"} validate={props.validator}/>
         </div>

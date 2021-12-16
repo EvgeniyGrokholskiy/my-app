@@ -16,7 +16,6 @@ import {getAuthState, getProfileState, getProfileStatusState} from "../../../../
 import StatusBarWithHooks from "../status/statusBarWithHooks";
 import {withAuthRedirect} from "../../../hoc/authRedirect";
 
-
 class GetProfileData extends React.Component {
     constructor(props) {
         super(props);
@@ -35,13 +34,7 @@ class GetProfileData extends React.Component {
         })
     };
 
-
     componentDidUpdate(prevProps, prevState, snapshot) {
-        /*        if (prevProps.auth.id !== this.props.auth.id) {
-                    this.setState({
-                        userId: this.props.auth.id
-                    })
-                }*/
         let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id
         if (userId !== prevState.userId) {
             this.props.getUserProfile(userId)
@@ -50,7 +43,6 @@ class GetProfileData extends React.Component {
                 userId: userId
             })
         }
-
     }
 
     render() {
