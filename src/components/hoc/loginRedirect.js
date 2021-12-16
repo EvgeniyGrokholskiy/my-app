@@ -1,7 +1,7 @@
 import React from "react";
 import {Navigate} from "react-router";
 import {connect} from "react-redux";
-import {getAuthState, getIsAuthState, getProfileStatusState} from "../../redux/selectors";
+import {getAuthState, getProfileStatusState} from "../../redux/selectors";
 import {initializeApp} from "../../redux/appReducer";
 
 const mapStateToProps = (state) => {

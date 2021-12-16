@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {
     getUserProfile,
     getUserStatusThunkCreator,
-    savePhoto, setUserProfileData, setUserProfileDataError,
+    savePhoto, setUserProfileData,
     setUserStatusThunkCreator
 } from "../../../../redux/profileReducer";
 import {useMatch} from "react-router";
