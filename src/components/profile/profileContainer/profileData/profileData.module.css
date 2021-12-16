@@ -50,10 +50,34 @@
     text-align: left;
 }
 
+.data a {
+    padding-left: 10px;
+}
+
 .contacts {
     margin: 10px 0 10px 20px;
 }
 
 .status {
 
+}
+
+.fullName {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+    padding-left: 10px;
+}
+
+.fieldData {
+    font-size: 17px;
+    font-style: italic;
+    padding-left: 10px;
+}
+
+.errorSpan {
+    display: inline-block;
+    color:red;
+    font-size: 18px;
+    margin: 20px;
 }
