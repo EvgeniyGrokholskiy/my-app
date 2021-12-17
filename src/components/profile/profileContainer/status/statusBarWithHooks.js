@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import style from "./statusBar.module.css";
 import {ReactComponent as SendIcon} from "../new_post/img/send_icon.svg";
 
-
 const StatusBarWithHooks = (props) => {
 
     let [editFlag, setEditMode] = useState(false);

@@ -11,7 +11,6 @@ const UserCard = (props) => {
 
         <div className={style.cardContainer}>
 
-
             <Pagination onPageChanged={props.onPageChanged}
                         totalUsers={props.totalUsers}
                         usersOnPage={props.usersOnPage}
@@ -29,7 +28,6 @@ const UserCard = (props) => {
                     const toFollow = () => {
                         props.setFollow(user.id, true);
                     }
-
 
                     return (
 
@@ -62,7 +60,6 @@ const UserCard = (props) => {
                     )
                 })
             }
-            {/*<button className={style.buttonSM}>Show more</button>*/}
         </div>
     )
 }

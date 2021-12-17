@@ -14,18 +14,19 @@ import {authThunkCreator} from "./redux/authReducer";
 import Loading from "./components/commons/loading/loading";
 import {initializeApp} from "./redux/appReducer";
 import FooterContainer from "./components/commons/footer/footerContainer";
+
 const FindUsers = React.lazy(() => import('./components/findUsers/findUsers'));
 
 
 class App extends React.Component {
 
-   componentDidMount() {
+    componentDidMount() {
         this.props.initializeApp()
     }
 
     render() {
 
-        if(!this.props.app.initialized) {
+        if (!this.props.app.initialized) {
             return <Loading/>
         }
 
@@ -36,7 +37,7 @@ class App extends React.Component {
                     <Routes>
                         <Route path="/" element={<LoginContainer/>}/>
                         <Route path="/users" element={
-                            <React.Suspense fallback={<Loading />}><FindUsers/></React.Suspense>
+                            <React.Suspense fallback={<Loading/>}><FindUsers/></React.Suspense>
                         }/>
                         <Route path="/profile/*" element={<Profile/>}/>
                         <Route path="/chat/*" element={<ChatContainer/>}/>
@@ -59,7 +60,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps,{authThunkCreator,initializeApp})(App)
+export default connect(mapStateToProps, {authThunkCreator, initializeApp})(App)
 
 
 

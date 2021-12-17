@@ -19,7 +19,6 @@ class UsersContainer extends React.Component {
         this.props.getUsers(page, this.props.usersOnPage);
     }
 
-
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.usersOnPage);
     }
@@ -47,7 +46,6 @@ class UsersContainer extends React.Component {
     }
 }
 
-
 const mapStateToProps = (state) => {
     return (
         {
@@ -60,7 +58,6 @@ const mapStateToProps = (state) => {
             isFollowingInProgress: getIsFollowingInProgressState(state),
         }
     )
-
 }
 
 const FindUsersContainer = connect(mapStateToProps, {
