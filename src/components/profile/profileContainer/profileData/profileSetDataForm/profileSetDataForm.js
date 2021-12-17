@@ -2,7 +2,7 @@ import style from "../profileData.module.css";
 import {Field, Form} from "react-final-form";
 import React from "react";
 
-const ProfileForm = (props) => {
+const ProfileSetDataForm = (props) => {
 
     return (
         <Form
@@ -82,4 +82,4 @@ const ProfileForm = (props) => {
     )
 }
 
-export default ProfileForm;
+export default ProfileSetDataForm;

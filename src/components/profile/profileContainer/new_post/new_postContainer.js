@@ -1,7 +1,7 @@
 import {addPost} from "../../../../redux/profileReducer";
-import NewPost from "./new_post";
 import {connect} from "react-redux";
 import {getProfileState} from "../../../../redux/selectors";
+import NewMessageForm from "./newMessageForm/newMessageForm";
 
 const mapStateToProps = (state) => {
     return {
@@ -9,6 +9,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-const NewPostContainer = connect(mapStateToProps, {addPost})(NewPost);
+const NewPostContainer = connect(mapStateToProps, {addPost})(NewMessageForm);
 
 export default NewPostContainer;

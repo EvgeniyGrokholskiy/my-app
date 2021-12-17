@@ -42,7 +42,6 @@ export const profileReducer = (state = initialState, action) => {
                 ...state,
                 newMessage: action.message
             };
-
         }
 
         case AddMessageOnWall: {

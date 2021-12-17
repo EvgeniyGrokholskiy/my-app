@@ -1,39 +1,28 @@
-import React from "react";
-import style from "./new_post.module.css";
-import {ReactComponent as SendIcon} from "./img/send_icon.svg";
+import {validators} from "../../../../utils/validators";
 import {Field, Form} from "react-final-form";
-import {validators} from "../../../utils/validators";
+import style from "./newMessageForm.module.css";
+import {ReactComponent as SendIcon} from "../img/send_icon.svg";
+import React from "react";
 
-class NewPost extends React.Component {
+const NewMessageForm = React.memo((props) => {
 
-    shouldComponentUpdate(nextProps, nextState, nextContext) {
-        return !nextProps === this.props
+    const addPost = (data) => {
+        if (data.newMessage) props.addPost(data.newMessage);
     }
 
-    render() {
-
-        const addPost = (data) => {
-            if (data.newMessage) this.props.addPost(data.newMessage);
-        }
-
-        return (
-            <div>
-                <NewMessageForm addPost={addPost}/>
-            </div>
-        )
-    }
-}
-
-const NewMessageForm = (props) => {
     const maxLength300 = validators.maxLengthValidatorCreator(300);
+    console.log("render");
     return (
         <Form
             onSubmit={(data) => {
-                props.addPost(data)
+                addPost(data)
             }}
             validate={(data) => {
 
             }}
+
+            keepDirtyOnReinitialize
+
             render={({handleSubmit}) => (
                 <form onSubmit={handleSubmit}>
                     <Field name="newMessage" validate={maxLength300}>
@@ -55,6 +44,8 @@ const NewMessageForm = (props) => {
             )}
         />
     )
-}
+},function areEqual(prevProps, nextProps) {
+return prevProps !== nextProps
+})
 
-export default NewPost;
+export default NewMessageForm;

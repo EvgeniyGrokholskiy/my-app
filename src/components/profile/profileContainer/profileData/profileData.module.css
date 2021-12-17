@@ -15,7 +15,7 @@
 .imageWrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    align-items: center;
     padding-bottom: 30px;
 }
 
@@ -35,13 +35,14 @@
 }
 
 .setPhoto {
-    display: inline-block;
+    display: none;
 }
 
 .profileDataWrapper {
     display: flex;
     flex-direction: column;
     padding-top: 35px;
+    margin-left: 35px;
 }
 
 .data, .status {
@@ -66,7 +67,6 @@
     font-size: 20px;
     font-weight: bold;
     margin: 10px 0;
-    padding-left: 10px;
 }
 
 .fieldData {
@@ -80,4 +80,35 @@
     color:red;
     font-size: 18px;
     margin: 20px;
+}
+
+.changePhotoLabel {
+    background-color: #0e6795;
+    border-radius: 4px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 35px;
+    width: 160px;
+}
+
+.button {
+    background-color: #0e6897;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px gray;
+    color: #fff;
+    height: 35px;
+    width: 85px;
+}
+
+.button:hover {
+    transform: scale(1.02);
+    box-shadow: 4px 4px 4px gray;
+}
+
+.button:active {
+    transform: scale(1.0);
+    box-shadow: 2px 2px 2px gray;
 }
