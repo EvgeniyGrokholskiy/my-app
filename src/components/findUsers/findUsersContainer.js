@@ -23,24 +23,13 @@ class UsersContainer extends React.Component {
         this.props.getUsers(this.props.currentPage, this.props.usersOnPage);
     }
 
-
     render() {
-        const {
-            totalUsers, usersOnPage, currentPage, findUsers, isFollowingInProgress,
-            setUnfollow, setFollow
-        } = this.props
+        console.log("render FU");
+
         return (
             <>
                 {this.props.isFetching ? <Loading/> : <></>}
-                <UserCard totalUsers={totalUsers}
-                          usersOnPage={usersOnPage}
-                          currentPage={currentPage}
-                          findUsers={findUsers}
-                          onPageChanged={this.onPageChanged}
-                          isFollowingInProgress={isFollowingInProgress}
-                          setUnfollow={setUnfollow}
-                          setFollow={setFollow}
-                />
+                <UserCard {...this.props} onPageChanged={this.onPageChanged}/>
             </>
         )
     }

@@ -54,7 +54,6 @@ const UserCard = (props) => {
                                     <p>{"props.user.location.country"},</p>
                                     <p>{"props.user.location.city"}</p>
                                 </div>
-
                             </div>
                         </div>
                     )

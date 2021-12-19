@@ -3,7 +3,7 @@ import style from "./friendsList.module.css";
 import FriendCard from "./friendCard/friendCard";
 
 
-const FriendsList = (props) => {
+const FriendsList = React.memo((props) => {
 
     const friendsListToRender = props.state.friends.map((friend) => {
         return <FriendCard key={friend.id} state={friend}/>;
@@ -20,6 +20,6 @@ const FriendsList = (props) => {
             </div>
         </div>
     );
-}
+})
 
 export default FriendsList;
