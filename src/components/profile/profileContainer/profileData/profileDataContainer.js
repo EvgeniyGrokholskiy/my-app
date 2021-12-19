@@ -38,9 +38,11 @@ class GetProfileData extends React.Component {
         this.getUserData(userId);
     }
 
+
   shouldComponentUpdate(nextProps, nextState, nextContext) {
         return this.props !== nextProps|| this.props.profileStatus !== nextProps.profileStatus || this.props.profile?.profile !== nextProps.profile?.profile
     }
+
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id
