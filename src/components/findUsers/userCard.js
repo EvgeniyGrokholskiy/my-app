@@ -5,8 +5,8 @@ import {NavLink} from "react-router-dom";
 import Pagination from "./pagination/pagination";
 
 
-const UserCard = (props) => {
-
+const UserCard = React.memo((props) => {
+    console.log("USER_CARD")
     return (
 
         <div className={style.cardContainer}>
@@ -61,6 +61,8 @@ const UserCard = (props) => {
             }
         </div>
     )
-}
+}, function isEqual(prevProps, nextProps){
+    return prevProps === nextProps;
+})
 
 export default UserCard;

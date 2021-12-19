@@ -6,7 +6,6 @@ import {ReactComponent as Question} from "./img/help-circle.svg";
 import {ReactComponent as Settings} from "./img/settings.svg";
 import {NavLink} from "react-router-dom";
 
-
 const Footer = (props) => {
 
     const [language, setLanguage] = useState(1);

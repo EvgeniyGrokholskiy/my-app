@@ -23,12 +23,16 @@ class UsersContainer extends React.Component {
         this.props.getUsers(this.props.currentPage, this.props.usersOnPage);
     }
 
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return this.props !== nextProps;
+    }
+
     render() {
         console.log("render FU");
 
         return (
             <>
-                {this.props.isFetching ? <Loading/> : <></>}
+                {this.props.isFetching ? <Loading/> :<></>}
                 <UserCard {...this.props} onPageChanged={this.onPageChanged}/>
             </>
         )

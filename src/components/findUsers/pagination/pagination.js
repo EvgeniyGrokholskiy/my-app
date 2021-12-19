@@ -18,7 +18,7 @@ const Pagination = (props) => {
     return (
         <div className={style.pageButtonsContainer}>
             { portionNumber >= 1 &&
-                <button onClick={()=>{setPortionNumber(portionNumber - 1)}} className={style.button} disabled={portionNumber === 1}>Prev</button>
+                <button onClick={()=>{setPortionNumber(portionNumber - 1)}} className={style.button} disabled={portionNumber === 1}>Prev pages</button>
             }
             {
                 pagesArray.filter((page)=> page >= leftPortionPageNumber && page <= rightPortionPageNumber)
@@ -33,7 +33,7 @@ const Pagination = (props) => {
                 })
             }
             { portionCount >= portionNumber &&
-                <button onClick={()=>{setPortionNumber(portionNumber + 1)}} className={style.button} disabled={portionNumber === portionCount}>Next</button>
+                <button onClick={()=>{setPortionNumber(portionNumber + 1)}} className={style.button} disabled={portionNumber === portionCount}>Next pages</button>
             }
         </div>
     )
