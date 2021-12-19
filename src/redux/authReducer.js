@@ -1,5 +1,5 @@
 import {authAPI} from "../api/api";
-import {getUserProfile, getUserStatusThunkCreator, setProfileStatus} from "./profileReducer";
+import {getUserProfileThunkCreator, getUserStatusThunkCreator, setProfileStatus} from "./profileReducer";
 
 const SET_USER_DATA = "MY_APP_/AUTH/SET_USER_DATA";
 const LOGIN = "MY_APP_/AUTH/LOGIN";
@@ -14,7 +14,6 @@ const initialState = {
     login: null,
     email: null,
     isAuth: false,
-    isFetching: false,
     isError: false,
     errorMessage: "",
     captcha: null,
@@ -80,7 +79,7 @@ export const authThunkCreator = () => async (dispatch) => {
     if (id !== undefined) {
         sessionStorage.setItem('isAuth', "true");
         dispatch(setUserData(id, login, email, true));
-        dispatch(getUserProfile(id));
+        dispatch(getUserProfileThunkCreator(id));
         dispatch(getUserStatusThunkCreator(id));
     }
 }

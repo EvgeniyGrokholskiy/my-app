@@ -1,6 +1,5 @@
 import React from "react";
 import style from "./header.module.css";
-
 import {ReactComponent as FindUsers} from "./img/findUsers.svg";
 import {ReactComponent as User} from "./img/User.svg";
 import {ReactComponent as Logo} from "./img/Logo.svg";
@@ -10,9 +9,7 @@ import {ReactComponent as Music} from "./img/Music.svg";
 import {ReactComponent as Settings} from "./img/Settings.svg";
 import {NavLink} from "react-router-dom";
 
-
-
-const Header = (props) => {
+const Header = ({login, isAuth, logoutThunkCreator}) => {
     return (
         <header className={style.header}>
             <>
@@ -31,10 +28,10 @@ const Header = (props) => {
                 </nav>
                 <div className={style.loginBlock}>
                     {
-                        props.state.isAuth ? <span className={style.loginName}>{props.state.login}</span> : <></>
+                        isAuth ? <span className={style.loginName}>{login}</span> : <></>
                     }
                     {
-                        props.state.isAuth ? <button onClick={props.logoutThunkCreator} className={style.loginButton}>LogOut</button> :
+                        isAuth ? <button onClick={logoutThunkCreator} className={style.loginButton}>LogOut</button> :
                             <button className={style.loginButton}>LogIn</button>
                     }
                 </div>

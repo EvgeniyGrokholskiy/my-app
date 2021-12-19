@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import style from "./statusBar.module.css";
 import {ReactComponent as SendIcon} from "../new_post/img/send_icon.svg";
 
-const StatusBarWithHooks = (props) => {
+const StatusBarWithHooks = React.memo((props) => {
 
     let [editFlag, setEditMode] = useState(false);
     let [status, setStatus] = useState(props.profileStatus);
@@ -40,6 +40,8 @@ const StatusBarWithHooks = (props) => {
             <button className={style.button} onClick={editModeOff}><SendIcon className={style.svg}/></button>
         </div>
     )
-}
+},function areEqual(prevProps, nextProps) {
+    return prevProps.profileStatus === nextProps.profileStatus;
+})
 
 export default StatusBarWithHooks

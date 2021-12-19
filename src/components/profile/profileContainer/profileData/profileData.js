@@ -6,7 +6,7 @@ import ProfileSetDataForm from "./profileSetDataForm/profileSetDataForm";
 import ProfileDataHolder from "./profileDataHolder/profileDataHolder";
 import ProfileImageBlock from "./profileImageBlock/profileImageBlock";
 
-const ProfileData = (props) => {
+const ProfileData = React.memo((props) => {
 
     const [editMode, setEditMode] = useState(false)
 
@@ -48,6 +48,8 @@ const ProfileData = (props) => {
             </div>
         </div>
     )
-}
+},function areEqual(prevProps, nextProps) {
+    return prevProps.state.profile === nextProps.state.profile;
+})
 
 export default ProfileData;

@@ -2,7 +2,7 @@ import React from "react";
 import style from './wall.module.css';
 import PostOnWall from "./wallComponents/postOnWall/postOnWall";
 
-const Wall = (props) => {
+const Wall = React.memo((props) => {
 
     let postsToRender = props.wallMessageArray.map(post => {
 
@@ -16,6 +16,8 @@ const Wall = (props) => {
 
         </div>
     );
-};
+},function areEqual(prevProps, nextProps) {
+    return prevProps.wallMessageArray === nextProps.wallMessageArray;
+});
 
 export default Wall;

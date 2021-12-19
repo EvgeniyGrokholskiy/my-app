@@ -1,8 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
 import Header from "./Header";
-import {authThunkCreator, logoutThunkCreator, setUserData} from "../../../redux/authReducer";
-import {getAuthState} from "../../../redux/selectors";
+import {logoutThunkCreator} from "../../../redux/authReducer";
+import {getAuthLogin, getIsAuthState} from "../../../redux/selectors";
 
 
 class Auth extends React.Component {
@@ -18,14 +18,13 @@ class Auth extends React.Component {
 const mapStateToProps = (state) => {
 
     return {
-        state: getAuthState(state)
+        isAuth: getIsAuthState(state),
+        login: getAuthLogin(state)
     };
 }
 
 const HeaderContainer = connect(mapStateToProps,
     {
-        setUserData,
-        authThunkCreator,
         logoutThunkCreator
     })(Auth)
 

@@ -10,7 +10,7 @@ const ChangePhotoButton = (props) => {
     }
 
     return (
-        <label className={style.changePhotoLabel}> Change main photo
+        <label className={`${style.changePhotoLabel} ${style.button}`}> Change main photo
             <input onChange={onMainPhotoSelected} type={"file"} className={style.setPhoto} />
         </label>
     )

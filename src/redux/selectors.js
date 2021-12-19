@@ -8,6 +8,10 @@ export const getAuthState = (state) => {
     return state.auth
 }
 
+export const getAuthLogin = (state) => {
+    return state.auth.login
+}
+
 export const getIsAuthState = (state) => {
     return state.auth.isAuth
 }

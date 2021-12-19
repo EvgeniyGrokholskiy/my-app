@@ -11,7 +11,6 @@ const NewMessageForm = React.memo((props) => {
     }
 
     const maxLength300 = validators.maxLengthValidatorCreator(300);
-    console.log("render");
     return (
         <Form
             onSubmit={(data) => {
@@ -45,7 +44,7 @@ const NewMessageForm = React.memo((props) => {
         />
     )
 },function areEqual(prevProps, nextProps) {
-return prevProps !== nextProps
+return prevProps === nextProps;
 })
 
 export default NewMessageForm;

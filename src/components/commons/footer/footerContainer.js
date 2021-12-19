@@ -9,13 +9,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-/*const mapDispatchToProps = (dispatch) => {
-    return {
-        changeLanguages: lang => dispatch(changeLanguages(lang))
-    }
-
-}*/
-
 const FooterContainer = connect(mapStateToProps, {changeLanguages})(Footer)
 
 export default FooterContainer;

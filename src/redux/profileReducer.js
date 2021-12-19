@@ -102,7 +102,7 @@ export const profileReducer = (state = initialState, action) => {
     }
 };
 
-export const getUserProfile = (userId) => async (dispatch) => {
+export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
     let data = await profileAPI.getUserProfile(userId)
     dispatch(setUserProfile(data));
 }
@@ -130,7 +130,7 @@ export const setUserProfileData = (data) => async (dispatch) => {
     let response = await profileAPI.setProfileData(data);
     if (response.resultCode === 0) {
         dispatch(setUserProfileDataError("",false));
-        dispatch(getUserProfile(store.getState().auth.id));
+        dispatch(getUserProfileThunkCreator(store.getState().auth.id));
         return response
     } else {
         dispatch(setUserProfileDataError(response.messages,true));

@@ -2,7 +2,7 @@ import React from "react";
 import ProfileData from "./profileData";
 import {connect} from "react-redux";
 import {
-    getUserProfile,
+    getUserProfileThunkCreator,
     getUserStatusThunkCreator,
     savePhoto, setUserProfileData,
     setUserStatusThunkCreator
@@ -24,24 +24,28 @@ class GetProfileData extends React.Component {
         }
     }
 
-    componentDidMount() {
-        let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id
-        if (!userId) return
-        this.props.getUserProfile(userId)
-        this.props.getUserStatusThunkCreator(userId)
+    getUserData = (userId) => {
+        this.props.getUserProfile(userId);
+        this.props.getUserStatusThunkCreator(userId);
         this.setState({
             userId: userId
         })
-    };
+    }
+
+    componentDidMount() {
+        let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id;
+        if (!userId) return;
+        this.getUserData(userId);
+    }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+        return this.props !== nextProps|| this.props.profileStatus !== nextProps.profileStatus || this.props.profile?.profile !== nextProps.profile?.profile
+    }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id
         if (userId !== prevState.userId) {
-            this.props.getUserProfile(userId)
-            this.props.getUserStatusThunkCreator(userId)
-            this.setState({
-                userId: userId
-            })
+            this.getUserData(userId);
         }
     }
 
@@ -77,11 +81,11 @@ const mapStateToProps = (state) => {
         auth: getAuthState(state),
         profileStatus: getProfileStatusState(state)
     };
-};
+}
 
 const ProfileDataContainer = compose(
     connect(mapStateToProps, {
-        getUserProfile,
+        getUserProfile: getUserProfileThunkCreator,
         getUserStatusThunkCreator,
         setUserStatusThunkCreator,
         authThunkCreator,
