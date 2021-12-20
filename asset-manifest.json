@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/my-app/static/css/main.67046159.chunk.css",
+    "main.css": "/my-app/static/css/main.ce6c0c49.chunk.css",
     "main.js": "/my-app/static/js/main.5cd5ab01.chunk.js",
     "main.js.map": "/my-app/static/js/main.5cd5ab01.chunk.js.map",
     "runtime-main.js": "/my-app/static/js/runtime-main.c977620a.js",
@@ -14,7 +14,7 @@
     "static/js/4.315c2266.chunk.js.map": "/my-app/static/js/4.315c2266.chunk.js.map",
     "index.html": "/my-app/index.html",
     "static/css/3.b13b5a63.chunk.css.map": "/my-app/static/css/3.b13b5a63.chunk.css.map",
-    "static/css/main.67046159.chunk.css.map": "/my-app/static/css/main.67046159.chunk.css.map",
+    "static/css/main.ce6c0c49.chunk.css.map": "/my-app/static/css/main.ce6c0c49.chunk.css.map",
     "static/js/2.7649756a.chunk.js.LICENSE.txt": "/my-app/static/js/2.7649756a.chunk.js.LICENSE.txt",
     "static/media/LinkedIn.d85289ea.svg": "/my-app/static/media/LinkedIn.d85289ea.svg",
     "static/media/Logo.1246500c.svg": "/my-app/static/media/Logo.1246500c.svg",
@@ -38,7 +38,7 @@
   "entrypoints": [
     "static/js/runtime-main.c977620a.js",
     "static/js/2.7649756a.chunk.js",
-    "static/css/main.67046159.chunk.css",
+    "static/css/main.ce6c0c49.chunk.css",
     "static/js/main.5cd5ab01.chunk.js"
   ]
 }
