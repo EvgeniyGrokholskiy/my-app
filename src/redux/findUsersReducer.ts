@@ -1,4 +1,5 @@
 import {followUnfollowAPI, usersAPI} from "../api/api";
+import {AnyAction} from "redux";
 
 const ToFollowUnFollowFlow = "MY-APP/FIND-USER/TO-FOLLOW-TO-UNFOLLOW-FLOW"
 const SetUsers = "MY-APP/FIND-USER/SET_USERS";
@@ -7,7 +8,16 @@ const SetTotalUsersCount = "MY-APP/FIND-USER/SET_TOTAL_USER_COUNT";
 const SetLoader = "MY-APP/FIND-USER/SET_LOADER";
 const FollowingInProgress = "MY-APP/FIND-USER/FOLLOWING_IN_PROGRESS";
 
-const initialState = {
+export type InitialStateType = {
+    findUsers: Array<any>,
+    currentPage: number,
+    totalUsers: number,
+    usersOnPage: number,
+    isFetching: boolean,
+    isFollowingInProgress: Array<any>
+}
+
+const initialState: InitialStateType = {
 
     findUsers: [],
     currentPage: 1,
@@ -17,7 +27,7 @@ const initialState = {
     isFollowingInProgress: []
 };
 
-export const findUsersReducer = (state = initialState, action) => {
+export const findUsersReducer = (state = initialState, action: AnyAction) => {
 
     switch (action.type) {
 
@@ -77,7 +87,7 @@ export const findUsersReducer = (state = initialState, action) => {
 };
 
 
-export const getUsers = (currentPage, usersOnPage) => async (dispatch) => {
+export const getUsers = (currentPage: number, usersOnPage: number) => async (dispatch: any) => {
     dispatch(setLoader(true));
     const data = await usersAPI.getUsers(currentPage, usersOnPage)
     dispatch(setUsers(data.items, currentPage));
@@ -85,25 +95,31 @@ export const getUsers = (currentPage, usersOnPage) => async (dispatch) => {
     dispatch(setLoader(false));
 }
 
-const followUnfollowFlow = async (dispatch, userId, apiMethod , actionCreator, flow) => {
+const followUnfollowFlow = async (dispatch: any, userId: number, apiMethod: Function, actionCreator: Function, flow: string) => {
     dispatch(followingInProgress(true, userId));
     let data = await apiMethod(userId)
     if (data.resultCode === 0) {
-        dispatch(actionCreator(userId,flow));
+        dispatch(actionCreator(userId, flow));
     }
     dispatch(followingInProgress(false, userId));
 }
 
 
-export const setUnfollow = (userId,flow) => (dispatch) => {
-    followUnfollowFlow(dispatch,userId,followUnfollowAPI.unFollow,toFollowUnFollowFlow,flow);
+export const setUnfollow = (userId: number, flow: string) => (dispatch: any) => {
+    followUnfollowFlow(dispatch, userId, followUnfollowAPI.unFollow, toFollowUnFollowFlow, flow);
 }
 
-export const setFollow = (userId,flow) => async (dispatch) => {
-    followUnfollowFlow(dispatch,userId,followUnfollowAPI.follow,toFollowUnFollowFlow,flow);
+export const setFollow = (userId: number, flow: string) => async (dispatch: any) => {
+    followUnfollowFlow(dispatch, userId, followUnfollowAPI.follow, toFollowUnFollowFlow, flow);
 }
 
-export const toFollowUnFollowFlow = (userId,flow) => {
+type ToFollowUnFollowFlowType = {
+    type: typeof ToFollowUnFollowFlow,
+    id: number,
+    followUnfollowFlow: string
+}
+
+export const toFollowUnFollowFlow = (userId: number, flow: string): ToFollowUnFollowFlowType => {
     return {
         type: ToFollowUnFollowFlow,
         id: userId,
@@ -111,7 +127,25 @@ export const toFollowUnFollowFlow = (userId,flow) => {
     }
 }
 
-export const setUsers = (users, page = 1) => {
+type UsersArrayItem = {
+    followed: boolean
+    id: number
+    name: string
+    photos: {
+        large: string | null
+        small: string | null
+    }
+    status: string | null
+    uniqueUrlName: string | null
+}
+
+type SetUserType = {
+    type: typeof SetUsers,
+    users: any,
+    page: number
+}
+
+export const setUsers = (users: Array<UsersArrayItem>, page = 1): SetUserType => {
     return {
         type: SetUsers,
         users: users,
@@ -119,28 +153,49 @@ export const setUsers = (users, page = 1) => {
     };
 }
 
-export const showPage = (selectedPage) => {
+type ShowPageType = {
+    type: typeof ShowPage,
+    selectedPage: number
+}
+
+export const showPage = (selectedPage: number): ShowPageType => {
     return {
         type: ShowPage,
         selectedPage: selectedPage
     };
 }
 
-export const setTotalUsersCount = (totalUsers) => {
+type SetTotalUsersCountType = {
+    type: typeof SetTotalUsersCount,
+    totalUsers: number
+}
+
+export const setTotalUsersCount = (totalUsers: number): SetTotalUsersCountType => {
     return {
         type: SetTotalUsersCount,
         totalUsers: totalUsers
     };
 }
 
-export const setLoader = (isFetching) => {
+type SetLoaderType = {
+    type: typeof SetLoader,
+    isFetching: boolean
+}
+
+export const setLoader = (isFetching: boolean): SetLoaderType => {
     return {
         type: SetLoader,
         isFetching: isFetching
     };
 }
 
-export const followingInProgress = (isInProgress, userId) => {
+type FollowingInProgressType = {
+    type: typeof FollowingInProgress,
+    isInProgress: boolean,
+    userId: number
+}
+
+export const followingInProgress = (isInProgress: boolean, userId: number): FollowingInProgressType => {
     return {
         type: FollowingInProgress,
         isInProgress,

@@ -1,16 +1,17 @@
 import {authThunkCreator} from "./authReducer";
+import {AnyAction} from "redux";
 
 const INIT_APP: "MY_APP/APP/INIT_APP" = "MY_APP/APP/INIT_APP";
 
-type initialStateType = {
+export type InitialStateType = {
     initialized: boolean
 }
 
-const initialState:initialStateType = {
+const initialState: InitialStateType = {
     initialized: false
 }
 
-export const appReducer = (state = initialState, action:actionType) => {
+export const appReducer = (state = initialState, action: AnyAction):InitialStateType => {
 
     switch (action.type) {
 
@@ -28,7 +29,7 @@ export const appReducer = (state = initialState, action:actionType) => {
 }
 
 export const initializeApp = () => {
-    return (dispatch:any) => {
+    return (dispatch: any) => {
         let promise = dispatch(authThunkCreator())
         promise.then(
             dispatch(initApp())
@@ -36,11 +37,9 @@ export const initializeApp = () => {
     }
 }
 
-type actionType = {
-    type: "MY_APP/APP/INIT_APP"
-}
+type actionType =  { type: typeof INIT_APP }
 
-const initApp = () => {
+const initApp = (): actionType => {
     return {
         type: INIT_APP,
     }

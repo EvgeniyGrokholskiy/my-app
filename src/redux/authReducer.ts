@@ -1,5 +1,6 @@
 import {authAPI} from "../api/api";
 import {setProfileStatus} from "./profileReducer";
+import {AnyAction} from "redux";
 
 const SET_USER_DATA = "MY_APP_/AUTH/SET_USER_DATA";
 const LOGIN = "MY_APP_/AUTH/LOGIN";
@@ -8,8 +9,18 @@ const SET_ERROR_MESSAGE = "MY_APP_/AUTH/SET_ERROR_MESSAGE";
 const GET_CAPTCHA_SUCCESS = "MY_APP_/AUTH/GET_CAPTCHA_SUCCESS";
 const ENTERED_RIGHT_CAPTCHA = "MY-APP/AUTH/ENTERED_RIGHT_CAPTCHA"
 
+export type InitialStateType = {
+    id: null | number,
+    login: null | string,
+    email: null | string,
+    isAuth: boolean,
+    isError: boolean,
+    errorMessage: string,
+    captcha: null | string,
 
-const initialState = {
+}
+
+const initialState: InitialStateType = {
     id: null,
     login: null,
     email: null,
@@ -19,13 +30,12 @@ const initialState = {
     captcha: null,
 }
 
-export const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action: AnyAction): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA: {
-
             return {
                 ...state,
-                ...action.data,
+                ...action.payload,
             }
         }
 
@@ -74,7 +84,7 @@ export const authReducer = (state = initialState, action) => {
 }
 
 
-export const authThunkCreator = () => async (dispatch) => {
+export const authThunkCreator = () => async (dispatch: any) => {
     let {id, email, login} = await authAPI.authMe()
     if (id !== undefined) {
         sessionStorage.setItem('isAuth', "true");
@@ -82,7 +92,8 @@ export const authThunkCreator = () => async (dispatch) => {
     }
 }
 
-export const loginThunkCreator = (loginData) => async (dispatch) => {
+export const loginThunkCreator = (loginData: any) => async (dispatch: any) => {
+    debugger
     let responseData = await authAPI.login(loginData)
     if (responseData.resultCode === 0) {
         dispatch(authThunkCreator());
@@ -98,22 +109,34 @@ export const loginThunkCreator = (loginData) => async (dispatch) => {
     }
 }
 
-export const getNewCaptcha = () => async (dispatch) => {
+export const getNewCaptcha = () => async (dispatch: any) => {
     let newCaptchaURL = await authAPI.getCaptcha();
     dispatch(setCaptchaUrl(newCaptchaURL))
 }
 
-export const logoutThunkCreator = () => async (dispatch) => {
+export const logoutThunkCreator = () => async (dispatch: any) => {
     await authAPI.logout();
     sessionStorage.setItem('isAuth', "");
     dispatch(setUserData(null, null, null, false));
     dispatch(setProfileStatus(""));
 }
 
-export const setUserData = (id, login, email, isAuth) => {
+type SetUserDataActionPayloadType = {
+    id: number | null,
+    login: string | null,
+    email: string | null,
+    isAuth: boolean
+}
+
+type SetUserDataActionType = {
+    type: typeof SET_USER_DATA,
+    payload: SetUserDataActionPayloadType,
+}
+
+export const setUserData = (id: number | null, login: string | null, email: string | null, isAuth: boolean): SetUserDataActionType => {
     return {
         type: SET_USER_DATA,
-        data: {
+        payload: {
             id,
             login,
             email,
@@ -122,7 +145,13 @@ export const setUserData = (id, login, email, isAuth) => {
     }
 }
 
-export const login = (userId) => {
+type LoginType = {
+    type: typeof LOGIN,
+    isAuth: boolean,
+    id: number
+}
+
+export const login = (userId: number): LoginType => {
     return {
         type: LOGIN,
         isAuth: true,
@@ -130,14 +159,25 @@ export const login = (userId) => {
     }
 }
 
-export const logout = () => {
+type LogoutType = {
+    type: typeof LOGOUT,
+    isAuth: boolean
+}
+
+export const logout = ():LogoutType => {
     return {
         type: LOGOUT,
         isAuth: false
     }
 }
 
-export const setErrorMessage = (errorMessage) => {
+type SetErrorMessageType = {
+    type: typeof SET_ERROR_MESSAGE,
+    errorMessage: string,
+    isError: boolean
+}
+
+export const setErrorMessage = (errorMessage: string): SetErrorMessageType => {
     return {
         type: SET_ERROR_MESSAGE,
         errorMessage,
@@ -145,15 +185,27 @@ export const setErrorMessage = (errorMessage) => {
     }
 }
 
-export const setCaptchaUrl = (captcha) => {
+type SetCaptchaUTLType = {
+    type: typeof GET_CAPTCHA_SUCCESS,
+    captcha: string,
+    isError: boolean
+}
+
+export const setCaptchaUrl = (captcha: string):SetCaptchaUTLType => {
     return {
         type: GET_CAPTCHA_SUCCESS,
         captcha,
-        isError:true
+        isError: true
     }
 }
 
-export const enteredRightCaptcha = () => {
+type EnteredRightCaptchaType = {
+    type: typeof ENTERED_RIGHT_CAPTCHA,
+    captcha: string,
+    isError: boolean
+}
+
+export const enteredRightCaptcha = ():EnteredRightCaptchaType => {
     return {
         type: ENTERED_RIGHT_CAPTCHA,
         captcha: "",

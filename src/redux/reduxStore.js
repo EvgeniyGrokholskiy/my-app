@@ -9,6 +9,7 @@ import {friendsListReducer} from "./friendsListReducer";
 import {findUsersReducer} from "./findUsersReducer";
 import {authReducer} from "./authReducer";
 import {appReducer} from "./appReducer";
+import {footerReducer} from "./footerReducer";
 
 let reducers = combineReducers({
     findUsersPage: findUsersReducer,
@@ -20,7 +21,7 @@ let reducers = combineReducers({
     settings: settingsReducer,
     auth: authReducer,
     app: appReducer,
-    footer: findUsersReducer
+    footer: footerReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

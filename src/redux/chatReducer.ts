@@ -1,9 +1,29 @@
 import {getDate} from "../components/utils/getDate";
+import {AnyAction} from "redux";
 
 const NewMessageInChat = "MY-APP/CHAT/SEND_MESSAGE_IN_CHAT";
 const SetActiveChatName = "MY-APP/CHAT/SET_ACTIVE_CHAT_NAME"
 
-const initialState = {
+type ChatListArrayItem = {
+    name: string,
+    id: number,
+    lastMessage: string,
+}
+
+type ChatMessageArrayItem = {
+    message: string,
+    type: string,
+    id: number,
+    data: string,
+}
+
+export type InitialStateType = {
+    activeChatName: string,
+    chatsList: Array<ChatListArrayItem>,
+    chatMessageArray: Array<ChatMessageArrayItem>
+}
+
+const initialState: InitialStateType = {
     activeChatName: "",
     chatsList: [
         {
@@ -78,9 +98,9 @@ const initialState = {
     ],
 };
 
-export const chatReducer = (state = initialState, action) => {
+export const chatReducer = (state = initialState, action: AnyAction) => {
 
-    const isEmptyMessage = (message) => (message === '' || message === undefined);
+    const isEmptyMessage = (message: string) => (message === '' || message === undefined);
 
     switch (action.type) {
 
@@ -110,7 +130,7 @@ export const chatReducer = (state = initialState, action) => {
                 chatsList: [...state.chatsList],
             };
 
-            stateCopy.chatsList.forEach((chat) => {
+            stateCopy.chatsList.forEach((chat: ChatListArrayItem) => {
                 if (chat.id === action.activeChatId) {
                     stateCopy.activeChatName = chat.name;
                 }
@@ -125,14 +145,24 @@ export const chatReducer = (state = initialState, action) => {
     }
 };
 
-export const sendMessage = (message) => {
+type SendMessageType = {
+    type: typeof NewMessageInChat,
+    message: string
+}
+
+export const sendMessage = (message: string): SendMessageType => {
     return {
         type: NewMessageInChat,
         message
     }
 }
 
-export const setActiveChatName = (chatId) => {
+type SetActiveChatNameType = {
+    type: typeof SetActiveChatName,
+    activeChatId: number,
+}
+
+export const setActiveChatName = (chatId: number): SetActiveChatNameType => {
     return {
         type: SetActiveChatName,
         activeChatId: chatId,
