@@ -42,7 +42,7 @@ const ProfileSetDataForm = (props) => {
                             <Field name="contacts.vk" component={"input"}/>
                         </label>
                         {/*<label className={style.label}>facebook:
-                                                <Field name="contacts.facebook" component={"input"}/>*/}
+                                                <Field name="contacts.facebook" sliderEvaluation={"input"}/>*/}
                         <Field
                             name="contacts.facebook"
                             render={({ input, meta }) => (

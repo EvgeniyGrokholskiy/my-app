@@ -5,12 +5,12 @@ import StatusClassComponent from "./statusBarClassComponent";
 
 describe("statusBarClassComponent",() => {
 
-    test ("component should be defined",() => {
+    test ("sliderEvaluation should be defined",() => {
         const bar = create(<StatusClassComponent/>);
         expect(bar).toBeDefined()
     })
 
-    test ("status component should be in state", () => {
+    test ("status sliderEvaluation should be in state", () => {
         const component = create(<StatusClassComponent profileStatus={"test status"} />);
         const componentInstance = component.getInstance();
         //console.log(barInstance)

@@ -42,7 +42,7 @@ class App extends React.Component {
                         <Route path="/profile/*" element={<Profile/>}/>
                         <Route path="/chat/*" element={<ChatContainer/>}/>
                         <Route path="/news/*" element={<News/>}/>
-                        <Route path="/music/*" element={<Music/>}/>
+                        <Route path="/music/*" element={<Music range={10}/>}/>
                         <Route path="/settings/*" element={<Settings/>}/>
                     </Routes>
                 </main>
