@@ -32,13 +32,13 @@
 .label {
     display: flex;
     justify-content: space-between;
-    margin-top: 1px;
+    margin-top: 10px;
     margin-bottom: 31px;
 }
 
 .button {
     display: block;
-    background-color: #c7d3f4;
+    background-color: #C7D3F4;
     border: none;
     font-size: 16px;
     font-weight: bold;
@@ -49,4 +49,13 @@
 
 .starsBlock {
     width: 100%;
+}
+
+.large {
+    width: 900px;
+}
+
+.small {
+    padding: 1% 3%;
+    width: 650px;
 }

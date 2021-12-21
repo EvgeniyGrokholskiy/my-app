@@ -6,23 +6,37 @@ const Music = (props) => {
 
     let [range, setRange] = useState(props.range)
     let [species, setSpecies] = useState(1)
+    let [isAuth, setIsAuth] = useState(false)
 
     return (
         <div className={style.container}>
-            <>
+             <>
                 <div className={style.tuningBlock}>
+                    <label className={style.tuningLabel}> Выберите тип опроса:
+                        <label> Слайдер.
+                            <input type="radio" name="grade" value={1} onChange={(event)=>{setSpecies(+event.target.value)}}/>
+                        </label>
+                        <label> Звезды.
+                            <input type="radio" name="grade" value={2} onChange={(event)=>{setSpecies(+event.target.value)}}/>
+                        </label>
+                    </label>
                     <label className={style.tuningLabel}> Выберите диапазон:
-                        <label> 5
+                        <label> Шкала 5 пунктов
                             <input type="radio" name="grade" value={5} onChange={(event)=>{setRange(+event.target.value)}}/>
                         </label>
-                        <label> 10
+                        <label> Шкала 10 пунктов
                             <input type="radio" name="grade" value={10} onChange={(event)=>{setRange(+event.target.value)}}/>
+                        </label>
+                    </label>
+                    <label className={style.tuningLabel}> Выберите авторизацию::
+                        <label> Пользователь авторизован?
+                            <input type="checkbox" name="isAuth" onChange={(event)=>{setIsAuth(event.target.checked)}}/>
                         </label>
                     </label>
                 </div>
             </>
             {
-                <SliderEvaluation range={range}/>
+                <SliderEvaluation range={range} isAuth={isAuth} species={species}/>
             }
         </div>
     )

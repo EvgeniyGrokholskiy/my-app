@@ -15,7 +15,22 @@ const GetGradeSlider = ({range, evaluation, setEvaluation, isDisable, setIsDisab
                     if (event.target.value !== evaluation) {
                         setEvaluation(event.target.value);
                     }
-                }} aria-label={"Default"} valueLabelDisplay={"off"} min={1} max={range} disabled={isDisable}/>
+                }} aria-label={"Default"}
+                        valueLabelDisplay={"off"}
+                        min={1}
+                        max={range}
+                        disabled={isDisable}
+                        sx={{
+                            width: 100 +`%`,
+                            color: `#C0CEF2`,
+                            '& .MuiSlider-thumb': {
+                                color: `#ADADAD`
+                            },
+                            '& .MuiSlider-rail': {
+                                color: `#E5E5E5`
+                            },
+                        }}
+                />
                 <div className={style.label}>
                     <span>Не готов рекомендовать</span>
                     <span>Обязательно рекомендую</span>

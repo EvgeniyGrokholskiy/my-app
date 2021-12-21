@@ -27,28 +27,25 @@
 
 .statisticWrapper {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    margin-top: 25px;
+    padding-left: 50px;
     width: 100%;
 }
 
-.statisticBlock {
+.statisticBlockItem {
     background-color: gray;
     height: 37px;
     width: 115px;
 }
 
 .statisticBlock1 {
-
+    display: flex;
+    justify-content: space-between;
+    width: 62%;
 }
 
 .statisticBlock2 {
-
-}
-
-.statisticBlock3 {
-
-}
-
-.statisticBlock4 {
-
+    margin-right: 43px;
+    width: 95px;
 }
