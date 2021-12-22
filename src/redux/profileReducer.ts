@@ -22,7 +22,7 @@ type PhotosObjInProfile = {
 }
 
 type ProfileType = {
-    aboutMe: string
+    aboutMe: null | string
     contacts: {
         facebook: string | null
         github: string | null
@@ -34,16 +34,16 @@ type ProfileType = {
         youtube: string | null
     }
 
-    fullName: string
-    lookingForAJob: boolean
+    fullName: string | null
+    lookingForAJob: boolean | null
     lookingForAJobDescription: string | null
-    photos: PhotosObjInProfile | any
-    userId: number
+    photos: PhotosObjInProfile | {}
+    userId: number | null
 }
 
 export type InitialStateType = {
     wallMessageArray: Array<WallMessageType>
-    profile: ProfileType | null,
+    profile: ProfileType,
     profileStatus: string,
     putRequestStatus: null,
     error: boolean,
@@ -64,16 +64,35 @@ const initialState = {
         }
     ],
 
-    profile: null,
+    profile: {
+        aboutMe: null,
+        contacts: {
+            facebook: null,
+            github: null,
+            instagram: null,
+            mainLink: null,
+            twitter: null,
+            vk: null,
+            website: null,
+            youtube: null,
+        },
+
+        fullName: null,
+        lookingForAJob: null,
+        lookingForAJobDescription: null,
+        photos: {},
+        userId: null
+    },
+
     profileStatus: "",
     putRequestStatus: null,
     error: false,
     sendErrorMessage: ""
 };
 
-export const profileReducer = (state: InitialStateType = initialState, action: AnyAction): InitialStateType => {
+export const profileReducer = (state = initialState, action:AnyAction):InitialStateType => {
 
-    const isEmptyMessage = (message: string) => (message === '' || message === undefined);
+    const isEmptyMessage = (message:string) => (message === '' || message === undefined);
 
     switch (action.type) {
 
@@ -144,31 +163,31 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
     }
 };
 
-export const getUserProfileThunkCreator = (userId: number) => async (dispatch: any) => {
+export const getUserProfileThunkCreator = (userId:number) => async (dispatch:any) => {
     let data = await profileAPI.getUserProfile(userId)
     dispatch(setUserProfile(data));
 }
 
-export const getUserStatusThunkCreator = (userId: number) => async (dispatch: any) => {
+export const getUserStatusThunkCreator = (userId:number) => async (dispatch:any) => {
     let data = await profileAPI.getUserStatus(userId)
     dispatch(setProfileStatus(data));
 }
 
-export const setUserStatusThunkCreator = (status: string) => async (dispatch: any) => {
+export const setUserStatusThunkCreator = (status:string) => async (dispatch:any) => {
     let response = await profileAPI.setUserStatus(status);
     if (response.resultCode === 0) {
         dispatch(setProfileStatus(status));
     }
 }
 
-export const savePhoto = (file: any) => async (dispatch: any) => {
+export const savePhoto = (file:any) => async (dispatch:any) => {
     let response = await profileAPI.savePhoto(file);
     if (response.resultCode === 0) {
         dispatch(setPhoto(response.data.photos));
     }
 }
 
-export const setUserProfileData = (data: string) => async (dispatch: any) => {
+export const setUserProfileData = (data:any) => async (dispatch:any) => {
     let response = await profileAPI.setProfileData(data);
     if (response.resultCode === 0) {
         dispatch(setUserProfileDataError("", false));
@@ -180,35 +199,35 @@ export const setUserProfileData = (data: string) => async (dispatch: any) => {
     }
 }
 
-export const addPost = (message: string) => {
+export const addPost = (message:string) => {
     return {
         type: AddMessageOnWall,
         message
     };
 }
 
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile:any) => {
     return {
         type: SetUserProfile,
         profile: profile
     }
 }
 
-export const setProfileStatus = (status: string) => {
+export const setProfileStatus = (status:string) => {
     return {
         type: SetProfileStatus,
         status
     }
 }
 
-export const setPhoto = (photo: object) => {
+export const setPhoto = (photo:any) => {
     return {
         type: SetPhoto,
         photo
     }
 }
 
-export const setUserProfileDataError = (errorMessage: string, error: boolean) => {
+export const setUserProfileDataError = (errorMessage:string, error:boolean) => {
     return {
         type: SetProfileDataError,
         errorMessage,
