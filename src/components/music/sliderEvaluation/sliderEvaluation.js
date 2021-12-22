@@ -10,23 +10,27 @@ const SliderEvaluation = ({range, isAuth, species}) => {
     let [isShowEvaluation, setIsShowEvaluation] = useState(false)
 
     return (
-        isShowEvaluation ? <ShowGarde evaluation={evaluation}
-                                      setIsShowEvaluation={setIsShowEvaluation}
-                                      setIsDisable={setIsDisable}
-                                      setEvaluation={setEvaluation}
-                                      isAuth={isAuth}/>
-            : species === 1 ? <GetGradeSlider range={range}
-                             evaluation={evaluation}
-                             setEvaluation={setEvaluation}
-                             isDisable={isDisable}
-                             setIsDisable={setIsDisable}
-                             setIsShowEvaluation={setIsShowEvaluation}/>
-                            : <GetGradeStars range={range}
-                                              evaluation={evaluation}
-                                              setEvaluation={setEvaluation}
-                                              isDisable={isDisable}
-                                              setIsDisable={setIsDisable}
-                                              setIsShowEvaluation={setIsShowEvaluation}/>
+        isShowEvaluation
+            ? <ShowGarde evaluation={evaluation}
+                         setIsShowEvaluation={setIsShowEvaluation}
+                         setIsDisable={setIsDisable}
+                         setEvaluation={setEvaluation}
+                         isAuth={isAuth}/>
+            : species === "slider"
+                ? <GetGradeSlider range={range}
+                                  evaluation={evaluation}
+                                  setEvaluation={setEvaluation}
+                                  isDisable={isDisable}
+                                  setIsDisable={setIsDisable}
+                                  setIsShowEvaluation={setIsShowEvaluation}/>
+                : species === "stars"
+                    ? <GetGradeStars range={range}
+                                     evaluation={evaluation}
+                                     setEvaluation={setEvaluation}
+                                     isDisable={isDisable}
+                                     setIsDisable={setIsDisable}
+                                     setIsShowEvaluation={setIsShowEvaluation}/>
+                    : <>Oops! Wrong props.</>
     )
 }
 
