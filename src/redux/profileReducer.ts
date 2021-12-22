@@ -1,13 +1,54 @@
 import {profileAPI} from "../api/api";
 import store from "./reduxStore";
+import {AnyAction} from "redux";
 
 const AddMessageOnWall = "MY-APP/PROFILE/ADD_MESSAGE_ON_WALL";
-const ChangeNewMessageOnWall = "MY-APP/PROFILE/CHANGE_NEW_MESSAGE_ON_WALL";
+/*const ChangeNewMessageOnWall = "MY-APP/PROFILE/CHANGE_NEW_MESSAGE_ON_WALL";*/
 const SetUserProfile = "MY-APP/PROFILE/SET_USERS_PROFILE";
 const SetProfileStatus = "MY-APP/PROFILE/SET_PROFILE_STATUS";
 const SetPhoto = "MY-APP/PROFILE/SAVE_PHOTO";
 const SetProfileDataError = "MY-APP/PROFILE/UPDATE_PROFILE_DATA_ERROR";
 const ResetSendError = "MY-APP/PROFILE/RESET_SEND_ERROR";
+
+type WallMessageType = {
+    message: string,
+    likeCount: number,
+    id: number
+}
+
+type PhotosObjInProfile = {
+    large: string | null,
+    small: string | null,
+}
+
+type ProfileType = {
+    aboutMe: string
+    contacts: {
+        facebook: string | null
+        github: string | null
+        instagram: string | null
+        mainLink: string | null
+        twitter: string | null
+        vk: string | null
+        website: string | null
+        youtube: string | null
+    }
+
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string | null
+    photos: PhotosObjInProfile | any
+    userId: number
+}
+
+export type InitialStateType = {
+    wallMessageArray: Array<WallMessageType>
+    profile: ProfileType | null,
+    profileStatus: string,
+    putRequestStatus: null,
+    error: boolean,
+    sendErrorMessage: string
+}
 
 const initialState = {
     wallMessageArray: [
@@ -30,19 +71,19 @@ const initialState = {
     sendErrorMessage: ""
 };
 
-export const profileReducer = (state = initialState, action) => {
+export const profileReducer = (state: InitialStateType = initialState, action: AnyAction): InitialStateType => {
 
-    const isEmptyMessage = (message) => (message === '' || message === undefined);
+    const isEmptyMessage = (message: string) => (message === '' || message === undefined);
 
     switch (action.type) {
 
-        case ChangeNewMessageOnWall: {
+        /*        case ChangeNewMessageOnWall: {
 
-            return {
-                ...state,
-                newMessage: action.message
-            };
-        }
+                    return {
+                        ...state,
+                        newMessage: action.message
+                    };
+                }*/
 
         case AddMessageOnWall: {
             if (isEmptyMessage(action.message)) return state;
@@ -61,6 +102,7 @@ export const profileReducer = (state = initialState, action) => {
         }
 
         case SetUserProfile: {
+            debugger
             return {
                 ...state,
                 profile: action.profile
@@ -90,7 +132,7 @@ export const profileReducer = (state = initialState, action) => {
         }
 
         case ResetSendError: {
-            return  {
+            return {
                 ...state,
                 sendErrorMessage: action.errorMessage,
                 error: action.error
@@ -102,71 +144,71 @@ export const profileReducer = (state = initialState, action) => {
     }
 };
 
-export const getUserProfileThunkCreator = (userId) => async (dispatch) => {
+export const getUserProfileThunkCreator = (userId: number) => async (dispatch: any) => {
     let data = await profileAPI.getUserProfile(userId)
     dispatch(setUserProfile(data));
 }
 
-export const getUserStatusThunkCreator = (userId) => async (dispatch) => {
+export const getUserStatusThunkCreator = (userId: number) => async (dispatch: any) => {
     let data = await profileAPI.getUserStatus(userId)
     dispatch(setProfileStatus(data));
 }
 
-export const setUserStatusThunkCreator = (status) => async (dispatch) => {
+export const setUserStatusThunkCreator = (status: string) => async (dispatch: any) => {
     let response = await profileAPI.setUserStatus(status);
     if (response.resultCode === 0) {
         dispatch(setProfileStatus(status));
     }
 }
 
-export const savePhoto = (file) => async (dispatch) => {
+export const savePhoto = (file: any) => async (dispatch: any) => {
     let response = await profileAPI.savePhoto(file);
     if (response.resultCode === 0) {
         dispatch(setPhoto(response.data.photos));
     }
 }
 
-export const setUserProfileData = (data) => async (dispatch) => {
+export const setUserProfileData = (data: string) => async (dispatch: any) => {
     let response = await profileAPI.setProfileData(data);
     if (response.resultCode === 0) {
-        dispatch(setUserProfileDataError("",false));
+        dispatch(setUserProfileDataError("", false));
         dispatch(getUserProfileThunkCreator(store.getState().auth.id));
         return response
     } else {
-        dispatch(setUserProfileDataError(response.messages,true));
+        dispatch(setUserProfileDataError(response.messages, true));
         return response
     }
 }
 
-export const addPost = (message) => {
+export const addPost = (message: string) => {
     return {
         type: AddMessageOnWall,
         message
     };
 }
 
-export const setUserProfile = (profile) => {
+export const setUserProfile = (profile: any) => {
     return {
         type: SetUserProfile,
         profile: profile
     }
 }
 
-export const setProfileStatus = (status) => {
+export const setProfileStatus = (status: string) => {
     return {
         type: SetProfileStatus,
         status
     }
 }
 
-export const setPhoto = (photo) => {
+export const setPhoto = (photo: object) => {
     return {
         type: SetPhoto,
         photo
     }
 }
 
-export const setUserProfileDataError = (errorMessage,error) => {
+export const setUserProfileDataError = (errorMessage: string, error: boolean) => {
     return {
         type: SetProfileDataError,
         errorMessage,
@@ -179,6 +221,5 @@ export const resetSendError = () => {
         type: ResetSendError,
         error: false,
         sendErrorMessage: ""
-
     }
 }

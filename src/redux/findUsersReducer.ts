@@ -8,6 +8,8 @@ const SetTotalUsersCount = "MY-APP/FIND-USER/SET_TOTAL_USER_COUNT";
 const SetLoader = "MY-APP/FIND-USER/SET_LOADER";
 const FollowingInProgress = "MY-APP/FIND-USER/FOLLOWING_IN_PROGRESS";
 
+
+
 export type InitialStateType = {
     findUsers: Array<any>,
     currentPage: number,
@@ -18,7 +20,6 @@ export type InitialStateType = {
 }
 
 const initialState: InitialStateType = {
-
     findUsers: [],
     currentPage: 1,
     totalUsers: 100,
