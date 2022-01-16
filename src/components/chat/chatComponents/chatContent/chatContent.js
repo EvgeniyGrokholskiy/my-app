@@ -3,20 +3,25 @@ import style from "./chatContent.module.css";
 import IncomingMessage from "../incomingMessage/incomingMessage";
 import OutgoingMessage from "../outgoingMessage/outgoingMessage";
 
-const ChatContent = (props) => {
+const ChatContent = ({chatMessage, chatName}) => {
 
-    let chatToRender = props.chatMessage.map((message) => (message.type === "in") ?
-        <IncomingMessage key={message.id} message={message.message} data={message.data}/> :
+    let chatToRender = chatMessage.map(message => message.type === "in" ?
+        <IncomingMessage key={message.id} message={message.message} data={message.data}/>
+        :
         <OutgoingMessage key={message.id} message={message.message} data={message.data}/>)
 
     return (
         <>
-            <h6 className={style.header}>Chat with <span
-                className={style.chatName}>{props.chatName ? props.chatName : "no data!!!"}</span></h6>
+            <h6 className={style.header}>
+                Chat with
+                <span className={style.chatName}>
+                    {chatName ? chatName : "no data!!!"}
+                </span>
+            </h6>
             <div className={style.chatting}>
-
-                {chatToRender}
-
+                {
+                    chatToRender
+                }
             </div>
         </>
     )

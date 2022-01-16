@@ -1,8 +1,8 @@
 import React from "react";
+import {Field, Form} from 'react-final-form';
 import style from "./sendMessage.module.css";
 import {ReactComponent as AttachBtn} from "../chatContent/img/paperclip.svg";
 import {ReactComponent as SendBtn} from "../chatContent/img/send_icon.svg";
-import {Field, Form} from 'react-final-form'
 
 
 const SendMessage = (props) => {
@@ -17,11 +17,12 @@ const SendMessage = (props) => {
 };
 
 
-const SendMessageForm = (props) => {
+const SendMessageForm = ({sendMessage}) => {
+
     return (
         <Form
             onSubmit={(data) => {
-                props.sendMessage(data)
+                sendMessage(data)
             }}
             validate={(data) => {}}
             render={({handleSubmit}) => (

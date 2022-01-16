@@ -1,5 +1,6 @@
-import {getDate} from "../components/utils/getDate";
 import {AnyAction} from "redux";
+import {getDate} from "../components/utils/getDate";
+
 
 const NewMessageInChat = "MY-APP/CHAT/SEND_MESSAGE_IN_CHAT";
 const SetActiveChatName = "MY-APP/CHAT/SET_ACTIVE_CHAT_NAME"

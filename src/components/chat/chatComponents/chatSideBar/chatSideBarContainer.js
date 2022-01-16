@@ -1,12 +1,13 @@
-import {setActiveChatName} from "../../../../redux/chatReducer";
-import ChatSideBar from "./chatSideBar";
 import {connect} from "react-redux";
-import {getChatPageState} from "../../../../redux/selectors";
+import ChatSideBar from "./chatSideBar";
+import {getChatList} from "../../../../redux/selectors";
+import {setActiveChatName} from "../../../../redux/chatReducer";
 
 
 const mapStateToProps = (state) => {
+
     return {
-        state: getChatPageState(state)
+        chatsList: getChatList(state)
     };
 };
 

@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import style from "./profileData.module.css";
-import profileData_top_image from "./img/profile_top_images.jpg";
 import Loading from "../../../commons/loading/loading";
-import ProfileSetDataForm from "./profileSetDataForm/profileSetDataForm";
+import profileData_top_image from "./img/profile_top_images.jpg";
 import ProfileDataHolder from "./profileDataHolder/profileDataHolder";
 import ProfileImageBlock from "./profileImageBlock/profileImageBlock";
+import ProfileSetDataForm from "./profileSetDataForm/profileSetDataForm";
+
 
 const ProfileData = React.memo((props) => {
 

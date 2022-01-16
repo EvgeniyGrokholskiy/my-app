@@ -1,9 +1,10 @@
 import React from "react";
 import style from "./findUsers.module.css";
-import FriendsListContainer from "../profile/profileContainer/friendsList/friendsListContainer";
 import FindUsersContainer from "./findUsersContainer";
+import FriendsListContainer from "../profile/profileContainer/friendsList/friendsListContainer";
 
-const FindUsers = (props)=> {
+
+const FindUsers = ()=> {
     return (
         <div className={style.container}>
             <div className={style.left_container}>

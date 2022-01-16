@@ -1,13 +1,14 @@
-import {followUnfollowAPI, usersAPI} from "../api/api";
 import {AnyAction} from "redux";
+import {Dispatch} from "../types/types";
+import {followUnfollowAPI, usersAPI} from "../api/api";
 
-const ToFollowUnFollowFlow = "MY-APP/FIND-USER/TO-FOLLOW-TO-UNFOLLOW-FLOW"
+
 const SetUsers = "MY-APP/FIND-USER/SET_USERS";
 const ShowPage = "MY-APP/FIND-USER/SHOW_PAGE";
-const SetTotalUsersCount = "MY-APP/FIND-USER/SET_TOTAL_USER_COUNT";
 const SetLoader = "MY-APP/FIND-USER/SET_LOADER";
+const SetTotalUsersCount = "MY-APP/FIND-USER/SET_TOTAL_USER_COUNT";
 const FollowingInProgress = "MY-APP/FIND-USER/FOLLOWING_IN_PROGRESS";
-
+const ToFollowUnFollowFlow = "MY-APP/FIND-USER/TO-FOLLOW-TO-UNFOLLOW-FLOW"
 
 
 export type InitialStateType = {
@@ -88,7 +89,7 @@ export const findUsersReducer = (state = initialState, action: AnyAction) => {
 };
 
 
-export const getUsers = (currentPage: number, usersOnPage: number) => async (dispatch: any) => {
+export const getUsers = (currentPage: number, usersOnPage: number) => async (dispatch: Dispatch) => {
     dispatch(setLoader(true));
     const data = await usersAPI.getUsers(currentPage, usersOnPage)
     dispatch(setUsers(data.items, currentPage));
@@ -96,7 +97,7 @@ export const getUsers = (currentPage: number, usersOnPage: number) => async (dis
     dispatch(setLoader(false));
 }
 
-const followUnfollowFlow = async (dispatch: any, userId: number, apiMethod: Function, actionCreator: Function, flow: string) => {
+const followUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: Function, actionCreator: Function, flow: string) => {
     dispatch(followingInProgress(true, userId));
     let data = await apiMethod(userId)
     if (data.resultCode === 0) {
@@ -106,11 +107,11 @@ const followUnfollowFlow = async (dispatch: any, userId: number, apiMethod: Func
 }
 
 
-export const setUnfollow = (userId: number, flow: string) => (dispatch: any) => {
+export const setUnfollow = (userId: number, flow: string) => (dispatch: Dispatch) => {
     followUnfollowFlow(dispatch, userId, followUnfollowAPI.unFollow, toFollowUnFollowFlow, flow);
 }
 
-export const setFollow = (userId: number, flow: string) => async (dispatch: any) => {
+export const setFollow = (userId: number, flow: string) => async (dispatch: Dispatch) => {
     followUnfollowFlow(dispatch, userId, followUnfollowAPI.follow, toFollowUnFollowFlow, flow);
 }
 

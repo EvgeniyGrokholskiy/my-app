@@ -1,5 +1,6 @@
 import {AnyAction} from "redux";
 
+
 const CHANGE_LANGUAGES = "MY-APP/FOOTER/CHANGE_LANGUAGES";
 
 export type InitialStateType = {

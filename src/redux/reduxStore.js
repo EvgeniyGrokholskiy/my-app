@@ -1,30 +1,33 @@
-import {applyMiddleware, combineReducers, compose, createStore} from "redux";
-import thunkMiddleware from 'redux-thunk'
-import {chatReducer} from "./chatReducer";
-import {profileReducer} from "./profileReducer";
-import {newsReducer} from "./newsReducer";
-import {musicReducer} from "./musicReducer";
-import {settingsReducer} from "./settingsReducer";
-import {friendsListReducer} from "./friendsListReducer";
-import {findUsersReducer} from "./findUsersReducer";
-import {authReducer} from "./authReducer";
 import {appReducer} from "./appReducer";
+import thunkMiddleware from 'redux-thunk';
+import {chatReducer} from "./chatReducer";
+import {newsReducer} from "./newsReducer";
+import {authReducer} from "./authReducer";
+import {musicReducer} from "./musicReducer";
 import {footerReducer} from "./footerReducer";
+import {profileReducer} from "./profileReducer";
+import {settingsReducer} from "./settingsReducer";
+import {findUsersReducer} from "./findUsersReducer";
+import {friendsListReducer} from "./friendsListReducer";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
+
 
 let reducers = combineReducers({
-    findUsersPage: findUsersReducer,
+
+    app: appReducer,
+    auth: authReducer,
+    footer: footerReducer,
     chatPage: chatReducer,
-    friendsList: friendsListReducer,
-    profile: profileReducer,
     newsPage: newsReducer,
     musicPage: musicReducer,
+    profile: profileReducer,
     settings: settingsReducer,
-    auth: authReducer,
-    app: appReducer,
-    footer: footerReducer
+    findUsersPage: findUsersReducer,
+    friendsList: friendsListReducer,
+
 });
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__|| compose;
 const store = createStore(reducers, /* preloadedState, */ composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 /*

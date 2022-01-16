@@ -1,20 +1,15 @@
 import React from "react";
-import style from "./chatSideBar.module.css";
 import "./chatSidebar.css";
-import ChatHeader from "./chatHeader/chatHeader";
 import {NavLink} from "react-router-dom";
+import style from "./chatSideBar.module.css";
+import ChatHeader from "./chatHeader/chatHeader";
 
 
-const ChatSideBar = (props) => {
+const ChatSideBar = ({chatsList,setActiveChatName}) => {
 
+    let chatsToRender = chatsList.map((chat) => {
 
-
-    let chatsToRender = props.state.chatsList.map((chat) => {
-
-        const setActiveChat = () => {
-
-            props.setActiveChatName(chat.id);
-        }
+        const setActiveChat = () => setActiveChatName(chat.id)
 
         return (
             <NavLink onClick={setActiveChat} key={chat.id} className={`${style.link} chatLink`} to={`/chat/${chat.id}`}>
@@ -26,9 +21,9 @@ const ChatSideBar = (props) => {
     return (
         <div className={style.wrapper}>
             <p className={style.header}>CHATS</p>
-
-            {chatsToRender}
-
+            {
+                chatsToRender
+            }
         </div>
     );
 };

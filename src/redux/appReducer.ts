@@ -1,5 +1,6 @@
 import {authThunkCreator} from "./authReducer";
 import {AnyAction} from "redux";
+import {Dispatch} from "../types/types";
 
 const INIT_APP: "MY_APP/APP/INIT_APP" = "MY_APP/APP/INIT_APP";
 
@@ -29,7 +30,7 @@ export const appReducer = (state = initialState, action: AnyAction):InitialState
 }
 
 export const initializeApp = () => {
-    return (dispatch: any) => {
+    return (dispatch: Dispatch) => {
         let promise = dispatch(authThunkCreator())
         promise.then(
             dispatch(initApp())

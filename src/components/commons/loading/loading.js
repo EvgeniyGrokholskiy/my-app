@@ -1,6 +1,7 @@
 import React from "react";
-import loadingGif from "../../findUsers/img/loading.gif"
 import style from "./loading.module.css";
+import loadingGif from "../../findUsers/img/loading.gif"
+
 
 const Loading = () => {
     return (

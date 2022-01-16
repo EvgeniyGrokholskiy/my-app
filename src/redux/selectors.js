@@ -1,5 +1,9 @@
 //import {createSelector} from "reselect";
 
+export const getAppState = (state) => {
+    return state.app
+}
+
 export const getProfileState = (state) => {
     return state.profile
 }
@@ -26,6 +30,10 @@ export const getProfileStatusState = (state) => {
 
 export const getChatPageState = (state) => {
     return state.chatPage
+}
+
+export const getChatList = (state) => {
+    return state.chatPage.chatsList
 }
 
 export const getChatMessageArrayState = (state) => {
@@ -77,7 +85,7 @@ export const getIsFollowingInProgressState = (state) => {
 }
 
 export const getFriendListState = (state) => {
-    return state.friendsList
+    return state.friendsList.friends
 }
 
 export const getWallMessageArrayState = (state) => {

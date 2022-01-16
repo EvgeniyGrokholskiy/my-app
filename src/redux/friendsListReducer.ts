@@ -1,5 +1,6 @@
 import {AnyAction} from "redux";
 
+
 type FriendsArrayItemType = {
     name: string,
     job: string,

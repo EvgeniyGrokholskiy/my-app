@@ -1,8 +1,4 @@
-import {connect} from "react-redux";
-import {getUsers, setFollow, setUnfollow} from "../../redux/findUsersReducer";
 import React from "react";
-import UserCard from "./userCard";
-import Loading from "../commons/loading/loading";
 import {
     getCurrentPageState,
     getFindUsersState,
@@ -11,6 +7,10 @@ import {
     getTotalUsersState,
     getUsersOnPageState
 } from "../../redux/selectors";
+import UserCard from "./userCard";
+import {connect} from "react-redux";
+import Loading from "../commons/loading/loading";
+import {getUsers, setFollow, setUnfollow} from "../../redux/findUsersReducer";
 
 
 class UsersContainer extends React.Component {
@@ -28,7 +28,6 @@ class UsersContainer extends React.Component {
     }
 
     render() {
-        console.log("render FU");
 
         return (
             <>

@@ -1,11 +1,12 @@
-import React, {useEffect, useState} from "react";
 import style from "./statusBar.module.css";
+import React, {useEffect, useState} from "react";
 import {ReactComponent as SendIcon} from "../new_post/img/send_icon.svg";
 
-const StatusBarWithHooks = React.memo((props) => {
+
+const StatusBarWithHooks = React.memo(({profileStatus,setUserStatusThunkCreator,}) => {
 
     let [editFlag, setEditMode] = useState(false);
-    let [status, setStatus] = useState(props.profileStatus);
+    let [status, setStatus] = useState(profileStatus);
 
     const editModeOn = () => {
         setEditMode(true);
@@ -13,12 +14,12 @@ const StatusBarWithHooks = React.memo((props) => {
 
     const editModeOff = () => {
         setEditMode(false);
-        props.setUserStatusThunkCreator(status);
+        setUserStatusThunkCreator(status);
     }
 
     useEffect(() => {
-        setStatus(props.profileStatus)
-    }, [props.profileStatus])
+        setStatus(profileStatus)
+    }, [profileStatus])
 
     const setProfileStatus = (event) => {
         setStatus(event.currentTarget.value);
@@ -30,7 +31,7 @@ const StatusBarWithHooks = React.memo((props) => {
             {
                 !editFlag &&
                 <span className={`${style.textArea} ${style.span}`}
-                      onClick={editModeOn}>{props.profileStatus}</span>
+                      onClick={editModeOn}>{profileStatus}</span>
             }
             {
                 editFlag &&

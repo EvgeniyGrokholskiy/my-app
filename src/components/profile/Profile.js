@@ -4,7 +4,7 @@ import FriendsListContainer from "./profileContainer/friendsList/friendsListCont
 import ProfileDataContainer from "./profileContainer/profileData/profileDataContainer";
 
 
-const Profile = (props) => {
+const Profile = () => {
 
     return (
         <div className={style.gridContainer}>

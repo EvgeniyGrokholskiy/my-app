@@ -1,11 +1,13 @@
-import {sendMessage} from "../../../../redux/chatReducer";
-import SendMessage from "./sendMessage";
 import {connect} from "react-redux";
+import SendMessage from "./sendMessage";
+import {sendMessage} from "../../../../redux/chatReducer";
+import {getChatPageState} from "../../../../redux/selectors";
 
 
 const mapStateToProps = (state) => {
+
     return {
-        state: state.chatPage
+        state: getChatPageState(state)
     };
 };
 

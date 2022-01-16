@@ -1,5 +1,5 @@
-import ChatContent from "./chatContent";
 import {connect} from "react-redux";
+import ChatContent from "./chatContent";
 import {getActiveChanNameState, getChatMessageArrayState} from "../../../../redux/selectors";
 
 

@@ -1,11 +1,12 @@
-import FriendsList from "./friendsList";
 import {connect} from "react-redux";
+import FriendsList from "./friendsList";
 import {getFriendListState} from "../../../../redux/selectors";
 
 
 const mapStateToProps = (state) => {
+
     return {
-        state: getFriendListState(state)
+        friends: getFriendListState(state)
     }
 }
 

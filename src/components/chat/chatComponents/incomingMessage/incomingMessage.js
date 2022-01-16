@@ -1,12 +1,14 @@
 import React from "react";
-import style from "./incomingMessage.module.css";
 import Photo from "./img/photo.png"
+import style from "./incomingMessage.module.css";
 
-const IncomingMessage = (props) => {
+
+const IncomingMessage = ({data,message}) => {
+
     return (
         <div className={style.container}>
-            <span className={style.messageText}>{props.message}</span>
-            <span className={style.data}>{props.data}</span>
+            <span className={style.messageText}>{message}</span>
+            <span className={style.data}>{data}</span>
             <img className={style.photo} src={Photo} alt="" height={46} width={46}/>
         </div>
     )

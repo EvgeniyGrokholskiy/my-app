@@ -3,10 +3,10 @@ import style from "./friendsList.module.css";
 import FriendCard from "./friendCard/friendCard";
 
 
-const FriendsList = React.memo((props) => {
+const FriendsList = React.memo(({friends}) => {
 
-    const friendsListToRender = props.state.friends.map((friend) => {
-        return <FriendCard key={friend.id} state={friend}/>;
+    const friendsListToRender = friends.map((friend) => {
+        return <FriendCard key={friend.id} name={friend.name} job={friend.job}/>;
     })
 
     return (
