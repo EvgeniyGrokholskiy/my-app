@@ -1,32 +1,45 @@
 import React from "react";
+import {NavLink} from "react-router-dom";
 import style from "./userCard.module.css";
 import photo from "./img/userUnknown.png";
-import {NavLink} from "react-router-dom";
 import Pagination from "./pagination/pagination";
+import {FollowUnfollowFunctionType, UsersArrayItemType} from "../../types/types";
 
 
-const UserCard = React.memo((props) => {
-    console.log("USER_CARD")
+
+type PropsType = {
+    onPageChanged: (page: number) => void
+    totalUsers: number
+    usersOnPage: number
+    currentPage: number
+    findUsers: Array<UsersArrayItemType>
+    setFollow: FollowUnfollowFunctionType
+    setUnfollow: FollowUnfollowFunctionType
+    isFollowingInProgress: Array<number>
+}
+
+const UserCard:React.FC<PropsType> = React.memo(({onPageChanged, totalUsers, usersOnPage, currentPage, findUsers, setFollow, setUnfollow, isFollowingInProgress}) => {
+
     return (
 
         <div className={style.cardContainer}>
 
-            <Pagination onPageChanged={props.onPageChanged}
-                        totalUsers={props.totalUsers}
-                        usersOnPage={props.usersOnPage}
-                        currentPage={props.currentPage}
+            <Pagination onPageChanged={onPageChanged}
+                        totalUsers={totalUsers}
+                        usersOnPage={usersOnPage}
+                        currentPage={currentPage}
                         pageSize={10}
             />
 
             {
-                props.findUsers.map((user) => {
+                findUsers.map((user:UsersArrayItemType) => {
 
                     const toUnfollow = () => {
-                        props.setUnfollow(user.id, false);
+                        setUnfollow(user.id, false);
                     }
 
                     const toFollow = () => {
-                        props.setFollow(user.id, true);
+                        setFollow(user.id, true);
                     }
 
                     return (
@@ -37,8 +50,8 @@ const UserCard = React.memo((props) => {
                                 <img className={style.photo}
                                      src={user.photos.small !== null ? user.photos.small : photo} alt=""/>
                                 {(user.followed) ?
-                                    <button disabled={props.isFollowingInProgress.some(id => id === user.id)} onClick={toUnfollow} className={style.button} >Unfollow</button> :
-                                    <button disabled={props.isFollowingInProgress.some(id => id === user.id)} onClick={toFollow} className={style.button}>Follow</button>}
+                                    <button disabled={isFollowingInProgress.some((id: number) => id === user.id)} onClick={toUnfollow} className={style.button} >Unfollow</button> :
+                                    <button disabled={isFollowingInProgress.some((id: number) => id === user.id)} onClick={toFollow} className={style.button}>Follow</button>}
                                 <NavLink to={`/profile/${user.id}`} className={style.linkToProfile}>Open
                                     Profile</NavLink>
                             </div>

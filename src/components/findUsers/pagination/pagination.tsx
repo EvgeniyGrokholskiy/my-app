@@ -1,19 +1,27 @@
-import React, {useState} from "react";
-import style from "../userCard.module.css";
+import style from "./pagination.module.css";
+import React, {ReactElement, useState} from "react";
 
-const Pagination = (props) => {
+type PropsType = {
+    totalUsers: number
+    usersOnPage: number
+    pageSize: number
+    onPageChanged: (page:number) => void
+    currentPage: number
+}
 
-    let pagesCount = Math.ceil(props.totalUsers / props.usersOnPage);
+const Pagination: React.FC<PropsType> = ({totalUsers, usersOnPage, pageSize, onPageChanged, currentPage}):ReactElement => {
+
+    let pagesCount = Math.ceil(totalUsers / usersOnPage);
     let pagesArray = [];
 
     for (let i = 1; i <= pagesCount; i++) {
         pagesArray.push(i);
     }
 
-    let portionCount = Math.ceil(pagesCount/props.pageSize)
+    let portionCount = Math.ceil(pagesCount/pageSize)
     let [portionNumber, setPortionNumber] = useState(1)
-    let leftPortionPageNumber = (portionNumber -1) * props.pageSize +1;
-    let rightPortionPageNumber = portionNumber * props.pageSize;
+    let leftPortionPageNumber = (portionNumber -1) * pageSize +1;
+    let rightPortionPageNumber = portionNumber * pageSize;
 
     return (
         <div className={style.pageButtonsContainer}>
@@ -25,9 +33,9 @@ const Pagination = (props) => {
                     .map((page) => {
                     return (
                         <button key={page} onClick={() => {
-                            props.onPageChanged(page)
+                            onPageChanged(page)
                         }}
-                                className={page === props.currentPage ? `${style.pageButton} ${style.current}` : style.pageButton}>{page}
+                                className={page === currentPage ? `${style.pageButton} ${style.current}` : style.pageButton}>{page}
                         </button>
                     )
                 })

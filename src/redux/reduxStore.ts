@@ -12,7 +12,7 @@ import {friendsListReducer} from "./friendsListReducer";
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 
 
-let reducers = combineReducers({
+let rootReducers = combineReducers({
 
     app: appReducer,
     auth: authReducer,
@@ -27,13 +27,18 @@ let reducers = combineReducers({
 
 });
 
+type RootReducer = typeof rootReducers
+export type AppStateType = ReturnType<RootReducer>
+
+// @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__|| compose;
-const store = createStore(reducers, /* preloadedState, */ composeEnhancers(applyMiddleware(thunkMiddleware)));
+const store = createStore(rootReducers, /* preloadedState, */ composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 /*
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 */
 
+// @ts-ignore
 window.__store__ = store
 
 export default store;

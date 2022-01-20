@@ -4,14 +4,14 @@ import FindUsersContainer from "./findUsersContainer";
 import FriendsListContainer from "../profile/profileContainer/friendsList/friendsListContainer";
 
 
-const FindUsers = ()=> {
+const FindUsers: React.FC = () => {
     return (
         <div className={style.container}>
             <div className={style.left_container}>
-                <FindUsersContainer />
+                <FindUsersContainer/>
             </div>
             <div className={style.right_container}>
-                <FriendsListContainer />
+                <FriendsListContainer/>
             </div>
         </div>
 

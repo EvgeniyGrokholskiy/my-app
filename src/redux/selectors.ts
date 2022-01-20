@@ -1,58 +1,60 @@
 //import {createSelector} from "reselect";
 
-export const getAppState = (state) => {
+import {AppStateType} from "./reduxStore";
+
+export const getAppState = (state:AppStateType) => {
     return state.app
 }
 
-export const getProfileState = (state) => {
+export const getProfileState = (state:AppStateType) => {
     return state.profile
 }
 
-export const getAuthState = (state) => {
+export const getAuthState = (state:AppStateType) => {
     return state.auth
 }
 
-export const getAuthLogin = (state) => {
+export const getAuthLogin = (state:AppStateType) => {
     return state.auth.login
 }
 
-export const getIsAuthState = (state) => {
+export const getIsAuthState = (state:AppStateType) => {
     return state.auth.isAuth
 }
 
-export const getInitializedState = (state) => {
+export const getInitializedState = (state:AppStateType) => {
     return state.app.initialized
 }
 
-export const getProfileStatusState = (state) => {
+export const getProfileStatusState = (state:AppStateType) => {
     return state.profile.profileStatus
 }
 
-export const getChatPageState = (state) => {
+export const getChatPageState = (state:AppStateType) => {
     return state.chatPage
 }
 
-export const getChatList = (state) => {
+export const getChatList = (state:AppStateType) => {
     return state.chatPage.chatsList
 }
 
-export const getChatMessageArrayState = (state) => {
+export const getChatMessageArrayState = (state:AppStateType) => {
     return state.chatPage.chatMessageArray
 }
 
-export const getActiveChanNameState = (state) => {
+export const getActiveChanNameState = (state:AppStateType) => {
     return state.chatPage.activeChatName
 }
 
-export const getFindUsersState = (state) => {
+export const getFindUsersState = (state:AppStateType) => {
     return state.findUsersPage.findUsers
 }
 
 /*
-export const getFindUsersState = (state) => {  простая логика в селекторе
+export const getFindUsersState = (state:AppStateType) => {  простая логика в селекторе
     return state.findUsersPage.findUsers
 
-export const getFindUsersStateSelector = (state) => {  сложный селектор с обработкой стэйта
+export const getFindUsersStateSelector = (state:AppStateType) => {  сложный селектор с обработкой стэйта
     return state.findUsersPage.findUsers.filter(user => true)
 }
 
@@ -64,30 +66,30 @@ export const getFindUsersStateRESELECT = createSelector(getFindUsersState,((user
 }))
 */
 
-export const getCurrentPageState = (state) => {
+export const getCurrentPageState = (state:AppStateType) => {
     return state.findUsersPage.currentPage
 }
 
-export const getTotalUsersState = (state) => {
+export const getTotalUsersState = (state:AppStateType) => {
     return state.findUsersPage.totalUsers
 }
 
-export const getUsersOnPageState = (state) => {
+export const getUsersOnPageState = (state:AppStateType) => {
     return state.findUsersPage.usersOnPage
 }
 
-export const getIsFetchingState = (state) => {
+export const getIsFetchingState = (state:AppStateType) => {
     return state.findUsersPage.isFetching
 }
 
-export const getIsFollowingInProgressState = (state) => {
+export const getIsFollowingInProgressState = (state:AppStateType) => {
     return state.findUsersPage.isFollowingInProgress
 }
 
-export const getFriendListState = (state) => {
+export const getFriendListState = (state:AppStateType) => {
     return state.friendsList.friends
 }
 
-export const getWallMessageArrayState = (state) => {
+export const getWallMessageArrayState = (state:AppStateType) => {
     return state.profile.wallMessageArray
 }

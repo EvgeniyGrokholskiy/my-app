@@ -42,7 +42,7 @@
     text-decoration: none;
 }
 
-.button, .pageButton {
+.button {
     display: block;
     background: rgb(0, 119, 181);
     background: linear-gradient(180deg, rgba(0, 119, 181, 1) 0%, rgba(14, 103, 149, 1) 100%);
@@ -61,12 +61,12 @@
     transition: all ease-in 0.1s;
 }
 
-.button:hover, .pageButton:hover {
+.button:hover {
     transform: scale(1.02);
     box-shadow: 0 6px 6px 0 #00000040;
 }
 
-.button:active, .pageButton:active {
+.button:active {
     transform: scale(0.98);
     box-shadow: 0 2px 2px 0 #00000040;
 }
@@ -85,27 +85,6 @@
 .button:disabled:hover {
     transform: none;
     box-shadow: 0 4px 4px 0 #00000040;
-}
-
-.pageButtonsContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 15px;
-    height: 50px;
-    width: 100%;
-}
-
-.current {
-    background: none;
-    border: 2px solid #0e6897;
-    color: black;
-    font-size: 16px;
-    font-weight: bold;
-    height: 40px;
-    width: 50px;
-    box-shadow: 0 6px 6px 0 #00000040;
-    margin: 0;
 }
 
 .user_description {

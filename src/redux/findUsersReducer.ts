@@ -1,6 +1,6 @@
 import {AnyAction} from "redux";
-import {Dispatch} from "../types/types";
 import {followUnfollowAPI, usersAPI} from "../api/api";
+import {Dispatch, UsersArrayItemType} from "../types/types";
 
 
 const SetUsers = "MY-APP/FIND-USER/SET_USERS";
@@ -12,12 +12,12 @@ const ToFollowUnFollowFlow = "MY-APP/FIND-USER/TO-FOLLOW-TO-UNFOLLOW-FLOW"
 
 
 export type InitialStateType = {
-    findUsers: Array<any>,
+    findUsers: Array<UsersArrayItemType>,
     currentPage: number,
     totalUsers: number,
     usersOnPage: number,
     isFetching: boolean,
-    isFollowingInProgress: Array<any>
+    isFollowingInProgress: Array<FollowingInProgressType>
 }
 
 const initialState: InitialStateType = {
@@ -129,25 +129,13 @@ export const toFollowUnFollowFlow = (userId: number, flow: string): ToFollowUnFo
     }
 }
 
-type UsersArrayItem = {
-    followed: boolean
-    id: number
-    name: string
-    photos: {
-        large: string | null
-        small: string | null
-    }
-    status: string | null
-    uniqueUrlName: string | null
-}
-
 type SetUserType = {
     type: typeof SetUsers,
     users: any,
     page: number
 }
 
-export const setUsers = (users: Array<UsersArrayItem>, page = 1): SetUserType => {
+export const setUsers = (users: Array<UsersArrayItemType>, page = 1): SetUserType => {
     return {
         type: SetUsers,
         users: users,
