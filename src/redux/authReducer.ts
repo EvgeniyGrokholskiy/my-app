@@ -32,7 +32,7 @@ const initialState: InitialStateType = {
     captcha: null,
 }
 
-interface LoginData {
+export interface LoginData {
     email: string
     password: string
     rememberMe: string

@@ -14,7 +14,6 @@ const FindUsers: React.FC = () => {
                 <FriendsListContainer/>
             </div>
         </div>
-
     )
 }
 

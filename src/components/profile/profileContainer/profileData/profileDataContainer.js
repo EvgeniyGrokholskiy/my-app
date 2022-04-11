@@ -1,20 +1,20 @@
-import React from "react";
-import {compose} from "redux";
-import {connect} from "react-redux";
-import {useMatch} from "react-router";
-import ProfileData from "./profileData";
+import React from "react"
+import {compose} from "redux"
+import {connect} from "react-redux"
+import {useMatch} from "react-router"
+import ProfileData from "./profileData"
 import {
     getUserProfileThunkCreator,
     getUserStatusThunkCreator,
     savePhoto, setUserProfileData,
     setUserStatusThunkCreator
-} from "../../../../redux/profileReducer";
-import WallContainer from "../wall/wallContainer";
-import {withAuthRedirect} from "../../../hoc/authRedirect";
-import NewPostContainer from "../new_post/new_postContainer";
-import StatusBarWithHooks from "../status/statusBarWithHooks";
-import {authThunkCreator} from "../../../../redux/authReducer";
-import {getAuthState, getProfileState, getProfileStatusState} from "../../../../redux/selectors";
+} from "../../../../redux/profileReducer"
+import WallContainer from "../wall/wallContainer"
+import {withAuthRedirect} from "../../../hoc/authRedirect"
+import NewPostContainer from "../new_post/new_postContainer"
+import StatusBarWithHooks from "../status/statusBarWithHooks"
+import {authThunkCreator} from "../../../../redux/authReducer"
+import {getAuthState, getProfileState, getProfileStatusState} from "../../../../redux/selectors"
 
 
 class GetProfileData extends React.Component {
@@ -55,8 +55,6 @@ class GetProfileData extends React.Component {
             <>
                 <ProfileData {...this.props} userId={this.userId}/>
                 <StatusBarWithHooks
-                    //id={this.props.auth.id}
-                    //getUserProfile={this.props.getUserProfile}
                     profileStatus={this.props.profileStatus}
                     getUserStatusThunkCreator={this.props.getUserStatusThunkCreator}
                     setUserStatusThunkCreator={this.props.setUserStatusThunkCreator}

@@ -1,15 +1,16 @@
-import {appReducer} from "./appReducer";
-import thunkMiddleware from 'redux-thunk';
-import {chatReducer} from "./chatReducer";
-import {newsReducer} from "./newsReducer";
-import {authReducer} from "./authReducer";
-import {musicReducer} from "./musicReducer";
-import {footerReducer} from "./footerReducer";
-import {profileReducer} from "./profileReducer";
-import {settingsReducer} from "./settingsReducer";
-import {findUsersReducer} from "./findUsersReducer";
-import {friendsListReducer} from "./friendsListReducer";
-import {applyMiddleware, combineReducers, compose, createStore} from "redux";
+import {appReducer} from "./appReducer"
+import thunkMiddleware from 'redux-thunk'
+import {chatReducer} from "./chatReducer"
+import {newsReducer} from "./newsReducer"
+import {authReducer} from "./authReducer"
+import {musicReducer} from "./musicReducer"
+import {footerReducer} from "./footerReducer"
+import {profileReducer} from "./profileReducer"
+import {settingsReducer} from "./settingsReducer"
+import {findUsersReducer} from "./findUsersReducer"
+import {friendsListReducer} from "./friendsListReducer"
+import {composeWithDevTools} from 'redux-devtools-extension'
+import {applyMiddleware, combineReducers, createStore} from "redux"
 
 
 let rootReducers = combineReducers({
@@ -24,21 +25,11 @@ let rootReducers = combineReducers({
     settings: settingsReducer,
     findUsersPage: findUsersReducer,
     friendsList: friendsListReducer,
-
 });
 
-type RootReducer = typeof rootReducers
+export type RootReducer = typeof rootReducers
 export type AppStateType = ReturnType<RootReducer>
 
-// @ts-ignore
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__|| compose;
-const store = createStore(rootReducers, /* preloadedState, */ composeEnhancers(applyMiddleware(thunkMiddleware)));
+const store = createStore(rootReducers, /* preloadedState, */ composeWithDevTools(applyMiddleware(thunkMiddleware)))
 
-/*
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
-*/
-
-// @ts-ignore
-window.__store__ = store
-
-export default store;
+export default store

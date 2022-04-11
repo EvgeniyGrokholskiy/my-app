@@ -8,7 +8,7 @@ export type InitialStateType = {
 }
 
 const initialState: InitialStateType = {
-    languages: "english",
+    languages: "English",
 }
 
 export const footerReducer = (state=initialState,action:AnyAction) => {
@@ -25,7 +25,7 @@ export const footerReducer = (state=initialState,action:AnyAction) => {
     }
 }
 
-type ChangeLanguagesType = {
+export type ChangeLanguagesType = {
     type: typeof CHANGE_LANGUAGES
     languages: string
 }

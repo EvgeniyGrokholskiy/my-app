@@ -1,7 +1,7 @@
 import {AnyAction} from "redux";
 
 
-type FriendsArrayItemType = {
+export type FriendsArrayItemType = {
     name: string,
     job: string,
     id: number,

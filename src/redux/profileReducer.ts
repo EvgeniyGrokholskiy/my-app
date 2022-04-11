@@ -12,7 +12,7 @@ const SetProfileStatus = "MY-APP/PROFILE/SET_PROFILE_STATUS";
 const SetProfileDataError = "MY-APP/PROFILE/UPDATE_PROFILE_DATA_ERROR";
 /*const ChangeNewMessageOnWall = "MY-APP/PROFILE/CHANGE_NEW_MESSAGE_ON_WALL";*/
 
-interface WallMessage {
+export interface WallMessage {
     message: string,
     likeCount: number,
     id: number

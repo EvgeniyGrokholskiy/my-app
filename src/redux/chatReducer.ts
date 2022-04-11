@@ -5,13 +5,13 @@ import {getDate} from "../components/utils/getDate";
 const NewMessageInChat = "MY-APP/CHAT/SEND_MESSAGE_IN_CHAT";
 const SetActiveChatName = "MY-APP/CHAT/SET_ACTIVE_CHAT_NAME"
 
-type ChatListArrayItem = {
+export type ChatListArrayItem = {
     name: string,
     id: number,
     lastMessage: string,
 }
 
-type ChatMessageArrayItem = {
+export type ChatMessageArrayItem = {
     message: string,
     type: string,
     id: number,
@@ -146,7 +146,7 @@ export const chatReducer = (state = initialState, action: AnyAction) => {
     }
 };
 
-type SendMessageType = {
+export type SendMessageType = {
     type: typeof NewMessageInChat,
     message: string
 }
@@ -158,7 +158,7 @@ export const sendMessage = (message: string): SendMessageType => {
     }
 }
 
-type SetActiveChatNameType = {
+export type SetActiveChatNameType = {
     type: typeof SetActiveChatName,
     activeChatId: number,
 }
