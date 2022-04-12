@@ -21,6 +21,9 @@ export type UsersArrayItemType = {
 }
 export type IsFollowingInProgressType = [id: number]
 export type FollowUnfollowFunctionType = (userId: number, status: boolean) => void
+/***********Functions types*********************/
+
+export type TGetDate = () => [day: string, month: string, year: number, hour: string, minute: string]
 
 /******Variables types*******/
 
@@ -162,6 +165,32 @@ export interface IProfileSetDataFormProps {
 }
 
 export interface IProfileDataProps {
+    state: ProfileInitialStateType
+    auth: AuthInitialStateType
+    profileStatus: string
+    match: PathMatch<"userId"> | null
+    getUserProfile: Dispatch
+    getUserStatusThunkCreator: Dispatch
+    setUserStatusThunkCreator: (status: string) => (dispatch: Dispatch) => Promise<void>
+    authThunkCreator: Dispatch
+    savePhoto: (photo: File) => (dispatch: Dispatch) => Promise<void>
+    setUserProfileData: (data: Record<string, any>) => Promise<any>
+}
+
+export interface IGetMatchUrlProps {
+    state: ProfileInitialStateType
+    auth: AuthInitialStateType
+    profileStatus: string
+    match: IMatchObj
+    getUserProfile: Dispatch
+    getUserStatusThunkCreator: Dispatch
+    setUserStatusThunkCreator: (status: string) => (dispatch: Dispatch) => Promise<void>
+    authThunkCreator: Dispatch
+    savePhoto: (photo: File) => (dispatch: Dispatch) => Promise<void>
+    setUserProfileData: (data: Record<string, any>) => Promise<any>
+}
+
+export interface IGetProfileData {
     state: ProfileInitialStateType
     auth: AuthInitialStateType
     profileStatus: string
