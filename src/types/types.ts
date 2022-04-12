@@ -1,12 +1,12 @@
-import store from "../redux/reduxStore"
-import {AuthInitialStateType, LoginData} from "../redux/authReducer"
-import {ChangeLanguagesType} from "../redux/footerReducer"
-import {ChatListArrayItem, ChatMessageArrayItem, SendMessageType, SetActiveChatNameType} from "../redux/chatReducer"
-import {FriendsArrayItemType} from "../redux/friendsListReducer";
-import {IProfileInitialStateType, IWallMessage} from "../redux/profileReducer";
 import React from "react";
-import {PathMatch} from "react-router";
+import {PathMatch} from "react-router"
+import store from "../redux/reduxStore"
 import {AppInitialStateType} from "../redux/appReducer";
+import {ChangeLanguagesType} from "../redux/footerReducer"
+import {FriendsArrayItemType} from "../redux/friendsListReducer";
+import {AuthInitialStateType, LoginData} from "../redux/authReducer"
+import {IProfileInitialStateType, IWallMessage} from "../redux/profileReducer";
+import {ChatListArrayItem, ChatMessageArrayItem, SendMessageType, SetActiveChatNameType} from "../redux/chatReducer"
 
 export type Dispatch = typeof store.dispatch
 export type UsersArrayItemType = {
@@ -22,6 +22,7 @@ export type UsersArrayItemType = {
 }
 export type IsFollowingInProgressType = [id: number]
 export type FollowUnfollowFunctionType = (userId: number, status: boolean) => void
+
 /***********Functions types*********************/
 
 export type TGetDate = () => [day: string, month: string, year: number, hour: string, minute: string]
