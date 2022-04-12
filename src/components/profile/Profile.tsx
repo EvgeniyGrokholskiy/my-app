@@ -6,6 +6,7 @@ import ProfileDataContainer from "./profileContainer/profileData/profileDataCont
 
 const Profile: React.FC = () => {
 
+
     return (
         <div className={style.gridContainer}>
             <div className={style.leftContainer}>

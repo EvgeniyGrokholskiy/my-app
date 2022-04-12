@@ -11,7 +11,7 @@ const SET_ERROR_MESSAGE = "MY_APP_/AUTH/SET_ERROR_MESSAGE";
 const GET_CAPTCHA_SUCCESS = "MY_APP_/AUTH/GET_CAPTCHA_SUCCESS";
 const ENTERED_RIGHT_CAPTCHA = "MY-APP/AUTH/ENTERED_RIGHT_CAPTCHA"
 
-export type InitialStateType = {
+export type AuthInitialStateType = {
     id: null | number,
     login: null | string,
     email: null | string,
@@ -22,7 +22,7 @@ export type InitialStateType = {
 
 }
 
-const initialState: InitialStateType = {
+const initialState: AuthInitialStateType = {
     id: null,
     login: null,
     email: null,

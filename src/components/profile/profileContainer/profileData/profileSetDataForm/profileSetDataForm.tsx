@@ -1,25 +1,30 @@
-import style from "../profileData.module.css";
-import {Field, Form} from "react-final-form";
-import React from "react";
+import React from "react"
+import style from "../profileData.module.css"
+import {Field, Form, FormRenderProps} from "react-final-form"
+import {IProfileSetDataFormProps} from "../../../../../types/types"
 
-const ProfileSetDataForm = (props) => {
+
+const ProfileSetDataForm: React.FC<IProfileSetDataFormProps> = ({
+                                                                    error,
+                                                                    errorMessage,
+                                                                    state,
+                                                                    setEditMode,
+                                                                    setUserProfileData
+                                                                }) => {
 
     return (
         <Form
-            initialValues={props.state.profile}
+            initialValues={state.profile}
             onSubmit={(data) => {
-                props.setUserProfileData(data)
-                    .then((response)=>{
+                setUserProfileData(data)
+                    .then((response: any) => {
                         if (response.resultCode === 0) {
-                            props.setEditMode(false)
+                            setEditMode(false)
                         }
-                    });
-
+                    })
             }}
-            validate={(values) => {
 
-            }}
-            render={({handleSubmit,meta}) => (
+            render={({handleSubmit}: FormRenderProps<Record<string, any>, any>) => (
                 <form className={style.form} onSubmit={handleSubmit}>
                     <div className={style.form__field}>
                         <label className={style.label}>Full Name
@@ -45,9 +50,9 @@ const ProfileSetDataForm = (props) => {
                                                 <Field name="contacts.facebook" sliderEvaluation={"input"}/>*/}
                         <Field
                             name="contacts.facebook"
-                            render={({ input, meta }) => (
+                            render={({input, meta}) => (
                                 <>
-                                    <label className={style.label} >facebook:
+                                    <label className={style.label}>facebook:
                                         <input {...input} />
                                         {meta.touched && meta.error && <span>{meta.error}</span>}
                                     </label>
@@ -71,7 +76,7 @@ const ProfileSetDataForm = (props) => {
                             <Field name="contacts.mainLink" component={"input"}/>
                         </label>
                         {
-                            props.error ? <span className={style.errorSpan}>{props.errorMessage}</span> : <></>
+                            error && <span className={style.errorSpan}>{errorMessage}</span>
                         }
                     </div>
                     <button className={style.button} type="submit">Save</button>

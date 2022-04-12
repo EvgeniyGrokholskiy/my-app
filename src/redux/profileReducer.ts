@@ -23,7 +23,7 @@ interface PhotosObjInProfile {
     small: string | null,
 }
 
-interface Profile {
+export interface Profile {
     aboutMe: null | string
     contacts: {
         facebook: string | null
@@ -39,11 +39,11 @@ interface Profile {
     fullName: string | null
     lookingForAJob: boolean | null
     lookingForAJobDescription: string | null
-    photos: PhotosObjInProfile | {}
+    photos: PhotosObjInProfile | null
     userId: number | null
 }
 
-export interface InitialStateType{
+export interface ProfileInitialStateType {
     wallMessageArray: Array<WallMessage>
     profile: Profile,
     profileStatus: string,
@@ -52,7 +52,7 @@ export interface InitialStateType{
     sendErrorMessage: string
 }
 
-const initialState:InitialStateType = {
+const initialState:ProfileInitialStateType = {
     wallMessageArray: [
         {
             message: "How’s your day going, guys?",
@@ -82,7 +82,7 @@ const initialState:InitialStateType = {
         fullName: null,
         lookingForAJob: null,
         lookingForAJobDescription: null,
-        photos: {},
+        photos: null,
         userId: null
     },
 
@@ -92,7 +92,7 @@ const initialState:InitialStateType = {
     sendErrorMessage: ""
 };
 
-export const profileReducer = (state = initialState, action:AnyAction):InitialStateType => {
+export const profileReducer = (state = initialState, action:AnyAction):ProfileInitialStateType => {
 
     const isEmptyMessage = (message:string) => (message === '' || message === undefined);
 

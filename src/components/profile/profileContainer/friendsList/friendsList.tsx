@@ -1,13 +1,12 @@
 import React from "react"
 import style from "./friendsList.module.css"
 import FriendCard from "./friendCard/friendCard"
-import {IFriendsListProps} from "../../../../types/types"
 import {FriendsArrayItemType} from "../../../../redux/friendsListReducer"
 
 
-const FriendsList: React.FC<any> = (props) => {
+const FriendsList: React.FC<any> = ({friends}) => {
 
-    const friendsListToRender = props.friends.map((friend: FriendsArrayItemType) => {
+    const friendsListToRender = friends.map((friend: FriendsArrayItemType) => {
         return <FriendCard key={friend.id} name={friend.name} job={friend.job}/>;
     })
 
