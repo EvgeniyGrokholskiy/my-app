@@ -4,6 +4,7 @@ import { IOutgoingMessage } from "../../../../types/types"
 
 
 const OutgoingMessage:React.FC<IOutgoingMessage> = ({message,data}) => {
+
     return (
         <div className={style.container}>
             <span className={style.messageText}>{message}</span>

@@ -5,12 +5,9 @@ import {AppStateType} from "../../../../redux/reduxStore"
 import {setActiveChatName} from "../../../../redux/chatReducer"
 
 
-const mapStateToProps = (state:AppStateType) => {
-
-    return {
-        chatsList: getChatList(state)
-    }
-}
+const mapStateToProps = (state: AppStateType) => ({
+    chatsList: getChatList(state)
+})
 
 const ChatSideBarContainer = connect(mapStateToProps,{setActiveChatName})(ChatSideBar)
 

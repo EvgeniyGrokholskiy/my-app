@@ -16,7 +16,7 @@ const PostOnWall: React.FC<IPostOnWall> = ({likeCount, message}) => {
             <LikeBtn className={style.likeBtn}/>
             <span className={style.likeCount}>{likeCount}</span>
         </div>
-    );
-};
+    )
+}
 
 export default PostOnWall;

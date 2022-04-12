@@ -1,24 +1,21 @@
-import React from "react";
-import {NavLink} from "react-router-dom";
-import style from "./userCard.module.css";
-import photo from "./img/userUnknown.png";
-import Pagination from "./pagination/pagination";
-import {FollowUnfollowFunctionType, UsersArrayItemType} from "../../types/types";
+import React from "react"
+import {NavLink} from "react-router-dom"
+import style from "./userCard.module.css"
+import photo from "./img/userUnknown.png"
+import Pagination from "./pagination/pagination"
+import {IUserCardProps, UsersArrayItemType} from "../../types/types"
 
 
-
-type PropsType = {
-    onPageChanged: (page: number) => void
-    totalUsers: number
-    usersOnPage: number
-    currentPage: number
-    findUsers: Array<UsersArrayItemType>
-    setFollow: FollowUnfollowFunctionType
-    setUnfollow: FollowUnfollowFunctionType
-    isFollowingInProgress: Array<number>
-}
-
-const UserCard:React.FC<PropsType> = React.memo(({onPageChanged, totalUsers, usersOnPage, currentPage, findUsers, setFollow, setUnfollow, isFollowingInProgress}) => {
+const UserCard: React.FC<IUserCardProps> = React.memo(({
+                                                           onPageChanged,
+                                                           totalUsers,
+                                                           usersOnPage,
+                                                           currentPage,
+                                                           findUsers,
+                                                           setFollow,
+                                                           setUnfollow,
+                                                           isFollowingInProgress
+                                                       }) => {
 
     return (
 
@@ -74,7 +71,7 @@ const UserCard:React.FC<PropsType> = React.memo(({onPageChanged, totalUsers, use
             }
         </div>
     )
-}, function isEqual(prevProps, nextProps){
+}, function isEqual(prevProps: IUserCardProps, nextProps: IUserCardProps) {
     return prevProps === nextProps;
 })
 

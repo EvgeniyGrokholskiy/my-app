@@ -8,18 +8,18 @@ import {LoginData} from "../../../redux/authReducer"
 import {Input} from "../../commons/formControls/component"
 
 
-const MyForm: React.FC<IMyFormProps> = (props) => {
+const MyForm: React.FC<IMyFormProps> = ({auth, loginThunkCreator, getNewCaptcha}) => {
 
-    const error = props.auth.isError;
-    const errorMessage = props.auth.errorMessage;
-    const captcha = props.auth.captcha;
+    const error = auth.isError;
+    const errorMessage = auth.errorMessage;
+    const captcha = auth.captcha;
     const maxLength30 = validators.maxLengthValidatorCreator(30);
     const validator = validators.composeValidators(validators.required, maxLength30);
 
     return (
         <Form
             onSubmit={(data: LoginData) => {
-                props.loginThunkCreator(data)
+                loginThunkCreator(data)
             }}
             render={({handleSubmit}) => (
                 <form className={style.form} onSubmit={handleSubmit}>
@@ -38,7 +38,7 @@ const MyForm: React.FC<IMyFormProps> = (props) => {
                     </div>
                     {
                         (error && captcha) &&
-                        <Captcha captcha={captcha} validator={validator} getNewCaptcha={props.getNewCaptcha}/>
+                        <Captcha captcha={captcha} validator={validator} getNewCaptcha={getNewCaptcha}/>
                     }
                     {
                         error && <span className={style.errorSpan}>{errorMessage}</span>

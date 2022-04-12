@@ -3,9 +3,10 @@ import {AuthInitialStateType, LoginData} from "../redux/authReducer"
 import {ChangeLanguagesType} from "../redux/footerReducer"
 import {ChatListArrayItem, ChatMessageArrayItem, SendMessageType, SetActiveChatNameType} from "../redux/chatReducer"
 import {FriendsArrayItemType} from "../redux/friendsListReducer";
-import {ProfileInitialStateType, WallMessage} from "../redux/profileReducer";
+import {IProfileInitialStateType, IWallMessage} from "../redux/profileReducer";
 import React from "react";
 import {PathMatch} from "react-router";
+import {AppInitialStateType} from "../redux/appReducer";
 
 export type Dispatch = typeof store.dispatch
 export type UsersArrayItemType = {
@@ -125,7 +126,7 @@ export interface INewMessageFormProps {
 }
 
 export interface IWallProps {
-    wallMessageArray: Array<WallMessage>
+    wallMessageArray: Array<IWallMessage>
 }
 
 export interface IPostOnWall {
@@ -143,14 +144,14 @@ export interface IChangePhotoButtonProps {
 }
 
 export interface IProfileImageBlockProps {
-    state: ProfileInitialStateType
+    state: IProfileInitialStateType
     auth: AuthInitialStateType
     match: PathMatch<"userId"> | null
     savePhoto: (photo: File) => (dispatch: Dispatch) => Promise<void>
 }
 
 export interface IProfileDataHolderProps {
-    state: ProfileInitialStateType
+    state: IProfileInitialStateType
     setEditMode: React.Dispatch<React.SetStateAction<boolean>>
     match: PathMatch<"userId"> | null
     auth: AuthInitialStateType
@@ -160,12 +161,12 @@ export interface IProfileSetDataFormProps {
     error: boolean
     errorMessage: string
     setEditMode: React.Dispatch<React.SetStateAction<boolean>>
-    state: ProfileInitialStateType
+    state: IProfileInitialStateType
     setUserProfileData: (data: Record<string, any>) => Promise<any>
 }
 
 export interface IProfileDataProps {
-    state: ProfileInitialStateType
+    state: IProfileInitialStateType
     auth: AuthInitialStateType
     profileStatus: string
     match: PathMatch<"userId"> | null
@@ -178,7 +179,7 @@ export interface IProfileDataProps {
 }
 
 export interface IGetMatchUrlProps {
-    state: ProfileInitialStateType
+    state: IProfileInitialStateType
     auth: AuthInitialStateType
     profileStatus: string
     match: IMatchObj
@@ -191,7 +192,7 @@ export interface IGetMatchUrlProps {
 }
 
 export interface IGetProfileData {
-    state: ProfileInitialStateType
+    state: IProfileInitialStateType
     auth: AuthInitialStateType
     profileStatus: string
     match: PathMatch<"userId"> | null
@@ -201,4 +202,40 @@ export interface IGetProfileData {
     authThunkCreator: Dispatch
     savePhoto: (photo: File) => (dispatch: Dispatch) => Promise<void>
     setUserProfileData: (data: Record<string, any>) => Promise<any>
+}
+
+export interface IAppProps {
+    app: AppInitialStateType
+    initializeApp: () => void
+}
+
+export interface IUserCardProps {
+    onPageChanged: (page: number) => void
+    totalUsers: number
+    usersOnPage: number
+    currentPage: number
+    findUsers: Array<UsersArrayItemType>
+    setFollow: (userId: number, flow: boolean) => Promise<void>
+    setUnfollow: (userId: number, flow: boolean) => void
+    isFollowingInProgress: Array<number>
+}
+
+export interface IUsersContainerProps {
+    usersOnPage: number
+    currentPage: number
+    isFetching: boolean
+    totalUsers: number
+    findUsers: Array<UsersArrayItemType>
+    setFollow: (userId: number, flow: boolean) => any
+    setUnfollow: (userId: number, flow: boolean) => void
+    getUsers: (page: number, usersOnPage: number) => void
+    isFollowingInProgress: number[]
+}
+
+export interface IPaginationProps {
+    totalUsers: number
+    usersOnPage: number
+    pageSize: number
+    onPageChanged: (page: number) => void
+    currentPage: number
 }

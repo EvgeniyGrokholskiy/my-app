@@ -3,11 +3,12 @@ import style from "../profileData.module.css"
 import {IProfileDataHolderProps} from "../../../../../types/types"
 
 
-const ProfileDataHolder: React.FC<IProfileDataHolderProps> = ({state,
+const ProfileDataHolder: React.FC<IProfileDataHolderProps> = ({
+                                                                  state,
                                                                   setEditMode,
                                                                   match,
-                                                                  auth}) => {
-
+                                                                  auth
+                                                              }) => {
 
     return (
         <>

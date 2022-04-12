@@ -6,6 +6,7 @@ import {Input} from "../../commons/formControls/component"
 
 
 const Captcha: React.FC<ICaptchaProps> = ({captcha, getNewCaptcha, validator}) => {
+
     return (
         <div className={style.form__field}>
             <img className={style.captcha} src={captcha} alt={"captcha"}/>

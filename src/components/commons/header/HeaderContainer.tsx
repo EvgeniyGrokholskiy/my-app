@@ -1,7 +1,7 @@
 import React from "react"
 import Header from "./Header"
 import {connect} from "react-redux"
-import { IAuthProps } from "../../../types/types"
+import {IAuthProps} from "../../../types/types"
 import {AppStateType} from "../../../redux/reduxStore"
 import {logoutThunkCreator} from "../../../redux/authReducer"
 import {getAuthLogin, getIsAuthState} from "../../../redux/selectors"
@@ -18,13 +18,10 @@ class Auth extends React.Component<IAuthProps> {
 }
 
 
-const mapStateToProps = (state: AppStateType) => {
-
-    return {
-        isAuth: getIsAuthState(state),
-        login: getAuthLogin(state)
-    };
-}
+const mapStateToProps = (state: AppStateType) => ({
+    isAuth: getIsAuthState(state),
+    login: getAuthLogin(state)
+})
 
 const HeaderContainer = connect(mapStateToProps,{logoutThunkCreator})(Auth)
 

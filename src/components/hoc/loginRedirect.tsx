@@ -6,12 +6,6 @@ import {initializeApp} from "../../redux/appReducer"
 import {IRedirectComponentProps} from "../../types/types"
 import {getAuthState, getIsAuthState} from "../../redux/selectors"
 
-const mapStateToProps = (state: AppStateType) => {
-    return {
-        isAuth: getIsAuthState(state),
-        props: getAuthState(state),
-    }
-}
 
 export const withLoginRedirect = (Component: React.JSXElementConstructor<any>) => {
 
@@ -24,6 +18,12 @@ export const withLoginRedirect = (Component: React.JSXElementConstructor<any>) =
         }
     }
 
+    const mapStateToProps = (state: AppStateType) => {
+        return {
+            isAuth: getIsAuthState(state),
+            props: getAuthState(state),
+        }
+    }
 
     return connect(mapStateToProps, {initializeApp})(RedirectComponent);
 }

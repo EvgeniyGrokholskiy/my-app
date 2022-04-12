@@ -5,6 +5,7 @@ import {IChatHeaderProps} from "../../../../../types/types"
 
 
 const ChatHeader: React.FC<IChatHeaderProps> = ({name, lastMessage}) => {
+
     return (
         <div className={style.wrapper}>
             <img className={style.photo} src={photo} alt="" height={52} width={52}/>

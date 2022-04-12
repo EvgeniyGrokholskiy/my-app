@@ -5,6 +5,7 @@ import { IGetMatchUrlProps } from "../../../../types/types"
 
 
 const GetMatchUrl: React.FC<IGetMatchUrlProps> = (props) => {
+
     const match:PathMatch<"userId"> | null = useMatch("/profile/:userId")
 
     return (

@@ -1,16 +1,14 @@
+import React from "react"
 import {connect} from "react-redux"
 import FriendsList from "./friendsList"
 import {AppStateType} from "../../../../redux/reduxStore"
 import {getFriendListState} from "../../../../redux/selectors"
 
 
-const mapStateToProps = (state: AppStateType) => {
+const mapStateToProps = (state: AppStateType) => ({
+    friends: getFriendListState(state)
+})
 
-    return {
-        friends: getFriendListState(state)
-    }
-}
-
-const FriendsListContainer = connect(mapStateToProps, null)(FriendsList)
+const FriendsListContainer: React.FC<any> = connect(mapStateToProps, null)(FriendsList)
 
 export default FriendsListContainer

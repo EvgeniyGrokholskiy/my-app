@@ -10,20 +10,19 @@ const SetUserProfile = "MY-APP/PROFILE/SET_USERS_PROFILE";
 const AddMessageOnWall = "MY-APP/PROFILE/ADD_MESSAGE_ON_WALL";
 const SetProfileStatus = "MY-APP/PROFILE/SET_PROFILE_STATUS";
 const SetProfileDataError = "MY-APP/PROFILE/UPDATE_PROFILE_DATA_ERROR";
-/*const ChangeNewMessageOnWall = "MY-APP/PROFILE/CHANGE_NEW_MESSAGE_ON_WALL";*/
 
-export interface WallMessage {
+export interface IWallMessage {
     message: string,
     likeCount: number,
     id: number
 }
 
-interface PhotosObjInProfile {
+interface IPhotosObjInProfile {
     large: string | null,
     small: string | null,
 }
 
-export interface Profile {
+export interface IProfile {
     aboutMe: null | string
     contacts: {
         facebook: string | null
@@ -39,20 +38,20 @@ export interface Profile {
     fullName: string | null
     lookingForAJob: boolean | null
     lookingForAJobDescription: string | null
-    photos: PhotosObjInProfile | null
+    photos: IPhotosObjInProfile | null
     userId: number | null
 }
 
-export interface ProfileInitialStateType {
-    wallMessageArray: Array<WallMessage>
-    profile: Profile,
+export interface IProfileInitialStateType {
+    wallMessageArray: Array<IWallMessage>
+    profile: IProfile,
     profileStatus: string,
     putRequestStatus: null,
     error: boolean,
     sendErrorMessage: string
 }
 
-const initialState:ProfileInitialStateType = {
+const initialState: IProfileInitialStateType = {
     wallMessageArray: [
         {
             message: "How’s your day going, guys?",
@@ -92,9 +91,9 @@ const initialState:ProfileInitialStateType = {
     sendErrorMessage: ""
 };
 
-export const profileReducer = (state = initialState, action:AnyAction):ProfileInitialStateType => {
+export const profileReducer = (state = initialState, action: AnyAction): IProfileInitialStateType => {
 
-    const isEmptyMessage = (message:string) => (message === '' || message === undefined);
+    const isEmptyMessage = (message: string) => (message === '' || message === undefined);
 
     switch (action.type) {
 
@@ -180,11 +179,11 @@ export const savePhoto = (photo:File) => async (dispatch:Dispatch) => {
     }
 }
 
-export const setUserProfileData = (data:Profile) => async (dispatch:Dispatch) => {
+export const setUserProfileData = (data: IProfile) => async (dispatch: Dispatch) => {
     let response = await profileAPI.setProfileData(data);
     if (response.resultCode === 0) {
         dispatch(setUserProfileDataError("", false));
-        dispatch(getUserProfileThunkCreator(store.getState().auth.id));
+        dispatch(await getUserProfileThunkCreator(store.getState().auth.id));
         return response
     } else {
         dispatch(setUserProfileDataError(response.messages, true));
@@ -199,7 +198,7 @@ export const addPost = (message:string) => {
     };
 }
 
-export const setUserProfile = (profile:Profile) => {
+export const setUserProfile = (profile: IProfile) => {
     return {
         type: SetUserProfile,
         profile: profile

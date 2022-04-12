@@ -4,19 +4,13 @@ import {Navigate} from "react-router"
 import {AppStateType} from "../../redux/reduxStore"
 import {getInitializedState, getIsAuthState} from "../../redux/selectors"
 
-const mapStateToProps = (state: AppStateType) => {
-    return {
-        isAuth: getIsAuthState(state),
-        initialized: getInitializedState(state)
-    }
-}
 
 export const withAuthRedirect = (Component: React.JSXElementConstructor<any>) => {
 
     class RedirectComponent extends React.Component {
         render() {
 
-            if (!window.sessionStorage.getItem("isAuth")/*this.props.isAuth*/) {
+            if (!window.sessionStorage.getItem("isAuth")) {
                 return <Navigate to={"/"}/>
             }
 
@@ -24,6 +18,10 @@ export const withAuthRedirect = (Component: React.JSXElementConstructor<any>) =>
         }
     }
 
+    const mapStateToProps = (state: AppStateType) => ({
+        isAuth: getIsAuthState(state),
+        initialized: getInitializedState(state)
+    })
 
     return connect(mapStateToProps)(RedirectComponent);
 }

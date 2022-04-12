@@ -1,15 +1,15 @@
-import style from "./pagination.module.css";
-import React, {ReactElement, useState} from "react";
+import style from "./pagination.module.css"
+import React, {ReactElement, useState} from "react"
+import {IPaginationProps} from "../../../types/types"
 
-type PropsType = {
-    totalUsers: number
-    usersOnPage: number
-    pageSize: number
-    onPageChanged: (page:number) => void
-    currentPage: number
-}
 
-const Pagination: React.FC<PropsType> = ({totalUsers, usersOnPage, pageSize, onPageChanged, currentPage}):ReactElement => {
+const Pagination: React.FC<IPaginationProps> = ({
+                                                    totalUsers,
+                                                    usersOnPage,
+                                                    pageSize,
+                                                    onPageChanged,
+                                                    currentPage
+                                                }): ReactElement => {
 
     let pagesCount = Math.ceil(totalUsers / usersOnPage);
     let pagesArray = [];
@@ -18,7 +18,7 @@ const Pagination: React.FC<PropsType> = ({totalUsers, usersOnPage, pageSize, onP
         pagesArray.push(i);
     }
 
-    let portionCount = Math.ceil(pagesCount/pageSize)
+    let portionCount = Math.ceil(pagesCount / pageSize)
     let [portionNumber, setPortionNumber] = useState(1)
     let leftPortionPageNumber = (portionNumber -1) * pageSize +1;
     let rightPortionPageNumber = portionNumber * pageSize;

@@ -2,15 +2,15 @@ import {authThunkCreator} from "./authReducer";
 
 const INIT_APP: "MY_APP/APP/INIT_APP" = "MY_APP/APP/INIT_APP";
 
-export type InitialStateType = {
+export type AppInitialStateType = {
     initialized: boolean
 }
 
-const initialState: InitialStateType = {
+const initialState: AppInitialStateType = {
     initialized: false
 }
 
-export const appReducer = (state = initialState, action: any):InitialStateType => {
+export const appReducer = (state = initialState, action: any):AppInitialStateType => {
 
     switch (action.type) {
 

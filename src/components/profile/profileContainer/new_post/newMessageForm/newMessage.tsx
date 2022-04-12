@@ -1,5 +1,5 @@
-import React, {ChangeEvent, useState} from "react"
 import style from "./newMessageForm.module.css"
+import React, {ChangeEvent, useState} from "react"
 import {INewMessageFormProps} from "../../../../../types/types"
 import {ReactComponent as SendIcon} from "../img/send_icon.svg"
 

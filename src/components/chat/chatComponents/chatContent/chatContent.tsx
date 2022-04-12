@@ -18,7 +18,7 @@ const ChatContent: React.FC<IChatContentProps> = ({chatMessage, chatName}) => {
             <h6 className={style.header}>
                 Chat with
                 <span className={style.chatName}>
-                    {chatName ? chatName : "no data!!!"}
+                    {chatName ? chatName : "loading..."}
                 </span>
             </h6>
             <div className={style.chatting}>
