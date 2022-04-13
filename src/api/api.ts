@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios, {AxiosInstance} from "axios"
 import {LoginData} from "../redux/authReducer"
 import {IProfile} from "../redux/profileReducer"
 
@@ -15,13 +15,20 @@ interface IUsersApiClass {
 }
 
 export class usersApiClass implements IUsersApiClass {
-    getUsers(currentPage = 1, pageSize = 5): Promise<any> {
-        return instance.get(`users/?count=${pageSize}&page=${currentPage}`,)
+
+    private _instance: AxiosInstance
+
+    constructor(instance: AxiosInstance) {
+        this._instance = instance
+    }
+
+    public getUsers(currentPage = 1, pageSize = 5): Promise<any> {
+        return this._instance.get(`users/?count=${pageSize}&page=${currentPage}`,)
             .then((response) => response.data)
     }
 }
 
-export const usersAPI = new usersApiClass()
+export const usersAPI = new usersApiClass(instance)
 
 
 interface IFollowUnfollowApiClass {
@@ -30,18 +37,25 @@ interface IFollowUnfollowApiClass {
 }
 
 class followUnfollowApiClass implements IFollowUnfollowApiClass {
-    unFollow(userId: number): Promise<any> {
-        return instance.delete(`follow/${userId}`)
+
+    private _instance: AxiosInstance
+
+    constructor(instance: AxiosInstance) {
+        this._instance = instance
+    }
+
+    public unFollow(userId: number): Promise<any> {
+        return this._instance.delete(`follow/${userId}`)
             .then((response) => response.data)
     }
 
-    follow(userId: number): Promise<any> {
-        return instance.post(`follow/${userId}`)
+    public follow(userId: number): Promise<any> {
+        return this._instance.post(`follow/${userId}`)
             .then((response) => response.data)
     }
 }
 
-export const followUnfollowAPI = new followUnfollowApiClass()
+export const followUnfollowAPI = new followUnfollowApiClass(instance)
 
 
 interface IAuthApiClass {
@@ -52,28 +66,35 @@ interface IAuthApiClass {
 }
 
 class authApiClass implements IAuthApiClass {
-    authMe(): Promise<any> {
-        return instance.get(`auth/me/`)
+
+    private _instance: AxiosInstance
+
+    constructor(instance: AxiosInstance) {
+        this._instance = instance
+    }
+
+    public authMe(): Promise<any> {
+        return this._instance.get(`auth/me/`)
             .then((response) => response.data.data)
     }
 
-    login(loginData: LoginData): Promise<any> {
+    public login(loginData: LoginData): Promise<any> {
         return instance.post(`/auth/login`, loginData)
             .then((response) => response.data)
     }
 
-    getCaptcha(): Promise<any> {
-        return instance.get(`security/get-captcha-url`)
+    public getCaptcha(): Promise<any> {
+        return this._instance.get(`security/get-captcha-url`)
             .then((response) => response.data.url)
     }
 
-    logout(): Promise<any> {
-        return instance.delete(`/auth/login`)
+    public logout(): Promise<any> {
+        return this._instance.delete(`/auth/login`)
             .then((response) => response)
     }
 }
 
-export const authAPI = new authApiClass()
+export const authAPI = new authApiClass(instance)
 
 
 interface IProfileApiClass {
@@ -85,43 +106,50 @@ interface IProfileApiClass {
 }
 
 class profileApiClass implements IProfileApiClass {
-    getUserProfile(userId: number): Promise<any> {
-        return instance.get(`profile/${userId}`)
+
+    private _instance: AxiosInstance
+
+    constructor(instance: AxiosInstance) {
+        this._instance = instance
+    }
+
+    public getUserProfile(userId: number): Promise<any> {
+        return this._instance.get(`profile/${userId}`)
             .then((response) => response.data)
     }
 
-    getUserStatus(userId: number): Promise<any> {
-        return instance.get(`/profile/status/${userId}`)
+    public getUserStatus(userId: number): Promise<any> {
+        return this._instance.get(`/profile/status/${userId}`)
             .then((response) => {
                     return response.data
                 }
             )
     }
 
-    setUserStatus(status: string): Promise<any> {
-        return instance.put(`/profile/status`, {status})
+    public setUserStatus(status: string): Promise<any> {
+        return this._instance.put(`/profile/status`, {status})
             .then((response) => {
                     return response.data
                 }
             )
     }
 
-    savePhoto(file: File): Promise<any> {
+    public savePhoto(file: File): Promise<any> {
         const formData = new FormData()
         formData.append("image", file)
 
         const config = {
             headers: {'Content-Type': 'multipart/form-data'}
         }
-        return instance.put(`/profile/photo`, formData, config)
+        return this._instance.put(`/profile/photo`, formData, config)
             .then((response) => {
                     return response.data
                 }
             )
     }
 
-    setProfileData(data: IProfile): Promise<any> {
-        return instance.put(`/profile/`, data)
+    public setProfileData(data: IProfile): Promise<any> {
+        return this._instance.put(`/profile/`, data)
             .then((response) => {
                     return response.data
                 }
@@ -129,4 +157,4 @@ class profileApiClass implements IProfileApiClass {
     }
 }
 
-export const profileAPI = new profileApiClass()
+export const profileAPI = new profileApiClass(instance)

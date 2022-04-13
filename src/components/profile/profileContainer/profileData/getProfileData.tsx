@@ -14,9 +14,9 @@ class GetProfileData extends React.Component<IGetProfileData> {
         }
     }
 
-    getUserData = (userId: string | number | null | undefined) => {
-        this.props.getUserProfile(userId);
-        this.props.getUserStatusThunkCreator(userId);
+    getUserData = (userId: string | undefined | number | null) => {
+        this.props.getUserProfile(Number(userId))
+        this.props.getUserStatusThunkCreator(Number(userId))
         this.setState({
             userId: userId
         })

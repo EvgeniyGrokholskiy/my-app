@@ -1,17 +1,64 @@
-import {AnyAction} from "redux";
-import {authAPI} from "../api/api";
-import {Dispatch} from "../types/types";
-import {setProfileStatus} from "./profileReducer";
+import {AnyAction, Dispatch} from "redux"
+import {authAPI} from "../api/api"
+import {setProfileStatus} from "./profileReducer"
 
-
-const LOGIN = "MY_APP_/AUTH/LOGIN";
-const LOGOUT = "MY_APP_/AUTH/LOGOUT";
-const SET_USER_DATA = "MY_APP_/AUTH/SET_USER_DATA";
-const SET_ERROR_MESSAGE = "MY_APP_/AUTH/SET_ERROR_MESSAGE";
-const GET_CAPTCHA_SUCCESS = "MY_APP_/AUTH/GET_CAPTCHA_SUCCESS";
+const LOGIN = "MY_APP_/AUTH/LOGIN"
+const LOGOUT = "MY_APP_/AUTH/LOGOUT"
+const SET_USER_DATA = "MY_APP_/AUTH/SET_USER_DATA"
+const SET_ERROR_MESSAGE = "MY_APP_/AUTH/SET_ERROR_MESSAGE"
+const GET_CAPTCHA_SUCCESS = "MY_APP_/AUTH/GET_CAPTCHA_SUCCESS"
 const ENTERED_RIGHT_CAPTCHA = "MY-APP/AUTH/ENTERED_RIGHT_CAPTCHA"
 
-export type AuthInitialStateType = {
+interface ISetUserDataActionPayload {
+    id: number | null,
+    login: string | null,
+    email: string | null,
+    isAuth: boolean
+}
+
+interface ISetUserDataActionAction {
+    type: typeof SET_USER_DATA,
+    payload: ISetUserDataActionPayload,
+}
+
+interface ILoginAction {
+    type: typeof LOGIN,
+    isAuth: boolean,
+    id: number
+}
+
+interface ILogoutAction {
+    type: typeof LOGOUT,
+    isAuth: boolean
+}
+
+interface ISetErrorMessageAction {
+    type: typeof SET_ERROR_MESSAGE,
+    errorMessage: string,
+    isError: boolean
+}
+
+interface ISetCaptchaURLAction {
+    type: typeof GET_CAPTCHA_SUCCESS,
+    captcha: string,
+    isError: boolean
+}
+
+interface IEnteredRightCaptchaAction {
+    type: typeof ENTERED_RIGHT_CAPTCHA,
+    captcha: string,
+    isError: boolean
+}
+
+type TActionsTypes =
+    ISetUserDataActionAction
+    | ILoginAction
+    | ILogoutAction
+    | ISetErrorMessageAction
+    | ISetCaptchaURLAction
+    | IEnteredRightCaptchaAction
+
+export interface AuthInitialStateType {
     id: null | number,
     login: null | string,
     email: null | string,
@@ -38,7 +85,7 @@ export interface LoginData {
     rememberMe: string
 }
 
-export const authReducer = (state = initialState, action: AnyAction) => {
+export const authReducer = (state: AuthInitialStateType = initialState, action: TActionsTypes): AuthInitialStateType => {
     switch (action.type) {
         case SET_USER_DATA: {
             return {
@@ -73,7 +120,7 @@ export const authReducer = (state = initialState, action: AnyAction) => {
             return {
                 ...state,
                 captcha: action.captcha,
-                errorMessage: action.errorMessage,
+                isError: action.isError,
             }
         }
 
@@ -91,8 +138,9 @@ export const authReducer = (state = initialState, action: AnyAction) => {
     }
 }
 
+export type TAuthThunkCreator = () => (dispatch: Dispatch<AnyAction>) => Promise<void>
 
-export const authThunkCreator = () => async (dispatch: Dispatch) => {
+export const authThunkCreator: TAuthThunkCreator = () => async (dispatch: Dispatch<AnyAction>) => {
     let {id, email, login} = await authAPI.authMe()
     if (id !== undefined) {
         sessionStorage.setItem('isAuth', "true");
@@ -100,7 +148,9 @@ export const authThunkCreator = () => async (dispatch: Dispatch) => {
     }
 }
 
-export const loginThunkCreator = (loginData: LoginData) => async (dispatch: Dispatch) => {
+export type TLoginThunkCreator = (loginData: LoginData) => (dispatch: Dispatch<any>) => Promise<void>
+
+export const loginThunkCreator: TLoginThunkCreator = (loginData: LoginData) => async (dispatch: Dispatch<any>) => {
     let responseData = await authAPI.login(loginData)
     if (responseData.resultCode === 0) {
         dispatch(authThunkCreator());
@@ -109,113 +159,63 @@ export const loginThunkCreator = (loginData: LoginData) => async (dispatch: Disp
         if (responseData.resultCode === 10) {
             let captchaURL = await authAPI.getCaptcha();
             dispatch(setCaptchaUrl(captchaURL))
-
         }
         dispatch(setUserData(null, null, null, false));
         dispatch(setErrorMessage(responseData.messages[0]))
     }
 }
 
-export const getNewCaptcha = () => async (dispatch: Dispatch) => {
+export type TGetNewCaptcha = () => (dispatch: Dispatch<AnyAction>) => Promise<void>
+
+export const getNewCaptcha: TGetNewCaptcha = () => async (dispatch: Dispatch<AnyAction>) => {
     let newCaptchaURL = await authAPI.getCaptcha();
     dispatch(setCaptchaUrl(newCaptchaURL))
 }
 
-export const logoutThunkCreator = () => async (dispatch: Dispatch) => {
+export type TLogOutThunkCreator = () => (dispatch: Dispatch) => Promise<void>
+
+export const logoutThunkCreator: TLogOutThunkCreator = () => async (dispatch: Dispatch) => {
     await authAPI.logout();
     sessionStorage.setItem('isAuth', "");
     dispatch(setUserData(null, null, null, false));
     dispatch(setProfileStatus(""));
 }
 
-type SetUserDataActionPayloadType = {
-    id: number | null,
-    login: string | null,
-    email: string | null,
-    isAuth: boolean
-}
-
-type SetUserDataActionType = {
-    type: typeof SET_USER_DATA,
-    payload: SetUserDataActionPayloadType,
-}
-
-export const setUserData = (id: number | null, login: string | null, email: string | null, isAuth: boolean): SetUserDataActionType => {
-    return {
-        type: SET_USER_DATA,
-        payload: {
-            id,
-            login,
-            email,
-            isAuth
-        }
+export const setUserData = (id: number | null, login: string | null, email: string | null, isAuth: boolean): ISetUserDataActionAction => ({
+    type: SET_USER_DATA,
+    payload: {
+        id,
+        login,
+        email,
+        isAuth
     }
-}
+})
 
-type LoginType = {
-    type: typeof LOGIN,
-    isAuth: boolean,
-    id: number
-}
+export const login = (userId: number): ILoginAction => ({
+    type: LOGIN,
+    isAuth: true,
+    id: userId
+})
 
-export const login = (userId: number): LoginType => {
-    return {
-        type: LOGIN,
-        isAuth: true,
-        id: userId
-    }
-}
+export const logout = (): ILogoutAction => ({
+    type: LOGOUT,
+    isAuth: false
+})
 
-type LogoutType = {
-    type: typeof LOGOUT,
-    isAuth: boolean
-}
+export const setErrorMessage = (errorMessage: string): ISetErrorMessageAction => ({
+    type: SET_ERROR_MESSAGE,
+    errorMessage,
+    isError: true
+})
 
-export const logout = (): LogoutType => {
-    return {
-        type: LOGOUT,
-        isAuth: false
-    }
-}
+export const setCaptchaUrl = (captcha: string): ISetCaptchaURLAction => ({
+    type: GET_CAPTCHA_SUCCESS,
+    captcha,
+    isError: true
+})
 
-type SetErrorMessageType = {
-    type: typeof SET_ERROR_MESSAGE,
-    errorMessage: string,
-    isError: boolean
-}
-
-export const setErrorMessage = (errorMessage: string): SetErrorMessageType => {
-    return {
-        type: SET_ERROR_MESSAGE,
-        errorMessage,
-        isError: true
-    }
-}
-
-type SetCaptchaUTLType = {
-    type: typeof GET_CAPTCHA_SUCCESS,
-    captcha: string,
-    isError: boolean
-}
-
-export const setCaptchaUrl = (captcha: string): SetCaptchaUTLType => {
-    return {
-        type: GET_CAPTCHA_SUCCESS,
-        captcha,
-        isError: true
-    }
-}
-
-type EnteredRightCaptchaType = {
-    type: typeof ENTERED_RIGHT_CAPTCHA,
-    captcha: string,
-    isError: boolean
-}
-
-export const enteredRightCaptcha = (): EnteredRightCaptchaType => {
-    return {
-        type: ENTERED_RIGHT_CAPTCHA,
-        captcha: "",
-        isError: false
-    }
-}
+export const enteredRightCaptcha = (): IEnteredRightCaptchaAction => ({
+    type: ENTERED_RIGHT_CAPTCHA,
+    captcha: "",
+    isError: false
+})

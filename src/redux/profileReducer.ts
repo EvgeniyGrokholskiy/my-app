@@ -1,7 +1,6 @@
-import {AnyAction} from "redux";
+import {AnyAction, Dispatch} from "redux";
 import store from "./reduxStore";
 import {profileAPI} from "../api/api";
-import {Dispatch} from "../types/types";
 
 
 const SetPhoto = "MY-APP/PROFILE/SAVE_PHOTO";
@@ -155,43 +154,43 @@ export const profileReducer = (state = initialState, action: AnyAction): IProfil
     }
 };
 
-export const getUserProfileThunkCreator = (userId:number) => async (dispatch:Dispatch) => {
+export const getUserProfileThunkCreator = (userId: number) => async (dispatch: Dispatch) => {
     let data = await profileAPI.getUserProfile(userId)
     dispatch(setUserProfile(data));
 }
 
-export const getUserStatusThunkCreator = (userId:number) => async (dispatch:Dispatch) => {
+export const getUserStatusThunkCreator = (userId: number) => async (dispatch: Dispatch) => {
     let data = await profileAPI.getUserStatus(userId)
     dispatch(setProfileStatus(data));
 }
 
-export const setUserStatusThunkCreator = (status:string) => async (dispatch:Dispatch) => {
+export const setUserStatusThunkCreator = (status: string) => async (dispatch: Dispatch) => {
     let response = await profileAPI.setUserStatus(status);
     if (response.resultCode === 0) {
         dispatch(setProfileStatus(status));
     }
 }
 
-export const savePhoto = (photo:File) => async (dispatch:Dispatch) => {
+export const savePhoto = (photo: File) => async (dispatch: Dispatch) => {
     let response = await profileAPI.savePhoto(photo);
     if (response.resultCode === 0) {
         dispatch(setPhoto(response.data.photos));
     }
 }
 
-export const setUserProfileData = (data: IProfile) => async (dispatch: Dispatch) => {
+export const setUserProfileData = (data: IProfile) => async (dispatch: Dispatch<any>) => {
     let response = await profileAPI.setProfileData(data);
     if (response.resultCode === 0) {
-        dispatch(setUserProfileDataError("", false));
-        dispatch(await getUserProfileThunkCreator(store.getState().auth.id));
+        dispatch(setUserProfileDataError("", false))
+        dispatch(await getUserProfileThunkCreator(Number(store.getState().auth.id)))
         return response
     } else {
-        dispatch(setUserProfileDataError(response.messages, true));
+        dispatch(setUserProfileDataError(response.messages, true))
         return response
     }
 }
 
-export const addPost = (message:string) => {
+export const addPost = (message: string) => {
     return {
         type: AddMessageOnWall,
         message
@@ -205,21 +204,21 @@ export const setUserProfile = (profile: IProfile) => {
     }
 }
 
-export const setProfileStatus = (status:string) => {
+export const setProfileStatus = (status: string) => {
     return {
         type: SetProfileStatus,
         status
     }
 }
 
-export const setPhoto = (photo:File) => {
+export const setPhoto = (photo: File) => {
     return {
         type: SetPhoto,
         photo
     }
 }
 
-export const setUserProfileDataError = (errorMessage:string, error:boolean) => {
+export const setUserProfileDataError = (errorMessage: string, error: boolean) => {
     return {
         type: SetProfileDataError,
         errorMessage,

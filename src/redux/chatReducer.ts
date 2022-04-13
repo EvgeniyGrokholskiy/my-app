@@ -1,30 +1,40 @@
-import {AnyAction} from "redux";
-import {getDate} from "../components/utils/getDate";
+import {getDate} from "../components/utils/getDate"
 
+const SEND_MESSAGE_IN_CHAT = "MY-APP/CHAT/SEND_MESSAGE_IN_CHAT"
+const SET_ACTIVE_CHAT_NAME = "MY-APP/CHAT/SET_ACTIVE_CHAT_NAME"
 
-const NewMessageInChat = "MY-APP/CHAT/SEND_MESSAGE_IN_CHAT";
-const SetActiveChatName = "MY-APP/CHAT/SET_ACTIVE_CHAT_NAME"
+export interface ISendMessageAction {
+    type: typeof SEND_MESSAGE_IN_CHAT,
+    message: string
+}
 
-export type ChatListArrayItem = {
+export interface ISetActiveChatNameAction {
+    type: typeof SET_ACTIVE_CHAT_NAME,
+    activeChatId: number,
+}
+
+type TActionsType = ISendMessageAction | ISetActiveChatNameAction
+
+export interface IChatListArrayItem {
     name: string,
     id: number,
     lastMessage: string,
 }
 
-export type ChatMessageArrayItem = {
+export interface IChatMessageArrayItem {
     message: string,
     type: string,
     id: number,
     data: string,
 }
 
-export type InitialStateType = {
+export interface IChatInitialState {
     activeChatName: string,
-    chatsList: Array<ChatListArrayItem>,
-    chatMessageArray: Array<ChatMessageArrayItem>
+    chatsList: Array<IChatListArrayItem>,
+    chatMessageArray: Array<IChatMessageArrayItem>
 }
 
-const initialState: InitialStateType = {
+const initialState: IChatInitialState = {
     activeChatName: "",
     chatsList: [
         {
@@ -97,75 +107,61 @@ const initialState: InitialStateType = {
             data: "06.06.06"
         },
     ],
-};
+}
 
-export const chatReducer = (state = initialState, action: AnyAction) => {
+export const chatReducer = (state: IChatInitialState = initialState, action: TActionsType) => {
 
-    const isEmptyMessage = (message: string) => (message === '' || message === undefined);
+    const isEmptyMessage = (message: string) => (message === '' || message === undefined)
 
     switch (action.type) {
 
-        case NewMessageInChat: {
+        case SEND_MESSAGE_IN_CHAT: {
 
-            if (isEmptyMessage(action.message)) return state;
+            if (isEmptyMessage(action.message)) return state
 
-            const id = state.chatMessageArray.length + 1;
-            const [day, month, year, hour, minute] = getDate();
+            const id = state.chatMessageArray.length + 1
+            const [day, month, year, hour, minute] = getDate()
 
             let messageObj = {
                 data: `${day}.${month}.${year} ${hour}:${minute}`,
                 message: `${action.message}`,
                 type: "out",
                 id: id,
-            };
+            }
 
             return {
                 ...state,
                 chatMessageArray: [...state.chatMessageArray, messageObj],
-            };
+            }
         }
-        case SetActiveChatName: {
+
+        case SET_ACTIVE_CHAT_NAME: {
 
             let stateCopy = {
                 ...state,
                 chatsList: [...state.chatsList],
-            };
+            }
 
-            stateCopy.chatsList.forEach((chat: ChatListArrayItem) => {
+            stateCopy.chatsList.forEach((chat: IChatListArrayItem) => {
                 if (chat.id === action.activeChatId) {
-                    stateCopy.activeChatName = chat.name;
+                    stateCopy.activeChatName = chat.name
                 }
-            });
+            })
 
-            return stateCopy;
+            return stateCopy
         }
 
-
         default:
-            return state;
-    }
-};
-
-export type SendMessageType = {
-    type: typeof NewMessageInChat,
-    message: string
-}
-
-export const sendMessage = (message: string): SendMessageType => {
-    return {
-        type: NewMessageInChat,
-        message
+            return state
     }
 }
 
-export type SetActiveChatNameType = {
-    type: typeof SetActiveChatName,
-    activeChatId: number,
-}
+export const sendMessage = (message: string): ISendMessageAction => ({
+    type: SEND_MESSAGE_IN_CHAT,
+    message
+})
 
-export const setActiveChatName = (chatId: number): SetActiveChatNameType => {
-    return {
-        type: SetActiveChatName,
-        activeChatId: chatId,
-    }
-}
+export const setActiveChatName = (chatId: number): ISetActiveChatNameAction => ({
+    type: SET_ACTIVE_CHAT_NAME,
+    activeChatId: chatId,
+})

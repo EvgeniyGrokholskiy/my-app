@@ -1,17 +1,16 @@
-import {AnyAction} from "redux";
+import {AnyAction} from "redux"
 
-
-export type FriendsArrayItemType = {
+export interface IFriendsArrayItem {
     name: string,
     job: string,
     id: number,
 }
 
-export type InitialStateType = {
-    friends: Array<FriendsArrayItemType>
+export interface IFriendsArrayInitialStateType {
+    friends: Array<IFriendsArrayItem>
 }
 
-const initialState: InitialStateType = {
+const initialState: IFriendsArrayInitialStateType = {
     friends: [
         {
             name: "Darlene Black",
@@ -42,5 +41,10 @@ const initialState: InitialStateType = {
 };
 
 export const friendsListReducer = (state = initialState, action:AnyAction) => {
-    return state;
+    switch (action.type) {
+        default: {
+            return state
+        }
+
+    }
 }

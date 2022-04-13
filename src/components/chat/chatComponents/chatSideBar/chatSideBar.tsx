@@ -4,12 +4,12 @@ import {NavLink} from "react-router-dom"
 import style from "./chatSideBar.module.css"
 import ChatHeader from "./chatHeader/chatHeader"
 import {IChatSideBarProps} from "../../../../types/types"
-import {ChatListArrayItem} from "../../../../redux/chatReducer"
+import {IChatListArrayItem} from "../../../../redux/chatReducer"
 
 
 const ChatSideBar: React.FC<IChatSideBarProps> = ({chatsList, setActiveChatName}) => {
 
-    let chatsToRender = chatsList.map((chat: ChatListArrayItem) => {
+    let chatsToRender = chatsList.map((chat: IChatListArrayItem) => {
 
         const setActiveChat = () => setActiveChatName(chat.id)
 

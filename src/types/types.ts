@@ -1,14 +1,15 @@
-import React from "react";
+import React from "react"
 import {PathMatch} from "react-router"
-import store from "../redux/reduxStore"
-import {AppInitialStateType} from "../redux/appReducer";
-import {ChangeLanguagesType} from "../redux/footerReducer"
-import {FriendsArrayItemType} from "../redux/friendsListReducer";
+import {AnyAction, Dispatch} from "redux"
+import {IChangeLanguagesAction} from "../redux/footerReducer"
+import {IFriendsArrayItem} from "../redux/friendsListReducer"
 import {AuthInitialStateType, LoginData} from "../redux/authReducer"
-import {IProfileInitialStateType, IWallMessage} from "../redux/profileReducer";
-import {ChatListArrayItem, ChatMessageArrayItem, SendMessageType, SetActiveChatNameType} from "../redux/chatReducer"
+import {AppInitialStateType, IInitAppAction} from "../redux/appReducer"
+import {IProfileInitialStateType, IWallMessage} from "../redux/profileReducer"
+import {IChatListArrayItem, IChatMessageArrayItem, ISendMessageAction, ISetActiveChatNameAction} from "../redux/chatReducer"
 
-export type Dispatch = typeof store.dispatch
+//export type Dispatch = typeof store.dispatch
+
 export type UsersArrayItemType = {
     followed: boolean
     id: number
@@ -39,13 +40,13 @@ export interface IMatchObj {
 /*****Props Types*******/
 
 export interface ISendMessageProps {
-    sendMessage: (message: string) => SendMessageType
+    sendMessage: (message: string) => ISendMessageAction
 }
 
 export interface ISendMessageFormProps {
     sendMessage: (data: any) => void
     message: string
-    setMessage:  React.Dispatch<React.SetStateAction<string>>
+    setMessage: React.Dispatch<React.SetStateAction<string>>
 }
 
 export interface IOutgoingMessage {
@@ -54,13 +55,13 @@ export interface IOutgoingMessage {
 }
 
 export interface IChatContentProps {
-    chatMessage: Array<ChatMessageArrayItem>
+    chatMessage: Array<IChatMessageArrayItem>
     chatName: string
 }
 
 export interface IChatSideBarProps {
-    chatsList: Array<ChatListArrayItem>
-    setActiveChatName: (chatId: number) => SetActiveChatNameType
+    chatsList: Array<IChatListArrayItem>
+    setActiveChatName: (chatId: number) => ISetActiveChatNameAction
 }
 
 export interface IChatHeaderProps {
@@ -75,17 +76,17 @@ export interface IIncomingMessageProps {
 
 export interface IFooterProps {
     languages: string
-    changeLanguages: (languages: string) => ChangeLanguagesType
+    changeLanguages: (languages: string) => IChangeLanguagesAction
 }
 
 export interface IHeaderProps {
-    login: string
+    login: string | null
     isAuth: boolean
     logoutThunkCreator: () => Promise<void>
 }
 
 export interface IAuthProps {
-    login: string
+    login: string | null
     isAuth: boolean
     logoutThunkCreator: () => Promise<void>
 }
@@ -103,7 +104,7 @@ export interface ILoginProps {
 
 export interface IMyFormProps {
     auth: AuthInitialStateType
-    getNewCaptcha:  () => (dispatch: Dispatch) => Promise<void>
+    getNewCaptcha: () => (dispatch: Dispatch) => Promise<void>
     loginThunkCreator: (loginData: LoginData) => (dispatch: Dispatch) => Promise<void>
 }
 
@@ -114,7 +115,7 @@ export interface ICaptchaProps {
 }
 
 export interface IFriendsListProps {
-    friends: Array<FriendsArrayItemType>
+    friends: Array<IFriendsArrayItem>
 }
 
 export interface IFriendCardProps {
@@ -171,10 +172,10 @@ export interface IProfileDataProps {
     auth: AuthInitialStateType
     profileStatus: string
     match: PathMatch<"userId"> | null
-    getUserProfile: Dispatch
-    getUserStatusThunkCreator: Dispatch
+    getUserProfile: (userId: number) => (dispatch: Dispatch) => Promise<void>
+    getUserStatusThunkCreator: (userId: number) => (dispatch: Dispatch<IInitAppAction | AnyAction>) => Promise<void>
     setUserStatusThunkCreator: (status: string) => (dispatch: Dispatch) => Promise<void>
-    authThunkCreator: Dispatch
+    authThunkCreator: () => (dispatch: Dispatch) => Promise<void>
     savePhoto: (photo: File) => (dispatch: Dispatch) => Promise<void>
     setUserProfileData: (data: Record<string, any>) => Promise<any>
 }
@@ -184,10 +185,10 @@ export interface IGetMatchUrlProps {
     auth: AuthInitialStateType
     profileStatus: string
     match: IMatchObj
-    getUserProfile: Dispatch
-    getUserStatusThunkCreator: Dispatch
+    getUserProfile: (userId: number) => (dispatch: Dispatch) => Promise<void>
+    getUserStatusThunkCreator: (userId: number) => (dispatch: Dispatch<IInitAppAction | AnyAction>) => Promise<void>
     setUserStatusThunkCreator: (status: string) => (dispatch: Dispatch) => Promise<void>
-    authThunkCreator: Dispatch
+    authThunkCreator: () => (dispatch: Dispatch) => Promise<void>
     savePhoto: (photo: File) => (dispatch: Dispatch) => Promise<void>
     setUserProfileData: (data: Record<string, any>) => Promise<any>
 }
@@ -197,10 +198,10 @@ export interface IGetProfileData {
     auth: AuthInitialStateType
     profileStatus: string
     match: PathMatch<"userId"> | null
-    getUserProfile: Dispatch
-    getUserStatusThunkCreator: Dispatch
+    getUserProfile: (userId: number) => (dispatch: Dispatch) => Promise<void>
+    getUserStatusThunkCreator: (userId: number) => (dispatch: Dispatch<IInitAppAction | AnyAction>) => Promise<void>
     setUserStatusThunkCreator: (status: string) => (dispatch: Dispatch) => Promise<void>
-    authThunkCreator: Dispatch
+    authThunkCreator: () => (dispatch: Dispatch) => Promise<void>
     savePhoto: (photo: File) => (dispatch: Dispatch) => Promise<void>
     setUserProfileData: (data: Record<string, any>) => Promise<any>
 }
