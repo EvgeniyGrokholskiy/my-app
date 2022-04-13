@@ -2,53 +2,33 @@
 
 import {AppStateType} from "./reduxStore";
 
-export const getAppState = (state: AppStateType) => {
-    return state.app
-}
+/*************App selectors*******************/
 
-export const getProfileState = (state: AppStateType) => {
-    return state.profile
-}
+export const getAppState = (state: AppStateType) => state.app
 
-export const getAuthState = (state: AppStateType) => {
-    return state.auth
-}
+/*****************Auth selectors****************/
 
-export const getAuthLogin = (state: AppStateType) => {
-    return state.auth.login
-}
+export const getAuthState = (state: AppStateType) => state.auth
 
-export const getIsAuthState = (state: AppStateType) => {
-    return state.auth.isAuth
-}
+export const getAuthLogin = (state: AppStateType) => state.auth.login
 
-export const getInitializedState = (state: AppStateType) => {
-    return state.app.initialized
-}
+export const getIsAuthState = (state: AppStateType) => state.auth.isAuth
 
-export const getProfileStatusState = (state: AppStateType) => {
-    return state.profile.profileStatus
-}
+export const getInitializedState = (state: AppStateType) => state.app.initialized
 
-export const getChatPageState = (state: AppStateType) => {
-    return state.chatPage
-}
+/*****************ChatPage selectors*************/
 
-export const getChatList = (state: AppStateType) => {
-    return state.chatPage.chatsList
-}
+export const getChatPageState = (state: AppStateType) => state.chatPage
 
-export const getChatMessageArrayState = (state: AppStateType) => {
-    return state.chatPage.chatMessageArray
-}
+export const getChatList = (state: AppStateType) => state.chatPage.chatsList
 
-export const getActiveChanNameState = (state: AppStateType) => {
-    return state.chatPage.activeChatName
-}
+export const getChatMessageArrayState = (state: AppStateType) => state.chatPage.chatMessageArray
 
-export const getFindUsersState = (state: AppStateType) => {
-    return state.findUsersPage.findUsers
-}
+export const getActiveChanNameState = (state: AppStateType) => state.chatPage.activeChatName
+
+/***************FindUser selectors*******************/
+
+export const getFindUsersState = (state: AppStateType) => state.findUsersPage.findUsers
 
 /*
 export const getFindUsersState = (state:AppStateType) => {  простая логика в селекторе
@@ -66,32 +46,28 @@ export const getFindUsersStateRESELECT = createSelector(getFindUsersState,((user
 }))
 */
 
-export const getCurrentPageState = (state: AppStateType) => {
-    return state.findUsersPage.currentPage
-}
+export const getCurrentPageState = (state: AppStateType) => state.findUsersPage.currentPage
 
-export const getTotalUsersState = (state: AppStateType) => {
-    return state.findUsersPage.totalUsers
-}
+export const getTotalUsersState = (state: AppStateType) => state.findUsersPage.totalUsers
 
-export const getUsersOnPageState = (state: AppStateType) => {
-    return state.findUsersPage.usersOnPage
-}
+export const getUsersOnPageState = (state: AppStateType) => state.findUsersPage.usersOnPage
 
-export const getIsFetchingState = (state: AppStateType) => {
-    return state.findUsersPage.isFetching
-}
+export const getIsFetchingState = (state: AppStateType) => state.findUsersPage.isFetching
 
-export const getIsFollowingInProgressState = (state: AppStateType) => {
-    return state.findUsersPage.isFollowingInProgress
-}
+export const getIsFollowingInProgressState = (state: AppStateType) => state.findUsersPage.isFollowingInProgress
 
-export const getFriendListState = (state: AppStateType) => {
-    return state.friendsList.friends
-}
+/*********FriendsList selectors***********/
 
-export const getWallMessageArrayState = (state: AppStateType) => {
-    return state.profile.wallMessageArray
-}
+export const getFriendListState = (state: AppStateType) => state.friendsList.friends
+
+/*********Profile selectors************/
+
+export const getProfileState = (state: AppStateType) => state.profile
+
+export const getProfileStatusState = (state: AppStateType) => state.profile.profileStatus
+
+export const getWallMessageArrayState = (state: AppStateType) => state.profile.wallMessageArray
+
+/*******Footer selectors***********/
 
 export const getLanguages = (state: AppStateType) => state.footer.languages

@@ -1,5 +1,5 @@
 import React from "react"
-import style from './wall.module.css'
+import style from "./wall.module.css"
 import {IWallProps} from "../../../../types/types"
 import {IWallMessage} from "../../../../redux/profileReducer"
 import PostOnWall from "./wallComponents/postOnWall/postOnWall"

@@ -15,9 +15,13 @@ const ProfileImageBlock: React.FC<IProfileImageBlockProps> = ({
     return (
         <div className={style.imageWrapper}>
             {
-                state.profile.photos && <img className={style.image}
-                                             src={state.profile.photos.large ? state.profile.photos.large : photo}
-                                             alt=""/>
+                state.profile.photos
+                    ?
+                    <img className={style.image}
+                         src={state.profile.photos.large ? state.profile.photos.large : photo}
+                         alt=""/>
+                    :
+                    <img className={style.image} src={photo} alt=""/>
             }
             {
                 auth.id && !match ? <ChangePhotoButton savePhoto={savePhoto}/> : <></>

@@ -1,9 +1,14 @@
-import {AnyAction} from "redux";
+import {AnyAction} from "redux"
 
 export type InitialStateType = {}
 
 const initialState:InitialStateType = {}
 
 export const musicReducer = (state = initialState, action:AnyAction) => {
-    return state;
+    switch (action.type) {
+        default: {
+            return state
+
+        }
+    }
 }

@@ -6,7 +6,7 @@ import loadingGif from "../../findUsers/img/loading.gif"
 const Loading:React.FC = () => {
     return (
         <div className={style.container}>
-            <img className={style.loadingGif} src={loadingGif} alt={''} />
+            <img className={style.loadingGif} src={loadingGif} alt={""} />
         </div>
     )
 }

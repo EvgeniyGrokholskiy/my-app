@@ -43,7 +43,7 @@ const MyForm: React.FC<IMyFormProps> = ({auth, loginThunkCreator, getNewCaptcha}
                     {
                         error && <span className={style.errorSpan}>{errorMessage}</span>
                     }
-                    <br className={''}/>
+                    <br className={""}/>
                     <button className={style.button} type="submit">Login</button>
                 </form>
             )}

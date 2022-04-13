@@ -184,7 +184,7 @@ export interface IGetMatchUrlProps {
     state: IProfileInitialStateType
     auth: AuthInitialStateType
     profileStatus: string
-    match: IMatchObj
+    match: PathMatch<"userId"> | null
     getUserProfile: (userId: number) => (dispatch: Dispatch) => Promise<void>
     getUserStatusThunkCreator: (userId: number) => (dispatch: Dispatch<IInitAppAction | AnyAction>) => Promise<void>
     setUserStatusThunkCreator: (status: string) => (dispatch: Dispatch) => Promise<void>
@@ -193,7 +193,7 @@ export interface IGetMatchUrlProps {
     setUserProfileData: (data: Record<string, any>) => Promise<any>
 }
 
-export interface IGetProfileData {
+export interface IGetProfileDataProps {
     state: IProfileInitialStateType
     auth: AuthInitialStateType
     profileStatus: string

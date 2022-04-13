@@ -2,22 +2,21 @@ import "./App.css"
 import React from "react"
 import {connect} from "react-redux"
 import {IAppProps} from "./types/types"
-import News from "./components/news/news"
-import Music from "./components/music/music"
 import {getAppState} from "./redux/selectors"
 import {Route, Routes} from "react-router-dom"
 import {AppStateType} from "./redux/reduxStore"
 import {initializeApp} from "./redux/appReducer"
-import Profile from "./components/profile/Profile"
-import Settings from "./components/settings/settings"
 import Loading from "./components/commons/loading/loading"
-import ChatContainer from "./components/chat/chatContainer"
 import LoginContainer from "./components/login/loginContainer"
 import FooterContainer from "./components/commons/footer/footerContainer"
 import HeaderContainer from "./components/commons/header/HeaderContainer"
 
-
-const FindUsers = React.lazy(() => import('./components/findUsers/findUsers'))
+const FindUsers = React.lazy(() => import("./components/findUsers/findUsers"))
+const Profile = React.lazy(() => import("./components/profile/Profile"))
+const ChatContainer = React.lazy(() => import("./components/chat/chatContainer"))
+const News = React.lazy(() => import("./components/news/news"))
+const Music = React.lazy(() => import("./components/music/music"))
+const Settings = React.lazy(() => import("./components/settings/settings"))
 
 
 class App extends React.Component<IAppProps> {
@@ -41,11 +40,21 @@ class App extends React.Component<IAppProps> {
                         <Route path="/users" element={
                             <React.Suspense fallback={<Loading/>}><FindUsers/></React.Suspense>
                         }/>
-                        <Route path="/profile/*" element={<Profile/>}/>
-                        <Route path="/chat/*" element={<ChatContainer/>}/>
-                        <Route path="/news/*" element={<News/>}/>
-                        <Route path="/music/*" element={<Music/>}/>
-                        <Route path="/settings/*" element={<Settings/>}/>
+                        <Route path="/profile/*" element={
+                            <React.Suspense fallback={<Loading/>}><Profile/></React.Suspense>
+                        }/>
+                        <Route path="/chat/*" element={
+                            <React.Suspense fallback={<Loading/>}><ChatContainer/></React.Suspense>
+                        }/>
+                        <Route path="/news/*" element={
+                            <React.Suspense fallback={<Loading/>}><News/></React.Suspense>
+                        }/>
+                        <Route path="/music/*" element={
+                            <React.Suspense fallback={<Loading/>}><Music/></React.Suspense>
+                        }/>
+                        <Route path="/settings/*" element={
+                            <React.Suspense fallback={<Loading/>}><Settings/></React.Suspense>
+                        }/>
                     </Routes>
                 </main>
                 <footer>

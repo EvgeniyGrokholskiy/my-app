@@ -1,13 +1,13 @@
 import React from "react"
 import ProfileData from "./profileData"
 import WallContainer from "../wall/wallContainer"
-import {IGetProfileData} from "../../../../types/types"
+import {IGetProfileDataProps} from "../../../../types/types"
 import NewPostContainer from "../new_post/new_postContainer"
 import StatusBarWithHooks from "../status/statusBarWithHooks"
 
 
-class GetProfileData extends React.Component<IGetProfileData> {
-    constructor(props: IGetProfileData) {
+class GetProfileData extends React.Component<IGetProfileDataProps> {
+    constructor(props: IGetProfileDataProps) {
         super(props);
         this.state = {
             userId: null
@@ -28,7 +28,7 @@ class GetProfileData extends React.Component<IGetProfileData> {
         this.getUserData(userId);
     }
 
-    componentDidUpdate(prevProps: IGetProfileData, prevState: any) {
+    componentDidUpdate(prevProps: IGetProfileDataProps, prevState: any) {
         let userId = this.props.match ? this.props.match.params.userId : this.props.auth.id
         if (userId !== prevState.userId) {
             this.getUserData(userId);
