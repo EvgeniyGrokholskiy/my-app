@@ -14,12 +14,13 @@ interface IUsersApiClass {
     getUsers: (currentPage: number, pageSize: number) => Promise<any>
 }
 
-export class usersApiClass implements IUsersApiClass {
+class usersApiClass implements IUsersApiClass {
 
     private _instance: AxiosInstance
 
     constructor(instance: AxiosInstance) {
         this._instance = instance
+        this.getUsers = this.getUsers.bind(this)
     }
 
     public getUsers(currentPage = 1, pageSize = 5): Promise<any> {
@@ -29,6 +30,26 @@ export class usersApiClass implements IUsersApiClass {
 }
 
 export const usersAPI = new usersApiClass(instance)
+
+interface IGetFriendsApiClass {
+    getFriends: () => Promise<any>
+}
+
+class getFriendsApiClass implements IGetFriendsApiClass {
+
+    private _instance: AxiosInstance
+
+    constructor(test: AxiosInstance) {
+        this._instance = test
+        this.getFriends = this.getFriends.bind(this)
+    }
+
+    getFriends(): Promise<any> {
+        return this._instance.get("users/?friend=true").then((response)=>response.data.items)
+    }
+}
+
+export const getFriendsAPI = new getFriendsApiClass(instance)
 
 
 interface IFollowUnfollowApiClass {
@@ -42,6 +63,8 @@ class followUnfollowApiClass implements IFollowUnfollowApiClass {
 
     constructor(instance: AxiosInstance) {
         this._instance = instance
+        this.follow = this.follow.bind(this)
+        this.unFollow = this.unFollow.bind(this)
     }
 
     public unFollow(userId: number): Promise<any> {
@@ -71,6 +94,10 @@ class authApiClass implements IAuthApiClass {
 
     constructor(instance: AxiosInstance) {
         this._instance = instance
+        this.authMe = this.authMe.bind(this)
+        this.login = this.login.bind(this)
+        this.logout = this.logout.bind(this)
+        this.getCaptcha = this.getCaptcha.bind(this)
     }
 
     public authMe(): Promise<any> {
@@ -111,6 +138,11 @@ class profileApiClass implements IProfileApiClass {
 
     constructor(instance: AxiosInstance) {
         this._instance = instance
+        this.getUserProfile = this.getUserProfile.bind(this)
+        this.getUserStatus = this.getUserStatus.bind(this)
+        this.setUserStatus = this.setUserStatus.bind(this)
+        this.setProfileData = this.setProfileData.bind(this)
+        this.savePhoto = this.savePhoto.bind(this)
     }
 
     public getUserProfile(userId: number): Promise<any> {
