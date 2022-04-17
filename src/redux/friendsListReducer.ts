@@ -42,9 +42,8 @@ const initialState: IFriendsArrayInitialStateType = {
 
 export const friendsListReducer = (state = initialState, action:AnyAction) => {
     switch (action.type) {
-        default: {
+        default:
             return state
-        }
 
     }
 }

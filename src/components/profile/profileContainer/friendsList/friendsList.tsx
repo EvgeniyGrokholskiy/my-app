@@ -1,9 +1,9 @@
 import React, {useEffect} from "react"
 import style from "./friendsList.module.css"
 import FriendCard from "./friendCard/friendCard"
+import {getFriendsAPI} from "../../../../api/api"
 import {IFriendsListProps} from "../../../../types/types"
 import {IFriendsArrayItem} from "../../../../redux/friendsListReducer"
-import {getFriendsAPI} from "../../../../api/api";
 
 
 const FriendsList: React.FC<IFriendsListProps> = ({friends}) => {

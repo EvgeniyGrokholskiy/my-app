@@ -19,13 +19,10 @@ export const appReducer = (state: AppInitialStateType = initialState, action: II
 
     switch (action.type) {
 
-        case INIT_APP: {
-
+        case INIT_APP:
             return {
-                ...state,
-                initialized: true
+                ...state, initialized: true
             }
-        }
 
         default:
             return state

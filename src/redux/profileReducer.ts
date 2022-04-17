@@ -135,7 +135,7 @@ export const profileReducer = (state = initialState, action: TActionsTypes): IPr
 
     switch (action.type) {
 
-        case ADD_MESSAGE_ON_WALL: {
+        case ADD_MESSAGE_ON_WALL:
             if (isEmptyMessage(action.message)) return state;
 
             let id = state.wallMessageArray.length + 1
@@ -143,50 +143,36 @@ export const profileReducer = (state = initialState, action: TActionsTypes): IPr
                 message: action.message,
                 likeCount: 0,
                 id: id,
-            };
-
-            return {
-                ...state,
-                wallMessageArray: [...state.wallMessageArray, messageObj],
-            };
-        }
-
-        case SET_USERS_PROFILE: {
-            return {
-                ...state,
-                profile: action.profile
             }
-        }
 
-        case SET_PROFILE_STATUS: {
             return {
-                ...state,
-                profileStatus: action.status
+                ...state, wallMessageArray: [...state.wallMessageArray, messageObj],
             }
-        }
 
-        case SAVE_PHOTO: {
+        case SET_USERS_PROFILE:
             return {
-                ...state,
-                profile: {...state.profile, photos: action.photo}
+                ...state, profile: action.profile
             }
-        }
 
-        case UPDATE_PROFILE_DATA_ERROR: {
+        case SET_PROFILE_STATUS:
             return {
-                ...state,
-                sendErrorMessage: action.errorMessage,
-                error: action.isError
+                ...state, profileStatus: action.status
             }
-        }
 
-        case RESET_SEND_ERROR: {
+        case SAVE_PHOTO:
             return {
-                ...state,
-                sendErrorMessage: action.sendErrorMessage,
-                error: action.error
+                ...state, profile: {...state.profile, photos: action.photo}
             }
-        }
+
+        case UPDATE_PROFILE_DATA_ERROR:
+            return {
+                ...state, sendErrorMessage: action.errorMessage, error: action.isError
+            }
+
+        case RESET_SEND_ERROR:
+            return {
+                ...state, sendErrorMessage: action.sendErrorMessage, error: action.error
+            }
 
         default:
             return state

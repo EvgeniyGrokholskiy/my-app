@@ -6,8 +6,8 @@ const initialState:InitialStateType = {}
 
 export const settingsReducer = (state = initialState, action:AnyAction) => {
     switch (action.type) {
-        default: {
+        default:
             return state
-        }
+
     }
 }

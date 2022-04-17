@@ -72,7 +72,7 @@ export const findUsersReducer = (state = initialState, action: TActionsTypes) =>
 
     switch (action.type) {
 
-        case TO_FOLLOW_TO_UNFOLLOW_FLOW: {
+        case TO_FOLLOW_TO_UNFOLLOW_FLOW:
             return {
                 ...state,
                 findUsers: state.findUsers.map((user) => {
@@ -82,45 +82,34 @@ export const findUsersReducer = (state = initialState, action: TActionsTypes) =>
                     return user
                 })
             }
-        }
 
-        case SET_USERS: {
+        case SET_USERS:
             return {
-                ...state,
-                findUsers: [...action.users],
-                currentPage: action.page
+                ...state, findUsers: [...action.users], currentPage: action.page
             }
-        }
 
-        case SHOW_PAGE: {
+        case SHOW_PAGE:
             return {
-                ...state,
-                currentPage: action.selectedPage
+                ...state, currentPage: action.selectedPage
             }
-        }
 
-        case SET_TOTAL_USER_COUNT: {
+        case SET_TOTAL_USER_COUNT:
             return {
-                ...state,
-                totalUsers: action.totalUsers
+                ...state, totalUsers: action.totalUsers
             }
-        }
 
-        case SET_LOADER: {
+        case SET_LOADER:
             return {
-                ...state,
-                isFetching: action.isFetching
+                ...state, isFetching: action.isFetching
             }
-        }
 
-        case FOLLOWING_IN_PROGRESS: {
+        case FOLLOWING_IN_PROGRESS:
             return {
                 ...state,
                 isFollowingInProgress: action.isInProgress
                     ? [...state.isFollowingInProgress, action.userId]
                     : state.isFollowingInProgress.filter(id => id !== action.userId)
             }
-        }
 
         default:
             return state

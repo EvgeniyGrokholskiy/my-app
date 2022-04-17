@@ -1,5 +1,5 @@
-import {AnyAction, Dispatch} from "redux"
 import {authAPI} from "../api/api"
+import {AnyAction, Dispatch} from "redux"
 import {setProfileStatus} from "./profileReducer"
 
 const LOGIN = "MY_APP_/AUTH/LOGIN"
@@ -87,54 +87,39 @@ export interface LoginData {
 
 export const authReducer = (state: AuthInitialStateType = initialState, action: TActionsTypes): AuthInitialStateType => {
     switch (action.type) {
-        case SET_USER_DATA: {
+        case SET_USER_DATA:
             return {
-                ...state,
-                ...action.payload,
+                ...state, ...action.payload,
             }
-        }
 
-        case LOGIN: {
+        case LOGIN:
             return {
-                ...state,
-                isAuth: action.isAuth
+                ...state, isAuth: action.isAuth
             }
-        }
 
-        case LOGOUT: {
+        case LOGOUT:
             return {
-                ...state,
-                isAuth: action.isAuth
+                ...state, isAuth: action.isAuth
             }
-        }
 
-        case SET_ERROR_MESSAGE: {
+        case SET_ERROR_MESSAGE:
             return {
-                ...state,
-                errorMessage: action.errorMessage,
-                isError: action.isError
+                ...state, errorMessage: action.errorMessage, isError: action.isError
             }
-        }
 
-        case GET_CAPTCHA_SUCCESS: {
+        case GET_CAPTCHA_SUCCESS:
             return {
-                ...state,
-                captcha: action.captcha,
-                isError: action.isError,
+                ...state, captcha: action.captcha, isError: action.isError,
             }
-        }
 
-        case ENTERED_RIGHT_CAPTCHA: {
+        case ENTERED_RIGHT_CAPTCHA:
             return {
-                ...state,
-                captcha: action.captcha,
-                isError: action.isError
+                ...state, captcha: action.captcha, isError: action.isError
             }
-        }
 
-        default: {
+        default:
             return state;
-        }
+
     }
 }
 

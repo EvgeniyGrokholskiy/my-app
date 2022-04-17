@@ -17,12 +17,11 @@ export const footerReducer = (state: IFooterInitialState = initialState, action:
 
     switch (action.type) {
 
-        case CHANGE_LANGUAGES: {
+        case CHANGE_LANGUAGES:
             return {
                 ...state,
                 languages: action.languages
             }
-        }
 
         default:
             return state

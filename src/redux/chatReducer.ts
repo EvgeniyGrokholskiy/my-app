@@ -115,7 +115,7 @@ export const chatReducer = (state: IChatInitialState = initialState, action: TAc
 
     switch (action.type) {
 
-        case SEND_MESSAGE_IN_CHAT: {
+        case SEND_MESSAGE_IN_CHAT:
 
             if (isEmptyMessage(action.message)) return state
 
@@ -130,16 +130,13 @@ export const chatReducer = (state: IChatInitialState = initialState, action: TAc
             }
 
             return {
-                ...state,
-                chatMessageArray: [...state.chatMessageArray, messageObj],
+                ...state, chatMessageArray: [...state.chatMessageArray, messageObj],
             }
-        }
 
-        case SET_ACTIVE_CHAT_NAME: {
+        case SET_ACTIVE_CHAT_NAME:
 
             let stateCopy = {
-                ...state,
-                chatsList: [...state.chatsList],
+                ...state, chatsList: [...state.chatsList],
             }
 
             stateCopy.chatsList.forEach((chat: IChatListArrayItem) => {
@@ -149,7 +146,6 @@ export const chatReducer = (state: IChatInitialState = initialState, action: TAc
             })
 
             return stateCopy
-        }
 
         default:
             return state
