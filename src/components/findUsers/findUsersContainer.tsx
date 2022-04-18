@@ -33,7 +33,7 @@ class UsersContainer extends React.Component<IUsersContainerProps> {
 
         return (
             <>
-                {this.props.isFetching ? <Loading/> :<></>}
+                {this.props.isFetching ? <Loading/> : <></>}
                 <UserCard {...this.props} onPageChanged={this.onPageChanged}/>
             </>
         )
@@ -50,7 +50,13 @@ const mapStateToProps = (state: AppStateType) => ({
     isFollowingInProgress: getIsFollowingInProgressState(state),
 })
 
+const mapDispatchToProps = {
+    getUsers,
+    setFollow,
+    setUnfollow,
+}
 
-const FindUsersContainer = connect(mapStateToProps, {getUsers,setUnfollow,setFollow,})(UsersContainer)
+
+const FindUsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
 
 export default FindUsersContainer

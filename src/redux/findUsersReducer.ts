@@ -1,6 +1,7 @@
 import {Dispatch} from "redux"
 import {UsersArrayItemType} from "../types/types"
 import {followUnfollowAPI, usersAPI} from "../api/api"
+import {setIsRefresh} from "./friendsListReducer";
 
 const SET_USERS = "MY-APP/FIND-USER/SET_USERS"
 const SHOW_PAGE = "MY-APP/FIND-USER/SHOW_PAGE"
@@ -135,6 +136,7 @@ const followUnfollowFlow: TFollowUnfollowFlow = async (dispatch: Dispatch, userI
         dispatch(actionCreator(userId, flow))
     }
     dispatch(followingInProgress(false, userId))
+    dispatch(setIsRefresh(true))
 }
 
 export type TSetUnfollow = (userId: number, flow: boolean) => (dispatch: Dispatch) => void

@@ -29,14 +29,14 @@ const UserCard: React.FC<IUserCardProps> = React.memo(({
             />
 
             {
-                findUsers.map((user:UsersArrayItemType) => {
+                findUsers.map((user: UsersArrayItemType) => {
 
                     const toUnfollow = () => {
-                        setUnfollow(user.id, false);
+                        setUnfollow(user.id, false)
                     }
 
                     const toFollow = () => {
-                        setFollow(user.id, true);
+                        setFollow(user.id, true)
                     }
 
                     return (
@@ -47,8 +47,10 @@ const UserCard: React.FC<IUserCardProps> = React.memo(({
                                 <img className={style.photo}
                                      src={user.photos.small !== null ? user.photos.small : photo} alt=""/>
                                 {(user.followed) ?
-                                    <button disabled={isFollowingInProgress.some((id: number) => id === user.id)} onClick={toUnfollow} className={style.button} >Unfollow</button> :
-                                    <button disabled={isFollowingInProgress.some((id: number) => id === user.id)} onClick={toFollow} className={style.button}>Follow</button>}
+                                    <button disabled={isFollowingInProgress.some((id: number) => id === user.id)}
+                                            onClick={toUnfollow} className={style.button}>Unfollow</button> :
+                                    <button disabled={isFollowingInProgress.some((id: number) => id === user.id)}
+                                            onClick={toFollow} className={style.button}>Follow</button>}
                                 <NavLink to={`/profile/${user.id}`} className={style.linkToProfile}>Open
                                     Profile</NavLink>
                             </div>

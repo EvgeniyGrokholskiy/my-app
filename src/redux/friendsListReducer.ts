@@ -1,49 +1,62 @@
-import {AnyAction} from "redux"
+const SET_IS_REFRESH = "MY_APP/SRC/REDUX/FRIENDS_LIST_REDUCER/SET_IS_REFRESH"
+const SET_FRIENDS_IN_LIST = "MY_APP/SRC/REDUX/FRIENDS_LIST_REDUCER/SET_FRIENDS_IN_LIST"
+
+export interface ISetFriendInListAction {
+    type: typeof SET_FRIENDS_IN_LIST
+    arrayOfFriends: Array<IFriendsArrayItem>
+}
+
+export interface ISetIsRefresh {
+    type: typeof SET_IS_REFRESH
+    status: boolean
+}
+
+type TActionsTypes = ISetIsRefresh | ISetFriendInListAction
 
 export interface IFriendsArrayItem {
-    name: string,
-    job: string,
+    followed: boolean,
     id: number,
+    name: string,
+    photos: { small: null | string, large: null | string },
+    status: null | string,
+    uniqueUrlName: null | string,
 }
 
 export interface IFriendsArrayInitialStateType {
+    isRefresh: boolean
     friends: Array<IFriendsArrayItem>
 }
 
 const initialState: IFriendsArrayInitialStateType = {
-    friends: [
-        {
-            name: "Darlene Black",
-            job: "HR-manager, 10 000 connec...",
-            id: 1,
-        },
-        {
-            name: "Theresa Steward",
-            job: "iOS developer",
-            id: 2,
-        },
-        {
-            name: "Brandon Wilson",
-            job: "Senior UX designer",
-            id: 3,
-        },
-        {
-            name: "Kyle Fisher",
-            job: "Product designer at Com...",
-            id: 4,
-        },
-        {
-            name: "Audrey Alexander",
-            job: "Team lead at Google",
-            id: 5,
-        }
-    ],
-};
+    isRefresh: false,
+    friends: []
+}
 
-export const friendsListReducer = (state = initialState, action:AnyAction) => {
+export const friendsListReducer = (state = initialState, action: TActionsTypes) => {
     switch (action.type) {
+        case SET_IS_REFRESH:
+            return {
+                ...state, isRefresh: action.status
+            }
+
+
+        case SET_FRIENDS_IN_LIST:
+            return {
+                ...state, friends: action.arrayOfFriends
+            }
+
         default:
             return state
 
     }
 }
+
+export const setFriendInList = (arrayOfFriends: Array<IFriendsArrayItem>): ISetFriendInListAction => ({
+    type: SET_FRIENDS_IN_LIST,
+    arrayOfFriends
+})
+
+export const setIsRefresh = (status: boolean): ISetIsRefresh => ({
+    type: SET_IS_REFRESH,
+    status
+})

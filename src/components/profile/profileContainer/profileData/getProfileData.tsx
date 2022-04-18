@@ -44,7 +44,7 @@ class GetProfileData extends React.Component<IGetProfileDataProps> {
                     setUserStatusThunkCreator={this.props.setUserStatusThunkCreator}
                 />
                 <NewPostContainer/>
-                <WallContainer wallMessageArray={[]}/>
+                <WallContainer/>
             </>
         )
     }

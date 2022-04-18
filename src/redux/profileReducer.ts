@@ -5,8 +5,9 @@ import {profileAPI} from "../api/api"
 const SAVE_PHOTO = "MY-APP/PROFILE/SAVE_PHOTO"
 const RESET_SEND_ERROR = "MY-APP/PROFILE/RESET_SEND_ERROR"
 const SET_USERS_PROFILE = "MY-APP/PROFILE/SET_USERS_PROFILE"
-const ADD_MESSAGE_ON_WALL = "MY-APP/PROFILE/ADD_MESSAGE_ON_WALL"
 const SET_PROFILE_STATUS = "MY-APP/PROFILE/SET_PROFILE_STATUS"
+const ADD_MESSAGE_ON_WALL = "MY-APP/PROFILE/ADD_MESSAGE_ON_WALL"
+const SET_LIKE_TO_MESSAGE = "MY-APP/PROFILE/SET_LIKE_TO_MESSAGE"
 const UPDATE_PROFILE_DATA_ERROR = "MY-APP/PROFILE/UPDATE_PROFILE_DATA_ERROR"
 
 interface ISetPhotoAction {
@@ -35,6 +36,11 @@ interface ISetProfileStatusAction {
     status: string
 }
 
+export interface ISetLikeToMessageAction {
+    type: typeof SET_LIKE_TO_MESSAGE
+    id: number
+}
+
 interface IUpdateProfileDataErrorAction {
     type: typeof UPDATE_PROFILE_DATA_ERROR
     errorMessage: string
@@ -47,6 +53,7 @@ type TActionsTypes =
     | ISetUserProfileAction
     | IAddMessageOnWallAction
     | ISetProfileStatusAction
+    | ISetLikeToMessageAction
     | IUpdateProfileDataErrorAction
 
 export interface IWallMessage {
@@ -169,6 +176,17 @@ export const profileReducer = (state = initialState, action: TActionsTypes): IPr
                 ...state, sendErrorMessage: action.errorMessage, error: action.isError
             }
 
+        case SET_LIKE_TO_MESSAGE:
+            return {
+                ...state, wallMessageArray: [...state.wallMessageArray.map((item) => {
+                    if (item.id === action.id) {
+                        item.likeCount++
+                        return item
+                    }
+                    return item
+                })]
+            }
+
         case RESET_SEND_ERROR:
             return {
                 ...state, sendErrorMessage: action.sendErrorMessage, error: action.error
@@ -213,7 +231,7 @@ export const savePhoto: TSavePhoto = (photo: File) => async (dispatch: Dispatch)
 
 export type TSetUserProfileData = (data: IProfile) => (dispatch: Dispatch<any>) => Promise<any>
 
-export const setUserProfileData = (data: IProfile) => async (dispatch: Dispatch<any>) => {
+export const setUserProfileData: TSetUserProfileData = (data: IProfile) => async (dispatch: Dispatch<any>) => {
     let response = await profileAPI.setProfileData(data);
     if (response.resultCode === 0) {
         dispatch(setUserProfileDataError("", false))
@@ -225,41 +243,36 @@ export const setUserProfileData = (data: IProfile) => async (dispatch: Dispatch<
     }
 }
 
-export const addPost = (message: string): IAddMessageOnWallAction => {
-    return {
-        type: ADD_MESSAGE_ON_WALL,
-        message
-    };
-}
+export const addPost = (message: string): IAddMessageOnWallAction => ({
+    type: ADD_MESSAGE_ON_WALL,
+    message
+})
 
-export const setUserProfile = (profile: IProfile): ISetUserProfileAction => {
-    return {
-        type: SET_USERS_PROFILE,
-        profile
-    }
-}
+export const setUserProfile = (profile: IProfile): ISetUserProfileAction => ({
+    type: SET_USERS_PROFILE,
+    profile
+})
 
-export const setProfileStatus = (status: string): ISetProfileStatusAction => {
-    return {
-        type: SET_PROFILE_STATUS,
-        status
-    }
-}
+export const setProfileStatus = (status: string): ISetProfileStatusAction => ({
+    type: SET_PROFILE_STATUS,
+    status
+})
 
-export const setPhoto = (photo: IPhotosObjInProfile): ISetPhotoAction => {
-    return {
-        type: SAVE_PHOTO,
-        photo
-    }
-}
+export const setPhoto = (photo: IPhotosObjInProfile): ISetPhotoAction => ({
+    type: SAVE_PHOTO,
+    photo
+})
 
-export const setUserProfileDataError = (errorMessage: string, isError: boolean): IUpdateProfileDataErrorAction => {
-    return {
-        type: UPDATE_PROFILE_DATA_ERROR,
-        errorMessage,
-        isError
-    }
-}
+export const setUserProfileDataError = (errorMessage: string, isError: boolean): IUpdateProfileDataErrorAction => ({
+    type: UPDATE_PROFILE_DATA_ERROR,
+    errorMessage,
+    isError
+})
+
+export const setLikeToMessage = (id: number): ISetLikeToMessageAction => ({
+    type: SET_LIKE_TO_MESSAGE,
+    id
+})
 
 export const resetSendError = (): IResetSendErrorAction => {
     return {

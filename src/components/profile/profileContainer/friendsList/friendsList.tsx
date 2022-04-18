@@ -6,15 +6,27 @@ import {IFriendsListProps} from "../../../../types/types"
 import {IFriendsArrayItem} from "../../../../redux/friendsListReducer"
 
 
-const FriendsList: React.FC<IFriendsListProps> = ({friends}) => {
-
+const FriendsList: React.FC<IFriendsListProps> = ({friends, setFriendInList, setIsRefresh, isRefresh}) => {
     const friendsListToRender = friends.map((friend: IFriendsArrayItem) => {
-        return <FriendCard key={friend.id} name={friend.name} job={friend.job}/>;
+        return <FriendCard key={friend.id} name={friend.name} photos={friend.photos}/>;
     })
 
     useEffect(() => {
-        getFriendsAPI.getFriends().then((response) => console.log(response))
-    }, [])
+        if (isRefresh) {
+            getFriendsAPI.getFriends().then((response) => {
+                    setFriendInList(response)
+                    setIsRefresh(false)
+                }
+            )
+        }
+    }, [isRefresh, setFriendInList, setIsRefresh])
+
+    useEffect(() => {
+        getFriendsAPI.getFriends().then((response) => {
+                setFriendInList(response)
+            }
+        )
+    }, [setFriendInList])
 
     return (
         <div className={style.container}>

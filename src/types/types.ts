@@ -2,11 +2,16 @@ import React from "react"
 import {PathMatch} from "react-router"
 import {AnyAction, Dispatch} from "redux"
 import {IChangeLanguagesAction} from "../redux/footerReducer"
-import {IFriendsArrayItem} from "../redux/friendsListReducer"
+import {IFriendsArrayItem, ISetFriendInListAction, ISetIsRefresh} from "../redux/friendsListReducer"
 import {AuthInitialStateType, LoginData} from "../redux/authReducer"
 import {AppInitialStateType, IInitAppAction} from "../redux/appReducer"
-import {IProfileInitialStateType, IWallMessage} from "../redux/profileReducer"
-import {IChatListArrayItem, IChatMessageArrayItem, ISendMessageAction, ISetActiveChatNameAction} from "../redux/chatReducer"
+import {IProfileInitialStateType, ISetLikeToMessageAction, IWallMessage} from "../redux/profileReducer"
+import {
+    IChatListArrayItem,
+    IChatMessageArrayItem,
+    ISendMessageAction,
+    ISetActiveChatNameAction
+} from "../redux/chatReducer"
 
 //export type Dispatch = typeof store.dispatch
 
@@ -116,11 +121,14 @@ export interface ICaptchaProps {
 
 export interface IFriendsListProps {
     friends: Array<IFriendsArrayItem>
+    isRefresh: boolean
+    setIsRefresh: (status: boolean) => ISetIsRefresh
+    setFriendInList: (arrayOfFriends: IFriendsArrayItem[]) => ISetFriendInListAction
 }
 
 export interface IFriendCardProps {
-    name: string
-    job: string
+    name: string,
+    photos: { small: null | string, large: null | string }
 }
 
 export interface INewMessageFormProps {
@@ -128,12 +136,15 @@ export interface INewMessageFormProps {
 }
 
 export interface IWallProps {
+    setLikeToMessage: (id: number) => ISetLikeToMessageAction
     wallMessageArray: Array<IWallMessage>
 }
 
 export interface IPostOnWall {
+    id: number
     likeCount: number
     message: string
+    setLikeToMessage: (id: number) => ISetLikeToMessageAction
 }
 
 export interface IStatusBarWithHooksProps {

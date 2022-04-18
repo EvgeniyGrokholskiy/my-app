@@ -5,7 +5,7 @@ import {IPostOnWall} from "../../../../../../types/types"
 import {ReactComponent as LikeBtn} from "./img/thumbsUp.svg"
 
 
-const PostOnWall: React.FC<IPostOnWall> = ({likeCount, message}) => {
+const PostOnWall: React.FC<IPostOnWall> = ({id, likeCount, message, setLikeToMessage}) => {
 
     return (
         <div className={style.wrapper}>
@@ -13,8 +13,10 @@ const PostOnWall: React.FC<IPostOnWall> = ({likeCount, message}) => {
                 <img className={style.avatar} src={avatar} alt="" width={"80"} height={"80"}/>
                 <p className={style.text}>{message}</p>
             </div>
-            <LikeBtn className={style.likeBtn}/>
-            <span className={style.likeCount}>{likeCount}</span>
+            <LikeBtn name={id.toString()} className={style.likeBtn} onClick={() => {
+                setLikeToMessage(id)
+            }}/>
+            < span className={style.likeCount}>{likeCount}</span>
         </div>
     )
 }
