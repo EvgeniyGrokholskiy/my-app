@@ -1,8 +1,24 @@
+body{
+    --width: auto;
+}
+
 .container {
+    position: relative;
     background-color: white;
     border-radius: 4px;
     padding-bottom: 15px;
     margin-top: 40px;
+    transition: all 0.5s ease-in;
+    width: 305px;
+    top: 0;
+    left: 0;
+}
+
+.container_width {
+    position: relative;
+    top: 0;
+    left: -1022px;
+    width: 1440px;
 }
 
 .header {
@@ -12,7 +28,11 @@
     border-bottom: 1px solid rgba(128, 128, 128, 0.5);
     margin: 0 auto;
     height: 56px;
-    width: 245px;
+    width: 80%
+}
+
+.header_width {
+    width: 90%;
 }
 
 .headerText, .headerLink {
@@ -29,8 +49,15 @@
     overflow: auto;
     margin: 0 auto;
     height: 500px;
-    width: 245px;
+    width: 80%;
 }
+
+.friendsList_width {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
 .friendsList::-webkit-scrollbar {
     width: 2px;
 }

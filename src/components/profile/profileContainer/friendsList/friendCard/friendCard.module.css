@@ -8,6 +8,11 @@
     width: 100%;
 }
 
+.wrapper_width {
+    margin: 15px;
+    width: auto;
+}
+
 .photo {
     border-radius: 50%;
     height: 52px;

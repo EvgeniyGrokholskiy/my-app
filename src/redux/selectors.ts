@@ -59,7 +59,10 @@ export const getIsFollowingInProgressState = (state: AppStateType) => state.find
 /*********FriendsList selectors***********/
 
 export const getFriendListState = (state: AppStateType) => state.friendsList.friends
+
 export const getIsRefreshState = (state: AppStateType) => state.friendsList.isRefresh
+
+export const getViewAll = (state: AppStateType) => state.friendsList.viewAll
 
 /*********Profile selectors************/
 
