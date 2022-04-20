@@ -1,7 +1,9 @@
 import {Dispatch} from "redux"
+import {ThunkAction} from "redux-thunk"
+import {AppStateType} from "./reduxStore"
 import {UsersArrayItemType} from "../types/types"
+import {ISetIsRefreshAction, setIsRefresh} from "./friendsListReducer"
 import {followUnfollowAPI, usersAPI} from "../api/api"
-import {setIsRefresh} from "./friendsListReducer";
 
 const SET_USERS = "MY-APP/FIND-USER/SET_USERS"
 const SHOW_PAGE = "MY-APP/FIND-USER/SHOW_PAGE"
@@ -50,6 +52,7 @@ type TActionsTypes =
     | ISetTotalUsersCountAction
     | ISetLoaderAction
     | IFollowingInProgressAction
+    | ISetIsRefreshAction
 
 export interface IFindUsersInitialState {
     findUsers: Array<UsersArrayItemType>,
@@ -117,9 +120,10 @@ export const findUsersReducer = (state = initialState, action: TActionsTypes) =>
     }
 }
 
-export type TGetUsers = (currentPage: number, usersOnPage: number) => (dispatch: Dispatch) => Promise<void>
+export type TThunkCreator = ThunkAction<Promise<void> | void, AppStateType, any, TActionsTypes>
 
-export const getUsers: TGetUsers = (currentPage: number, usersOnPage: number) => async (dispatch: Dispatch) => {
+
+export const getUsers = (currentPage: number, usersOnPage: number): TThunkCreator => async (dispatch: Dispatch) => {
     dispatch(setLoader(true))
     const data = await usersAPI.getUsers(currentPage, usersOnPage)
     dispatch(setUsers(data.items, currentPage))
@@ -127,9 +131,9 @@ export const getUsers: TGetUsers = (currentPage: number, usersOnPage: number) =>
     dispatch(setLoader(false))
 }
 
-type TFollowUnfollowFlow = (dispatch: Dispatch, userId: number, apiMethod: Function, actionCreator: Function, flow: boolean) => Promise<void>
+type TActionCreator = (userId: number, flow: boolean) => IToFollowUnFollowFlowAction
 
-const followUnfollowFlow: TFollowUnfollowFlow = async (dispatch: Dispatch, userId: number, apiMethod: Function, actionCreator: Function, flow: boolean) => {
+const _followUnfollowFlow = async (dispatch: Dispatch<TActionsTypes>, userId: number, apiMethod: (userId: number) => Promise<{ resultCode: number }>, actionCreator: TActionCreator, flow: boolean) => {
     dispatch(followingInProgress(true, userId))
     let data = await apiMethod(userId)
     if (data.resultCode === 0) {
@@ -139,16 +143,12 @@ const followUnfollowFlow: TFollowUnfollowFlow = async (dispatch: Dispatch, userI
     dispatch(setIsRefresh(true))
 }
 
-export type TSetUnfollow = (userId: number, flow: boolean) => (dispatch: Dispatch) => void
-
-export const setUnfollow: TSetUnfollow = (userId: number, flow: boolean) => (dispatch: Dispatch) => {
-    followUnfollowFlow(dispatch, userId, followUnfollowAPI.unFollow, toFollowUnFollowFlow, flow)
+export const setUnfollow = (userId: number, flow: boolean): TThunkCreator => (dispatch) => {
+    _followUnfollowFlow(dispatch, userId, followUnfollowAPI.unFollow, toFollowUnFollowFlow, flow)
 }
 
-export type TSetFollow = (userId: number, flow: boolean) => (dispatch: Dispatch) => void
-
-export const setFollow: TSetFollow = (userId: number, flow: boolean) => (dispatch: Dispatch) => {
-    followUnfollowFlow(dispatch, userId, followUnfollowAPI.follow, toFollowUnFollowFlow, flow)
+export const setFollow = (userId: number, flow: boolean): TThunkCreator => (dispatch) => {
+    _followUnfollowFlow(dispatch, userId, followUnfollowAPI.follow, toFollowUnFollowFlow, flow)
 }
 
 export const toFollowUnFollowFlow = (userId: number, flow: boolean): IToFollowUnFollowFlowAction => {

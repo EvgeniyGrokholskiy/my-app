@@ -5,6 +5,10 @@ import {AppStateType} from "../../../../redux/reduxStore"
 import {getFriendListState, getIsRefreshState, getViewAll} from "../../../../redux/selectors"
 import {setFriendInList, setIsRefresh, setViewAll} from "../../../../redux/friendsListReducer";
 
+type TMapStateToProps = ReturnType<typeof mapStateToProps>
+type TMapDispatchToProps = typeof mapDispatchToProps
+type TProps = TMapStateToProps & TMapDispatchToProps
+
 
 const mapStateToProps = (state: AppStateType) => ({
     viewAll: getViewAll(state),
@@ -18,6 +22,6 @@ const mapDispatchToProps = {
     setFriendInList
 }
 
-const FriendsListContainer: React.FC<any> = connect(mapStateToProps, mapDispatchToProps)(FriendsList)
+const FriendsListContainer = connect<TMapStateToProps, TMapDispatchToProps, {}, AppStateType>(mapStateToProps, mapDispatchToProps)(FriendsList)
 
 export default FriendsListContainer

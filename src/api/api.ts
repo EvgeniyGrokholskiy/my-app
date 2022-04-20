@@ -52,7 +52,7 @@ class getFriendsApiClass implements IGetFriendsApiClass {
 export const getFriendsAPI = new getFriendsApiClass(instance)
 
 
-interface IFollowUnfollowApiClass {
+export interface IFollowUnfollowApiClass {
     unFollow: (userId: number) => Promise<any>
     follow: (userId: number) => Promise<any>
 }

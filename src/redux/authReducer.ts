@@ -1,6 +1,8 @@
+import {Dispatch} from "redux"
 import {authAPI} from "../api/api"
-import {AnyAction, Dispatch} from "redux"
-import {setProfileStatus} from "./profileReducer"
+import {ThunkAction} from "redux-thunk"
+import {AppStateType} from "./reduxStore"
+import {ISetProfileStatusAction, setProfileStatus} from "./profileReducer"
 
 const LOGIN = "MY_APP_/AUTH/LOGIN"
 const LOGOUT = "MY_APP_/AUTH/LOGOUT"
@@ -57,6 +59,8 @@ type TActionsTypes =
     | ISetErrorMessageAction
     | ISetCaptchaURLAction
     | IEnteredRightCaptchaAction
+    | ISetProfileStatusAction
+
 
 export interface AuthInitialStateType {
     id: null | number,
@@ -123,9 +127,9 @@ export const authReducer = (state: AuthInitialStateType = initialState, action: 
     }
 }
 
-export type TAuthThunkCreator = () => (dispatch: Dispatch<AnyAction>) => Promise<void>
+export type TThunkCreator = ThunkAction<Promise<void>, AppStateType, any, TActionsTypes>
 
-export const authThunkCreator: TAuthThunkCreator = () => async (dispatch: Dispatch<AnyAction>) => {
+export const authThunkCreator = (): TThunkCreator => async (dispatch) => {
     let {id, email, login} = await authAPI.authMe()
     if (id !== undefined) {
         sessionStorage.setItem('isAuth', "true");
@@ -133,12 +137,10 @@ export const authThunkCreator: TAuthThunkCreator = () => async (dispatch: Dispat
     }
 }
 
-export type TLoginThunkCreator = (loginData: LoginData) => (dispatch: Dispatch<any>) => Promise<void>
-
-export const loginThunkCreator: TLoginThunkCreator = (loginData: LoginData) => async (dispatch: Dispatch<any>) => {
+export const loginThunkCreator = (loginData: LoginData): TThunkCreator => async (dispatch) => {
     let responseData = await authAPI.login(loginData)
     if (responseData.resultCode === 0) {
-        dispatch(authThunkCreator());
+        await dispatch(authThunkCreator());
         dispatch(enteredRightCaptcha());
     } else {
         if (responseData.resultCode === 10) {
@@ -150,16 +152,12 @@ export const loginThunkCreator: TLoginThunkCreator = (loginData: LoginData) => a
     }
 }
 
-export type TGetNewCaptcha = () => (dispatch: Dispatch<AnyAction>) => Promise<void>
-
-export const getNewCaptcha: TGetNewCaptcha = () => async (dispatch: Dispatch<AnyAction>) => {
+export const getNewCaptcha = (): TThunkCreator => async (dispatch) => {
     let newCaptchaURL = await authAPI.getCaptcha();
     dispatch(setCaptchaUrl(newCaptchaURL))
 }
 
-export type TLogOutThunkCreator = () => (dispatch: Dispatch) => Promise<void>
-
-export const logoutThunkCreator: TLogOutThunkCreator = () => async (dispatch: Dispatch) => {
+export const logoutThunkCreator = (): TThunkCreator => async (dispatch: Dispatch) => {
     await authAPI.logout();
     sessionStorage.setItem('isAuth', "");
     dispatch(setUserData(null, null, null, false));

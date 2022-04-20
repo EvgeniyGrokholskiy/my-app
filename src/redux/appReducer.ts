@@ -1,11 +1,14 @@
-import {Dispatch} from "redux"
 import {authThunkCreator} from "./authReducer"
+import {ThunkAction} from "redux-thunk";
+import {AppStateType} from "./reduxStore";
 
 const INIT_APP: "MY_APP/APP/INIT_APP" = "MY_APP/APP/INIT_APP"
 
 export interface IInitAppAction {
     type: typeof INIT_APP
 }
+
+type ActionsType = IInitAppAction
 
 export type AppInitialStateType = {
     initialized: boolean
@@ -15,7 +18,7 @@ const initialState: AppInitialStateType = {
     initialized: false
 }
 
-export const appReducer = (state: AppInitialStateType = initialState, action: IInitAppAction): AppInitialStateType => {
+export const appReducer = (state: AppInitialStateType = initialState, action: ActionsType): AppInitialStateType => {
 
     switch (action.type) {
 
@@ -28,10 +31,10 @@ export const appReducer = (state: AppInitialStateType = initialState, action: II
             return state
     }
 }
-type TInitializeApp = () => (dispatch: Dispatch<any>) => void
+type TInitializeApp = ThunkAction<Promise<void>, AppStateType, any, ActionsType>
 
-export const initializeApp: TInitializeApp = () => (dispatch: Dispatch<any>) => {
-    dispatch(authThunkCreator())
+export const initializeApp = (): TInitializeApp => async (dispatch) => {
+    await dispatch(authThunkCreator())
     dispatch(initApp())
 }
 

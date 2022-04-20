@@ -1,6 +1,7 @@
 import {Dispatch} from "redux"
-import store from "./reduxStore"
+import store, {AppStateType} from "./reduxStore"
 import {profileAPI} from "../api/api"
+import {ThunkAction} from "redux-thunk";
 
 const SAVE_PHOTO = "MY-APP/PROFILE/SAVE_PHOTO"
 const RESET_SEND_ERROR = "MY-APP/PROFILE/RESET_SEND_ERROR"
@@ -31,7 +32,7 @@ interface IAddMessageOnWallAction {
     message: string
 }
 
-interface ISetProfileStatusAction {
+export interface ISetProfileStatusAction {
     type: typeof SET_PROFILE_STATUS
     status: string
 }
@@ -197,41 +198,33 @@ export const profileReducer = (state = initialState, action: TActionsTypes): IPr
     }
 }
 
-export type TGetUserProfileThunkCreator = (userId: number) => (dispatch: Dispatch) => Promise<void>
+export type TThunkCreator = ThunkAction<Promise<void>, AppStateType, any, TActionsTypes>
 
-export const getUserProfileThunkCreator: TGetUserProfileThunkCreator = (userId: number) => async (dispatch: Dispatch) => {
+export const getUserProfileThunkCreator = (userId: number): TThunkCreator => async (dispatch) => {
     let data = await profileAPI.getUserProfile(userId)
     dispatch(setUserProfile(data));
 }
 
-export type TGetUserStatusThunkCreator = (userId: number) => (dispatch: Dispatch) => Promise<void>
-
-export const getUserStatusThunkCreator: TGetUserStatusThunkCreator = (userId: number) => async (dispatch: Dispatch) => {
+export const getUserStatusThunkCreator = (userId: number): TThunkCreator => async (dispatch) => {
     let data = await profileAPI.getUserStatus(userId)
     dispatch(setProfileStatus(data));
 }
 
-export type TSetUserStatusThunkCreator = (status: string) => (dispatch: Dispatch) => Promise<void>
-
-export const setUserStatusThunkCreator: TSetUserStatusThunkCreator = (status: string) => async (dispatch: Dispatch) => {
+export const setUserStatusThunkCreator = (status: string): TThunkCreator => async (dispatch: Dispatch) => {
     let response = await profileAPI.setUserStatus(status);
     if (response.resultCode === 0) {
         dispatch(setProfileStatus(status));
     }
 }
 
-export type TSavePhoto = (photo: File) => (dispatch: Dispatch) => Promise<void>
-
-export const savePhoto: TSavePhoto = (photo: File) => async (dispatch: Dispatch) => {
+export const savePhoto = (photo: File): TThunkCreator => async (dispatch: Dispatch) => {
     let response = await profileAPI.savePhoto(photo);
     if (response.resultCode === 0) {
         dispatch(setPhoto(response.data.photos));
     }
 }
 
-export type TSetUserProfileData = (data: IProfile) => (dispatch: Dispatch<any>) => Promise<any>
-
-export const setUserProfileData: TSetUserProfileData = (data: IProfile) => async (dispatch: Dispatch<any>) => {
+export const setUserProfileData = (data: IProfile): TThunkCreator => async (dispatch: Dispatch<any>) => {
     let response = await profileAPI.setProfileData(data);
     if (response.resultCode === 0) {
         dispatch(setUserProfileDataError("", false))
