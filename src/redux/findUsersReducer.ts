@@ -3,7 +3,7 @@ import {ThunkAction} from "redux-thunk"
 import {AppStateType} from "./reduxStore"
 import {UsersArrayItemType} from "../types/types"
 import {ISetIsRefreshAction, setIsRefresh} from "./friendsListReducer"
-import {followUnfollowAPI, usersAPI} from "../api/api"
+import {followUnfollowAPI, ResponseCode, usersAPI} from "../api/api"
 
 const SET_USERS = "MY-APP/FIND-USER/SET_USERS"
 const SHOW_PAGE = "MY-APP/FIND-USER/SHOW_PAGE"
@@ -136,7 +136,7 @@ type TActionCreator = (userId: number, flow: boolean) => IToFollowUnFollowFlowAc
 const _followUnfollowFlow = async (dispatch: Dispatch<TActionsTypes>, userId: number, apiMethod: (userId: number) => Promise<{ resultCode: number }>, actionCreator: TActionCreator, flow: boolean) => {
     dispatch(followingInProgress(true, userId))
     let data = await apiMethod(userId)
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResponseCode.success) {
         dispatch(actionCreator(userId, flow))
     }
     dispatch(followingInProgress(false, userId))

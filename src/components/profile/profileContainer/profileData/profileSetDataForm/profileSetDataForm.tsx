@@ -76,7 +76,7 @@ const ProfileSetDataForm: React.FC<IProfileSetDataFormProps> = ({
                             <Field name="contacts.mainLink" component={"input"}/>
                         </label>
                         {
-                            error && <span className={style.errorSpan}>{errorMessage}</span>
+                            error && <span className={style.errorSpan}>{errorMessage}123123123</span>
                         }
                     </div>
                     <button className={style.button} type="submit">Save</button>

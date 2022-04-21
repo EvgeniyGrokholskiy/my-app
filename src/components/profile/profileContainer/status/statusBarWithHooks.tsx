@@ -9,8 +9,8 @@ const StatusBarWithHooks: React.FC<IStatusBarWithHooksProps> = React.memo(({
                                                                                setUserStatusThunkCreator,
                                                                            }) => {
 
-    let [editFlag, setEditMode] = useState(false);
-    let [status, setStatus] = useState(profileStatus);
+    let [editFlag, setEditMode] = useState<boolean>(false);
+    let [status, setStatus] = useState<string>(profileStatus);
 
     const editModeOn = () => {
         setEditMode(true)

@@ -10,8 +10,8 @@ import {ReactComponent as Question} from "./img/help-circle.svg"
 
 const Footer: React.FC<IFooterProps> = ({languages, changeLanguages}) => {
 
-    const setLanguages = (value: string) => {
-        changeLanguages(value)
+    const setLanguages = (event: ChangeEvent<HTMLSelectElement>) => {
+        changeLanguages(event.target.value)
     }
 
     return (
@@ -65,11 +65,7 @@ const Footer: React.FC<IFooterProps> = ({languages, changeLanguages}) => {
             </div>
             <div className={style.languages}>
                 <h4 className={style.header}>Languages:{(languages === "English") ? " english" : " русский"}</h4>
-                <select value={languages} className={style.select} onChange={
-                    (event: ChangeEvent<HTMLSelectElement>) => {
-                        setLanguages(event.currentTarget.value)
-                    }
-                }>
+                <select value={languages} className={style.select} onChange={setLanguages}>
                     <option value={"English"}>English</option>
                     <option value={"Русский"}>Русский</option>
                 </select>

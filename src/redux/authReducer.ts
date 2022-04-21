@@ -1,5 +1,5 @@
 import {Dispatch} from "redux"
-import {authAPI} from "../api/api"
+import {authAPI, ResponseCode} from "../api/api"
 import {ThunkAction} from "redux-thunk"
 import {AppStateType} from "./reduxStore"
 import {ISetProfileStatusAction, setProfileStatus} from "./profileReducer"
@@ -139,11 +139,11 @@ export const authThunkCreator = (): TThunkCreator => async (dispatch) => {
 
 export const loginThunkCreator = (loginData: LoginData): TThunkCreator => async (dispatch) => {
     let responseData = await authAPI.login(loginData)
-    if (responseData.resultCode === 0) {
+    if (responseData.resultCode === ResponseCode.success) {
         await dispatch(authThunkCreator());
         dispatch(enteredRightCaptcha());
     } else {
-        if (responseData.resultCode === 10) {
+        if (responseData.resultCode === ResponseCode.captchaIsRequired) {
             let captchaURL = await authAPI.getCaptcha();
             dispatch(setCaptchaUrl(captchaURL))
         }
@@ -158,10 +158,14 @@ export const getNewCaptcha = (): TThunkCreator => async (dispatch) => {
 }
 
 export const logoutThunkCreator = (): TThunkCreator => async (dispatch: Dispatch) => {
-    await authAPI.logout();
-    sessionStorage.setItem('isAuth', "");
-    dispatch(setUserData(null, null, null, false));
-    dispatch(setProfileStatus(""));
+    await authAPI.logout().then(response => {
+        if (response.resultCode === 0) {
+            sessionStorage.setItem('isAuth', "");
+            dispatch(setUserData(null, null, null, false));
+            dispatch(setProfileStatus(""));
+        }
+    })
+
 }
 
 export const setUserData = (id: number | null, login: string | null, email: string | null, isAuth: boolean): ISetUserDataActionAction => ({

@@ -1,6 +1,6 @@
 import React from "react"
 import style from "./chatContent.module.css"
-import {IChatContentProps} from "../../../../types/types";
+import {IChatContentProps} from "../../../../types/types"
 import IncomingMessage from "../incomingMessage/incomingMessage"
 import OutgoingMessage from "../outgoingMessage/outgoingMessage"
 

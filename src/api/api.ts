@@ -1,6 +1,7 @@
 import axios, {AxiosInstance} from "axios"
 import {LoginData} from "../redux/authReducer"
 import {IProfile} from "../redux/profileReducer"
+import {UsersArrayItemType} from "../types/types";
 
 const instance = axios.create({
     baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -10,8 +11,23 @@ const instance = axios.create({
     withCredentials: true
 })
 
+export enum ResponseCode {
+    success = 0,
+    error = 1,
+    captchaIsRequired = 10
+}
+
+type TGetUsersData = { items: Array<UsersArrayItemType>, totalCount: number, "error": null | string }
+
+export type TAxiosResponse<T> = {
+    url: string
+    data: T
+    resultCode: number
+    messages: string
+}
+
 interface IUsersApiClass {
-    getUsers: (currentPage: number, pageSize: number) => Promise<any>
+    getUsers: (currentPage: number, pageSize: number) => Promise<TGetUsersData>
 }
 
 class usersApiClass implements IUsersApiClass {
@@ -23,8 +39,8 @@ class usersApiClass implements IUsersApiClass {
         this.getUsers = this.getUsers.bind(this)
     }
 
-    public getUsers(currentPage = 1, pageSize = 5): Promise<any> {
-        return this._instance.get(`users/?count=${pageSize}&page=${currentPage}`,)
+    public getUsers(currentPage = 1, pageSize = 5) {
+        return this._instance.get<TGetUsersData>(`users/?count=${pageSize}&page=${currentPage}`,)
             .then((response) => response.data)
     }
 }
@@ -32,7 +48,7 @@ class usersApiClass implements IUsersApiClass {
 export const usersAPI = new usersApiClass(instance)
 
 interface IGetFriendsApiClass {
-    getFriends: () => Promise<any>
+    getFriends: () => Promise<Array<UsersArrayItemType>>
 }
 
 class getFriendsApiClass implements IGetFriendsApiClass {
@@ -44,8 +60,8 @@ class getFriendsApiClass implements IGetFriendsApiClass {
         this.getFriends = this.getFriends.bind(this)
     }
 
-    getFriends(): Promise<any> {
-        return this._instance.get("users/?friend=true").then((response)=>response.data.items)
+    getFriends()  {
+        return this._instance.get<TGetUsersData>("users/?friend=true").then((response) => response.data.items)
     }
 }
 
@@ -53,8 +69,8 @@ export const getFriendsAPI = new getFriendsApiClass(instance)
 
 
 export interface IFollowUnfollowApiClass {
-    unFollow: (userId: number) => Promise<any>
-    follow: (userId: number) => Promise<any>
+    unFollow: (userId: number) => Promise<TAxiosResponse<{}>>
+    follow: (userId: number) => Promise<TAxiosResponse<{}>>
 }
 
 class followUnfollowApiClass implements IFollowUnfollowApiClass {
@@ -67,25 +83,27 @@ class followUnfollowApiClass implements IFollowUnfollowApiClass {
         this.unFollow = this.unFollow.bind(this)
     }
 
-    public unFollow(userId: number): Promise<any> {
-        return this._instance.delete(`follow/${userId}`)
+    public unFollow(userId: number) {
+        return this._instance.delete<TAxiosResponse<{}>>(`follow/${userId}`)
             .then((response) => response.data)
     }
 
-    public follow(userId: number): Promise<any> {
-        return this._instance.post(`follow/${userId}`)
+    public follow(userId: number) {
+        return this._instance.post<TAxiosResponse<{}>>(`follow/${userId}`)
             .then((response) => response.data)
     }
 }
 
 export const followUnfollowAPI = new followUnfollowApiClass(instance)
 
+type TAuthMeData = { id: number, email: string, login: string }
+type TLoginData = { userId: number }
 
 interface IAuthApiClass {
-    authMe: () => Promise<any>
-    login: (loginData: LoginData) => Promise<any>
-    getCaptcha: () => Promise<any>
-    logout: () => Promise<any>
+    authMe: () => Promise<TAuthMeData>
+    login: (loginData: LoginData) => Promise<TAxiosResponse<TLoginData>>
+    getCaptcha: () => Promise<string>
+    logout: () => Promise<TAxiosResponse<{}>>
 }
 
 class authApiClass implements IAuthApiClass {
@@ -100,36 +118,38 @@ class authApiClass implements IAuthApiClass {
         this.getCaptcha = this.getCaptcha.bind(this)
     }
 
-    public authMe(): Promise<any> {
-        return this._instance.get(`auth/me/`)
+    public authMe() {
+        return this._instance.get<TAxiosResponse<TAuthMeData>>(`auth/me/`)
             .then((response) => response.data.data)
     }
 
-    public login(loginData: LoginData): Promise<any> {
-        return instance.post(`/auth/login`, loginData)
+    public login(loginData: LoginData) {
+        return instance.post<TAxiosResponse<TLoginData>>(`/auth/login`, loginData)
             .then((response) => response.data)
     }
 
-    public getCaptcha(): Promise<any> {
-        return this._instance.get(`security/get-captcha-url`)
+    public getCaptcha() {
+        return this._instance.get<TAxiosResponse<{}>>(`security/get-captcha-url`)
             .then((response) => response.data.url)
     }
 
-    public logout(): Promise<any> {
-        return this._instance.delete(`/auth/login`)
-            .then((response) => response)
+    public logout() {
+        return this._instance.delete<TAxiosResponse<{}>>(`/auth/login`)
+            .then((response) => response.data)
     }
 }
 
 export const authAPI = new authApiClass(instance)
 
 
+type TSavePhotoResponseData = {photos:{large: string, small: string}}
+
 interface IProfileApiClass {
-    getUserProfile: (userId: number) => Promise<any>
-    getUserStatus: (userId: number) => Promise<any>
-    setUserStatus: (status: string) => Promise<any>
-    savePhoto: (file: File) => Promise<any>
-    setProfileData: (data: IProfile) => Promise<any>
+    getUserProfile: (userId: number) => Promise<IProfile>
+    getUserStatus: (userId: number) => Promise<string>
+    setUserStatus: (status: string) => Promise<TAxiosResponse<{}>>
+    savePhoto: (file: File) => Promise<TAxiosResponse<TSavePhotoResponseData>>
+    setProfileData: (data: IProfile) => Promise<TAxiosResponse<IProfile>>
 }
 
 class profileApiClass implements IProfileApiClass {
@@ -145,43 +165,43 @@ class profileApiClass implements IProfileApiClass {
         this.savePhoto = this.savePhoto.bind(this)
     }
 
-    public getUserProfile(userId: number): Promise<any> {
-        return this._instance.get(`profile/${userId}`)
+    public getUserProfile(userId: number): Promise<IProfile> {
+        return this._instance.get<IProfile>(`profile/${userId}`)
             .then((response) => response.data)
     }
 
-    public getUserStatus(userId: number): Promise<any> {
-        return this._instance.get(`/profile/status/${userId}`)
+    public getUserStatus(userId: number): Promise<string> {
+        return this._instance.get<string>(`/profile/status/${userId}`)
             .then((response) => {
                     return response.data
                 }
             )
     }
 
-    public setUserStatus(status: string): Promise<any> {
-        return this._instance.put(`/profile/status`, {status})
+    public setUserStatus(status: string): Promise<TAxiosResponse<{}>> {
+        return this._instance.put<TAxiosResponse<{}>>(`/profile/status`, {status})
             .then((response) => {
                     return response.data
                 }
             )
     }
 
-    public savePhoto(file: File): Promise<any> {
+    public savePhoto(file: File): Promise<TAxiosResponse<TSavePhotoResponseData>> {
         const formData = new FormData()
         formData.append("image", file)
 
         const config = {
             headers: {'Content-Type': 'multipart/form-data'}
         }
-        return this._instance.put(`/profile/photo`, formData, config)
+        return this._instance.put<TAxiosResponse<TSavePhotoResponseData>>(`/profile/photo`, formData, config)
             .then((response) => {
                     return response.data
                 }
             )
     }
 
-    public setProfileData(data: IProfile): Promise<any> {
-        return this._instance.put(`/profile/`, data)
+    public setProfileData(data: IProfile) {
+        return this._instance.put<TAxiosResponse<IProfile>>(`/profile/`, data)
             .then((response) => {
                     return response.data
                 }

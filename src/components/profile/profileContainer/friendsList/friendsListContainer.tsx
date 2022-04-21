@@ -1,4 +1,3 @@
-import React from "react"
 import {connect} from "react-redux"
 import FriendsList from "./friendsList"
 import {AppStateType} from "../../../../redux/reduxStore"

@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import style from "./component.module.css"
 
 export const Input = ({input, meta, ...props}) => {

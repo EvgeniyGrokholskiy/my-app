@@ -7,7 +7,7 @@ import {ReactComponent as AttachBtn} from "../chatContent/img/paperclip.svg"
 
 const SendMessage: React.FC<ISendMessageProps> = ({sendMessage}) => {
 
-    const [message, setMessage] = useState("")
+    const [message, setMessage] = useState<string>("")
 
     const handleSendMessage = () => {
         if (message) {

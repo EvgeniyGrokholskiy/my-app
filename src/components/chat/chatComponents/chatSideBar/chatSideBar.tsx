@@ -9,7 +9,7 @@ import {IChatListArrayItem} from "../../../../redux/chatReducer"
 
 const ChatSideBar: React.FC<IChatSideBarProps> = ({chatsList, setActiveChatName}) => {
 
-    let chatsToRender = chatsList.map((chat: IChatListArrayItem) => {
+    const chatsToRender = chatsList.map((chat: IChatListArrayItem) => {
 
         const setActiveChat = () => setActiveChatName(chat.id)
 

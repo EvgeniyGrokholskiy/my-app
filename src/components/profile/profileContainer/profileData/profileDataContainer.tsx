@@ -1,4 +1,3 @@
-import React from "react"
 import {connect} from "react-redux"
 import GetMatchUrl from "./getMatchUrl"
 import {AppStateType} from "../../../../redux/reduxStore"
@@ -32,6 +31,6 @@ const mapDispatchToProps = {
     setUserProfileData
 }
 
-const ProfileDataContainer: React.FC<any> = connect<TMapStateToProps, TMapDispatchToProps, {}, AppStateType>(mapStateToProps, mapDispatchToProps)(withAuthRedirect(GetMatchUrl))
+const ProfileDataContainer = connect<TMapStateToProps, TMapDispatchToProps, {}, AppStateType>(mapStateToProps, mapDispatchToProps)(withAuthRedirect(GetMatchUrl))
 
 export default ProfileDataContainer;

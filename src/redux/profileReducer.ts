@@ -1,6 +1,5 @@
-import {Dispatch} from "redux"
 import store, {AppStateType} from "./reduxStore"
-import {profileAPI} from "../api/api"
+import {profileAPI, ResponseCode, TAxiosResponse} from "../api/api"
 import {ThunkAction} from "redux-thunk";
 
 const SAVE_PHOTO = "MY-APP/PROFILE/SAVE_PHOTO"
@@ -198,11 +197,11 @@ export const profileReducer = (state = initialState, action: TActionsTypes): IPr
     }
 }
 
-export type TThunkCreator = ThunkAction<Promise<void>, AppStateType, any, TActionsTypes>
+export type TThunkCreator = ThunkAction<Promise<void | TAxiosResponse<IProfile>>, AppStateType, any, TActionsTypes>
 
 export const getUserProfileThunkCreator = (userId: number): TThunkCreator => async (dispatch) => {
     let data = await profileAPI.getUserProfile(userId)
-    dispatch(setUserProfile(data));
+    dispatch(setUserProfile(data))
 }
 
 export const getUserStatusThunkCreator = (userId: number): TThunkCreator => async (dispatch) => {
@@ -210,23 +209,23 @@ export const getUserStatusThunkCreator = (userId: number): TThunkCreator => asyn
     dispatch(setProfileStatus(data));
 }
 
-export const setUserStatusThunkCreator = (status: string): TThunkCreator => async (dispatch: Dispatch) => {
+export const setUserStatusThunkCreator = (status: string): TThunkCreator => async (dispatch) => {
     let response = await profileAPI.setUserStatus(status);
     if (response.resultCode === 0) {
         dispatch(setProfileStatus(status));
     }
 }
 
-export const savePhoto = (photo: File): TThunkCreator => async (dispatch: Dispatch) => {
+export const savePhoto = (photo: File): TThunkCreator => async (dispatch) => {
     let response = await profileAPI.savePhoto(photo);
-    if (response.resultCode === 0) {
+    if (response.resultCode === ResponseCode.success) {
         dispatch(setPhoto(response.data.photos));
     }
 }
 
-export const setUserProfileData = (data: IProfile): TThunkCreator => async (dispatch: Dispatch<any>) => {
+export const setUserProfileData = (data: IProfile): TThunkCreator => async (dispatch) => {
     let response = await profileAPI.setProfileData(data);
-    if (response.resultCode === 0) {
+    if (response.resultCode === ResponseCode.success) {
         dispatch(setUserProfileDataError("", false))
         dispatch(await getUserProfileThunkCreator(Number(store.getState().auth.id)))
         return response
@@ -258,7 +257,7 @@ export const setPhoto = (photo: IPhotosObjInProfile): ISetPhotoAction => ({
 
 export const setUserProfileDataError = (errorMessage: string, isError: boolean): IUpdateProfileDataErrorAction => ({
     type: UPDATE_PROFILE_DATA_ERROR,
-    errorMessage,
+    errorMessage: errorMessage,
     isError
 })
 
