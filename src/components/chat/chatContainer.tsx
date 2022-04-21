@@ -1,6 +1,7 @@
 import React from "react"
 import {connect} from "react-redux"
 import style from "./chat.module.css"
+import {AppStateType} from "../../redux/reduxStore"
 import {withAuthRedirect} from "../hoc/authRedirect"
 import StartNewChat from "./chatComponents/startNewChatBtn/startNewChat"
 import ChatContentContainer from "./chatComponents/chatContent/chatContentContainer"
@@ -24,6 +25,6 @@ const Chat = () => {
     )
 }
 
-const ChatContainer = connect(null, null)(withAuthRedirect(Chat))
+const ChatContainer = connect<null,null,{},AppStateType>(null, null)(withAuthRedirect(Chat))
 
 export default ChatContainer;

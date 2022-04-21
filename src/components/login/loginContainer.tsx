@@ -5,6 +5,8 @@ import {AppStateType} from "../../redux/reduxStore"
 import {withLoginRedirect} from "../hoc/loginRedirect"
 import {getNewCaptcha, loginThunkCreator} from "../../redux/authReducer"
 
+type TMapStateToProps = ReturnType<typeof mapStateToProps>
+type TMapDispatchToProps = typeof mapDispatchToProps
 
 const mapStateToProps = (state: AppStateType) => ({
     auth: getAuthState(state)
@@ -15,6 +17,6 @@ const mapDispatchToProps = {
     getNewCaptcha
 }
 
-const LoginContainer = connect(mapStateToProps, mapDispatchToProps)(withLoginRedirect(Login))
+const LoginContainer = connect<TMapStateToProps, TMapDispatchToProps, {}, AppStateType>(mapStateToProps, mapDispatchToProps)(withLoginRedirect(Login))
 
 export default LoginContainer

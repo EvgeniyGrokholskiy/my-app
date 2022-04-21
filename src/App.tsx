@@ -65,16 +65,18 @@ class App extends React.Component<IAppProps> {
     }
 }
 
+type TMapStateToProps = ReturnType<typeof mapStateToProps>
+type TMapDispatchToProps = typeof mapDispatchToProps
+
 const mapStateToProps = (state: AppStateType) => ({
     app: getAppState(state)
 })
-
 
 const mapDispatchToProps = {
     initializeApp
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect<TMapStateToProps, TMapDispatchToProps, {}, AppStateType>(mapStateToProps, mapDispatchToProps)(App)
 
 
 

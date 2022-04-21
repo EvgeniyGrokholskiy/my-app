@@ -17,12 +17,18 @@ class Auth extends React.Component<IAuthProps> {
     }
 }
 
+type TMapStateToProps = ReturnType<typeof mapStateToProps>
+type TMapDispatchToProps = typeof mapDispatchToProps
 
 const mapStateToProps = (state: AppStateType) => ({
     isAuth: getIsAuthState(state),
     login: getAuthLogin(state)
 })
 
-const HeaderContainer = connect(mapStateToProps,{logoutThunkCreator})(Auth)
+const mapDispatchToProps = {
+    logoutThunkCreator
+}
+
+const HeaderContainer = connect<TMapStateToProps, TMapDispatchToProps, {}, AppStateType>(mapStateToProps, mapDispatchToProps)(Auth)
 
 export default HeaderContainer;

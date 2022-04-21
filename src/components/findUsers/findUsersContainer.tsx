@@ -1,4 +1,10 @@
 import React from "react"
+import UserCard from "./userCard"
+import {connect} from "react-redux"
+import Loading from "../commons/loading/loading"
+import {AppStateType} from "../../redux/reduxStore"
+import {IUsersContainerProps} from "../../types/types"
+import {getUsers, setFollow, setUnfollow} from "../../redux/findUsersReducer"
 import {
     getCurrentPageState,
     getFindUsersState,
@@ -7,12 +13,6 @@ import {
     getTotalUsersState,
     getUsersOnPageState
 } from "../../redux/selectors"
-import UserCard from "./userCard"
-import {connect} from "react-redux"
-import Loading from "../commons/loading/loading"
-import {AppStateType} from "../../redux/reduxStore"
-import {IUsersContainerProps} from "../../types/types"
-import {getUsers, setFollow, setUnfollow} from "../../redux/findUsersReducer"
 
 
 class UsersContainer extends React.Component<IUsersContainerProps> {
@@ -40,6 +40,9 @@ class UsersContainer extends React.Component<IUsersContainerProps> {
     }
 }
 
+type TMapStateToProps = ReturnType<typeof mapStateToProps>
+type TMapDispatchToProps = typeof mapDispatchToProps
+
 const mapStateToProps = (state: AppStateType) => ({
     //findUsers: getFindUsersStateRESELECT(state), используется при использовании сложной логики в селекторе, что бы оптимизировать рендеринг
     findUsers: getFindUsersState(state),
@@ -57,6 +60,7 @@ const mapDispatchToProps = {
 }
 
 
-const FindUsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+const FindUsersContainer = connect<TMapStateToProps, TMapDispatchToProps, {}, AppStateType>(mapStateToProps, mapDispatchToProps)(UsersContainer)
+
 
 export default FindUsersContainer

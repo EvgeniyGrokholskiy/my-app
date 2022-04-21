@@ -7,8 +7,6 @@ import {setFriendInList, setIsRefresh, setViewAll} from "../../../../redux/frien
 
 type TMapStateToProps = ReturnType<typeof mapStateToProps>
 type TMapDispatchToProps = typeof mapDispatchToProps
-type TProps = TMapStateToProps & TMapDispatchToProps
-
 
 const mapStateToProps = (state: AppStateType) => ({
     viewAll: getViewAll(state),
